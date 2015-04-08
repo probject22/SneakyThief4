@@ -4,6 +4,7 @@
 package dataContainer;
 
 /**
+ * The coordinates are stored in this container
  * @author ing. Robert Stevens
  * @version 1.0
  * @begin 1-4-2015

@@ -19,6 +19,9 @@ import java.net.URL;
 public class Map {
 	private boolean debug = false;
 
+	/**
+	 * If no mapfile is set load the default map
+	 */
 	public Map(){
 		URL url = Map.class.getResource("/resources/maps/default.map");
 		if (url != null)
@@ -29,21 +32,34 @@ public class Map {
 			System.exit(-1);
 		}
 	}
-	
-	public Map(String name){
-		intit(name);
+	/**
+	 * Load a costom map
+	 * @param path The path to the map file (e.g. maps/default.map)
+	 */
+	public Map(String path){
+		intit(path);
 	}
 	
+	
+	/**
+	 * Get the map
+	 * @return a CLONE of the map
+	 */
 	public GridState[][] getCopyOfMap(){
 		return map == null ? null: map.clone();
 	}
-	private void intit(String name){
+	
+	/**
+	 * Initialise the class and load in the map file
+	 * @param path the path to the map file
+	 */
+	private void intit(String path){
 		
 		if (debug) System.out.println("the map class stared in debug modus");
-		if (debug) System.out.println("The path to the map is: " + name);
+		if (debug) System.out.println("The path to the map is: " + path);
 		
 		try{
-			 BufferedReader br = new BufferedReader(new FileReader(name));
+			 BufferedReader br = new BufferedReader(new FileReader(path));
 			 String strLine;
 			 int state = 0;
 			 
@@ -87,7 +103,9 @@ public class Map {
 		 }
 	}
 	
-	
+	/**
+	 * The real map
+	 */
 	private GridState[][] map;
 	
 }
