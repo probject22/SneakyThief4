@@ -3,6 +3,7 @@
  */
 package core.sprite;
 
+import core.actions.*;
 import dataContainer.Coordinate;
 
 /**
@@ -14,5 +15,11 @@ public class Agent extends Sprite {
         super(coords);
     }
 
-
+	public Action getActions(){
+		Action action = new Action();
+		action.addAction(new Turn(45.0));
+		action.addAction(new Move(1.0));
+		return action;
+	}
+	
 }

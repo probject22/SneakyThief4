@@ -1,5 +1,6 @@
 package core.sprite;
 
+import core.actions.Action;
 import dataContainer.Coordinate;
 /**
  * All movable objects are sprites
@@ -11,7 +12,6 @@ public class Sprite {
 	public Sprite(Coordinate coords){
 		this.coords = coords;
 	}
-	
 
 	public Coordinate getCoordinates(){
 		return coords == null? null: coords.clone();
@@ -19,6 +19,11 @@ public class Sprite {
 	
 	public void setCoordinates(Coordinate coords){
 		this.coords = coords;
+	}
+	
+	public Action getActions(){
+		System.err.println("This function has to be overwritten");
+		return null;
 	}
 	
 	private Coordinate coords;
