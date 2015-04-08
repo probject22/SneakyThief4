@@ -22,4 +22,15 @@ public class Agent extends Sprite {
 		return action;
 	}
 	
+	public void addTimeToKey(double time){
+		timeKey += time;
+		if (timeKey < 0){
+			System.err.println("The value of the timekey was to big and became odd");
+			System.exit(-1);
+		}
+	}
+	public double getTimeKey(){
+		return timeKey;
+	}
+	private double timeKey;
 }

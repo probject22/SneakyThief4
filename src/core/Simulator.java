@@ -1,5 +1,10 @@
 package core;
 
+import java.util.Map.Entry;
+
+import core.sprite.Agent;
+import core.sprite.SpriteManager;
+import dataContainer.Coordinate;
 import gui.MainFrame;
 
 /**
@@ -10,7 +15,15 @@ public class Simulator {
     
 	public Simulator(){
 		if (debug) System.err.println("The simulator has been started");
+		
 		map = new Map();
+		spriteManager = new SpriteManager(map);
+		spriteManager.addAgent(new Agent(new Coordinate(1,1,0.0)));
+		spriteManager.addAgent(new Agent(new Coordinate(2,2,0.0)));
+		
+		/*to get the agent list call spriteManager.getAgentList(); */
+		
+		/* gui stuff */
 		MainFrame mainFrame = new MainFrame();
 		mainFrame.setMap(map);
 	}
@@ -19,6 +32,6 @@ public class Simulator {
     	new Simulator();
     }
     
-	private java.util.TreeMap<Double, core.sprite.Agent> Agents;
 	private Map map;
+	private SpriteManager spriteManager;
 }
