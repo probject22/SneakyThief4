@@ -22,7 +22,7 @@ import java.io.*;
 
 import core.Map;
 import core.sprite.Sprite;
-import dataContainer.Coordinates;
+import dataContainer.Coordinate;
 
 /**
  * @author ing. R.J.H.M. Stevens
@@ -76,7 +76,7 @@ public class MainFrame extends JFrame {
 		for (Sprite sprite : sprites) {
 			if (sprite == null)
 				break;
-			Coordinates coords = sprite.getCoordinates();
+			Coordinate coords = sprite.getCoordinates();
 			Image img = null;
 			int imgWidth = 0;
 			int imgHeight = 0;

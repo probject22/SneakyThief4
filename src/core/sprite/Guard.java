@@ -3,7 +3,7 @@
  */
 package core.sprite;
 
-import dataContainer.Coordinates;
+import dataContainer.Coordinate;
 
 /**
  * @author ing. R.J.H.M. Stevens
@@ -14,7 +14,7 @@ public class Guard extends Agent {
 	/**
 	 * @param coords
 	 */
-	public Guard(Coordinates coords) {
+	public Guard(Coordinate coords) {
 		super(coords);
 	}
 

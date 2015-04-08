@@ -1,0 +1,898 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.yattasolutions.uml.diagrams.classifier:ClassDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.yattasolutions.diagrams="http://ns.yatta-solutions.com/umllab/diagrams/1.1.0" xmlns:com.yattasolutions.uml.diagrams.classifier="http://ns.yatta-solutions.com/umllab/diagrams/classifier/1.1.0" xmi:id="_tB8AQN4JEeSqn993QqRDWw">
+  <modelElement href="SneakyThief4.uml#_tAywwN4JEeSqn993QqRDWw"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_uPQH8d4JEeSqn993QqRDWw" targetItem="_uPQH8t4JEeSqn993QqRDWw" sourceItem="_uPQH8N4JEeSqn993QqRDWw"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_uP62Ud4JEeSqn993QqRDWw" targetItem="_uP62U94JEeSqn993QqRDWw" sourceItem="_uP62UN4JEeSqn993QqRDWw"/>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:GeneralizationVisual" xmi:id="_uP62Ut4JEeSqn993QqRDWw" sourceAnchor="29.0,0.0" targetAnchor="64.0,44.0" dashed="true" superClass="_uP62U94JEeSqn993QqRDWw" subClass="_uPQH8t4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tcEXgd4JEeSqn993QqRDWw"/>
+    <bendpoints xmi:id="_ud19kN4JEeSqn993QqRDWw" sourceY="-28" targetX="134" targetY="27"/>
+    <bendpoints xmi:id="_ud19kd4JEeSqn993QqRDWw" sourceX="-134" sourceY="-28" targetY="27"/>
+  </edges>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_uQHDkd4JEeSqn993QqRDWw" targetItem="_uQTQ0N4JEeSqn993QqRDWw" sourceItem="_uQHDkN4JEeSqn993QqRDWw"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_uQrrUd4JEeSqn993QqRDWw" targetItem="_uQrrUt4JEeSqn993QqRDWw" sourceItem="_uQrrUN4JEeSqn993QqRDWw"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_uQrrVt4JEeSqn993QqRDWw" targetItem="_uQxx-d4JEeSqn993QqRDWw" sourceItem="_uQrrVd4JEeSqn993QqRDWw"/>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_uQxx8N4JEeSqn993QqRDWw" source="_uQxx-d4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tdsII94JEeSqn993QqRDWw"/>
+    <stereotypes xmi:id="_uQxx8d4JEeSqn993QqRDWw" name="Reference">
+      <modelElement href="SneakyThief4.uml#_tdsIJd4JEeSqn993QqRDWw"/>
+    </stereotypes>
+    <nameVisual xmi:id="_uQxx8t4JEeSqn993QqRDWw" text=""/>
+    <sourceRole xmi:id="_uQxx894JEeSqn993QqRDWw" aggregationKind="NONE" name="">
+      <modelElement href="SneakyThief4.uml#_tdsIJN4JEeSqn993QqRDWw"/>
+      <visibility xmi:id="_uQxx9N4JEeSqn993QqRDWw" label="+"/>
+      <cardinality xmi:id="_uQxx9d4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_uQxx9t4JEeSqn993QqRDWw" aggregationKind="NONE" name="Agents" navigable="true">
+      <modelElement href="SneakyThief4.uml#_tc7TI94JEeSqn993QqRDWw"/>
+      <visibility xmi:id="_uQxx994JEeSqn993QqRDWw" label="-"/>
+      <cardinality xmi:id="_uQxx-N4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_uQxyAt4JEeSqn993QqRDWw" sourceAnchor="31.0,0.0" targetAnchor="34.0,44.0" target="_uP62U94JEeSqn993QqRDWw" source="_uQ34m94JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tdsIIN4JEeSqn993QqRDWw"/>
+    <stereotypes xmi:id="_uQ34ld4JEeSqn993QqRDWw" name="Reference">
+      <modelElement href="SneakyThief4.uml#_tdsIIt4JEeSqn993QqRDWw"/>
+    </stereotypes>
+    <nameVisual xmi:id="_uQ34kt4JEeSqn993QqRDWw" text="">
+      <visualProperties xmi:id="_ud8EMt4JEeSqn993QqRDWw" position="-26.601203859769157,56.50223291316274"/>
+    </nameVisual>
+    <sourceRole xmi:id="_uQ34k94JEeSqn993QqRDWw" aggregationKind="NONE" name="">
+      <modelElement href="SneakyThief4.uml#_tdsIId4JEeSqn993QqRDWw"/>
+      <visualProperties xmi:id="_ud8EMd4JEeSqn993QqRDWw" position="-18.802747708222654,-74.62243177600473"/>
+      <visibility xmi:id="_uQ34l94JEeSqn993QqRDWw" label="+"/>
+      <cardinality xmi:id="_uQ34lt4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_uQ34lN4JEeSqn993QqRDWw" aggregationKind="NONE" name="actionElements" navigable="true">
+      <modelElement href="SneakyThief4.uml#_tc7TIN4JEeSqn993QqRDWw"/>
+      <visualProperties xmi:id="_ud8EM94JEeSqn993QqRDWw" position="-59.56233234458375,167.10077192422676"/>
+      <visibility xmi:id="_uQ34md4JEeSqn993QqRDWw" label="-"/>
+      <cardinality xmi:id="_uQ34mN4JEeSqn993QqRDWw" label="1..*" max="-1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_uQ34kd4JEeSqn993QqRDWw" targetItem="_uQ34m94JEeSqn993QqRDWw" sourceItem="_uQ34kN4JEeSqn993QqRDWw"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_uQ9_Md4JEeSqn993QqRDWw" targetItem="_uQ9_M94JEeSqn993QqRDWw" sourceItem="_uQ9_MN4JEeSqn993QqRDWw"/>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:GeneralizationVisual" xmi:id="_uQ9_Mt4JEeSqn993QqRDWw" sourceAnchor="30.0,0.0" targetAnchor="29.0,27.0" superClass="_uQ9_M94JEeSqn993QqRDWw" subClass="_uQrrUt4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tcKeIN4JEeSqn993QqRDWw"/>
+    <bendpoints xmi:id="_ud19kt4JEeSqn993QqRDWw" sourceY="-28" targetX="-258" targetY="27"/>
+    <bendpoints xmi:id="_ud19k94JEeSqn993QqRDWw" sourceX="258" sourceY="-28" targetY="27"/>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:GeneralizationVisual" xmi:id="_uREF0N4JEeSqn993QqRDWw" sourceAnchor="26.0,0.0" targetAnchor="64.0,44.0" dashed="true" superClass="_uP62U94JEeSqn993QqRDWw" subClass="_uREF094JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tcKeId4JEeSqn993QqRDWw"/>
+    <bendpoints xmi:id="_ud19lN4JEeSqn993QqRDWw" sourceY="-257" targetX="-90" targetY="27"/>
+    <bendpoints xmi:id="_ud19ld4JEeSqn993QqRDWw" sourceX="90" sourceY="-257" targetY="27"/>
+  </edges>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_uREF0t4JEeSqn993QqRDWw" targetItem="_uREF094JEeSqn993QqRDWw" sourceItem="_uREF0d4JEeSqn993QqRDWw"/>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:GeneralizationVisual" xmi:id="_uREF1t4JEeSqn993QqRDWw" sourceAnchor="30.0,0.0" targetAnchor="29.0,27.0" superClass="_uQ9_M94JEeSqn993QqRDWw" subClass="_uREF2d4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tcKeIt4JEeSqn993QqRDWw"/>
+    <bendpoints xmi:id="_ud19lt4JEeSqn993QqRDWw" sourceY="-28" targetX="-126" targetY="27"/>
+    <bendpoints xmi:id="_ud19l94JEeSqn993QqRDWw" sourceX="126" sourceY="-28" targetY="27"/>
+  </edges>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_uREF2N4JEeSqn993QqRDWw" targetItem="_uREF2d4JEeSqn993QqRDWw" sourceItem="_uREF194JEeSqn993QqRDWw"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_uRKMcd4JEeSqn993QqRDWw" targetItem="_uRKMct4JEeSqn993QqRDWw" sourceItem="_uRKMcN4JEeSqn993QqRDWw"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_uRKMfd4JEeSqn993QqRDWw" targetItem="_uRQTEd4JEeSqn993QqRDWw" sourceItem="_uRKMfN4JEeSqn993QqRDWw"/>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:GeneralizationVisual" xmi:id="_uRKMft4JEeSqn993QqRDWw" sourceAnchor="248.0,27.0" targetAnchor="157.0,92.0" superClass="_uRQTEd4JEeSqn993QqRDWw" subClass="_uRKMct4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tcKeKN4JEeSqn993QqRDWw"/>
+    <bendpoints xmi:id="_ud19mN4JEeSqn993QqRDWw" sourceX="192" targetY="392"/>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_uRKMf94JEeSqn993QqRDWw" sourceAnchor="214.0,0.0" targetAnchor="194.0,156.0" target="_uRcgUt4JEeSqn993QqRDWw" source="_uRQTEd4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tdsIJt4JEeSqn993QqRDWw"/>
+    <stereotypes xmi:id="_uRKMg94JEeSqn993QqRDWw" name="Reference">
+      <modelElement href="SneakyThief4.uml#_tdsIKN4JEeSqn993QqRDWw"/>
+    </stereotypes>
+    <nameVisual xmi:id="_uRKMgN4JEeSqn993QqRDWw" text="">
+      <visualProperties xmi:id="_ud8ENd4JEeSqn993QqRDWw" position="-24.49199917006456,-15.091847969513651"/>
+    </nameVisual>
+    <sourceRole xmi:id="_uRKMgd4JEeSqn993QqRDWw" aggregationKind="NONE" name="">
+      <modelElement href="SneakyThief4.uml#_tdsIJ94JEeSqn993QqRDWw"/>
+      <visualProperties xmi:id="_ud8ENN4JEeSqn993QqRDWw" position="-17.388636667161677,-77.75137885034962"/>
+      <visibility xmi:id="_uRKMhd4JEeSqn993QqRDWw" label="+"/>
+      <cardinality xmi:id="_uRKMhN4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_uRKMgt4JEeSqn993QqRDWw" aggregationKind="NONE" name="coords" navigable="true">
+      <modelElement href="SneakyThief4.uml#_tc7TJt4JEeSqn993QqRDWw"/>
+      <visualProperties xmi:id="_ud8ENt4JEeSqn993QqRDWw" position="-35.46215812937112,23.052492106094576"/>
+      <visibility xmi:id="_uRKMh94JEeSqn993QqRDWw" label="-"/>
+      <cardinality xmi:id="_uRKMht4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:GeneralizationVisual" xmi:id="_uRQTKN4JEeSqn993QqRDWw" sourceAnchor="15.0,0.0" targetAnchor="124.0,54.0" superClass="_uRKMct4JEeSqn993QqRDWw" subClass="_uRWZsN4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tcKePN4JEeSqn993QqRDWw"/>
+    <bendpoints xmi:id="_ud19md4JEeSqn993QqRDWw" sourceY="-161" targetX="-579" targetY="27"/>
+    <bendpoints xmi:id="_ud19mt4JEeSqn993QqRDWw" sourceX="579" sourceY="-161" targetY="27"/>
+  </edges>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_uRQTKt4JEeSqn993QqRDWw" targetItem="_uRWZsN4JEeSqn993QqRDWw" sourceItem="_uRQTKd4JEeSqn993QqRDWw"/>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:GeneralizationVisual" xmi:id="_uRWZut4JEeSqn993QqRDWw" sourceAnchor="116.0,0.0" targetAnchor="124.0,54.0" superClass="_uRKMct4JEeSqn993QqRDWw" subClass="_uRWZvd4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tcKeLt4JEeSqn993QqRDWw"/>
+    <bendpoints xmi:id="_ud19m94JEeSqn993QqRDWw" sourceY="-28" targetX="-217" targetY="27"/>
+    <bendpoints xmi:id="_ud19nN4JEeSqn993QqRDWw" sourceX="217" sourceY="-28" targetY="27"/>
+  </edges>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_uRWZvN4JEeSqn993QqRDWw" targetItem="_uRWZvd4JEeSqn993QqRDWw" sourceItem="_uRWZu94JEeSqn993QqRDWw"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_uRcgUd4JEeSqn993QqRDWw" targetItem="_uRcgUt4JEeSqn993QqRDWw" sourceItem="_uRcgUN4JEeSqn993QqRDWw"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_uRotkd4JEeSqn993QqRDWw" targetItem="_uRotm94JEeSqn993QqRDWw" sourceItem="_uRotkN4JEeSqn993QqRDWw"/>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_uRotkt4JEeSqn993QqRDWw" source="_uRotm94JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tdsIKd4JEeSqn993QqRDWw"/>
+    <stereotypes xmi:id="_uRotk94JEeSqn993QqRDWw" name="Reference">
+      <modelElement href="SneakyThief4.uml#_tdsIK94JEeSqn993QqRDWw"/>
+    </stereotypes>
+    <nameVisual xmi:id="_uRotlN4JEeSqn993QqRDWw" text=""/>
+    <sourceRole xmi:id="_uRotld4JEeSqn993QqRDWw" aggregationKind="NONE" name="">
+      <modelElement href="SneakyThief4.uml#_tdsIKt4JEeSqn993QqRDWw"/>
+      <visibility xmi:id="_uRotlt4JEeSqn993QqRDWw" label="+"/>
+      <cardinality xmi:id="_uRotl94JEeSqn993QqRDWw" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_uRotmN4JEeSqn993QqRDWw" aggregationKind="NONE" name="color" navigable="true">
+      <modelElement href="SneakyThief4.uml#_tdBZwd4JEeSqn993QqRDWw"/>
+      <visibility xmi:id="_uRotmd4JEeSqn993QqRDWw" label="~"/>
+      <cardinality xmi:id="_uRotmt4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_uSBIEN4JEeSqn993QqRDWw" sourceAnchor="207.0,84.0" targetAnchor="127.0,92.0" target="_uRQTEd4JEeSqn993QqRDWw" source="_uSHOu94JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tdsILN4JEeSqn993QqRDWw"/>
+    <bendpoints xmi:id="_ud8EMN4JEeSqn993QqRDWw" sourceX="183" targetY="117"/>
+    <stereotypes xmi:id="_uSBIF94JEeSqn993QqRDWw" name="Reference">
+      <modelElement href="SneakyThief4.uml#_tdyOwN4JEeSqn993QqRDWw"/>
+    </stereotypes>
+    <nameVisual xmi:id="_uSBIFN4JEeSqn993QqRDWw" text="">
+      <visualProperties xmi:id="_ud8EON4JEeSqn993QqRDWw" position="-195.0029416855008,-17.66787870774914"/>
+    </nameVisual>
+    <sourceRole xmi:id="_uSBIFd4JEeSqn993QqRDWw" aggregationKind="NONE" name="">
+      <modelElement href="SneakyThief4.uml#_tdsILd4JEeSqn993QqRDWw"/>
+      <visualProperties xmi:id="_ud8EN94JEeSqn993QqRDWw" position="42.86431589824531,-33.90394668524891"/>
+      <visibility xmi:id="_uSHOsd4JEeSqn993QqRDWw" label="+"/>
+      <cardinality xmi:id="_uSHOsN4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_uSBIFt4JEeSqn993QqRDWw" aggregationKind="NONE" name="sprites" navigable="true">
+      <modelElement href="SneakyThief4.uml#_tdHgZt4JEeSqn993QqRDWw"/>
+      <visualProperties xmi:id="_ud8EOd4JEeSqn993QqRDWw" position="-248.81447117924608,83.09605331475106"/>
+      <visibility xmi:id="_uSHOs94JEeSqn993QqRDWw" label="-"/>
+      <cardinality xmi:id="_uSHOst4JEeSqn993QqRDWw" label="1..*" max="-1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_uSBIEd4JEeSqn993QqRDWw" sourceAnchor="80.0,0.0" targetAnchor="117.0,156.0" target="_uQTQ0N4JEeSqn993QqRDWw" source="_uSHOu94JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tdyOwd4JEeSqn993QqRDWw"/>
+    <stereotypes xmi:id="_uSBIG94JEeSqn993QqRDWw" name="Reference">
+      <modelElement href="SneakyThief4.uml#_tdyOw94JEeSqn993QqRDWw"/>
+    </stereotypes>
+    <nameVisual xmi:id="_uSBIGN4JEeSqn993QqRDWw" text="">
+      <visualProperties xmi:id="_ud8EO94JEeSqn993QqRDWw" position="-26.153924399578443,-58.06234551175936"/>
+    </nameVisual>
+    <sourceRole xmi:id="_uSBIGd4JEeSqn993QqRDWw" aggregationKind="NONE" name="">
+      <modelElement href="SneakyThief4.uml#_tdyOwt4JEeSqn993QqRDWw"/>
+      <visualProperties xmi:id="_ud8EOt4JEeSqn993QqRDWw" position="-18.557231160622052,-75.88761690748674"/>
+      <visibility xmi:id="_uSHOt94JEeSqn993QqRDWw" label="+"/>
+      <cardinality xmi:id="_uSHOtt4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_uSBIGt4JEeSqn993QqRDWw" aggregationKind="NONE" name="map" navigable="true">
+      <modelElement href="SneakyThief4.uml#_tdHgat4JEeSqn993QqRDWw"/>
+      <visualProperties xmi:id="_ud8EPN4JEeSqn993QqRDWw" position="-29.88922673438418,-62.65547261120378"/>
+      <visibility xmi:id="_uSHOud4JEeSqn993QqRDWw" label="-"/>
+      <cardinality xmi:id="_uSHOuN4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_uSBIE94JEeSqn993QqRDWw" targetItem="_uSHOu94JEeSqn993QqRDWw" sourceItem="_uSBIEt4JEeSqn993QqRDWw"/>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_uPQH8N4JEeSqn993QqRDWw" sourceConnectionVisual="_uPQH8d4JEeSqn993QqRDWw" text="Created by Stan on 08/04/15." item="_uPQH8t4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tdf69N4JEeSqn993QqRDWw"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_uP62UN4JEeSqn993QqRDWw" sourceConnectionVisual="_uP62Ud4JEeSqn993QqRDWw" text="Created by Stan on 08/04/15." item="_uP62U94JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tdf68t4JEeSqn993QqRDWw"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_uQHDkN4JEeSqn993QqRDWw" sourceConnectionVisual="_uQHDkd4JEeSqn993QqRDWw" text="the map is stored as GridState[x][y]&#xD;&#xA;&#xD;&#xA;@author ing. R.J.H.M. Stevens&#xD;&#xA;@version 1.0&#xD;&#xA;@begin 1-4-2015" item="_uQTQ0N4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tdmBi94JEeSqn993QqRDWw"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_uQrrUN4JEeSqn993QqRDWw" sourceConnectionVisual="_uQrrUd4JEeSqn993QqRDWw" text="Created by Stan on 08/04/15." item="_uQrrUt4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tdf69t4JEeSqn993QqRDWw"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_uQrrVd4JEeSqn993QqRDWw" sourceConnectionVisual="_uQrrVt4JEeSqn993QqRDWw" text="Created by Stan on 08/04/15." item="_uQxx-d4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tdf69d4JEeSqn993QqRDWw"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_uQ34kN4JEeSqn993QqRDWw" sourceConnectionVisual="_uQ34kd4JEeSqn993QqRDWw" text="Created by Stan on 08/04/15." item="_uQ34m94JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tdf68d4JEeSqn993QqRDWw"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_uQ9_MN4JEeSqn993QqRDWw" sourceConnectionVisual="_uQ9_Md4JEeSqn993QqRDWw" text="Created by Stan on 08/04/15." item="_uQ9_M94JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tdf6894JEeSqn993QqRDWw"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_uREF0d4JEeSqn993QqRDWw" sourceConnectionVisual="_uREF0t4JEeSqn993QqRDWw" text="Created by Stan on 08/04/15." item="_uREF094JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tdf6994JEeSqn993QqRDWw"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_uREF194JEeSqn993QqRDWw" sourceConnectionVisual="_uREF2N4JEeSqn993QqRDWw" text="Created by Stan on 08/04/15." item="_uREF2d4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tdf6-N4JEeSqn993QqRDWw"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_uRKMcN4JEeSqn993QqRDWw" sourceConnectionVisual="_uRKMcd4JEeSqn993QqRDWw" text="@author ing. R.J.H.M. Stevens" item="_uRKMct4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tdf6-d4JEeSqn993QqRDWw"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_uRKMfN4JEeSqn993QqRDWw" sourceConnectionVisual="_uRKMfd4JEeSqn993QqRDWw" text="All movable objects are sprites&#xD;&#xA;&#xD;&#xA;@author ing. R.J.H.M. Stevens&#xD;&#xA; *" item="_uRQTEd4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tdf6-94JEeSqn993QqRDWw"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_uRQTKd4JEeSqn993QqRDWw" sourceConnectionVisual="_uRQTKt4JEeSqn993QqRDWw" text="Created by Stan on 08/04/15." item="_uRWZsN4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tdf6_N4JEeSqn993QqRDWw"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_uRWZu94JEeSqn993QqRDWw" sourceConnectionVisual="_uRWZvN4JEeSqn993QqRDWw" text="@author ing. R.J.H.M. Stevens&#xD;&#xA; *" item="_uRWZvd4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tdf6-t4JEeSqn993QqRDWw"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_uRcgUN4JEeSqn993QqRDWw" sourceConnectionVisual="_uRcgUd4JEeSqn993QqRDWw" text="@author ing. Robert Stevens&#xD;&#xA;@version 1.0&#xD;&#xA;@begin 1-4-2015&#xD;&#xA; *" item="_uRcgUt4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tdf6_d4JEeSqn993QqRDWw"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_uRotkN4JEeSqn993QqRDWw" sourceConnectionVisual="_uRotkd4JEeSqn993QqRDWw" text="This stores all the possible states that the playfield can have. Stores colors with the states.&#xD;&#xA;@author Robert Stevens, Stan Kerstjens&#xD;&#xA; *" item="_uRotm94JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tdf6_t4JEeSqn993QqRDWw"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_uSBIEt4JEeSqn993QqRDWw" sourceConnectionVisual="_uSBIE94JEeSqn993QqRDWw" text="@author ing. R.J.H.M. Stevens&#xD;&#xA; *" item="_uSHOu94JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tdmBit4JEeSqn993QqRDWw"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_uPQH8t4JEeSqn993QqRDWw" comments="_uPQH8N4JEeSqn993QqRDWw" targetConnectionVisual="_uPQH8d4JEeSqn993QqRDWw" name="Move" generalizations="_uP62Ut4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tZfkot4JEeSqn993QqRDWw"/>
+    <visualProperties xmi:id="_uPQH894JEeSqn993QqRDWw" position="30.0,30.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_uPQH9N4JEeSqn993QqRDWw" label="+"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:InterfaceVisual" xmi:id="_uP62U94JEeSqn993QqRDWw" comments="_uP62UN4JEeSqn993QqRDWw" targetConnectionVisual="_uP62Ud4JEeSqn993QqRDWw" name="ActionElement" associationsIn="_uQxyAt4JEeSqn993QqRDWw" subclassedBy="_uP62Ut4JEeSqn993QqRDWw _uREF0N4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tZfkoN4JEeSqn993QqRDWw"/>
+    <visualProperties xmi:id="_uP62VN4JEeSqn993QqRDWw" position="-139.0,-69.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_uP62Vd4JEeSqn993QqRDWw" label="+"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_uQTQ0N4JEeSqn993QqRDWw" comments="_uQHDkN4JEeSqn993QqRDWw" targetConnectionVisual="_uQHDkd4JEeSqn993QqRDWw" name="Map" associationsIn="_uSBIEd4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_taWgQN4JEeSqn993QqRDWw"/>
+    <visualProperties xmi:id="_uQTQ0d4JEeSqn993QqRDWw" position="349.0,-395.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_uQTQ0t4JEeSqn993QqRDWw" label="+"/>
+    <attributes xmi:id="_uQTQ094JEeSqn993QqRDWw" defaultValue="false" name="debug">
+      <modelElement href="SneakyThief4.uml#_tdHgbN4JEeSqn993QqRDWw"/>
+      <stereotypes xmi:id="_uQTQ1N4JEeSqn993QqRDWw" name="LegacyStyledElement">
+        <modelElement href="SneakyThief4.uml#_tdNnAd4JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <visibility xmi:id="_uQTQ1d4JEeSqn993QqRDWw" label="-"/>
+      <cardinality xmi:id="_uQTQ1t4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
+      <type xmi:id="_uQTQ194JEeSqn993QqRDWw" name="boolean">
+        <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_uQTQ2N4JEeSqn993QqRDWw" name="map">
+      <modelElement href="SneakyThief4.uml#_tdNnAt4JEeSqn993QqRDWw"/>
+      <stereotypes xmi:id="_uQTQ2d4JEeSqn993QqRDWw" name="Array">
+        <modelElement href="SneakyThief4.uml#_tdNnBN4JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <stereotypes xmi:id="_uQTQ2t4JEeSqn993QqRDWw" name="LegacyStyledElement">
+        <modelElement href="SneakyThief4.uml#_tdNnBd4JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <visibility xmi:id="_uQTQ294JEeSqn993QqRDWw" label="-"/>
+      <cardinality xmi:id="_uQTQ3N4JEeSqn993QqRDWw" label="1..*" max="-1" min="1"/>
+      <type xmi:id="_uQTQ3d4JEeSqn993QqRDWw" name="GridState">
+        <modelElement href="SneakyThief4.uml#_tZ3_Ld4JEeSqn993QqRDWw"/>
+      </type>
+    </attributes>
+    <operations xmi:id="_uQTQ3t4JEeSqn993QqRDWw" name="Map">
+      <modelElement href="SneakyThief4.uml#_taWgQd4JEeSqn993QqRDWw"/>
+      <keywords xmi:id="_uQTQ394JEeSqn993QqRDWw" keyword="create"/>
+      <visibility xmi:id="_uQTQ4N4JEeSqn993QqRDWw" label="+"/>
+      <outParameters xmi:id="_uQTQ4d4JEeSqn993QqRDWw">
+        <modelElement href="SneakyThief4.uml#_taWgRN4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uQTQ4t4JEeSqn993QqRDWw" name="Map">
+          <modelElement href="SneakyThief4.uml#_taWgQN4JEeSqn993QqRDWw"/>
+        </type>
+      </outParameters>
+    </operations>
+    <operations xmi:id="_uQTQ494JEeSqn993QqRDWw" name="Map">
+      <modelElement href="SneakyThief4.uml#_taWgRd4JEeSqn993QqRDWw"/>
+      <keywords xmi:id="_uQTQ5N4JEeSqn993QqRDWw" keyword="create"/>
+      <visibility xmi:id="_uQTQ5d4JEeSqn993QqRDWw" label="+"/>
+      <outParameters xmi:id="_uQTQ5t4JEeSqn993QqRDWw">
+        <modelElement href="SneakyThief4.uml#_taWgSd4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uQTQ594JEeSqn993QqRDWw" name="Map">
+          <modelElement href="SneakyThief4.uml#_taWgQN4JEeSqn993QqRDWw"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_uQTQ6N4JEeSqn993QqRDWw" name="name">
+        <modelElement href="SneakyThief4.uml#_taWgRt4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uQTQ6d4JEeSqn993QqRDWw" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_uQTQ6t4JEeSqn993QqRDWw" name="getCopyOfMap">
+      <modelElement href="SneakyThief4.uml#_taWgSt4JEeSqn993QqRDWw"/>
+      <stereotypes xmi:id="_uQTQ694JEeSqn993QqRDWw" name="Array">
+        <modelElement href="SneakyThief4.uml#_tacm4N4JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <visibility xmi:id="_uQTQ7N4JEeSqn993QqRDWw" label="+"/>
+      <outParameters xmi:id="_uQTQ7d4JEeSqn993QqRDWw">
+        <modelElement href="SneakyThief4.uml#_taWgS94JEeSqn993QqRDWw"/>
+        <type xmi:id="_uQTQ7t4JEeSqn993QqRDWw" name="GridState">
+          <modelElement href="SneakyThief4.uml#_tZ3_Ld4JEeSqn993QqRDWw"/>
+        </type>
+      </outParameters>
+    </operations>
+    <operations xmi:id="_uQTQ794JEeSqn993QqRDWw" name="intit">
+      <modelElement href="SneakyThief4.uml#_tacm4d4JEeSqn993QqRDWw"/>
+      <visibility xmi:id="_uQTQ8N4JEeSqn993QqRDWw" label="-"/>
+      <parameters xmi:id="_uQTQ8d4JEeSqn993QqRDWw" name="name">
+        <modelElement href="SneakyThief4.uml#_tacm4t4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uQTQ8t4JEeSqn993QqRDWw" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_uQrrUt4JEeSqn993QqRDWw" comments="_uQrrUN4JEeSqn993QqRDWw" targetConnectionVisual="_uQrrUd4JEeSqn993QqRDWw" name="Sound" generalizations="_uQ9_Mt4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tZfkpN4JEeSqn993QqRDWw"/>
+    <visualProperties xmi:id="_uQrrU94JEeSqn993QqRDWw" position="-15.0,163.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_uQrrVN4JEeSqn993QqRDWw" label="+"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_uQxx-d4JEeSqn993QqRDWw" comments="_uQrrVd4JEeSqn993QqRDWw" targetConnectionVisual="_uQrrVt4JEeSqn993QqRDWw" name="Simulator" associationsOut="_uQxx8N4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tZfko94JEeSqn993QqRDWw"/>
+    <visualProperties xmi:id="_uQxx-t4JEeSqn993QqRDWw" position="-70.0,260.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_uQxx-94JEeSqn993QqRDWw" label="+"/>
+    <attributes xmi:id="_uQxx_N4JEeSqn993QqRDWw" name="Agents">
+      <modelElement href="SneakyThief4.uml#_tc7TI94JEeSqn993QqRDWw"/>
+      <stereotypes xmi:id="_uQxx_d4JEeSqn993QqRDWw" name="Generics">
+        <modelElement href="SneakyThief4.uml#_tc7TJN4JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <stereotypes xmi:id="_uQxx_t4JEeSqn993QqRDWw" name="LegacyStyledElement">
+        <modelElement href="SneakyThief4.uml#_tc7TJd4JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <visibility xmi:id="_uQxx_94JEeSqn993QqRDWw" label="-"/>
+      <cardinality xmi:id="_uQxyAN4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
+      <type xmi:id="_uQxyAd4JEeSqn993QqRDWw" name="TreeMap">
+        <modelElement href="SneakyThief4.uml#_tcEXgt4JEeSqn993QqRDWw"/>
+      </type>
+    </attributes>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_uQ34m94JEeSqn993QqRDWw" comments="_uQ34kN4JEeSqn993QqRDWw" targetConnectionVisual="_uQ34kd4JEeSqn993QqRDWw" name="Action" associationsOut="_uQxyAt4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tZZeAN4JEeSqn993QqRDWw"/>
+    <visualProperties xmi:id="_uQ34nN4JEeSqn993QqRDWw" position="-136.0,163.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_uQ34nd4JEeSqn993QqRDWw" label="+"/>
+    <attributes xmi:id="_uQ34nt4JEeSqn993QqRDWw" name="actionElements">
+      <modelElement href="SneakyThief4.uml#_tc7TIN4JEeSqn993QqRDWw"/>
+      <stereotypes xmi:id="_uQ34n94JEeSqn993QqRDWw" name="LegacyStyledElement">
+        <modelElement href="SneakyThief4.uml#_tc7TIt4JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <visibility xmi:id="_uQ34oN4JEeSqn993QqRDWw" label="-"/>
+      <cardinality xmi:id="_uQ34od4JEeSqn993QqRDWw" label="1..*" max="-1" min="1"/>
+      <type xmi:id="_uQ34ot4JEeSqn993QqRDWw" name="ActionElement">
+        <modelElement href="SneakyThief4.uml#_tZfkoN4JEeSqn993QqRDWw"/>
+      </type>
+    </attributes>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_uQ9_M94JEeSqn993QqRDWw" comments="_uQ9_MN4JEeSqn993QqRDWw" targetConnectionVisual="_uQ9_Md4JEeSqn993QqRDWw" name="Event" subclassedBy="_uQ9_Mt4JEeSqn993QqRDWw _uREF1t4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tZfkod4JEeSqn993QqRDWw"/>
+    <visualProperties xmi:id="_uQ9_NN4JEeSqn993QqRDWw" position="244.0,81.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_uQ9_Nd4JEeSqn993QqRDWw" label="+"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_uREF094JEeSqn993QqRDWw" comments="_uREF0d4JEeSqn993QqRDWw" targetConnectionVisual="_uREF0t4JEeSqn993QqRDWw" name="Turn" generalizations="_uREF0N4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tZlrQN4JEeSqn993QqRDWw"/>
+    <visualProperties xmi:id="_uREF1N4JEeSqn993QqRDWw" position="-191.0,259.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_uREF1d4JEeSqn993QqRDWw" label="+"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_uREF2d4JEeSqn993QqRDWw" comments="_uREF194JEeSqn993QqRDWw" targetConnectionVisual="_uREF2N4JEeSqn993QqRDWw" name="Vision" generalizations="_uREF1t4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tZlrQd4JEeSqn993QqRDWw"/>
+    <visualProperties xmi:id="_uREF2t4JEeSqn993QqRDWw" position="117.0,163.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_uREF294JEeSqn993QqRDWw" label="+"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_uRKMct4JEeSqn993QqRDWw" comments="_uRKMcN4JEeSqn993QqRDWw" targetConnectionVisual="_uRKMcd4JEeSqn993QqRDWw" name="Agent" generalizations="_uRKMft4JEeSqn993QqRDWw" subclassedBy="_uRQTKN4JEeSqn993QqRDWw _uRWZut4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tZlrQt4JEeSqn993QqRDWw"/>
+    <visualProperties xmi:id="_uRKMc94JEeSqn993QqRDWw" position="366.0,148.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_uRKMdN4JEeSqn993QqRDWw" label="+"/>
+    <operations xmi:id="_uRKMdd4JEeSqn993QqRDWw" name="Agent">
+      <modelElement href="SneakyThief4.uml#_tcKeI94JEeSqn993QqRDWw"/>
+      <keywords xmi:id="_uRKMdt4JEeSqn993QqRDWw" keyword="create"/>
+      <visibility xmi:id="_uRKMd94JEeSqn993QqRDWw" label="+"/>
+      <outParameters xmi:id="_uRKMeN4JEeSqn993QqRDWw">
+        <modelElement href="SneakyThief4.uml#_tcKeJ94JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRKMed4JEeSqn993QqRDWw" name="Agent">
+          <modelElement href="SneakyThief4.uml#_tZlrQt4JEeSqn993QqRDWw"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_uRKMet4JEeSqn993QqRDWw" name="coords">
+        <modelElement href="SneakyThief4.uml#_tcKeJN4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRKMe94JEeSqn993QqRDWw" name="Coordinate">
+          <modelElement href="SneakyThief4.uml#_tZx4gd4JEeSqn993QqRDWw"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_uRQTEd4JEeSqn993QqRDWw" comments="_uRKMfN4JEeSqn993QqRDWw" targetConnectionVisual="_uRKMfd4JEeSqn993QqRDWw" name="Sprite" associationsIn="_uSBIEN4JEeSqn993QqRDWw" associationsOut="_uRKMf94JEeSqn993QqRDWw" subclassedBy="_uRKMft4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tZrx4d4JEeSqn993QqRDWw"/>
+    <visualProperties xmi:id="_uRQTEt4JEeSqn993QqRDWw" position="649.0,-309.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_uRQTE94JEeSqn993QqRDWw" label="+"/>
+    <attributes xmi:id="_uRQTFN4JEeSqn993QqRDWw" name="coords">
+      <modelElement href="SneakyThief4.uml#_tc7TJt4JEeSqn993QqRDWw"/>
+      <stereotypes xmi:id="_uRQTFd4JEeSqn993QqRDWw" name="LegacyStyledElement">
+        <modelElement href="SneakyThief4.uml#_tc7TJ94JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <visibility xmi:id="_uRQTFt4JEeSqn993QqRDWw" label="-"/>
+      <cardinality xmi:id="_uRQTF94JEeSqn993QqRDWw" label="1" max="1" min="1"/>
+      <type xmi:id="_uRQTGN4JEeSqn993QqRDWw" name="Coordinate">
+        <modelElement href="SneakyThief4.uml#_tZx4gd4JEeSqn993QqRDWw"/>
+      </type>
+    </attributes>
+    <operations xmi:id="_uRQTGd4JEeSqn993QqRDWw" name="getCoordinates">
+      <modelElement href="SneakyThief4.uml#_tZrx4t4JEeSqn993QqRDWw"/>
+      <visibility xmi:id="_uRQTGt4JEeSqn993QqRDWw" label="+"/>
+      <outParameters xmi:id="_uRQTG94JEeSqn993QqRDWw">
+        <modelElement href="SneakyThief4.uml#_tcKeNN4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRQTHN4JEeSqn993QqRDWw" name="Coordinate">
+          <modelElement href="SneakyThief4.uml#_tZx4gd4JEeSqn993QqRDWw"/>
+        </type>
+      </outParameters>
+    </operations>
+    <operations xmi:id="_uRQTHd4JEeSqn993QqRDWw" name="Sprite">
+      <modelElement href="SneakyThief4.uml#_tcKeL94JEeSqn993QqRDWw"/>
+      <keywords xmi:id="_uRQTHt4JEeSqn993QqRDWw" keyword="create"/>
+      <visibility xmi:id="_uRQTH94JEeSqn993QqRDWw" label="+"/>
+      <outParameters xmi:id="_uRQTIN4JEeSqn993QqRDWw">
+        <modelElement href="SneakyThief4.uml#_tcKeM94JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRQTId4JEeSqn993QqRDWw" name="Sprite">
+          <modelElement href="SneakyThief4.uml#_tZrx4d4JEeSqn993QqRDWw"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_uRQTIt4JEeSqn993QqRDWw" name="coords">
+        <modelElement href="SneakyThief4.uml#_tcKeMN4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRQTI94JEeSqn993QqRDWw" name="Coordinate">
+          <modelElement href="SneakyThief4.uml#_tZx4gd4JEeSqn993QqRDWw"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_uRQTJN4JEeSqn993QqRDWw" name="setCoordinates">
+      <modelElement href="SneakyThief4.uml#_tcKeNd4JEeSqn993QqRDWw"/>
+      <visibility xmi:id="_uRQTJd4JEeSqn993QqRDWw" label="+"/>
+      <parameters xmi:id="_uRQTJt4JEeSqn993QqRDWw" name="coords">
+        <modelElement href="SneakyThief4.uml#_tcKeNt4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRQTJ94JEeSqn993QqRDWw" name="Coordinate">
+          <modelElement href="SneakyThief4.uml#_tZx4gd4JEeSqn993QqRDWw"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_uRWZsN4JEeSqn993QqRDWw" comments="_uRQTKd4JEeSqn993QqRDWw" targetConnectionVisual="_uRQTKt4JEeSqn993QqRDWw" name="Thief" generalizations="_uRQTKN4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tZx4gN4JEeSqn993QqRDWw"/>
+    <visualProperties xmi:id="_uRWZsd4JEeSqn993QqRDWw" position="-104.0,390.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_uRWZst4JEeSqn993QqRDWw" label="+"/>
+    <operations xmi:id="_uRWZs94JEeSqn993QqRDWw" name="Thief">
+      <modelElement href="SneakyThief4.uml#_tcKeN94JEeSqn993QqRDWw"/>
+      <keywords xmi:id="_uRWZtN4JEeSqn993QqRDWw" keyword="create"/>
+      <visibility xmi:id="_uRWZtd4JEeSqn993QqRDWw" label="+"/>
+      <outParameters xmi:id="_uRWZtt4JEeSqn993QqRDWw">
+        <modelElement href="SneakyThief4.uml#_tcKeO94JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRWZt94JEeSqn993QqRDWw" name="Thief">
+          <modelElement href="SneakyThief4.uml#_tZx4gN4JEeSqn993QqRDWw"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_uRWZuN4JEeSqn993QqRDWw" name="coords">
+        <modelElement href="SneakyThief4.uml#_tcKeON4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRWZud4JEeSqn993QqRDWw" name="Coordinate">
+          <modelElement href="SneakyThief4.uml#_tZx4gd4JEeSqn993QqRDWw"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_uRWZvd4JEeSqn993QqRDWw" comments="_uRWZu94JEeSqn993QqRDWw" targetConnectionVisual="_uRWZvN4JEeSqn993QqRDWw" name="Guard" generalizations="_uRWZut4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tZrx4N4JEeSqn993QqRDWw"/>
+    <visualProperties xmi:id="_uRWZvt4JEeSqn993QqRDWw" position="157.0,257.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_uRWZv94JEeSqn993QqRDWw" label="+"/>
+    <operations xmi:id="_uRWZwN4JEeSqn993QqRDWw" name="Guard">
+      <modelElement href="SneakyThief4.uml#_tcKeKd4JEeSqn993QqRDWw"/>
+      <keywords xmi:id="_uRWZwd4JEeSqn993QqRDWw" keyword="create"/>
+      <visibility xmi:id="_uRWZwt4JEeSqn993QqRDWw" label="+"/>
+      <outParameters xmi:id="_uRWZw94JEeSqn993QqRDWw">
+        <modelElement href="SneakyThief4.uml#_tcKeLd4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRWZxN4JEeSqn993QqRDWw" name="Guard">
+          <modelElement href="SneakyThief4.uml#_tZrx4N4JEeSqn993QqRDWw"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_uRWZxd4JEeSqn993QqRDWw" name="coords">
+        <modelElement href="SneakyThief4.uml#_tcKeKt4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRWZxt4JEeSqn993QqRDWw" name="Coordinate">
+          <modelElement href="SneakyThief4.uml#_tZx4gd4JEeSqn993QqRDWw"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_uRcgUt4JEeSqn993QqRDWw" comments="_uRcgUN4JEeSqn993QqRDWw" targetConnectionVisual="_uRcgUd4JEeSqn993QqRDWw" name="Coordinate" associationsIn="_uRKMf94JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tZx4gd4JEeSqn993QqRDWw"/>
+    <visualProperties xmi:id="_uRcgU94JEeSqn993QqRDWw" position="669.0,-520.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_uRcgVN4JEeSqn993QqRDWw" label="+"/>
+    <attributes xmi:id="_uRcgVd4JEeSqn993QqRDWw" name="x">
+      <modelElement href="SneakyThief4.uml#_tc7TKN4JEeSqn993QqRDWw"/>
+      <stereotypes xmi:id="_uRcgVt4JEeSqn993QqRDWw" name="LegacyStyledElement">
+        <modelElement href="SneakyThief4.uml#_tc7TKd4JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <visibility xmi:id="_uRcgV94JEeSqn993QqRDWw" label="+"/>
+      <cardinality xmi:id="_uRcgWN4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
+      <type xmi:id="_uRcgWd4JEeSqn993QqRDWw" name="double">
+        <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_uRcgWt4JEeSqn993QqRDWw" name="y">
+      <modelElement href="SneakyThief4.uml#_tc7TKt4JEeSqn993QqRDWw"/>
+      <stereotypes xmi:id="_uRcgW94JEeSqn993QqRDWw" name="LegacyStyledElement">
+        <modelElement href="SneakyThief4.uml#_tc7TK94JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <visibility xmi:id="_uRcgXN4JEeSqn993QqRDWw" label="+"/>
+      <cardinality xmi:id="_uRcgXd4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
+      <type xmi:id="_uRcgXt4JEeSqn993QqRDWw" name="double">
+        <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_uRcgX94JEeSqn993QqRDWw" name="angle">
+      <modelElement href="SneakyThief4.uml#_tc7TLN4JEeSqn993QqRDWw"/>
+      <stereotypes xmi:id="_uRcgYN4JEeSqn993QqRDWw" name="LegacyStyledElement">
+        <modelElement href="SneakyThief4.uml#_tdBZwN4JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <visibility xmi:id="_uRcgYd4JEeSqn993QqRDWw" label="+"/>
+      <cardinality xmi:id="_uRcgYt4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
+      <type xmi:id="_uRcgY94JEeSqn993QqRDWw" name="double">
+        <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+      </type>
+    </attributes>
+    <operations xmi:id="_uRcgZN4JEeSqn993QqRDWw" name="Coordinate">
+      <modelElement href="SneakyThief4.uml#_tZ3_IN4JEeSqn993QqRDWw"/>
+      <keywords xmi:id="_uRcgZd4JEeSqn993QqRDWw" keyword="create"/>
+      <stereotypes xmi:id="_uRcgZt4JEeSqn993QqRDWw" name="LegacyStyledElement">
+        <modelElement href="SneakyThief4.uml#_tZ3_I94JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <visibility xmi:id="_uRcgZ94JEeSqn993QqRDWw" label="+"/>
+      <outParameters xmi:id="_uRcgaN4JEeSqn993QqRDWw">
+        <modelElement href="SneakyThief4.uml#_tZ3_JN4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRcgad4JEeSqn993QqRDWw" name="Coordinate">
+          <modelElement href="SneakyThief4.uml#_tZx4gd4JEeSqn993QqRDWw"/>
+        </type>
+      </outParameters>
+    </operations>
+    <operations xmi:id="_uRcgat4JEeSqn993QqRDWw" name="Coordinate">
+      <modelElement href="SneakyThief4.uml#_tZ3_Jd4JEeSqn993QqRDWw"/>
+      <keywords xmi:id="_uRcga94JEeSqn993QqRDWw" keyword="create"/>
+      <visibility xmi:id="_uRcgbN4JEeSqn993QqRDWw" label="+"/>
+      <outParameters xmi:id="_uRcgbd4JEeSqn993QqRDWw">
+        <modelElement href="SneakyThief4.uml#_tZ3_K94JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRcgbt4JEeSqn993QqRDWw" name="Coordinate">
+          <modelElement href="SneakyThief4.uml#_tZx4gd4JEeSqn993QqRDWw"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_uRcgb94JEeSqn993QqRDWw" name="x">
+        <modelElement href="SneakyThief4.uml#_tZ3_Jt4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRcgcN4JEeSqn993QqRDWw" name="double">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_uRcgcd4JEeSqn993QqRDWw" name="y">
+        <modelElement href="SneakyThief4.uml#_tZ3_J94JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRcgct4JEeSqn993QqRDWw" name="double">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_uRcgc94JEeSqn993QqRDWw" name="angle">
+        <modelElement href="SneakyThief4.uml#_tZ3_KN4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRcgdN4JEeSqn993QqRDWw" name="double">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_uRcgdd4JEeSqn993QqRDWw" name="clone">
+      <modelElement href="SneakyThief4.uml#_tZ3_LN4JEeSqn993QqRDWw"/>
+      <visibility xmi:id="_uRcgdt4JEeSqn993QqRDWw" label="+"/>
+      <outParameters xmi:id="_uRcgd94JEeSqn993QqRDWw">
+        <modelElement href="SneakyThief4.uml#_tcQkwN4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRcgeN4JEeSqn993QqRDWw" name="Coordinate">
+          <modelElement href="SneakyThief4.uml#_tZx4gd4JEeSqn993QqRDWw"/>
+        </type>
+      </outParameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:EnumerationVisual" xmi:id="_uRotm94JEeSqn993QqRDWw" comments="_uRotkN4JEeSqn993QqRDWw" targetConnectionVisual="_uRotkd4JEeSqn993QqRDWw" name="GridState" associationsOut="_uRotkt4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_tZ3_Ld4JEeSqn993QqRDWw"/>
+    <visualProperties xmi:id="_uRotnN4JEeSqn993QqRDWw" position="-1132.0,-220.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_uRotnd4JEeSqn993QqRDWw" label="+"/>
+    <attributes xmi:id="_uRotnt4JEeSqn993QqRDWw" name="color">
+      <modelElement href="SneakyThief4.uml#_tdBZwd4JEeSqn993QqRDWw"/>
+      <stereotypes xmi:id="_uRotn94JEeSqn993QqRDWw" name="LegacyStyledElement">
+        <modelElement href="SneakyThief4.uml#_tdBZwt4JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <visibility xmi:id="_uRotoN4JEeSqn993QqRDWw" label="~"/>
+      <cardinality xmi:id="_uRotod4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
+      <type xmi:id="_uRotot4JEeSqn993QqRDWw" name="Color">
+        <modelElement href="SneakyThief4.uml#_tcQkwd4JEeSqn993QqRDWw"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_uRoto94JEeSqn993QqRDWw" name="m_moveable">
+      <modelElement href="SneakyThief4.uml#_tdBZw94JEeSqn993QqRDWw"/>
+      <stereotypes xmi:id="_uRotpN4JEeSqn993QqRDWw" name="LegacyStyledElement">
+        <modelElement href="SneakyThief4.uml#_tdBZxN4JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <visibility xmi:id="_uRotpd4JEeSqn993QqRDWw" label="-"/>
+      <cardinality xmi:id="_uRotpt4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
+      <type xmi:id="_uRotp94JEeSqn993QqRDWw" name="boolean">
+        <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_uRotqN4JEeSqn993QqRDWw" name="m_freedState">
+      <modelElement href="SneakyThief4.uml#_tdBZxd4JEeSqn993QqRDWw"/>
+      <stereotypes xmi:id="_uRotqd4JEeSqn993QqRDWw" name="LegacyStyledElement">
+        <modelElement href="SneakyThief4.uml#_tdBZxt4JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <visibility xmi:id="_uRotqt4JEeSqn993QqRDWw" label="-"/>
+      <cardinality xmi:id="_uRotq94JEeSqn993QqRDWw" label="1" max="1" min="1"/>
+      <type xmi:id="_uRotrN4JEeSqn993QqRDWw" name="GridState">
+        <modelElement href="SneakyThief4.uml#_tZ3_Ld4JEeSqn993QqRDWw"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_uRotrd4JEeSqn993QqRDWw" name="m_guardState">
+      <modelElement href="SneakyThief4.uml#_tdHgYN4JEeSqn993QqRDWw"/>
+      <stereotypes xmi:id="_uRotrt4JEeSqn993QqRDWw" name="LegacyStyledElement">
+        <modelElement href="SneakyThief4.uml#_tdHgYd4JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <visibility xmi:id="_uRotr94JEeSqn993QqRDWw" label="-"/>
+      <cardinality xmi:id="_uRotsN4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
+      <type xmi:id="_uRotsd4JEeSqn993QqRDWw" name="GridState">
+        <modelElement href="SneakyThief4.uml#_tZ3_Ld4JEeSqn993QqRDWw"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_uRotst4JEeSqn993QqRDWw" name="m_intruderState">
+      <modelElement href="SneakyThief4.uml#_tdHgYt4JEeSqn993QqRDWw"/>
+      <stereotypes xmi:id="_uRots94JEeSqn993QqRDWw" name="LegacyStyledElement">
+        <modelElement href="SneakyThief4.uml#_tdHgY94JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <visibility xmi:id="_uRottN4JEeSqn993QqRDWw" label="-"/>
+      <cardinality xmi:id="_uRottd4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
+      <type xmi:id="_uRottt4JEeSqn993QqRDWw" name="GridState">
+        <modelElement href="SneakyThief4.uml#_tZ3_Ld4JEeSqn993QqRDWw"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_uRott94JEeSqn993QqRDWw" name="m_fileVal">
+      <modelElement href="SneakyThief4.uml#_tdHgZN4JEeSqn993QqRDWw"/>
+      <stereotypes xmi:id="_uRotuN4JEeSqn993QqRDWw" name="LegacyStyledElement">
+        <modelElement href="SneakyThief4.uml#_tdHgZd4JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <visibility xmi:id="_uRotud4JEeSqn993QqRDWw" label="-"/>
+      <cardinality xmi:id="_uRotut4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
+      <type xmi:id="_uRotu94JEeSqn993QqRDWw" name="char">
+        <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#char"/>
+      </type>
+    </attributes>
+    <operations xmi:id="_uRotvN4JEeSqn993QqRDWw" name="color">
+      <modelElement href="SneakyThief4.uml#_taEMYN4JEeSqn993QqRDWw"/>
+      <visibility xmi:id="_uRotvd4JEeSqn993QqRDWw" label="+"/>
+      <outParameters xmi:id="_uRotvt4JEeSqn993QqRDWw">
+        <modelElement href="SneakyThief4.uml#_tco_Ut4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRotv94JEeSqn993QqRDWw" name="Color">
+          <modelElement href="SneakyThief4.uml#_tcQkwd4JEeSqn993QqRDWw"/>
+        </type>
+      </outParameters>
+    </operations>
+    <operations xmi:id="_uRotwN4JEeSqn993QqRDWw" name="moveable">
+      <modelElement href="SneakyThief4.uml#_taEMYd4JEeSqn993QqRDWw"/>
+      <visibility xmi:id="_uRotwd4JEeSqn993QqRDWw" label="+"/>
+      <outParameters xmi:id="_uRotwt4JEeSqn993QqRDWw">
+        <modelElement href="SneakyThief4.uml#_taEMYt4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRotw94JEeSqn993QqRDWw" name="boolean">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        </type>
+      </outParameters>
+    </operations>
+    <operations xmi:id="_uRotxN4JEeSqn993QqRDWw" name="stateWhenFreed">
+      <modelElement href="SneakyThief4.uml#_taEMY94JEeSqn993QqRDWw"/>
+      <visibility xmi:id="_uRotxd4JEeSqn993QqRDWw" label="+"/>
+      <outParameters xmi:id="_uRotxt4JEeSqn993QqRDWw">
+        <modelElement href="SneakyThief4.uml#_tcQkw94JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRotx94JEeSqn993QqRDWw" name="GridState">
+          <modelElement href="SneakyThief4.uml#_tZ3_Ld4JEeSqn993QqRDWw"/>
+        </type>
+      </outParameters>
+    </operations>
+    <operations xmi:id="_uRotyN4JEeSqn993QqRDWw" name="getFileVal">
+      <modelElement href="SneakyThief4.uml#_taEMZN4JEeSqn993QqRDWw"/>
+      <visibility xmi:id="_uRotyd4JEeSqn993QqRDWw" label="+"/>
+      <outParameters xmi:id="_uRotyt4JEeSqn993QqRDWw">
+        <modelElement href="SneakyThief4.uml#_taEMZd4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRoty94JEeSqn993QqRDWw" name="char">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#char"/>
+        </type>
+      </outParameters>
+    </operations>
+    <operations xmi:id="_uRotzN4JEeSqn993QqRDWw" name="GridState">
+      <modelElement href="SneakyThief4.uml#_tco_QN4JEeSqn993QqRDWw"/>
+      <keywords xmi:id="_uRotzd4JEeSqn993QqRDWw" keyword="create"/>
+      <visibility xmi:id="_uRotzt4JEeSqn993QqRDWw" label="~"/>
+      <outParameters xmi:id="_uRotz94JEeSqn993QqRDWw">
+        <modelElement href="SneakyThief4.uml#_tco_R94JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRot0N4JEeSqn993QqRDWw" name="GridState">
+          <modelElement href="SneakyThief4.uml#_tZ3_Ld4JEeSqn993QqRDWw"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_uRot0d4JEeSqn993QqRDWw" name="color">
+        <modelElement href="SneakyThief4.uml#_tco_Qd4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRot0t4JEeSqn993QqRDWw" name="Color">
+          <modelElement href="SneakyThief4.uml#_tcQkwd4JEeSqn993QqRDWw"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_uRot094JEeSqn993QqRDWw" name="moveable">
+        <modelElement href="SneakyThief4.uml#_tco_Qt4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRot1N4JEeSqn993QqRDWw" name="boolean">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_uRot1d4JEeSqn993QqRDWw" name="freedState">
+        <modelElement href="SneakyThief4.uml#_tco_Q94JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRot1t4JEeSqn993QqRDWw" name="GridState">
+          <modelElement href="SneakyThief4.uml#_tZ3_Ld4JEeSqn993QqRDWw"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_uRot194JEeSqn993QqRDWw" name="fileVal">
+        <modelElement href="SneakyThief4.uml#_tco_RN4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRot2N4JEeSqn993QqRDWw" name="char">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#char"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_uRot2d4JEeSqn993QqRDWw" name="GridState">
+      <modelElement href="SneakyThief4.uml#_tco_SN4JEeSqn993QqRDWw"/>
+      <keywords xmi:id="_uRot2t4JEeSqn993QqRDWw" keyword="create"/>
+      <visibility xmi:id="_uRot294JEeSqn993QqRDWw" label="~"/>
+      <outParameters xmi:id="_uRot3N4JEeSqn993QqRDWw">
+        <modelElement href="SneakyThief4.uml#_tco_Ud4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRot3d4JEeSqn993QqRDWw" name="GridState">
+          <modelElement href="SneakyThief4.uml#_tZ3_Ld4JEeSqn993QqRDWw"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_uRot3t4JEeSqn993QqRDWw" name="color">
+        <modelElement href="SneakyThief4.uml#_tco_Sd4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRot394JEeSqn993QqRDWw" name="Color">
+          <modelElement href="SneakyThief4.uml#_tcQkwd4JEeSqn993QqRDWw"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_uRot4N4JEeSqn993QqRDWw" name="moveable">
+        <modelElement href="SneakyThief4.uml#_tco_St4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRot4d4JEeSqn993QqRDWw" name="boolean">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_uRot4t4JEeSqn993QqRDWw" name="freedState">
+        <modelElement href="SneakyThief4.uml#_tco_S94JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRot494JEeSqn993QqRDWw" name="GridState">
+          <modelElement href="SneakyThief4.uml#_tZ3_Ld4JEeSqn993QqRDWw"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_uRot5N4JEeSqn993QqRDWw" name="enterGuard">
+        <modelElement href="SneakyThief4.uml#_tco_TN4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRot5d4JEeSqn993QqRDWw" name="GridState">
+          <modelElement href="SneakyThief4.uml#_tZ3_Ld4JEeSqn993QqRDWw"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_uRot5t4JEeSqn993QqRDWw" name="enterIntruder">
+        <modelElement href="SneakyThief4.uml#_tco_Td4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRot594JEeSqn993QqRDWw" name="GridState">
+          <modelElement href="SneakyThief4.uml#_tZ3_Ld4JEeSqn993QqRDWw"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_uRot6N4JEeSqn993QqRDWw" name="fileVal">
+        <modelElement href="SneakyThief4.uml#_tco_Tt4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uRot6d4JEeSqn993QqRDWw" name="char">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#char"/>
+        </type>
+      </parameters>
+    </operations>
+    <literals xmi:id="_uRot6t4JEeSqn993QqRDWw" name="Empty">
+      <modelElement href="SneakyThief4.uml#_tZ-FwN4JEeSqn993QqRDWw"/>
+    </literals>
+    <literals xmi:id="_uRot694JEeSqn993QqRDWw" name="Wall">
+      <modelElement href="SneakyThief4.uml#_tZ-Fwt4JEeSqn993QqRDWw"/>
+    </literals>
+    <literals xmi:id="_uRot7N4JEeSqn993QqRDWw" name="Sentry">
+      <modelElement href="SneakyThief4.uml#_tZ-FxN4JEeSqn993QqRDWw"/>
+    </literals>
+    <literals xmi:id="_uRot7d4JEeSqn993QqRDWw" name="Shade">
+      <modelElement href="SneakyThief4.uml#_tZ-Fxt4JEeSqn993QqRDWw"/>
+    </literals>
+    <literals xmi:id="_uRot7t4JEeSqn993QqRDWw" name="Window">
+      <modelElement href="SneakyThief4.uml#_tZ-FyN4JEeSqn993QqRDWw"/>
+    </literals>
+    <literals xmi:id="_uRot794JEeSqn993QqRDWw" name="Door">
+      <modelElement href="SneakyThief4.uml#_tZ-Fyt4JEeSqn993QqRDWw"/>
+    </literals>
+    <literals xmi:id="_uRot8N4JEeSqn993QqRDWw" name="Target">
+      <modelElement href="SneakyThief4.uml#_tZ-FzN4JEeSqn993QqRDWw"/>
+    </literals>
+    <literals xmi:id="_uRot8d4JEeSqn993QqRDWw" name="Tree">
+      <modelElement href="SneakyThief4.uml#_tZ-Fzt4JEeSqn993QqRDWw"/>
+    </literals>
+    <literals xmi:id="_uRot8t4JEeSqn993QqRDWw" name="OuterWall">
+      <modelElement href="SneakyThief4.uml#_tZ-F0N4JEeSqn993QqRDWw"/>
+    </literals>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_uSHOu94JEeSqn993QqRDWw" comments="_uSBIEt4JEeSqn993QqRDWw" targetConnectionVisual="_uSBIE94JEeSqn993QqRDWw" name="MainFrame" associationsOut="_uSBIEN4JEeSqn993QqRDWw _uSBIEd4JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_taQZoN4JEeSqn993QqRDWw"/>
+    <visualProperties xmi:id="_uSHOvN4JEeSqn993QqRDWw" position="386.0,-184.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_uSHOvd4JEeSqn993QqRDWw" label="+"/>
+    <attributes xmi:id="_uSHOvt4JEeSqn993QqRDWw" name="sprites">
+      <modelElement href="SneakyThief4.uml#_tdHgZt4JEeSqn993QqRDWw"/>
+      <stereotypes xmi:id="_uSHOv94JEeSqn993QqRDWw" name="Array">
+        <modelElement href="SneakyThief4.uml#_tdHgaN4JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <stereotypes xmi:id="_uSHOwN4JEeSqn993QqRDWw" name="LegacyStyledElement">
+        <modelElement href="SneakyThief4.uml#_tdHgad4JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <visibility xmi:id="_uSHOwd4JEeSqn993QqRDWw" label="-"/>
+      <cardinality xmi:id="_uSHOwt4JEeSqn993QqRDWw" label="1..*" max="-1" min="1"/>
+      <type xmi:id="_uSHOw94JEeSqn993QqRDWw" name="Sprite">
+        <modelElement href="SneakyThief4.uml#_tZrx4d4JEeSqn993QqRDWw"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_uSHOxN4JEeSqn993QqRDWw" name="map">
+      <modelElement href="SneakyThief4.uml#_tdHgat4JEeSqn993QqRDWw"/>
+      <stereotypes xmi:id="_uSHOxd4JEeSqn993QqRDWw" name="LegacyStyledElement">
+        <modelElement href="SneakyThief4.uml#_tdHga94JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <visibility xmi:id="_uSHOxt4JEeSqn993QqRDWw" label="-"/>
+      <cardinality xmi:id="_uSHOx94JEeSqn993QqRDWw" label="1" max="1" min="1"/>
+      <type xmi:id="_uSHOyN4JEeSqn993QqRDWw" name="Map">
+        <modelElement href="SneakyThief4.uml#_taWgQN4JEeSqn993QqRDWw"/>
+      </type>
+    </attributes>
+    <operations xmi:id="_uSHOyd4JEeSqn993QqRDWw" name="MainFrame">
+      <modelElement href="SneakyThief4.uml#_taQZod4JEeSqn993QqRDWw"/>
+      <keywords xmi:id="_uSHOyt4JEeSqn993QqRDWw" keyword="create"/>
+      <visibility xmi:id="_uSHOy94JEeSqn993QqRDWw" label="+"/>
+      <outParameters xmi:id="_uSHOzN4JEeSqn993QqRDWw">
+        <modelElement href="SneakyThief4.uml#_taQZpN4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uSHOzd4JEeSqn993QqRDWw" name="MainFrame">
+          <modelElement href="SneakyThief4.uml#_taQZoN4JEeSqn993QqRDWw"/>
+        </type>
+      </outParameters>
+    </operations>
+    <operations xmi:id="_uSHOzt4JEeSqn993QqRDWw" name="updateMap">
+      <modelElement href="SneakyThief4.uml#_taQZpd4JEeSqn993QqRDWw"/>
+      <visibility xmi:id="_uSHOz94JEeSqn993QqRDWw" label="+"/>
+    </operations>
+    <operations xmi:id="_uSHO0N4JEeSqn993QqRDWw" name="setMap">
+      <modelElement href="SneakyThief4.uml#_tccyBd4JEeSqn993QqRDWw"/>
+      <visibility xmi:id="_uSHO0d4JEeSqn993QqRDWw" label="+"/>
+      <parameters xmi:id="_uSHO0t4JEeSqn993QqRDWw" name="map">
+        <modelElement href="SneakyThief4.uml#_tccyBt4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uSHO094JEeSqn993QqRDWw" name="Map">
+          <modelElement href="SneakyThief4.uml#_taWgQN4JEeSqn993QqRDWw"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_uSHO1N4JEeSqn993QqRDWw" name="setSpriteList">
+      <modelElement href="SneakyThief4.uml#_tccyB94JEeSqn993QqRDWw"/>
+      <visibility xmi:id="_uSHO1d4JEeSqn993QqRDWw" label="+"/>
+      <parameters xmi:id="_uSHO1t4JEeSqn993QqRDWw" name="sprites">
+        <modelElement href="SneakyThief4.uml#_tccyCN4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uSHO194JEeSqn993QqRDWw" name="Sprite">
+          <modelElement href="SneakyThief4.uml#_tZrx4d4JEeSqn993QqRDWw"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_uSHO2N4JEeSqn993QqRDWw" name="drawMap">
+      <modelElement href="SneakyThief4.uml#_tcvF4t4JEeSqn993QqRDWw"/>
+      <visibility xmi:id="_uSHO2d4JEeSqn993QqRDWw" label="-"/>
+      <parameters xmi:id="_uSHO2t4JEeSqn993QqRDWw" name="g">
+        <modelElement href="SneakyThief4.uml#_tcvF494JEeSqn993QqRDWw"/>
+        <type xmi:id="_uSHO294JEeSqn993QqRDWw" name="Graphics">
+          <modelElement href="SneakyThief4.uml#_tcvF4N4JEeSqn993QqRDWw"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_uSHO3N4JEeSqn993QqRDWw" name="drawSprites">
+      <modelElement href="SneakyThief4.uml#_tcvF5N4JEeSqn993QqRDWw"/>
+      <visibility xmi:id="_uSHO3d4JEeSqn993QqRDWw" label="-"/>
+      <parameters xmi:id="_uSHO3t4JEeSqn993QqRDWw" name="g">
+        <modelElement href="SneakyThief4.uml#_tcvF5d4JEeSqn993QqRDWw"/>
+        <type xmi:id="_uSHO394JEeSqn993QqRDWw" name="Graphics">
+          <modelElement href="SneakyThief4.uml#_tcvF4N4JEeSqn993QqRDWw"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_uSHO4N4JEeSqn993QqRDWw" name="paint">
+      <modelElement href="SneakyThief4.uml#_tcvF5t4JEeSqn993QqRDWw"/>
+      <stereotypes xmi:id="_uSHO4d4JEeSqn993QqRDWw" name="LegacyStyledElement">
+        <modelElement href="SneakyThief4.uml#_tcvF6N4JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <stereotypes xmi:id="_uSHO4t4JEeSqn993QqRDWw" name="Annotations">
+        <modelElement href="SneakyThief4.uml#_tcvF6d4JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <visibility xmi:id="_uSHO494JEeSqn993QqRDWw" label="+"/>
+      <parameters xmi:id="_uSHO5N4JEeSqn993QqRDWw" name="g">
+        <modelElement href="SneakyThief4.uml#_tcvF594JEeSqn993QqRDWw"/>
+        <type xmi:id="_uSHO5d4JEeSqn993QqRDWw" name="Graphics">
+          <modelElement href="SneakyThief4.uml#_tcvF4N4JEeSqn993QqRDWw"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+</com.yattasolutions.uml.diagrams.classifier:ClassDiagram>
