@@ -73,6 +73,8 @@ public class MainFrame extends JFrame {
 	}
 
 	private void drawSprites(Graphics g) {
+		if (sprites == null)
+			return;
 		for (Sprite sprite : sprites) {
 			if (sprite == null)
 				break;
@@ -82,10 +84,10 @@ public class MainFrame extends JFrame {
 			int imgHeight = 0;
 
 			URL url = getClass().getClassLoader().getResource(
-					sprite.getImageUrl());
+					"resources/images/agent.png");
 			if (url == null) {
 				System.err.println("Couldn't find file: "
-						+ sprite.getImageUrl());
+						+ "resources/images/agent.png");
 				break;
 			}
 			try {
