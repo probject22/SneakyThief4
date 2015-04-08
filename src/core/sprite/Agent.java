@@ -17,7 +17,7 @@ public class Agent extends Sprite {
 
 	public Action getActions(){
 		Action action = new Action();
-		action.addAction(new Turn(45.0));
+		action.addAction(new Turn(Math.toRadians(45.0)));
 		action.addAction(new Move(1.0));
 		return action;
 	}
