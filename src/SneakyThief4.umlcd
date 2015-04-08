@@ -24,29 +24,14 @@
     </sourceRole>
     <targetRole xmi:id="_uQxx9t4JEeSqn993QqRDWw" aggregationKind="NONE" name="Agents" navigable="true">
       <modelElement href="SneakyThief4.uml#_tc7TI94JEeSqn993QqRDWw"/>
+      <stereotypes xmi:id="_KiOuAN4NEeSfP645tvOJvg" name="Generics">
+        <modelElement href="SneakyThief4.uml#_tc7TJN4JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <stereotypes xmi:id="_KiOuAd4NEeSfP645tvOJvg" name="LegacyStyledElement">
+        <modelElement href="SneakyThief4.uml#_tc7TJd4JEeSqn993QqRDWw"/>
+      </stereotypes>
       <visibility xmi:id="_uQxx994JEeSqn993QqRDWw" label="-"/>
       <cardinality xmi:id="_uQxx-N4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
-    </targetRole>
-  </edges>
-  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_uQxyAt4JEeSqn993QqRDWw" sourceAnchor="31.0,0.0" targetAnchor="34.0,44.0" target="_uP62U94JEeSqn993QqRDWw" source="_uQ34m94JEeSqn993QqRDWw">
-    <modelElement href="SneakyThief4.uml#_tdsIIN4JEeSqn993QqRDWw"/>
-    <stereotypes xmi:id="_uQ34ld4JEeSqn993QqRDWw" name="Reference">
-      <modelElement href="SneakyThief4.uml#_tdsIIt4JEeSqn993QqRDWw"/>
-    </stereotypes>
-    <nameVisual xmi:id="_uQ34kt4JEeSqn993QqRDWw" text="">
-      <visualProperties xmi:id="_ud8EMt4JEeSqn993QqRDWw" position="-26.601203859769157,56.50223291316274"/>
-    </nameVisual>
-    <sourceRole xmi:id="_uQ34k94JEeSqn993QqRDWw" aggregationKind="NONE" name="">
-      <modelElement href="SneakyThief4.uml#_tdsIId4JEeSqn993QqRDWw"/>
-      <visualProperties xmi:id="_ud8EMd4JEeSqn993QqRDWw" position="-18.802747708222654,-74.62243177600473"/>
-      <visibility xmi:id="_uQ34l94JEeSqn993QqRDWw" label="+"/>
-      <cardinality xmi:id="_uQ34lt4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
-    </sourceRole>
-    <targetRole xmi:id="_uQ34lN4JEeSqn993QqRDWw" aggregationKind="NONE" name="actionElements" navigable="true">
-      <modelElement href="SneakyThief4.uml#_tc7TIN4JEeSqn993QqRDWw"/>
-      <visualProperties xmi:id="_ud8EM94JEeSqn993QqRDWw" position="-59.56233234458375,167.10077192422676"/>
-      <visibility xmi:id="_uQ34md4JEeSqn993QqRDWw" label="-"/>
-      <cardinality xmi:id="_uQ34mN4JEeSqn993QqRDWw" label="1..*" max="-1" min="1"/>
     </targetRole>
   </edges>
   <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_uQ34kd4JEeSqn993QqRDWw" targetItem="_uQ34m94JEeSqn993QqRDWw" sourceItem="_uQ34kN4JEeSqn993QqRDWw"/>
@@ -91,6 +76,9 @@
     <targetRole xmi:id="_uRKMgt4JEeSqn993QqRDWw" aggregationKind="NONE" name="coords" navigable="true">
       <modelElement href="SneakyThief4.uml#_tc7TJt4JEeSqn993QqRDWw"/>
       <visualProperties xmi:id="_ud8ENt4JEeSqn993QqRDWw" position="-35.46215812937112,23.052492106094576"/>
+      <stereotypes xmi:id="_KiU0od4NEeSfP645tvOJvg" name="LegacyStyledElement">
+        <modelElement href="SneakyThief4.uml#_tc7TJ94JEeSqn993QqRDWw"/>
+      </stereotypes>
       <visibility xmi:id="_uRKMh94JEeSqn993QqRDWw" label="-"/>
       <cardinality xmi:id="_uRKMht4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
     </targetRole>
@@ -122,6 +110,9 @@
     </sourceRole>
     <targetRole xmi:id="_uRotmN4JEeSqn993QqRDWw" aggregationKind="NONE" name="color" navigable="true">
       <modelElement href="SneakyThief4.uml#_tdBZwd4JEeSqn993QqRDWw"/>
+      <stereotypes xmi:id="_KiU0ot4NEeSfP645tvOJvg" name="LegacyStyledElement">
+        <modelElement href="SneakyThief4.uml#_tdBZwt4JEeSqn993QqRDWw"/>
+      </stereotypes>
       <visibility xmi:id="_uRotmd4JEeSqn993QqRDWw" label="~"/>
       <cardinality xmi:id="_uRotmt4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
     </targetRole>
@@ -144,6 +135,12 @@
     <targetRole xmi:id="_uSBIFt4JEeSqn993QqRDWw" aggregationKind="NONE" name="sprites" navigable="true">
       <modelElement href="SneakyThief4.uml#_tdHgZt4JEeSqn993QqRDWw"/>
       <visualProperties xmi:id="_ud8EOd4JEeSqn993QqRDWw" position="-248.81447117924608,83.09605331475106"/>
+      <stereotypes xmi:id="_KiU0o94NEeSfP645tvOJvg" name="Array">
+        <modelElement href="SneakyThief4.uml#_tdHgaN4JEeSqn993QqRDWw"/>
+      </stereotypes>
+      <stereotypes xmi:id="_KiU0pN4NEeSfP645tvOJvg" name="LegacyStyledElement">
+        <modelElement href="SneakyThief4.uml#_tdHgad4JEeSqn993QqRDWw"/>
+      </stereotypes>
       <visibility xmi:id="_uSHOs94JEeSqn993QqRDWw" label="-"/>
       <cardinality xmi:id="_uSHOst4JEeSqn993QqRDWw" label="1..*" max="-1" min="1"/>
     </targetRole>
@@ -165,11 +162,31 @@
     <targetRole xmi:id="_uSBIGt4JEeSqn993QqRDWw" aggregationKind="NONE" name="map" navigable="true">
       <modelElement href="SneakyThief4.uml#_tdHgat4JEeSqn993QqRDWw"/>
       <visualProperties xmi:id="_ud8EPN4JEeSqn993QqRDWw" position="-29.88922673438418,-62.65547261120378"/>
+      <stereotypes xmi:id="_KiU0pd4NEeSfP645tvOJvg" name="LegacyStyledElement">
+        <modelElement href="SneakyThief4.uml#_tdHga94JEeSqn993QqRDWw"/>
+      </stereotypes>
       <visibility xmi:id="_uSHOud4JEeSqn993QqRDWw" label="-"/>
       <cardinality xmi:id="_uSHOuN4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
     </targetRole>
   </edges>
   <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_uSBIE94JEeSqn993QqRDWw" targetItem="_uSHOu94JEeSqn993QqRDWw" sourceItem="_uSBIEt4JEeSqn993QqRDWw"/>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_IjllIN4PEeSfP645tvOJvg" target="_uP62U94JEeSqn993QqRDWw" source="_uQ34m94JEeSqn993QqRDWw">
+    <modelElement href="SneakyThief4.uml#_IjNKoN4PEeSfP645tvOJvg"/>
+    <stereotypes xmi:id="_IjllId4PEeSfP645tvOJvg" name="Reference">
+      <modelElement href="SneakyThief4.uml#_IjNKot4PEeSfP645tvOJvg"/>
+    </stereotypes>
+    <nameVisual xmi:id="_IjllIt4PEeSfP645tvOJvg" text=""/>
+    <sourceRole xmi:id="_IjllI94PEeSfP645tvOJvg" aggregationKind="NONE" name="">
+      <modelElement href="SneakyThief4.uml#_IjNKod4PEeSfP645tvOJvg"/>
+      <visibility xmi:id="_IjllJN4PEeSfP645tvOJvg" label="+"/>
+      <cardinality xmi:id="_IjllJd4PEeSfP645tvOJvg" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_IjllJt4PEeSfP645tvOJvg" aggregationKind="NONE" name="actionElements" navigable="true">
+      <modelElement href="SneakyThief4.uml#_tc7TIN4JEeSqn993QqRDWw"/>
+      <visibility xmi:id="_IjllJ94PEeSfP645tvOJvg" label="-"/>
+      <cardinality xmi:id="_IjllKN4PEeSfP645tvOJvg" label="1..*" max="-1" min="1"/>
+    </targetRole>
+  </edges>
   <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_uPQH8N4JEeSqn993QqRDWw" sourceConnectionVisual="_uPQH8d4JEeSqn993QqRDWw" text="Created by Stan on 08/04/15." item="_uPQH8t4JEeSqn993QqRDWw">
     <modelElement href="SneakyThief4.uml#_tdf69N4JEeSqn993QqRDWw"/>
   </nodes>
@@ -223,7 +240,7 @@
     <visualProperties xmi:id="_uPQH894JEeSqn993QqRDWw" position="30.0,30.0" size="-1.0,-1.0"/>
     <visibility xmi:id="_uPQH9N4JEeSqn993QqRDWw" label="+"/>
   </nodes>
-  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:InterfaceVisual" xmi:id="_uP62U94JEeSqn993QqRDWw" comments="_uP62UN4JEeSqn993QqRDWw" targetConnectionVisual="_uP62Ud4JEeSqn993QqRDWw" name="ActionElement" associationsIn="_uQxyAt4JEeSqn993QqRDWw" subclassedBy="_uP62Ut4JEeSqn993QqRDWw _uREF0N4JEeSqn993QqRDWw">
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:InterfaceVisual" xmi:id="_uP62U94JEeSqn993QqRDWw" comments="_uP62UN4JEeSqn993QqRDWw" targetConnectionVisual="_uP62Ud4JEeSqn993QqRDWw" name="ActionElement" associationsIn="_IjllIN4PEeSfP645tvOJvg" subclassedBy="_uP62Ut4JEeSqn993QqRDWw _uREF0N4JEeSqn993QqRDWw">
     <modelElement href="SneakyThief4.uml#_tZfkoN4JEeSqn993QqRDWw"/>
     <visualProperties xmi:id="_uP62VN4JEeSqn993QqRDWw" position="-139.0,-69.0" size="-1.0,-1.0"/>
     <visibility xmi:id="_uP62Vd4JEeSqn993QqRDWw" label="+"/>
@@ -320,12 +337,12 @@
     <visibility xmi:id="_uQxx-94JEeSqn993QqRDWw" label="+"/>
     <attributes xmi:id="_uQxx_N4JEeSqn993QqRDWw" name="Agents">
       <modelElement href="SneakyThief4.uml#_tc7TI94JEeSqn993QqRDWw"/>
-      <stereotypes xmi:id="_uQxx_d4JEeSqn993QqRDWw" name="Generics">
-        <modelElement href="SneakyThief4.uml#_tc7TJN4JEeSqn993QqRDWw"/>
-      </stereotypes>
-      <stereotypes xmi:id="_uQxx_t4JEeSqn993QqRDWw" name="LegacyStyledElement">
-        <modelElement href="SneakyThief4.uml#_tc7TJd4JEeSqn993QqRDWw"/>
-      </stereotypes>
+      <stereotypes xmi:id="_KitPIN4NEeSfP645tvOJvg" name="Generics"/>
+      <stereotypes xmi:id="_KitPId4NEeSfP645tvOJvg" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_KizVwN4NEeSfP645tvOJvg" name="Generics"/>
+      <stereotypes xmi:id="_KizVwd4NEeSfP645tvOJvg" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_Ki5cZN4NEeSfP645tvOJvg" name="Generics"/>
+      <stereotypes xmi:id="_Ki5cZd4NEeSfP645tvOJvg" name="LegacyStyledElement"/>
       <visibility xmi:id="_uQxx_94JEeSqn993QqRDWw" label="-"/>
       <cardinality xmi:id="_uQxyAN4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
       <type xmi:id="_uQxyAd4JEeSqn993QqRDWw" name="TreeMap">
@@ -333,13 +350,18 @@
       </type>
     </attributes>
   </nodes>
-  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_uQ34m94JEeSqn993QqRDWw" comments="_uQ34kN4JEeSqn993QqRDWw" targetConnectionVisual="_uQ34kd4JEeSqn993QqRDWw" name="Action" associationsOut="_uQxyAt4JEeSqn993QqRDWw">
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_uQ34m94JEeSqn993QqRDWw" comments="_uQ34kN4JEeSqn993QqRDWw" targetConnectionVisual="_uQ34kd4JEeSqn993QqRDWw" name="Action" associationsOut="_IjllIN4PEeSfP645tvOJvg">
     <modelElement href="SneakyThief4.uml#_tZZeAN4JEeSqn993QqRDWw"/>
     <visualProperties xmi:id="_uQ34nN4JEeSqn993QqRDWw" position="-136.0,163.0" size="-1.0,-1.0"/>
     <visibility xmi:id="_uQ34nd4JEeSqn993QqRDWw" label="+"/>
     <attributes xmi:id="_uQ34nt4JEeSqn993QqRDWw" name="actionElements">
       <modelElement href="SneakyThief4.uml#_tc7TIN4JEeSqn993QqRDWw"/>
-      <stereotypes xmi:id="_uQ34n94JEeSqn993QqRDWw" name="LegacyStyledElement">
+      <stereotypes xmi:id="_KizVwt4NEeSfP645tvOJvg" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_KizVw94NEeSfP645tvOJvg" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_Ki5cZt4NEeSfP645tvOJvg" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_GTfKwN4PEeSfP645tvOJvg" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_GUP_wN4PEeSfP645tvOJvg" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_IjZX4N4PEeSfP645tvOJvg" name="LegacyStyledElement">
         <modelElement href="SneakyThief4.uml#_tc7TIt4JEeSqn993QqRDWw"/>
       </stereotypes>
       <visibility xmi:id="_uQ34oN4JEeSqn993QqRDWw" label="-"/>
@@ -392,9 +414,9 @@
     <visibility xmi:id="_uRQTE94JEeSqn993QqRDWw" label="+"/>
     <attributes xmi:id="_uRQTFN4JEeSqn993QqRDWw" name="coords">
       <modelElement href="SneakyThief4.uml#_tc7TJt4JEeSqn993QqRDWw"/>
-      <stereotypes xmi:id="_uRQTFd4JEeSqn993QqRDWw" name="LegacyStyledElement">
-        <modelElement href="SneakyThief4.uml#_tc7TJ94JEeSqn993QqRDWw"/>
-      </stereotypes>
+      <stereotypes xmi:id="_KizVxN4NEeSfP645tvOJvg" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_KizVxd4NEeSfP645tvOJvg" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_Ki5cZ94NEeSfP645tvOJvg" name="LegacyStyledElement"/>
       <visibility xmi:id="_uRQTFt4JEeSqn993QqRDWw" label="-"/>
       <cardinality xmi:id="_uRQTF94JEeSqn993QqRDWw" label="1" max="1" min="1"/>
       <type xmi:id="_uRQTGN4JEeSqn993QqRDWw" name="Coordinate">
@@ -580,9 +602,9 @@
     <visibility xmi:id="_uRotnd4JEeSqn993QqRDWw" label="+"/>
     <attributes xmi:id="_uRotnt4JEeSqn993QqRDWw" name="color">
       <modelElement href="SneakyThief4.uml#_tdBZwd4JEeSqn993QqRDWw"/>
-      <stereotypes xmi:id="_uRotn94JEeSqn993QqRDWw" name="LegacyStyledElement">
-        <modelElement href="SneakyThief4.uml#_tdBZwt4JEeSqn993QqRDWw"/>
-      </stereotypes>
+      <stereotypes xmi:id="_KizVxt4NEeSfP645tvOJvg" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_KizVx94NEeSfP645tvOJvg" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_Ki5caN4NEeSfP645tvOJvg" name="LegacyStyledElement"/>
       <visibility xmi:id="_uRotoN4JEeSqn993QqRDWw" label="~"/>
       <cardinality xmi:id="_uRotod4JEeSqn993QqRDWw" label="1" max="1" min="1"/>
       <type xmi:id="_uRotot4JEeSqn993QqRDWw" name="Color">
@@ -800,12 +822,12 @@
     <visibility xmi:id="_uSHOvd4JEeSqn993QqRDWw" label="+"/>
     <attributes xmi:id="_uSHOvt4JEeSqn993QqRDWw" name="sprites">
       <modelElement href="SneakyThief4.uml#_tdHgZt4JEeSqn993QqRDWw"/>
-      <stereotypes xmi:id="_uSHOv94JEeSqn993QqRDWw" name="Array">
-        <modelElement href="SneakyThief4.uml#_tdHgaN4JEeSqn993QqRDWw"/>
-      </stereotypes>
-      <stereotypes xmi:id="_uSHOwN4JEeSqn993QqRDWw" name="LegacyStyledElement">
-        <modelElement href="SneakyThief4.uml#_tdHgad4JEeSqn993QqRDWw"/>
-      </stereotypes>
+      <stereotypes xmi:id="_KizVyN4NEeSfP645tvOJvg" name="Array"/>
+      <stereotypes xmi:id="_KizVyd4NEeSfP645tvOJvg" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_Ki5cYN4NEeSfP645tvOJvg" name="Array"/>
+      <stereotypes xmi:id="_Ki5cYd4NEeSfP645tvOJvg" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_Ki_jAN4NEeSfP645tvOJvg" name="Array"/>
+      <stereotypes xmi:id="_Ki_jAd4NEeSfP645tvOJvg" name="LegacyStyledElement"/>
       <visibility xmi:id="_uSHOwd4JEeSqn993QqRDWw" label="-"/>
       <cardinality xmi:id="_uSHOwt4JEeSqn993QqRDWw" label="1..*" max="-1" min="1"/>
       <type xmi:id="_uSHOw94JEeSqn993QqRDWw" name="Sprite">
@@ -814,9 +836,9 @@
     </attributes>
     <attributes xmi:id="_uSHOxN4JEeSqn993QqRDWw" name="map">
       <modelElement href="SneakyThief4.uml#_tdHgat4JEeSqn993QqRDWw"/>
-      <stereotypes xmi:id="_uSHOxd4JEeSqn993QqRDWw" name="LegacyStyledElement">
-        <modelElement href="SneakyThief4.uml#_tdHga94JEeSqn993QqRDWw"/>
-      </stereotypes>
+      <stereotypes xmi:id="_Ki5cYt4NEeSfP645tvOJvg" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_Ki5cY94NEeSfP645tvOJvg" name="LegacyStyledElement"/>
+      <stereotypes xmi:id="_Ki_jAt4NEeSfP645tvOJvg" name="LegacyStyledElement"/>
       <visibility xmi:id="_uSHOxt4JEeSqn993QqRDWw" label="-"/>
       <cardinality xmi:id="_uSHOx94JEeSqn993QqRDWw" label="1" max="1" min="1"/>
       <type xmi:id="_uSHOyN4JEeSqn993QqRDWw" name="Map">

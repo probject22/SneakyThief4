@@ -4,7 +4,7 @@
     <eAnnotations xmi:id="_tMJFIN4JEeSqn993QqRDWw" source="http://ns.yatta.de/umllab">
       <contents xmi:type="ecore:EAnnotation" xmi:id="_tMJFId4JEeSqn993QqRDWw" source="codegen">
         <details xmi:id="_tMJFIt4JEeSqn993QqRDWw" key="codegenDirectory" value="/SneakyThief4/src"/>
-        <details xmi:id="_uO3tcN4JEeSqn993QqRDWw" key="AssociatedSourceCode" value="/SneakyThief4/src/core/Action.java;3449130239/1;/SneakyThief4/src/core/ActionElement.java;2874969106/1;/SneakyThief4/src/core/Event.java;1345346865/1;/SneakyThief4/src/core/Move.java;3311244307/1;/SneakyThief4/src/core/Simulator.java;1033481028/1;/SneakyThief4/src/core/Sound.java;1444613135/1;/SneakyThief4/src/core/Turn.java;2781162367/1;/SneakyThief4/src/core/Vision.java;2162136757/1;/SneakyThief4/src/core/sprite/Agent.java;3600634807/1;/SneakyThief4/src/core/sprite/Guard.java;1072825729/1;/SneakyThief4/src/core/sprite/Sprite.java;4109238213/1;/SneakyThief4/src/core/sprite/Thief.java;3790765938/1;/SneakyThief4/src/dataContainer/Coordinate.java;699241620/1;/SneakyThief4/src/dataContainer/GridState.java;3949161261/1;/SneakyThief4/src/gui/MainFrame.java;1352113925/1;/SneakyThief4/src/core/Map.java;2991867546/1;"/>
+        <details xmi:id="_uO3tcN4JEeSqn993QqRDWw" key="AssociatedSourceCode" value="/SneakyThief4/src/core/Simulator.java;1033481028/1;/SneakyThief4/src/core/sprite/Agent.java;3600634807/1;/SneakyThief4/src/core/sprite/Guard.java;1072825729/1;/SneakyThief4/src/core/sprite/Sprite.java;4109238213/1;/SneakyThief4/src/core/sprite/Thief.java;3790765938/1;/SneakyThief4/src/dataContainer/Coordinate.java;699241620/1;/SneakyThief4/src/dataContainer/GridState.java;3949161261/1;/SneakyThief4/src/gui/MainFrame.java;1352113925/1;/SneakyThief4/src/core/Map.java;2991867546/1;/SneakyThief4/src/core/events/Event.java;2095043581/1;/SneakyThief4/src/core/events/Sound.java;167526904/1;/SneakyThief4/src/core/events/Vision.java;2740524615/1;/SneakyThief4/src/actions/Action.java;380046650/1;/SneakyThief4/src/actions/ActionElement.java;650873072/1;/SneakyThief4/src/actions/Move.java;1699155566/1;/SneakyThief4/src/actions/Turn.java;98545922/1;"/>
       </contents>
     </eAnnotations>
     <elementImport xmi:id="_tX96oN4JEeSqn993QqRDWw">
@@ -165,53 +165,11 @@
           <ownedEnd xmi:id="_tdsIJ94JEeSqn993QqRDWw" name="" type="_tZrx4d4JEeSqn993QqRDWw" association="_tdsIJt4JEeSqn993QqRDWw"/>
         </packagedElement>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_tZZeAN4JEeSqn993QqRDWw" name="Action">
-        <ownedComment xmi:id="_tdf68d4JEeSqn993QqRDWw">
-          <body>Created by Stan on 08/04/15.</body>
-        </ownedComment>
-        <ownedAttribute xmi:id="_tc7TIN4JEeSqn993QqRDWw" name="actionElements" visibility="private" type="_tZfkoN4JEeSqn993QqRDWw" isOrdered="true" association="_tdsIIN4JEeSqn993QqRDWw">
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_tc7TId4JEeSqn993QqRDWw" value="*"/>
-        </ownedAttribute>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Interface" xmi:id="_tZfkoN4JEeSqn993QqRDWw" name="ActionElement">
-        <ownedComment xmi:id="_tdf68t4JEeSqn993QqRDWw">
-          <body>Created by Stan on 08/04/15.</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_tZfkod4JEeSqn993QqRDWw" name="Event">
-        <ownedComment xmi:id="_tdf6894JEeSqn993QqRDWw">
-          <body>Created by Stan on 08/04/15.</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_tZfkot4JEeSqn993QqRDWw" name="Move">
-        <ownedComment xmi:id="_tdf69N4JEeSqn993QqRDWw">
-          <body>Created by Stan on 08/04/15.</body>
-        </ownedComment>
-        <interfaceRealization xmi:id="_tcEXgd4JEeSqn993QqRDWw" client="_tZfkot4JEeSqn993QqRDWw" supplier="_tZfkoN4JEeSqn993QqRDWw" contract="_tZfkoN4JEeSqn993QqRDWw"/>
-      </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_tZfko94JEeSqn993QqRDWw" name="Simulator">
         <ownedComment xmi:id="_tdf69d4JEeSqn993QqRDWw">
           <body>Created by Stan on 08/04/15.</body>
         </ownedComment>
         <ownedAttribute xmi:id="_tc7TI94JEeSqn993QqRDWw" name="Agents" visibility="private" type="_tcEXgt4JEeSqn993QqRDWw" association="_tdsII94JEeSqn993QqRDWw"/>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_tZfkpN4JEeSqn993QqRDWw" name="Sound">
-        <ownedComment xmi:id="_tdf69t4JEeSqn993QqRDWw">
-          <body>Created by Stan on 08/04/15.</body>
-        </ownedComment>
-        <generalization xmi:id="_tcKeIN4JEeSqn993QqRDWw" general="_tZfkod4JEeSqn993QqRDWw"/>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_tZlrQN4JEeSqn993QqRDWw" name="Turn">
-        <ownedComment xmi:id="_tdf6994JEeSqn993QqRDWw">
-          <body>Created by Stan on 08/04/15.</body>
-        </ownedComment>
-        <interfaceRealization xmi:id="_tcKeId4JEeSqn993QqRDWw" client="_tZlrQN4JEeSqn993QqRDWw" supplier="_tZfkoN4JEeSqn993QqRDWw" contract="_tZfkoN4JEeSqn993QqRDWw"/>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_tZlrQd4JEeSqn993QqRDWw" name="Vision">
-        <ownedComment xmi:id="_tdf6-N4JEeSqn993QqRDWw">
-          <body>Created by Stan on 08/04/15.</body>
-        </ownedComment>
-        <generalization xmi:id="_tcKeIt4JEeSqn993QqRDWw" general="_tZfkod4JEeSqn993QqRDWw"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_taWgQN4JEeSqn993QqRDWw" name="Map">
         <ownedComment xmi:id="_tdmBi94JEeSqn993QqRDWw">
@@ -337,12 +295,29 @@
           </ownedParameter>
         </ownedOperation>
       </packagedElement>
-      <packagedElement xmi:type="uml:Association" xmi:id="_tdsIIN4JEeSqn993QqRDWw" name="" memberEnd="_tdsIId4JEeSqn993QqRDWw _tc7TIN4JEeSqn993QqRDWw">
-        <ownedEnd xmi:id="_tdsIId4JEeSqn993QqRDWw" name="" type="_tZZeAN4JEeSqn993QqRDWw" association="_tdsIIN4JEeSqn993QqRDWw"/>
-      </packagedElement>
       <packagedElement xmi:type="uml:Association" xmi:id="_tdsII94JEeSqn993QqRDWw" name="" memberEnd="_tdsIJN4JEeSqn993QqRDWw _tc7TI94JEeSqn993QqRDWw">
         <ownedEnd xmi:id="_tdsIJN4JEeSqn993QqRDWw" name="" type="_tZfko94JEeSqn993QqRDWw" association="_tdsII94JEeSqn993QqRDWw"/>
       </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_7ITrwN4OEeSfP645tvOJvg" name="events">
+        <packagedElement xmi:type="uml:Class" xmi:id="_tZfkod4JEeSqn993QqRDWw" name="Event">
+          <ownedComment xmi:id="_tdf6894JEeSqn993QqRDWw">
+            <body>Created by Stan on 08/04/15.</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_tZfkpN4JEeSqn993QqRDWw" name="Sound">
+          <ownedComment xmi:id="_tdf69t4JEeSqn993QqRDWw">
+            <body>Created by Stan on 08/04/15.</body>
+          </ownedComment>
+          <generalization xmi:id="_tcKeIN4JEeSqn993QqRDWw" general="_tZfkod4JEeSqn993QqRDWw"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_tZlrQd4JEeSqn993QqRDWw" name="Vision">
+          <ownedComment xmi:id="_tdf6-N4JEeSqn993QqRDWw">
+            <body>Created by Stan on 08/04/15.</body>
+          </ownedComment>
+          <generalization xmi:id="_tcKeIt4JEeSqn993QqRDWw" general="_tZfkod4JEeSqn993QqRDWw"/>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_GSuVwN4PEeSfP645tvOJvg" name="actions"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="_tYcbwN4JEeSqn993QqRDWw" name="dataContainer">
       <packagedElement xmi:type="uml:Class" xmi:id="_tZx4gd4JEeSqn993QqRDWw" name="Coordinate">
@@ -702,6 +677,36 @@
         <ownedEnd xmi:id="_tdyOwt4JEeSqn993QqRDWw" name="" type="_taQZoN4JEeSqn993QqRDWw" association="_tdyOwd4JEeSqn993QqRDWw"/>
       </packagedElement>
     </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_IjHEAN4PEeSfP645tvOJvg" name="actions">
+      <packagedElement xmi:type="uml:Class" xmi:id="_tZZeAN4JEeSqn993QqRDWw" name="Action">
+        <ownedComment xmi:id="_tdf68d4JEeSqn993QqRDWw">
+          <body>Created by Stan on 08/04/15.</body>
+        </ownedComment>
+        <ownedAttribute xmi:id="_tc7TIN4JEeSqn993QqRDWw" name="actionElements" visibility="private" type="_tZfkoN4JEeSqn993QqRDWw" isOrdered="true" association="_IjNKoN4PEeSfP645tvOJvg">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_tc7TId4JEeSqn993QqRDWw" value="*"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="_tZfkoN4JEeSqn993QqRDWw" name="ActionElement">
+        <ownedComment xmi:id="_tdf68t4JEeSqn993QqRDWw">
+          <body>Created by Stan on 08/04/15.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_tZfkot4JEeSqn993QqRDWw" name="Move">
+        <ownedComment xmi:id="_tdf69N4JEeSqn993QqRDWw">
+          <body>Created by Stan on 08/04/15.</body>
+        </ownedComment>
+        <interfaceRealization xmi:id="_tcEXgd4JEeSqn993QqRDWw" client="_tZfkot4JEeSqn993QqRDWw" supplier="_tZfkoN4JEeSqn993QqRDWw" contract="_tZfkoN4JEeSqn993QqRDWw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_tZlrQN4JEeSqn993QqRDWw" name="Turn">
+        <ownedComment xmi:id="_tdf6994JEeSqn993QqRDWw">
+          <body>Created by Stan on 08/04/15.</body>
+        </ownedComment>
+        <interfaceRealization xmi:id="_tcKeId4JEeSqn993QqRDWw" client="_tZlrQN4JEeSqn993QqRDWw" supplier="_tZfkoN4JEeSqn993QqRDWw" contract="_tZfkoN4JEeSqn993QqRDWw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_IjNKoN4PEeSfP645tvOJvg" name="" memberEnd="_IjNKod4PEeSfP645tvOJvg _tc7TIN4JEeSqn993QqRDWw">
+        <ownedEnd xmi:id="_IjNKod4PEeSfP645tvOJvg" name="" type="_tZZeAN4JEeSqn993QqRDWw" association="_IjNKoN4PEeSfP645tvOJvg"/>
+      </packagedElement>
+    </packagedElement>
     <profileApplication xmi:id="_tMPLwN4JEeSqn993QqRDWw">
       <eAnnotations xmi:id="_tMPLwd4JEeSqn993QqRDWw" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="pathmap://UMLLAB_PROFILES/UMLLab.profile.uml#UMLLabProfile-Annotation_2-UMLLabProfile"/>
@@ -813,10 +818,10 @@
     <body>return m_fileVal;&#xD;
 	</body>
   </uml:OpaqueBehavior>
-  <UMLLabProfile:Reference xmi:id="_tdsIIt4JEeSqn993QqRDWw" base_Element="_tdsIIN4JEeSqn993QqRDWw"/>
   <UMLLabProfile:Reference xmi:id="_tdsIJd4JEeSqn993QqRDWw" base_Element="_tdsII94JEeSqn993QqRDWw"/>
   <UMLLabProfile:Reference xmi:id="_tdsIKN4JEeSqn993QqRDWw" base_Element="_tdsIJt4JEeSqn993QqRDWw"/>
   <UMLLabProfile:Reference xmi:id="_tdsIK94JEeSqn993QqRDWw" base_Element="_tdsIKd4JEeSqn993QqRDWw"/>
   <UMLLabProfile:Reference xmi:id="_tdyOwN4JEeSqn993QqRDWw" base_Element="_tdsILN4JEeSqn993QqRDWw"/>
   <UMLLabProfile:Reference xmi:id="_tdyOw94JEeSqn993QqRDWw" base_Element="_tdyOwd4JEeSqn993QqRDWw"/>
+  <UMLLabProfile:Reference xmi:id="_IjNKot4PEeSfP645tvOJvg" base_Element="_IjNKoN4PEeSfP645tvOJvg"/>
 </xmi:XMI>

@@ -5,4 +5,8 @@ package core;
  */
 public class Simulator {
     private java.util.TreeMap<Double, core.sprite.Agent> Agents;
+    
+    public static void main(String [] args){
+    	new Simulator();
+    }
 }
