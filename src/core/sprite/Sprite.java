@@ -1,6 +1,6 @@
 package core.sprite;
-import dataContainer.Coordinates;
-import dataContainer.Twist;
+
+import dataContainer.Coordinate;
 /**
  * All movable objects are sprites
  * 
@@ -8,22 +8,19 @@ import dataContainer.Twist;
  *
  */
 public class Sprite {
-	public Sprite(Coordinates coords){
+	public Sprite(Coordinate coords){
 		this.coords = coords;
 	}
 	
-	public Twist GetMove(){
-		return null;
-	}
-	
-	public Coordinates getCoordinates(){
+
+	public Coordinate getCoordinates(){
 		return coords == null? null: coords.clone();
 	}
 	
-	public void setCoordinates(Coordinates coords){
+	public void setCoordinates(Coordinate coords){
 		this.coords = coords;
 	}
 	
-	private Coordinates coords;
+	private Coordinate coords;
 	
 }

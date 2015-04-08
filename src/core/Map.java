@@ -3,15 +3,11 @@
  */
 package core;
 
+import dataContainer.GridState;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.prefs.Preferences;
-
-import dataContainer.Constants;
-import dataContainer.GridState;
 
 /**
  * the map is stored as GridState[x][y]

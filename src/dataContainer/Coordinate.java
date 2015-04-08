@@ -9,19 +9,19 @@ package dataContainer;
  * @begin 1-4-2015
  *
  */
-public class Coordinates {
+public class Coordinate {
 	public double x;
 	public double y;
 	public double angle;
 	
-	public Coordinates(){}
-	public Coordinates(double x, double y, double angle){
+	public Coordinate(){}
+	public Coordinate(double x, double y, double angle){
 		this.x = x;
 		this.y = y;
 		this.angle = angle;
 	}
 	
-	public Coordinates clone(){
-		return new Coordinates(x, y, angle);
+	public Coordinate clone(){
+		return new Coordinate(x, y, angle);
 	}
 }
