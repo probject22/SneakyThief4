@@ -11,12 +11,12 @@ package dataContainer;
  *
  */
 public class Coordinate {
-	public double x;
-	public double y;
+	public int x;
+	public int y;
 	public double angle;
 	
 	public Coordinate(){}
-	public Coordinate(double x, double y, double angle){
+	public Coordinate(int x, int y, double angle){
 		this.x = x;
 		this.y = y;
 		this.angle = angle;

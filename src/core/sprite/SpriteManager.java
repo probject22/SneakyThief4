@@ -119,8 +119,14 @@ public class SpriteManager {
 	 * @return true if the move is possible else false
 	 */
 	private boolean isMovePossible(Agent agent, Coordinate newCoords) {
-		// TODO implement this function
-		return true;
+		if (map.getCopyOfMap()[newCoords.x][newCoords.y].moveable()){
+			for (Agent tempAgent: agents){
+				Coordinate coords = tempAgent.getCoordinates();
+				if (!(coords.x == newCoords.x && coords.y == newCoords.y))
+					return true;
+			}
+		}
+		return false;
 	}
 
 	public void setEventManager(EventManager eventManager) {
