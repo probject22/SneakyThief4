@@ -14,6 +14,9 @@ public class Action {
 	public void addAction(ActionElement action){
 		actionElements.add(action);
 	}
+	public List<ActionElement> getActions(){
+		return actionElements;
+	}
     private List<ActionElement> actionElements;
 
 }

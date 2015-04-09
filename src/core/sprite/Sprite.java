@@ -14,7 +14,7 @@ public class Sprite {
 	}
 
 	public Coordinate getCoordinates(){
-		return coords == null? null: coords.clone();
+		return coords;
 	}
 	
 	public void setCoordinates(Coordinate coords){

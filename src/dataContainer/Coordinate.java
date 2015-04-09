@@ -21,6 +21,12 @@ public class Coordinate {
 		this.y = y;
 		this.angle = angle;
 	}
+	public void addToAngle(double angle){
+		this.angle += angle;
+		while (this.angle < 0)
+			this.angle += Math.PI*2;
+		this.angle %= Math.PI*2;
+	}
 	
 	public Coordinate clone(){
 		return new Coordinate(x, y, angle);

@@ -7,6 +7,8 @@ public class Turn extends ActionElement {
 	public Turn(double radians){
 		rad = radians % (2*Math.PI);
 	}
-	
-	public double rad;
+	public double getAngleRad(){
+		return rad;
+	}
+	private double rad;
 }
