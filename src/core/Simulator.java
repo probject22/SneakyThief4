@@ -20,7 +20,8 @@ public class Simulator {
 		
 		map = new Map();
 		
-		spriteManager = new SpriteManager(map);
+		spriteManager = SpriteManager.instance();
+		spriteManager.setMap(map);
 		spriteManager.addAgent(new Agent(new Coordinate(1,1,0.0)));
 		spriteManager.addAgent(new Agent(new Coordinate(2,2,0.0)));
 		eventManager = new EventManager(spriteManager.getAgentList(), map);
