@@ -8,10 +8,10 @@ package core.events;
 public class Vision extends Event {
 
 	/**
-	 * @param timeOccurt
+	 * @param timeStamp
 	 */
-	public Vision(double timeOccurt) {
-		super(timeOccurt);
+	public Vision(double timeStamp) {
+		super(timeStamp);
 		// TODO Auto-generated constructor stub
 	}
 }

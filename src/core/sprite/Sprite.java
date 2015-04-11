@@ -1,6 +1,6 @@
 package core.sprite;
 
-import core.actions.Action;
+import core.actions.Move;
 import dataContainer.Coordinate;
 /**
  * All movable objects are sprites
@@ -20,12 +20,14 @@ public class Sprite {
 	public void setCoordinates(Coordinate coords){
 		this.coords = coords;
 	}
-	
-	public Action getActions(){
-		System.err.println("This function has to be overwritten");
-		return null;
-	}
-	
+
 	private Coordinate coords;
-	
+
+	/**
+	 * Moves a sprite
+	 * @param move
+	 */
+	public void move(Move move) {
+		//TODO: implement move
+	}
 }

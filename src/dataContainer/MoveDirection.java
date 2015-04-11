@@ -3,17 +3,15 @@
  */
 package dataContainer;
 
-import java.awt.Color;
-
 /**
- * This enum hold all the basic move derections
+ * This enum hold all the basic move directions
  * @author ing. Robert Stevens
  * @begin 8 apr. 2015
  * @version 1.0
  * @changes
  * @todo 
  */
-public enum MoveDirections {
+public enum MoveDirection {
 	/*	dx	|	dy	| start angle	| stop Angle	*/
 	N	( 1, 	0, 		67.5, 			112.5 		),
 	NE	( 1, 	1, 		22.5, 			67.5 		),
@@ -32,7 +30,7 @@ public enum MoveDirections {
 	W	( 0, 	-1, 	157.5, 			202.5 		),
 	NW	( 1, 	-1, 	112.5, 			157.5 		);
 	
-	MoveDirections(int x, int y,  double startAngle, double endAngle){
+	MoveDirection(int x, int y, double startAngle, double endAngle){
 		this.x = x;
 		this.y =y;
 		this.startAngle = startAngle;

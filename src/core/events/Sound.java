@@ -8,10 +8,10 @@ package core.events;
 public class Sound extends Event {
 
 	/**
-	 * @param timeOccurt
+	 * @param timeStamp
 	 */
-	public Sound(double timeOccurt) {
-		super(timeOccurt);
+	public Sound(double timeStamp) {
+		super(timeStamp);
 		// TODO Auto-generated constructor stub
 	}
 }
