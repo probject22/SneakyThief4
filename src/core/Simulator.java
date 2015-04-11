@@ -1,7 +1,5 @@
 package core;
 
-import java.util.Map.Entry;
-
 import core.events.EventManager;
 import core.sprite.Agent;
 import core.sprite.SpriteManager;
@@ -9,6 +7,9 @@ import dataContainer.Coordinate;
 import gui.MainFrame;
 
 /**
+ *
+ * A controller of the SpriteManager and the Map.
+ *
  * Created by Stan on 08/04/15.
  */
 public class Simulator {
@@ -22,7 +23,7 @@ public class Simulator {
 		spriteManager = new SpriteManager(map);
 		spriteManager.addAgent(new Agent(new Coordinate(1,1,0.0)));
 		spriteManager.addAgent(new Agent(new Coordinate(2,2,0.0)));
-		eventManager = new EventManager(spriteManager.getAgentList());
+		eventManager = new EventManager(spriteManager.getAgentList(), map);
 		spriteManager.setEventManager(eventManager);
 		/*to get the agent list call spriteManager.getAgentList(); */
 		

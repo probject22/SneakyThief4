@@ -115,7 +115,6 @@ public class SpriteManager {
 	 * @param move the move the agent wants to perform
 	 * @return true if the move is possible else false
 	 */
-
 	private boolean isMovePossible(Agent agent, Move move) {
 		Coordinate coordinate = agent.getCoordinates();
 		coordinate.x += move.direction().getDx();

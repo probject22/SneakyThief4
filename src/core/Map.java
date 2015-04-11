@@ -17,6 +17,10 @@ import java.net.URL;
  * @begin 1-4-2015
  */
 public class Map {
+	/**
+	 * the amount of meters in every square of the grid.
+	 */
+	public static double meters_per_unit = 1;
 	private boolean debug = false;
 
 	/**
