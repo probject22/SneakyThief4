@@ -20,18 +20,30 @@ import java.util.PriorityQueue;
  * The SpriteManager knows about the Map of the world, and about all sprites living
  * on the map. It asks the Agents for their actions, and performs them if possible.
  *
+ * This class is a singleton, meaning that there can be only one SpriteManager.
+ *
  * @author ing. R.J.H.M. Stevens
  *
  */
 public class SpriteManager {
 
+	private static SpriteManager spriteManager;
 	/**
-	 * @param map the worldmap
-	 * 
+	 * private constructor for singleton design pattern.
 	 */
-	public SpriteManager(Map map) {
-		this.map = map;
+	 private SpriteManager() {
 		agents = new PriorityQueue<>(new AgentComparator());
+	 }
+
+	public void setMap(Map map){
+		this.map = map;
+	}
+
+	public static SpriteManager instance(){
+		if(spriteManager == null)
+			spriteManager = new SpriteManager();
+
+		return spriteManager;
 	}
 
 	/**
