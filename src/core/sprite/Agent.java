@@ -3,9 +3,7 @@
  */
 package core.sprite;
 
-import core.actions.Action;
-import core.actions.Move;
-import core.actions.Turn;
+import core.actions.*;
 import core.events.Event;
 import dataContainer.Coordinate;
 import dataContainer.MoveDirection;
@@ -53,6 +51,7 @@ public class Agent extends Sprite {
 		//Default action
 		action.addActionElement(new Turn(Math.toRadians(45.0), 1));
 		action.addActionElement(new Move(1.0,MoveDirection.E));
+		action.addActionElement(new Wait(Math.random()));
 		return action;
 	}
 	

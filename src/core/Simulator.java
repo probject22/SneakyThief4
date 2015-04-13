@@ -1,9 +1,6 @@
 package core;
 
-import core.actions.Action;
-import core.actions.ActionElement;
-import core.actions.Move;
-import core.actions.Turn;
+import core.actions.*;
 import core.events.EventManager;
 import core.sprite.Agent;
 import core.sprite.SpriteManager;
@@ -110,12 +107,11 @@ public class Simulator {
 
 
 			/* this handles the turn actionElement */
-
 			if ( actionElement instanceof Turn){
 				agent.getCoordinates().addToAngle(((Turn) actionElement).getAngle());
 				
-				eventManager.triggerEvent(actionElement,agent);
 				timeSpend += actionElement.duration();
+				eventManager.triggerEvent(actionElement,agent);
 			}
 
 			/* this handles the move actionElement (THIS NEEDS TO BE IMPLEMENTED) */
@@ -124,13 +120,19 @@ public class Simulator {
 				if(isMovePossible(agent, move)){
 					agent.move(move);
 
+					timeSpend += actionElement.duration();
+					
 					//Always trigger events AFTER EXECUTION OF THE ACTIONELEMENT
 					eventManager.triggerEvent(actionElement,agent);
-					timeSpend += actionElement.duration();
 				}
 			}
 
 			/* handle the wait ActionElement */
+			if ( actionElement instanceof Wait){
+				timeSpend += actionElement.duration();
+				
+				eventManager.triggerEvent(actionElement,agent);
+			}
 
 		}
 
