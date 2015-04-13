@@ -8,6 +8,7 @@ import core.events.EventManager;
 import core.sprite.Agent;
 import core.sprite.SpriteManager;
 import dataContainer.Coordinate;
+import dataContainer.GridState;
 import gui.MainFrame;
 
 /**
@@ -18,7 +19,9 @@ import gui.MainFrame;
  */
 public class Simulator {
 	private boolean debug = true;
-    
+    private boolean stop = false;
+    private boolean pause = false;
+    private double speed = 1.0;
 	public Simulator(){
 		if (debug) System.err.println("The simulator has been started");
 		
@@ -31,9 +34,35 @@ public class Simulator {
 		/*to get the agent list call spriteManager.getAgentList(); */
 		
 		/* gui stuff */
-		MainFrame mainFrame = new MainFrame();
+		mainFrame = new MainFrame();
 		mainFrame.setMap(map);
-		mainFrame.updateGui();
+		
+		gameLoop();
+	}
+	
+	private void gameLoop(){
+		while (!stop){
+			firstAgentAction();
+			/* finish the move by updateting the gui */
+			mainFrame.updateGui();
+			sleep(speed);
+			while (pause){
+				sleep(0.1);
+			}
+				
+		}
+	}
+	/**
+	 * This puts the current thread into sleep
+	 * @param time the time that the thread has to sleep in seconds
+	 */
+	private void sleep(double time){
+		time *= 1000;
+		try {
+			Thread.sleep((long)time);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -48,7 +77,12 @@ public class Simulator {
 		Coordinate coordinate = agent.getCoordinates();
 		coordinate.x += move.direction().getDx();
 		coordinate.y += move.direction().getDy();
-		if (map.getCopyOfMap()[coordinate.x][coordinate.y].moveable()){
+		GridState[][] tempMap = map.getCopyOfMap();
+		if (coordinate.x < 0 && coordinate.y < 0)
+			return false;
+		if (!(coordinate.x < tempMap.length && coordinate.y < tempMap[0].length))
+			return true;
+		if (tempMap[coordinate.x][coordinate.y].moveable()){
 			for (Agent tempAgent: spriteManager.getAgentList()){
 				Coordinate coords = tempAgent.getCoordinates();
 				if ((coords.x == coordinate.x || coords.y == coordinate.y))
@@ -115,4 +149,5 @@ public class Simulator {
 	private Map map;
 	private SpriteManager spriteManager;
 	private EventManager eventManager;
+	private MainFrame mainFrame;
 }
