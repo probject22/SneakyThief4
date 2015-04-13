@@ -4,7 +4,9 @@
 package gui;
 
 import java.awt.Frame;
+
 import dataContainer.GridState;
+
 import java.awt.Graphics2D;
 
 import javax.swing.JFrame;
@@ -22,6 +24,7 @@ import java.io.*;
 
 import core.Map;
 import core.sprite.Sprite;
+import core.sprite.SpriteManager;
 import dataContainer.Coordinate;
 
 /**
@@ -29,7 +32,9 @@ import dataContainer.Coordinate;
  *
  */
 public class MainFrame extends JFrame {
+	private SpriteManager spriteManager;
 	public MainFrame() {
+		this.spriteManager = SpriteManager.instance();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		this.setVisible(true);
@@ -45,7 +50,7 @@ public class MainFrame extends JFrame {
 		this.sprites = sprites;
 	}
 
-	public void updateMap() {
+	public void updateGui() {
 		this.repaint();
 	}
 
@@ -73,9 +78,7 @@ public class MainFrame extends JFrame {
 	}
 
 	private void drawSprites(Graphics g) {
-		if (sprites == null)
-			return;
-		for (Sprite sprite : sprites) {
+		for (Sprite sprite : spriteManager.getAgentList()) {
 			if (sprite == null)
 				break;
 			Coordinate coords = sprite.getCoordinates();

@@ -25,14 +25,15 @@ public class Simulator {
 		map = new Map();
 		
 		spriteManager = SpriteManager.instance();
-		spriteManager.addAgent(new Agent(new Coordinate(1,1,0.0)));
-		spriteManager.addAgent(new Agent(new Coordinate(2,2,0.0)));
+		spriteManager.addAgent(new Agent(new Coordinate(100,100,0.0)));
+		spriteManager.addAgent(new Agent(new Coordinate(200,200,0.0)));
 		eventManager = new EventManager(map);
 		/*to get the agent list call spriteManager.getAgentList(); */
 		
 		/* gui stuff */
 		MainFrame mainFrame = new MainFrame();
 		mainFrame.setMap(map);
+		mainFrame.updateGui();
 	}
 
 	/**
