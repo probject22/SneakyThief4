@@ -4,10 +4,9 @@
 package core.events;
 
 import core.Map;
-import core.actions.Action;
+import core.actions.ActionElement;
 import core.sprite.Agent;
-
-import java.util.List;
+import core.sprite.SpriteManager;
 
 /**
  *
@@ -22,25 +21,25 @@ import java.util.List;
  */
 public class EventManager {
 
+	private final SpriteManager spriteManager;
 	private Map map;
-	private List<Agent> agents;
 
-	public EventManager(List<Agent> agents, Map map){
-		this.agents = agents;
+	public EventManager(Map map){
+		this.spriteManager = SpriteManager.instance();
 		this.map = map;
 	}
 
 	/**
-	 * checks if the action performed by the given agent triggers any events. If so the events
+	 * checks if the actionElement performed by the given agent triggers any events. If so the events
 	 * are routed to the appropriate agents.
-	 *
-	 * @param action
+	 * Always trigger events AFTER EXECUTION OF THE ACTIONELEMENT!
+	 * @param actionElement
 	 * @param agent
 	 */
-	public void triggerEvent(Action action, Agent agent){
+	public void triggerEvent(ActionElement actionElement, Agent agent){
 		//TODO all the event handling
 
-		//Generate events based on action
+		//Generate events based on actionElement
 		//sound
 		//vision
 
