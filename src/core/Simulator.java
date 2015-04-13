@@ -113,8 +113,9 @@ public class Simulator {
 
 			if ( actionElement instanceof Turn){
 				agent.getCoordinates().addToAngle(((Turn) actionElement).getAngle());
-				//TODO check if turn is valid
+				
 				eventManager.triggerEvent(actionElement,agent);
+				timeSpend += actionElement.duration();
 			}
 
 			/* this handles the move actionElement (THIS NEEDS TO BE IMPLEMENTED) */
@@ -125,6 +126,7 @@ public class Simulator {
 
 					//Always trigger events AFTER EXECUTION OF THE ACTIONELEMENT
 					eventManager.triggerEvent(actionElement,agent);
+					timeSpend += actionElement.duration();
 				}
 			}
 
@@ -135,7 +137,7 @@ public class Simulator {
 
 
 		/* update the duration witch was spend to execute the agentAction */
-		agent.addTimeToKey(agentAction.duration());
+		agent.addTimeToKey(timeSpend);
 
 		/* put the agent back into the queue with a new duration */
 		spriteManager.addAgent(agent);
