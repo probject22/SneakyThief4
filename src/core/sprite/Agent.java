@@ -54,7 +54,11 @@ public class Agent extends Sprite {
 		action.addActionElement(new Wait(Math.random()));
 		return action;
 	}
-	
+
+	/**
+	 * increments the time of the agent.
+	 * @param time
+	 */
 	public void addTimeToKey(double time){
 		timeKey += time;
 		if (timeKey < 0){
@@ -62,6 +66,11 @@ public class Agent extends Sprite {
 			System.exit(-1);
 		}
 	}
+
+	/**
+	 * Returns the current timekey of the agent.
+	 * @return current timekey of the agent
+	 */
 	public double getTimeKey(){
 		return timeKey;
 	}
