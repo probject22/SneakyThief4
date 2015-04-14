@@ -65,8 +65,23 @@ public class Agent extends Sprite {
 	public double getTimeKey(){
 		return timeKey;
 	}
-
-
-
+	
+	public double getMinVisionRange(){
+		return this.minVisionRange;
+	}
+	
+	public double getMaxVisionRange(){
+		return this.maxVisionRange;
+	}
+	
+	public double getVisionAngleRad(){
+		return Math.toRadians(this.visionAngle);
+	}
+	
+	/* the vision variable */
+	private double minVisionRange = 0;
+	private double maxVisionRange = 10;
+	private double visionAngle = 45;
+	
 	private double timeKey;
 }
