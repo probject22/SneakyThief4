@@ -35,7 +35,7 @@ public class Agent extends Sprite {
 	/**
 	 * Method that processes events to update the belief state of the agent. The simulator will
 	 * hand events to the agents using this method.
-	 * @param event
+	 * @param event The event that the agent should know about.
 	 */
 	public void giveEvent(Event event){
 
@@ -44,7 +44,7 @@ public class Agent extends Sprite {
 	/**
 	 * Get the action that the agent currently wants to perform. This will consist of only a single
 	 * square with a certain speed, and possibly a turn.
-	 * @return
+	 * @return The action that the agents want to perform next
 	 */
 	public Action getAction(){
 		Action action = new Action();
@@ -57,7 +57,7 @@ public class Agent extends Sprite {
 
 	/**
 	 * increments the time of the agent.
-	 * @param time
+	 * @param time the time to be added to the current.
 	 */
 	public void addTimeToKey(double time){
 		timeKey += time;
@@ -68,8 +68,8 @@ public class Agent extends Sprite {
 	}
 
 	/**
-	 * Returns the current timekey of the agent.
-	 * @return current timekey of the agent
+	 * Returns the current timeKey of the agent.
+	 * @return current timeKey of the agent
 	 */
 	public double getTimeKey(){
 		return timeKey;
