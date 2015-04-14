@@ -55,6 +55,7 @@ public class EventManager {
 
 		/* handle the wait ActionElement */
 		else if ( actionElement instanceof Wait){
+			generateVisionEvent(agent, timeStamp);
 			//trigger a vision event
 		}
 		
