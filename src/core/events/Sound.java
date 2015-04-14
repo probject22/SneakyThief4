@@ -1,5 +1,7 @@
 package core.events;
 
+import dataContainer.Coordinate;
+
 
 /**
  * This class implement the sound event message
@@ -10,8 +12,18 @@ public class Sound extends Event {
 	/**
 	 * @param timeStamp
 	 */
-	public Sound(double timeStamp) {
+	public Sound(double timeStamp, double direction, Coordinate baseCoords) {
 		super(timeStamp);
-		// TODO Auto-generated constructor stub
+		this.direction = direction;
+		this.baseCoords = baseCoords;
 	}
+	public double getDirection(){
+		return this.direction;
+	}
+	
+	public Coordinate getBaseCoordinate(){
+		return this.baseCoords;
+	}
+	private double direction;
+	private Coordinate baseCoords;
 }

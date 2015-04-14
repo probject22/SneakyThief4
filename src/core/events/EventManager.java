@@ -10,6 +10,7 @@ import core.actions.Turn;
 import core.actions.Wait;
 import core.sprite.Agent;
 import core.sprite.SpriteManager;
+import dataContainer.Coordinate;
 
 /**
  *
@@ -56,7 +57,6 @@ public class EventManager {
 		/* handle the wait ActionElement */
 		else if ( actionElement instanceof Wait){
 			generateVisionEvent(agent, timeStamp);
-			//trigger a vision event
 		}
 		
 	}
@@ -68,7 +68,14 @@ public class EventManager {
 	}
 	
 	private void generateMoveSoundEvent(Agent agent, double timeStamp, double speed){
-		Sound sound = new Sound(timeStamp);
+		//TODO check if the standardDeviation is applied correctly
+		/* in degree */
+		double standardDeviation = 10;
+		double variance = Math.pow(standardDeviation, 2);
+		
+		/*variance in rad */
+		double varianceRad = Math.toRadians(variance);
+		
 		double distence = 0;
 		if (speed >0 && speed < 0.5)
 			distence = 1;
@@ -79,14 +86,21 @@ public class EventManager {
 		else
 			distence = 10;
 		
-		//TODO put stuff in the sound event
 		
 		for (Agent tempAgent: spriteManager.getAgentList())
-			if (distenceBetweenAgents(agent, tempAgent) <= distence)
+			if (distenceBetweenAgents(agent, tempAgent) <= distence){
+				/* calculate the angle under witch the agent hears the sound and add the variance to it */
+				double dx = agent.getCoordinates().x - tempAgent.getCoordinates().x;
+				double dy = agent.getCoordinates().y - tempAgent.getCoordinates().y;
+				double direction = (Math.atan2(dy, dx) + (Math.random()*(varianceRad*2) - varianceRad)) % 2 * Math.PI;
+				if (direction < 0) direction += 2*Math.PI;
+				
+				Sound sound = new Sound(timeStamp, direction, tempAgent.getCoordinates().clone());
 				tempAgent.giveEvent(sound);
+			}
 	}
 	
 	private double distenceBetweenAgents(Agent agent1, Agent agent2){
-		return 0;
+		return Coordinate.distenceBetweenCoordinates(agent1.getCoordinates(), agent2.getCoordinates());
 	}
 }

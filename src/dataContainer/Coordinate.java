@@ -3,6 +3,8 @@
  */
 package dataContainer;
 
+import core.sprite.Agent;
+
 /**
  * The coordinates are stored in this container
  * @author ing. Robert Stevens
@@ -30,5 +32,12 @@ public class Coordinate {
 	
 	public Coordinate clone(){
 		return new Coordinate(x, y, angle);
+	}
+	
+	static public double distenceBetweenCoordinates(Coordinate c1, Coordinate c2){
+		double dx = c1.x - c2.x;
+		double dy = c1.y - c2.y;
+		
+		return Math.sqrt(dx * dx + dy * dy);
 	}
 }
