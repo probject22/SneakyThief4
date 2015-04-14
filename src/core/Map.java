@@ -27,7 +27,7 @@ public class Map {
 	 * If no mapfile is set load the default map
 	 */
 	public Map(){
-		URL url = Map.class.getResource("/resources/maps/default.map");
+		URL url = Map.class.getResource("/maps/default.map");
 		if (url != null)
 			intit(url.toString().replace("file:", ""));
 		else

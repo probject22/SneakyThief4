@@ -3,29 +3,18 @@
  */
 package gui;
 
-import java.awt.Frame;
-
-import dataContainer.GridState;
-
-import java.awt.Graphics2D;
-
-import javax.swing.JFrame;
-
-import java.awt.geom.AffineTransform;
-
-import javax.imageio.ImageIO;
-
-import java.net.URL;
-import java.awt.*;
-
-import javax.swing.*;
-
-import java.io.*;
-
 import core.Map;
 import core.sprite.Sprite;
 import core.sprite.SpriteManager;
 import dataContainer.Coordinate;
+import dataContainer.GridState;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.io.IOException;
+import java.net.URL;
 
 /**
  * @author ing. R.J.H.M. Stevens
@@ -86,11 +75,10 @@ public class MainFrame extends JFrame {
 			int imgWidth = 0;
 			int imgHeight = 0;
 
-			URL url = getClass().getClassLoader().getResource(
-					"resources/images/agent.png");
+			URL url = getClass().getClassLoader().getResource("images/agent.png");
 			if (url == null) {
 				System.err.println("Couldn't find file: "
-						+ "resources/images/agent.png");
+						+ "images/agent.png");
 				break;
 			}
 			try {
