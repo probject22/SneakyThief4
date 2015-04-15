@@ -50,7 +50,7 @@ public class Agent extends Sprite {
 		Action action = new Action();
 		//Default action
 		action.addActionElement(new Turn(Math.toRadians(45.0), 1));
-		action.addActionElement(new Move(1.0,MoveDirection.E));
+		action.addActionElement(new Move(1.0));
 		action.addActionElement(new Wait(Math.random()));
 		return action;
 	}

@@ -6,6 +6,7 @@ import core.sprite.Agent;
 import core.sprite.SpriteManager;
 import dataContainer.Coordinate;
 import dataContainer.GridState;
+import dataContainer.MoveDirection;
 import gui.MainFrame;
 
 /**
@@ -72,8 +73,9 @@ public class Simulator {
 	 */
 	private boolean isMovePossible(Agent agent, Move move) {
 		Coordinate coordinate = agent.getCoordinates().clone();
-		coordinate.x += move.direction().getDx();
-		coordinate.y += move.direction().getDy();
+		MoveDirection dir = MoveDirection.getDirectionFromAngle(coordinate.angle);
+		coordinate.x += dir.getDx();
+		coordinate.y += dir.getDy();
 		GridState[][] tempMap = map.getCopyOfMap();
 		if (coordinate.x < 0 && coordinate.y < 0)
 			return false;
@@ -118,10 +120,13 @@ public class Simulator {
 			if ( actionElement instanceof Move){
 				Move move = (Move) actionElement;
 				if(isMovePossible(agent, move)){
-					agent.move(move);
-
-					timeSpend += actionElement.duration();
+					Coordinate coordinate = agent.getCoordinates();
+					MoveDirection dir = MoveDirection.getDirectionFromAngle(coordinate.angle);
+					coordinate.x += dir.getDx();
+					coordinate.y += dir.getDy();
 					
+					
+					timeSpend += actionElement.duration();
 					//Always trigger events AFTER EXECUTION OF THE ACTIONELEMENT
 					eventManager.triggerEvent(actionElement,agent);
 				}
