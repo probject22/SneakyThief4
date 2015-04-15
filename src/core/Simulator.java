@@ -71,7 +71,7 @@ public class Simulator {
 	 * @return true if the move is possible else false
 	 */
 	private boolean isMovePossible(Agent agent, Move move) {
-		Coordinate coordinate = agent.getCoordinates();
+		Coordinate coordinate = agent.getCoordinates().clone();
 		coordinate.x += move.direction().getDx();
 		coordinate.y += move.direction().getDy();
 		GridState[][] tempMap = map.getCopyOfMap();
@@ -82,7 +82,7 @@ public class Simulator {
 		if (tempMap[coordinate.x][coordinate.y].moveable()){
 			for (Agent tempAgent: spriteManager.getAgentList()){
 				Coordinate coords = tempAgent.getCoordinates();
-				if ((coords.x == coordinate.x || coords.y == coordinate.y))
+				if ((coords.x == coordinate.x && coords.y == coordinate.y))
 					return false; // if there is an agent in the way
 			}
 			return true; // if there is nothing in the way
