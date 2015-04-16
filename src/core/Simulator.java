@@ -98,7 +98,10 @@ public class Simulator {
 	 */
 	public void firstAgentAction(){
 		Agent agent = spriteManager.getFirstAgent();
+		
+		/*trigger the wait event to send an update of the vision to the agent */
 		eventManager.triggerEvent( new Wait(0),agent);
+		
 		Action agentAction = agent.getAction();
 		double timeSpend = 0;
 

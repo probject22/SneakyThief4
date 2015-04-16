@@ -55,8 +55,8 @@ public enum MoveDirection {
 		for (MoveDirection dir: MoveDirection.values()){
 			if (angle >= dir.getStartAngleRad() && angle < dir.getEndAngleRad()){
 				return dir;
-				}
 			}
+		}
 		return null;
 	}
 	
