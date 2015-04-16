@@ -72,6 +72,7 @@ public class Simulator {
 	 * @return true if the move is possible else false
 	 */
 	private boolean isMovePossible(Agent agent, Move move) {
+		
 		Coordinate coordinate = agent.getCoordinates().clone();
 		MoveDirection dir = MoveDirection.getDirectionFromAngle(coordinate.angle);
 		coordinate.x += dir.getDx();
@@ -97,6 +98,7 @@ public class Simulator {
 	 */
 	public void firstAgentAction(){
 		Agent agent = spriteManager.getFirstAgent();
+		eventManager.triggerEvent( new Wait(0),agent);
 		Action agentAction = agent.getAction();
 		double timeSpend = 0;
 
