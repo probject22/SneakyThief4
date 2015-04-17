@@ -34,9 +34,12 @@ import dataContainer.Coordinate;
 public class MainFrame extends JFrame {
 	private SpriteManager spriteManager;
 	public MainFrame() {
+		BorderLayout mainlayout = new BorderLayout();
+		JPanel controlpanel = new ControlPanel();
 		this.spriteManager = SpriteManager.instance();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
+		this.add(controlpanel, BorderLayout.SOUTH);
 		this.setVisible(true);
 		this.setName("MainFrame");
 
