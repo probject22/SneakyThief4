@@ -19,7 +19,7 @@ public class Simulator {
 	private boolean debug = true;
     private boolean stop = false;
     private boolean pause = false;
-    private double speed = 1.0;
+    private double speed = 0.5;
 	public Simulator(){
 		if (debug) System.err.println("The simulator has been started");
 		
