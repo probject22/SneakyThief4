@@ -71,6 +71,7 @@ public class EventManager {
 	}
 	
 	// Split the map into sub section.
+	// Has to be initialized when map gets created
 	private void initializeSoundOnMap(){
 		
 		int sectionSize = 25;
@@ -85,13 +86,13 @@ public class EventManager {
 		
 		int nSections = nWidth*nHeight;
 		
-		//if(extraHeight != 0){
-		//	nSections += nHeight;
-		//}
-		//
-		//if(extraWidth != 0){
-		//	nSections += nWidth;
-		//}
+		if(extraHeight != 0){
+			nSections += nHeight;
+		}
+		
+		if(extraWidth != 0){
+			nSections += nWidth;
+		}
 		
 		tick = new double[nSections];
 		// The first entry is the bottomLeft corner the Second is the top right
@@ -107,7 +108,29 @@ public class EventManager {
 			}
 		}
 		
+		if(extraHeight != 0){
+			for (int i=0; i<nWidth ; i++){
+				tick[k] = 0;
+				soundCoordinates[k][0] = new Coordinate(i*25,(nHeight-1)*25,0);
+				soundCoordinates[k][1] = new Coordinate((i+1)*25,nHeight*extraHeight,0);
+				k++;
+			}				
+		}
 		
+		if(extraWidth != 0){
+			for (int j=0; j<nHeight ; j++){
+				tick[k] = 0;
+				soundCoordinates[k][0] = new Coordinate((nWidth-1)*25,j*25,0);
+				soundCoordinates[k][1] = new Coordinate(nWidth*extraWidth,(j+1)*25,0);
+				k++;
+			}				
+		}
+		
+		if(extraWidth != 0 && extraHeight != 0){
+			tick[k] = 0;
+			soundCoordinates[k][0] = new Coordinate((nWidth-1)*25,(nHeight-1)*25,0);
+			soundCoordinates[k][1] = new Coordinate(nWidth*extraWidth,nHeight*extraHeight,0);
+		}
 		
 	}
 	
