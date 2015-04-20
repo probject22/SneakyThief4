@@ -65,6 +65,7 @@ public class EventManager {
 	
 	private void generateVisionEvent(Agent agent, double timeStamp){
 		Vision vision = new Vision(timeStamp);
+		vision.setCoords(agent.getCoordinates().clone());
 		//TODO calculate what the agent can see and make a ?list? of it
 		agent.giveEvent(vision);
 	}
