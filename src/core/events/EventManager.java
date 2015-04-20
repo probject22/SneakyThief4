@@ -94,6 +94,10 @@ public class EventManager {
 			nSections += nWidth;
 		}
 		
+		if(extraWidth != 0 && extraHeight != 0){
+			nSections ++;
+		}
+		
 		tick = new double[nSections];
 		// The first entry is the bottomLeft corner the Second is the top right
 		// of each sub section.
