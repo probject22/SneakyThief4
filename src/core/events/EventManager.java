@@ -70,14 +70,17 @@ public class EventManager {
 	}
 	
 	// Split the map into sub section.
-	private void generateSoundOnMap(){
+	private void initializeSoundOnMap(){
 		
 		int sectionSize = 25;
 		int height = map.getMapHeight();
 		int width = map.getMapWidth();
 		
-		int nHeight = height % sectionSize;
-		int nWidth = width % sectionSize;
+		int nHeight = height / sectionSize;
+		int nWidth = width / sectionSize;
+		
+		int extraHeight = height % sectionSize;
+		int extraWidth = width % sectionSize;
 		
 		int heightSection  = height/nHeight;
 		int widthSection  = width/nWidth;
@@ -88,11 +91,13 @@ public class EventManager {
 		// The first entry is the bottomLeft corner the Second is the top right
 		// of each sub section.
 		soundCoordinates = new Coordinate[nSections][2];
-		
+		int k = 0;
 		for (int i=0; i<nWidth ; i++){
 			for (int j=0; j<nHeight ; j++){
-				soundCoordinates[j+i][0] = new Coordinate(i*widthSection,j*heightSection,0);
-				soundCoordinates[j+i][1] = new Coordinate((i+1)*widthSection,(j+1)*heightSection,0);
+				tick[k] = 0;
+				soundCoordinates[k][0] = new Coordinate(i*25,j*25,0);
+				soundCoordinates[k][1] = new Coordinate((i+1)*25,(j+1)*25,0);
+				k++;
 			}
 		}
 		
