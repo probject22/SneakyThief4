@@ -82,10 +82,15 @@ public class EventManager {
 		int extraHeight = height % sectionSize;
 		int extraWidth = width % sectionSize;
 		
-		int heightSection  = height/nHeight;
-		int widthSection  = width/nWidth;
-		
 		int nSections = nWidth*nHeight;
+		
+		//if(extraHeight != 0){
+		//	nSections += nHeight;
+		//}
+		//
+		//if(extraWidth != 0){
+		//	nSections += nWidth;
+		//}
 		
 		tick = new double[nSections];
 		// The first entry is the bottomLeft corner the Second is the top right
@@ -100,6 +105,8 @@ public class EventManager {
 				k++;
 			}
 		}
+		
+		
 		
 	}
 	
