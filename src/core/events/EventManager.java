@@ -27,6 +27,8 @@ public class EventManager {
 
 	private final SpriteManager spriteManager;
 	private Map map;
+	private double[] tick;
+	private Coordinate[][] soundCoordinates;
 
 	public EventManager(Map map){
 		this.spriteManager = SpriteManager.instance();
@@ -66,6 +68,50 @@ public class EventManager {
 		//TODO calculate what the agent can see and make a ?list? of it
 		agent.giveEvent(vision);
 	}
+	
+	// Split the map into sub section.
+	private void generateSoundOnMap(){
+		
+		int sectionSize = 25;
+		int height = map.getMapHeight();
+		int width = map.getMapWidth();
+		
+		int nHeight = height % sectionSize;
+		int nWidth = width % sectionSize;
+		
+		int heightSection  = height/nHeight;
+		int widthSection  = width/nWidth;
+		
+		int nSections = nWidth*nHeight;
+		
+		tick = new double[nSections];
+		// The first entry is the bottomLeft corner the Second is the top right
+		// of each sub section.
+		soundCoordinates = new Coordinate[nSections][2];
+		
+		for (int i=0; i<nWidth ; i++){
+			for (int j=0; j<nHeight ; j++){
+				soundCoordinates[j+i][0] = new Coordinate(i*widthSection,j*heightSection,0);
+				soundCoordinates[j+i][1] = new Coordinate((i+1)*widthSection,(j+1)*heightSection,0);
+			}
+		}
+		
+	}
+	
+	// Generates the random sound for each soundCoordinate for each tick
+	public void generateRandomSound(){
+		
+		int nSections = tick.length;
+		
+		// generate a random sound for each map sub section.
+		for(int i = 0; i<nSections ; i++){
+		//
+		//Sharon will finish this part
+		//
+		//
+		}
+	}
+	
 	
 	private void generateMoveSoundEvent(Agent agent, double timeStamp, double speed){
 		//TODO check if the standardDeviation is applied correctly

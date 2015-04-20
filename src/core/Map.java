@@ -22,6 +22,9 @@ public class Map {
 	 */
 	public static double meters_per_unit = 1;
 	private boolean debug = false;
+	// height and width
+	private int mapHeight;
+	private int mapWidth;
 
 	/**
 	 * If no mapfile is set load the default map
@@ -52,6 +55,8 @@ public class Map {
 	public GridState[][] getCopyOfMap(){
 		return map == null ? null: map.clone();
 	}
+	
+	
 	
 	/**
 	 * Initialise the class and load in the map file
@@ -98,6 +103,10 @@ public class Map {
 				 			y++;
 				 			
 				 	}
+			 // Setting height and Width
+				 	mapHeight = height;
+				 	mapWidth  = width;
+			 
 			 }
 			 //Close the input stream
 			 br.close();
@@ -111,5 +120,15 @@ public class Map {
 	 * The real map
 	 */
 	private GridState[][] map;
+
+	/**
+	 * Width and Height getters
+	 */
+	public int getMapHeight() {
+		return mapHeight;
+	}
+	public int getMapWidth() {
+		return mapWidth;
+	}
 	
 }
