@@ -17,8 +17,7 @@ import gui.MainFrame;
  */
 public class Simulator {
 	private boolean debug = true;
-	private boolean on = true;
-    private static boolean stop = true;
+    private static boolean stop = false;
     private static boolean pause = false;
     private double speed = 0.5;
     
@@ -58,19 +57,18 @@ public class Simulator {
 	}
 	
 	private void gameLoop(){
-		while (on){
-			while (!stop){
-				firstAgentAction();
-				/* finish the move by updateting the gui */
-				mainFrame.updateGui();
-				sleep(speed);
-				while (pause){
-					sleep(0.1);
-				}
-					
+		while (!stop){
+			firstAgentAction();
+			/* finish the move by updateting the gui */
+			mainFrame.updateGui();
+			sleep(speed);
+			while (pause && !stop){
+				sleep(0.1);
 			}
+				
 		}
 		System.out.println("Stop");
+		System.exit(0);
 	}
 	/**
 	 * This puts the current thread into sleep
