@@ -51,6 +51,15 @@ public enum MoveDirection {
 		return Math.toRadians(endAngle);
 	}
 	
+	public static MoveDirection getDirectionFromAngle(double angle){
+		for (MoveDirection dir: MoveDirection.values()){
+			if (angle >= dir.getStartAngleRad() && angle < dir.getEndAngleRad()){
+				return dir;
+			}
+		}
+		return null;
+	}
+	
 	private int x;
 	private int y;
 	private double startAngle;

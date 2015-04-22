@@ -12,11 +12,9 @@ import dataContainer.MoveDirection;
  * Created by Stan on 08/04/15.
  */
 public class Move implements ActionElement {
-	public Move (double speed, MoveDirection direction){
-		this.direction = direction;
+	public Move (double speed){
 		this.speed = speed;
 	}
-	public MoveDirection direction;
 	public double speed;
 
 	@Override
@@ -24,7 +22,4 @@ public class Move implements ActionElement {
 		return speed * Map.meters_per_unit;
 	}
 
-	public MoveDirection direction() {
-		return direction;
-	}
 }

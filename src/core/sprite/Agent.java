@@ -49,8 +49,8 @@ public class Agent extends Sprite {
 	public Action getAction(){
 		Action action = new Action();
 		//Default action
+		action.addActionElement(new Move(1.0));
 		action.addActionElement(new Turn(Math.toRadians(45.0), 1));
-		action.addActionElement(new Move(1.0,MoveDirection.E));
 		action.addActionElement(new Wait(Math.random()));
 		return action;
 	}
@@ -74,8 +74,25 @@ public class Agent extends Sprite {
 	public double getTimeKey(){
 		return timeKey;
 	}
-
-
-
+	
+	public double getMinVisionRange(){
+		return this.minVisionRange;
+	}
+	
+	public double getMaxVisionRange(){
+		return this.maxVisionRange;
+	}
+	
+	public double getVisionAngleRad(){
+		return Math.toRadians(this.visionAngle);
+	}
+	
+	/* the vision variable */
+	private double minVisionRange = 0;
+	private double maxVisionRange = 10;
+	private double visionAngle = 45;
+	private double structureVisionRange = 10;
+	private double towerVisionRange = 15;
+	
 	private double timeKey;
 }

@@ -6,6 +6,7 @@ import core.sprite.Agent;
 import core.sprite.SpriteManager;
 import dataContainer.Coordinate;
 import dataContainer.GridState;
+import dataContainer.MoveDirection;
 import gui.MainFrame;
 
 /**
@@ -16,9 +17,28 @@ import gui.MainFrame;
  */
 public class Simulator {
 	private boolean debug = true;
-    private boolean stop = false;
-    private boolean pause = false;
-    private double speed = 1.0;
+	private boolean on = true;
+    private static boolean stop = true;
+    private static boolean pause = false;
+    private double speed = 0.5;
+    
+    public static void setStop(boolean newvalue)
+    {
+    	stop = newvalue;
+    }
+    public static boolean getStop()
+    {
+    	return stop;
+    }
+    public static void setPause(boolean newvalue)
+    {
+    	pause = newvalue;
+    }
+    
+    public static boolean getPause()
+    {
+    	return pause;
+    }
 	public Simulator(){
 		if (debug) System.err.println("The simulator has been started");
 		
@@ -38,16 +58,19 @@ public class Simulator {
 	}
 	
 	private void gameLoop(){
-		while (!stop){
-			firstAgentAction();
-			/* finish the move by updateting the gui */
-			mainFrame.updateGui();
-			sleep(speed);
-			while (pause){
-				sleep(0.1);
+		while (on){
+			while (!stop){
+				firstAgentAction();
+				/* finish the move by updateting the gui */
+				mainFrame.updateGui();
+				sleep(speed);
+				while (pause){
+					sleep(0.1);
+				}
+					
 			}
-				
 		}
+		System.out.println("Stop");
 	}
 	/**
 	 * This puts the current thread into sleep
@@ -71,9 +94,11 @@ public class Simulator {
 	 * @return true if the move is possible else false
 	 */
 	private boolean isMovePossible(Agent agent, Move move) {
-		Coordinate coordinate = agent.getCoordinates();
-		coordinate.x += move.direction().getDx();
-		coordinate.y += move.direction().getDy();
+		
+		Coordinate coordinate = agent.getCoordinates().clone();
+		MoveDirection dir = MoveDirection.getDirectionFromAngle(coordinate.angle);
+		coordinate.x += dir.getDx();
+		coordinate.y += dir.getDy();
 		GridState[][] tempMap = map.getCopyOfMap();
 		if (coordinate.x < 0 && coordinate.y < 0)
 			return false;
@@ -82,7 +107,7 @@ public class Simulator {
 		if (tempMap[coordinate.x][coordinate.y].moveable()){
 			for (Agent tempAgent: spriteManager.getAgentList()){
 				Coordinate coords = tempAgent.getCoordinates();
-				if ((coords.x == coordinate.x || coords.y == coordinate.y))
+				if ((coords.x == coordinate.x && coords.y == coordinate.y))
 					return false; // if there is an agent in the way
 			}
 			return true; // if there is nothing in the way
@@ -95,8 +120,11 @@ public class Simulator {
 	 */
 	public void firstAgentAction(){
 		Agent agent = spriteManager.getFirstAgent();
+		
+		/*trigger the wait event to send an update of the vision to the agent */
+		eventManager.triggerEvent( new Wait(0),agent);
+		
 		Action agentAction = agent.getAction();
-		double timeSpend = 0;
 
 		for (ActionElement actionElement: agentAction.getActionElements()){
 
@@ -110,7 +138,7 @@ public class Simulator {
 			if ( actionElement instanceof Turn){
 				agent.getCoordinates().addToAngle(((Turn) actionElement).getAngle());
 				
-				timeSpend += actionElement.duration();
+				agent.addTimeToKey(actionElement.duration());
 				eventManager.triggerEvent(actionElement,agent);
 			}
 
@@ -118,10 +146,13 @@ public class Simulator {
 			if ( actionElement instanceof Move){
 				Move move = (Move) actionElement;
 				if(isMovePossible(agent, move)){
-					agent.move(move);
-
-					timeSpend += actionElement.duration();
+					Coordinate coordinate = agent.getCoordinates();
+					MoveDirection dir = MoveDirection.getDirectionFromAngle(coordinate.angle);
+					coordinate.x += dir.getDx();
+					coordinate.y += dir.getDy();
 					
+					
+					agent.addTimeToKey(actionElement.duration());
 					//Always trigger events AFTER EXECUTION OF THE ACTIONELEMENT
 					eventManager.triggerEvent(actionElement,agent);
 				}
@@ -129,7 +160,7 @@ public class Simulator {
 
 			/* handle the wait ActionElement */
 			if ( actionElement instanceof Wait){
-				timeSpend += actionElement.duration();
+				agent.addTimeToKey( actionElement.duration());
 				
 				eventManager.triggerEvent(actionElement,agent);
 			}
@@ -139,7 +170,7 @@ public class Simulator {
 
 
 		/* update the duration witch was spend to execute the agentAction */
-		agent.addTimeToKey(timeSpend);
+		;
 
 		/* put the agent back into the queue with a new duration */
 		spriteManager.addAgent(agent);
