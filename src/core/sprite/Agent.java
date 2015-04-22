@@ -82,6 +82,8 @@ public class Agent extends Sprite {
 	private double minVisionRange = 0;
 	private double maxVisionRange = 10;
 	private double visionAngle = 45;
+	private double structureVisionRange = 10;
+	private double towerVisionRange = 15;
 	
 	private double timeKey;
 }
