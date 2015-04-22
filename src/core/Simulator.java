@@ -103,7 +103,6 @@ public class Simulator {
 		eventManager.triggerEvent( new Wait(0),agent);
 		
 		Action agentAction = agent.getAction();
-		double timeSpend = 0;
 
 		for (ActionElement actionElement: agentAction.getActionElements()){
 
@@ -117,7 +116,7 @@ public class Simulator {
 			if ( actionElement instanceof Turn){
 				agent.getCoordinates().addToAngle(((Turn) actionElement).getAngle());
 				
-				timeSpend += actionElement.duration();
+				agent.addTimeToKey(actionElement.duration());
 				eventManager.triggerEvent(actionElement,agent);
 			}
 
@@ -131,7 +130,7 @@ public class Simulator {
 					coordinate.y += dir.getDy();
 					
 					
-					timeSpend += actionElement.duration();
+					agent.addTimeToKey(actionElement.duration());
 					//Always trigger events AFTER EXECUTION OF THE ACTIONELEMENT
 					eventManager.triggerEvent(actionElement,agent);
 				}
@@ -139,7 +138,7 @@ public class Simulator {
 
 			/* handle the wait ActionElement */
 			if ( actionElement instanceof Wait){
-				timeSpend += actionElement.duration();
+				agent.addTimeToKey( actionElement.duration());
 				
 				eventManager.triggerEvent(actionElement,agent);
 			}
@@ -149,7 +148,7 @@ public class Simulator {
 
 
 		/* update the duration witch was spend to execute the agentAction */
-		agent.addTimeToKey(timeSpend);
+		;
 
 		/* put the agent back into the queue with a new duration */
 		spriteManager.addAgent(agent);
