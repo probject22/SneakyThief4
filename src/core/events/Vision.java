@@ -1,5 +1,7 @@
 package core.events;
 
+import java.util.HashMap;
+
 import core.sprite.Sprite;
 import dataContainer.Coordinate;
 import dataContainer.GridState;
@@ -29,44 +31,18 @@ public class Vision extends Event {
 	 * @param coords the coords to set
 	 */
 	public void setBaseCoords(Coordinate coords) {
-		this.baseCoords = coords;
+		this.baseCoords = coords.clone();
 	}
-	/**
-	 * @return the state
-	 */
-	public GridState getState() {
-		return state;
+	public void addSprite(Coordinate coords, Sprite sprite){
+		spriteInVisionMap.put(coords.clone(), sprite);
 	}
-	/**
-	 * @param state the state to set
-	 */
-	public void setState(GridState state) {
-		this.state = state;
-	}
-	/**
-	 * @return the sprite
-	 */
-	public Sprite getSprite() {
-		return sprite;
-	}
-	/**
-	 * @param sprite the sprite to set
-	 */
-	public void setSprite(Sprite sprite) {
-		this.sprite = sprite;
-	}
-
-	public Coordinate getField() {
-		return field;
-	}
-
-	public void setField(Coordinate field) {
-		this.field = field;
+	
+	public void addGrid(Coordinate coords, GridState state){
+		stateInVisionMap.put(coords.clone(),state);
 	}
 
 	private Coordinate baseCoords = null;
-	private Coordinate field = null;
-	private GridState state = null;
-	private Sprite sprite = null;
+	HashMap <Coordinate, GridState> stateInVisionMap = new HashMap<Coordinate, GridState>();
+	HashMap <Coordinate, Sprite> spriteInVisionMap = new HashMap<Coordinate, Sprite>();
 	
 }
