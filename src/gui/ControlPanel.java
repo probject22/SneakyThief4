@@ -7,6 +7,8 @@ import javax.swing.JSpinner;
 public class ControlPanel extends JPanel {
 	public ControlPanel()
 	{
+		//Components of the Control Panel
+		
 		JButton startbutton = new JButton("Start");
 		JButton pausebutton = new JButton("Pause");
 		JButton stopbutton = new JButton("Stop");

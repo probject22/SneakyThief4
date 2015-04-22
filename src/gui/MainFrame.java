@@ -70,7 +70,7 @@ public class MainFrame extends JFrame {
 			for(int j = 0; j<map.getCopyOfMap()[0].length;j++)
 			{
 				currentstate = map.getCopyOfMap()[i][j];
-				int pxPerGridState = 50;
+				int pxPerGridState = 30;
 				//CHANGE COLOR DEPENDING ON THE GRIDSTATE
 				g2.setColor(currentstate.color());
 				//Fabric structure is commented out.
