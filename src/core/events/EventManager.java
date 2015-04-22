@@ -3,6 +3,8 @@
  */
 package core.events;
 
+import java.util.Random;
+
 import core.Map;
 import core.actions.ActionElement;
 import core.actions.Move;
@@ -27,8 +29,9 @@ public class EventManager {
 
 	private final SpriteManager spriteManager;
 	private Map map;
-	private double[] tick;
+	private double[][] tick;
 	private Coordinate[][] soundCoordinates;
+	private double lambda = 6;
 
 	public EventManager(Map map){
 		this.spriteManager = SpriteManager.instance();
@@ -98,14 +101,16 @@ public class EventManager {
 			nSections ++;
 		}
 		
-		tick = new double[nSections];
+		//tick[currentTick][nextRandomSoundEvent]
+		tick = new double[nSections][2];
 		// The first entry is the bottomLeft corner the Second is the top right
 		// of each sub section.
 		soundCoordinates = new Coordinate[nSections][2];
 		int k = 0;
 		for (int i=0; i<nWidth ; i++){
 			for (int j=0; j<nHeight ; j++){
-				tick[k] = 0;
+				tick[k][0] = -1;
+				tick[k][1] = -1;
 				soundCoordinates[k][0] = new Coordinate(i*25,j*25,0);
 				soundCoordinates[k][1] = new Coordinate((i+1)*25,(j+1)*25,0);
 				k++;
@@ -114,7 +119,8 @@ public class EventManager {
 		
 		if(extraHeight != 0){
 			for (int i=0; i<nWidth ; i++){
-				tick[k] = 0;
+				tick[k][0] = -1;
+				tick[k][1] = -1;
 				soundCoordinates[k][0] = new Coordinate(i*25,(nHeight-1)*25,0);
 				soundCoordinates[k][1] = new Coordinate((i+1)*25,nHeight*extraHeight,0);
 				k++;
@@ -123,7 +129,8 @@ public class EventManager {
 		
 		if(extraWidth != 0){
 			for (int j=0; j<nHeight ; j++){
-				tick[k] = 0;
+				tick[k][0] = -1;
+				tick[k][1] = -1;
 				soundCoordinates[k][0] = new Coordinate((nWidth-1)*25,j*25,0);
 				soundCoordinates[k][1] = new Coordinate(nWidth*extraWidth,(j+1)*25,0);
 				k++;
@@ -131,27 +138,57 @@ public class EventManager {
 		}
 		
 		if(extraWidth != 0 && extraHeight != 0){
-			tick[k] = 0;
+			tick[k][0] = -1;
+			tick[k][1] = -1;
 			soundCoordinates[k][0] = new Coordinate((nWidth-1)*25,(nHeight-1)*25,0);
 			soundCoordinates[k][1] = new Coordinate(nWidth*extraWidth,nHeight*extraHeight,0);
 		}
 		
 	}
 	
+	//Generate when next event happens (in secs)
+	public double generateNextSound(){
+		Random rand = new Random();
+		return -Math.log(1.0 - rand.nextDouble()) / lambda;
+	}
+	
 	// Generates the random sound for each soundCoordinate for each tick
-	public void generateRandomSound(){
+	public void randomSoundOnMap(double plusTick){
 		
 		int nSections = tick.length;
 		
 		// generate a random sound for each map sub section.
 		for(int i = 0; i<nSections ; i++){
-		//
-		//Sharon will finish this part
-		//
-		//
+			generateRandomSound(i, plusTick, soundCoordinates[i][0], soundCoordinates[i][1]);
 		}
 	}
 	
+	//for one 25m2 area 
+	private void generateRandomSound(int nrOfArea, double plusTick, Coordinate bottomLeft, Coordinate topRight){ 
+		
+		double distanceSound = 5;
+		if(tick[nrOfArea][1] == -1){
+			tick[nrOfArea][1] = generateNextSound(); 
+		} 
+		tick[nrOfArea][0] = tick[nrOfArea][0] + plusTick;
+		if(tick[nrOfArea][0] >= tick[nrOfArea][1]){ //Coordinate.distenceBetweenCoordinates()
+			for (Agent tempAgent: spriteManager.getAgentList()) {
+				Coordinate soundCoo = new Coordinate((int)Math.random()*(bottomLeft.x-topRight.x), (int)Math.random()*(bottomLeft.y-topRight.y),0);
+				if(Coordinate.distenceBetweenCoordinates(soundCoo,tempAgent.getCoordinates()) <= distanceSound){ 
+					//calculate the angle	under witch the agent hears the sound and add the variance to it
+					double dx = soundCoo.x - tempAgent.getCoordinates().x;
+					double dy = soundCoo.y - tempAgent.getCoordinates().y;
+					//Math.pow(StandardDeviation,2)
+					double varianceRad = Math.toRadians(Math.pow(10, 2));
+					double direction = (Math.atan2(dy, dx) + (Math.random()*(varianceRad*2) - varianceRad)) % 2 * Math.PI;
+					if (direction < 0) direction += 2*Math.PI;
+					
+					Sound sound = new Sound(tempAgent.getTimeKey(), direction, tempAgent.getCoordinates().clone());
+					tempAgent.giveEvent(sound);
+				}
+			}
+		}
+	}
 	
 	private void generateMoveSoundEvent(Agent agent, double timeStamp, double speed){
 		//TODO check if the standardDeviation is applied correctly
