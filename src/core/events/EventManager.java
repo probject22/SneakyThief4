@@ -47,7 +47,7 @@ public class EventManager {
 	 */
 	public void triggerEvent(ActionElement actionElement, Agent agent){
 		//TODO Get the timestamps of the actions
-		double timeStamp = 1;
+		double timeStamp = agent.getTimeKey();
 		if ( actionElement instanceof Turn){
 			//triger a vision event
 		}
