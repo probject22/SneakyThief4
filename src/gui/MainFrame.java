@@ -38,7 +38,9 @@ public class MainFrame extends JFrame {
 		JPanel controlpanel = new ControlPanel();
 		this.spriteManager = SpriteManager.instance();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setExtendedState(Frame.MAXIMIZED_BOTH);
+		this.setSize(700,600);
+		this.setLocationRelativeTo(null);
+		//this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		this.add(controlpanel, BorderLayout.SOUTH);
 		this.setVisible(true);
 		this.setName("MainFrame");
@@ -69,13 +71,14 @@ public class MainFrame extends JFrame {
 		for(int i = 0;i<map.getCopyOfMap().length;i++)
 			for(int j = 0; j<map.getCopyOfMap()[0].length;j++)
 			{
+				int extra = 50;
 				currentstate = map.getCopyOfMap()[i][j];
-				int pxPerGridState = 30;
+				int pxPerGridState = 20;
 				//CHANGE COLOR DEPENDING ON THE GRIDSTATE
 				g2.setColor(currentstate.color());
 				//Fabric structure is commented out.
 				//g2.fill3DRect(i*pxPerGridState, j*pxPerGridState, pxPerGridState, pxPerGridState, true);
-				g2.fillRect(i*pxPerGridState, j*pxPerGridState, pxPerGridState, pxPerGridState);
+				g2.fillRect((i*pxPerGridState)+extra, (j*pxPerGridState)+extra, pxPerGridState+extra, pxPerGridState+extra);
 			}
 
 	}
@@ -107,7 +110,7 @@ public class MainFrame extends JFrame {
 			Graphics2D g2d = (Graphics2D) g;
 			AffineTransform transform = new AffineTransform();
 			
-			transform.translate((coords.x-imgWidth / 2)*5, (coords.y - imgHeight / 2)*5);
+			transform.translate((coords.x-imgWidth / 2)*2, (coords.y - imgHeight / 2)*2);
 			transform.rotate(coords.angle, imgWidth/2, imgHeight/2); // about its center
 			transform.scale(0.2, 0.2);
 			g2d.drawImage(img, transform, this);

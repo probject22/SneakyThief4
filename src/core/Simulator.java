@@ -17,9 +17,28 @@ import gui.MainFrame;
  */
 public class Simulator {
 	private boolean debug = true;
-    private boolean stop = false;
-    private boolean pause = false;
+	private boolean on = true;
+    private static boolean stop = true;
+    private static boolean pause = false;
     private double speed = 0.5;
+    
+    public static void setStop(boolean newvalue)
+    {
+    	stop = newvalue;
+    }
+    public static boolean getStop()
+    {
+    	return stop;
+    }
+    public static void setPause(boolean newvalue)
+    {
+    	pause = newvalue;
+    }
+    
+    public static boolean getPause()
+    {
+    	return pause;
+    }
 	public Simulator(){
 		if (debug) System.err.println("The simulator has been started");
 		
@@ -39,16 +58,19 @@ public class Simulator {
 	}
 	
 	private void gameLoop(){
-		while (!stop){
-			firstAgentAction();
-			/* finish the move by updateting the gui */
-			mainFrame.updateGui();
-			sleep(speed);
-			while (pause){
-				sleep(0.1);
+		while (on){
+			while (!stop){
+				firstAgentAction();
+				/* finish the move by updateting the gui */
+				mainFrame.updateGui();
+				sleep(speed);
+				while (pause){
+					sleep(0.1);
+				}
+					
 			}
-				
 		}
+		System.out.println("Stop");
 	}
 	/**
 	 * This puts the current thread into sleep

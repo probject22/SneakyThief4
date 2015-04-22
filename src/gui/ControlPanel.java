@@ -1,8 +1,13 @@
 package gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
+
+import core.Simulator;
 
 public class ControlPanel extends JPanel {
 	public ControlPanel()
@@ -10,7 +15,22 @@ public class ControlPanel extends JPanel {
 		//Components of the Control Panel
 		
 		JButton startbutton = new JButton("Start");
+		startbutton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				Simulator.setStop(false);
+				System.out.println("Started program");
+			}
+		});
 		JButton pausebutton = new JButton("Pause");
+		pausebutton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				Simulator.setPause(!Simulator.getPause());
+			}
+		});
 		JButton stopbutton = new JButton("Stop");
 		JSpinner speedinput = new JSpinner();
 		this.add(startbutton);
@@ -19,3 +39,4 @@ public class ControlPanel extends JPanel {
 		this.add(speedinput);
 	}
 }
+
