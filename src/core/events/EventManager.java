@@ -75,7 +75,7 @@ public class EventManager {
 	
 	// Split the map into sub section.
 	// Has to be initialized when map gets created
-	private void initializeSoundOnMap(){
+	public void initializeSoundOnMap(){
 		
 		int sectionSize = 25;
 		int height = map.getMapHeight();
@@ -109,8 +109,8 @@ public class EventManager {
 		int k = 0;
 		for (int i=0; i<nWidth ; i++){
 			for (int j=0; j<nHeight ; j++){
-				tick[k][0] = -1;
-				tick[k][1] = -1;
+				tick[k][0] = 0;
+				tick[k][1] = generateNextSound();
 				soundCoordinates[k][0] = new Coordinate(i*25,j*25,0);
 				soundCoordinates[k][1] = new Coordinate((i+1)*25,(j+1)*25,0);
 				k++;
@@ -119,8 +119,8 @@ public class EventManager {
 		
 		if(extraHeight != 0){
 			for (int i=0; i<nWidth ; i++){
-				tick[k][0] = -1;
-				tick[k][1] = -1;
+				tick[k][0] = 0;
+				tick[k][1] = generateNextSound();
 				soundCoordinates[k][0] = new Coordinate(i*25,(nHeight-1)*25,0);
 				soundCoordinates[k][1] = new Coordinate((i+1)*25,nHeight*extraHeight,0);
 				k++;
@@ -129,8 +129,8 @@ public class EventManager {
 		
 		if(extraWidth != 0){
 			for (int j=0; j<nHeight ; j++){
-				tick[k][0] = -1;
-				tick[k][1] = -1;
+				tick[k][0] = 0;
+				tick[k][1] = generateNextSound();
 				soundCoordinates[k][0] = new Coordinate((nWidth-1)*25,j*25,0);
 				soundCoordinates[k][1] = new Coordinate(nWidth*extraWidth,(j+1)*25,0);
 				k++;
@@ -138,8 +138,8 @@ public class EventManager {
 		}
 		
 		if(extraWidth != 0 && extraHeight != 0){
-			tick[k][0] = -1;
-			tick[k][1] = -1;
+			tick[k][0] = 0;
+			tick[k][1] = generateNextSound();
 			soundCoordinates[k][0] = new Coordinate((nWidth-1)*25,(nHeight-1)*25,0);
 			soundCoordinates[k][1] = new Coordinate(nWidth*extraWidth,nHeight*extraHeight,0);
 		}
@@ -147,7 +147,7 @@ public class EventManager {
 	}
 	
 	//Generate when next event happens (in secs)
-	public double generateNextSound(){
+	private double generateNextSound(){
 		Random rand = new Random();
 		return -Math.log(1.0 - rand.nextDouble()) / lambda;
 	}
@@ -167,15 +167,13 @@ public class EventManager {
 	private void generateRandomSound(int nrOfArea, double plusTick, Coordinate bottomLeft, Coordinate topRight){ 
 		
 		double distanceSound = 5;
-		if(tick[nrOfArea][1] == -1){
-			tick[nrOfArea][1] = generateNextSound(); 
-		} 
+		
 		tick[nrOfArea][0] = tick[nrOfArea][0] + plusTick;
 		if(tick[nrOfArea][0] >= tick[nrOfArea][1]){ //Coordinate.distenceBetweenCoordinates()
 			for (Agent tempAgent: spriteManager.getAgentList()) {
 				Coordinate soundCoo = new Coordinate((int)Math.random()*(bottomLeft.x-topRight.x), (int)Math.random()*(bottomLeft.y-topRight.y),0);
 				if(Coordinate.distenceBetweenCoordinates(soundCoo,tempAgent.getCoordinates()) <= distanceSound){ 
-					//calculate the angle	under witch the agent hears the sound and add the variance to it
+					//calculate the angle under which the agent hears the sound and add the uncertainty to it
 					double dx = soundCoo.x - tempAgent.getCoordinates().x;
 					double dy = soundCoo.y - tempAgent.getCoordinates().y;
 					//Math.pow(StandardDeviation,2)
@@ -185,6 +183,9 @@ public class EventManager {
 					
 					Sound sound = new Sound(tempAgent.getTimeKey(), direction, tempAgent.getCoordinates().clone());
 					tempAgent.giveEvent(sound);
+					
+					tick[nrOfArea][0] = 0;
+					tick[nrOfArea][1] = generateNextSound();
 				}
 			}
 		}
