@@ -14,6 +14,9 @@ import java.util.*;
  * To apply on something else than the map, make new classes that implement HeuristicFunction, CostFunction, and
  * NeighbourGenerator.
  *
+ * E is the type of the result (for instance move directions)
+ * T is the type of the node elements (for instance map coordinates)
+ *
  * Created by Stan on 26/04/15.
  */
 public class AStar<E,T> {
@@ -24,6 +27,13 @@ public class AStar<E,T> {
     HeuristicFunction heuristicFunction;
     ResultInterpreter<E,T> resultInterpreter;
 
+    /**
+     * Constructor
+     * @param neighbourGenerator
+     * @param costFunction
+     * @param heuristicFunction
+     * @param resultInterpreter
+     */
     public AStar(
             NeighbourGenerator neighbourGenerator,
             CostFunction costFunction,
@@ -35,7 +45,19 @@ public class AStar<E,T> {
         this.resultInterpreter = resultInterpreter;
     }
 
-    public List<E> getShortestPath(Node from, Node to){
+    /**
+     * Returns a list of outcomes as specified in the generic variable.
+     * @param fromElement starting element
+     * @param toElement final element
+     * @return
+     */
+    public List<E> getShortestPath(T fromElement, T toElement){
+
+        Node<T> from = new Node<>();
+        from.element = fromElement;
+        Node<T> to = new Node<>();
+        to.element = toElement;
+
         List<Node> open = new ArrayList<>();
         List<Node> closed = new ArrayList<>();
 
@@ -45,20 +67,31 @@ public class AStar<E,T> {
         open.add(from);
 
 
-
+        // loop through the fringe
         while (!open.isEmpty()){
+
+            // get the value with the lowest cost prospection
             Node current = Collections.min(open, new NodeComparator());
+
+            // remove the current element from the fringe
             open.remove(current);
+
+            // generate neighbours
             List<Node> neighbours = neighbourGenerator.getNeighbours(current);
+
+            //loop through neighbours
             for (Node neighbour : neighbours) {
                 if (neighbour.equals(to)) {
+                    //return result
                     return resultInterpreter.getResult(neighbour);
                 }
 
+                // calculate functions
                 neighbour.g = costFunction.getCost(current, neighbour);
                 neighbour.h = heuristicFunction.getHeuristic(neighbour, to);
                 neighbour.f = neighbour.g + neighbour.h;
 
+                // Check whether to add the new neighbour to the fringe
                 if (open.contains(neighbour)) {
                     int i = open.indexOf(neighbour);
                     Node neighbour2 = open.get(i);
@@ -69,10 +102,11 @@ public class AStar<E,T> {
                     int i = open.indexOf(neighbour);
                     Node neighbour2 = open.get(i);
                     if (neighbour.f < neighbour2.f)
-                        open.set(i, neighbour);
+                        open.add(neighbour);
                 }
                 else open.add(neighbour);
 
+                // remove the current node from the fringe
                 closed.add(current);
 
             }
@@ -81,6 +115,9 @@ public class AStar<E,T> {
         return null;
     }
 
+    /**
+     * Compares two nodes based on their f
+     */
     class NodeComparator implements Comparator<Node>{
         @Override
         public int compare(Node n1, Node n2) {

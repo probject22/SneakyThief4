@@ -6,6 +6,9 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 /**
+ *
+ * Implementation of the CostFunction interface for use with the AStar class.
+ *
  * Created by Stan on 26/04/15.
  */
 public class MapCostFunction implements CostFunction<Coordinate>{
