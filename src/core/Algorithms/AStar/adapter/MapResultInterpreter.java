@@ -29,22 +29,6 @@ public class MapResultInterpreter implements ResultInterpreter<MoveDirection, Co
     }
 
     private MoveDirection getMoveDirection(Node<Coordinate> from, Node<Coordinate> to){
-        if(from.element.x == to.element.x-1 && from.element.y-1 == to.element.y)
-            return MoveDirection.SW;
-        if(from.element.x == to.element.x && from.element.y-1 == to.element.y)
-            return MoveDirection.S;
-        if(from.element.x == to.element.x+1 && from.element.y-1 == to.element.y)
-            return MoveDirection.SE;
-        if(from.element.x == to.element.x-1 && from.element.y == to.element.y)
-            return MoveDirection.W;
-        if(from.element.x == to.element.x+1 && from.element.y == to.element.y)
-            return MoveDirection.E;
-        if(from.element.x == to.element.x-1 && from.element.y+1 == to.element.y)
-            return MoveDirection.NW;
-        if(from.element.x == to.element.x && from.element.y+1 == to.element.y)
-            return MoveDirection.N;
-        if(from.element.x == to.element.x+1 && from.element.y+1 == to.element.y)
-            return MoveDirection.NE;
-        return null;
+       return MoveDirection.getMoveDirection(from.element, to.element);
     }
 }

@@ -46,7 +46,28 @@ public enum MoveDirection {
 	public double getStartAngleRad(){
 		return Math.toRadians(startAngle);
 	}
-	
+
+
+	public static MoveDirection getMoveDirection(Coordinate from, Coordinate to){
+		if(from.x == to.x-1 && from.y-1 == to.y)
+			return MoveDirection.SW;
+		if(from.x == to.x && from.y-1 == to.y)
+			return MoveDirection.S;
+		if(from.x == to.x+1 && from.y-1 == to.y)
+			return MoveDirection.SE;
+		if(from.x == to.x-1 && from.y == to.y)
+			return MoveDirection.W;
+		if(from.x == to.x+1 && from.y == to.y)
+			return MoveDirection.E;
+		if(from.x == to.x-1 && from.y+1 == to.y)
+			return MoveDirection.NW;
+		if(from.x == to.x && from.y+1 == to.y)
+			return MoveDirection.N;
+		if(from.x == to.x+1 && from.y+1 == to.y)
+			return MoveDirection.NE;
+		return null;
+	}
+
 	public double getEndAngleRad(){
 		return Math.toRadians(endAngle);
 	}

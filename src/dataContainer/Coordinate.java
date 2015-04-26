@@ -46,5 +46,8 @@ public class Coordinate {
 		return sqrt(pow(x-element.x, 2) + pow( y - element.y, 2));
 	}
 
+	public double getAngle(Coordinate two){
+		return Math.atan((two.y - this.y) / (two.x - this.x));
+	}
 
 }
