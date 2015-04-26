@@ -3,7 +3,8 @@
  */
 package dataContainer;
 
-import core.sprite.Agent;
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
 
 /**
  * The coordinates are stored in this container
@@ -38,6 +39,12 @@ public class Coordinate {
 		double dx = c1.x - c2.x;
 		double dy = c1.y - c2.y;
 		
-		return Math.sqrt(dx * dx + dy * dy);
+		return sqrt(dx * dx + dy * dy);
 	}
+
+	public double distance(Coordinate element) {
+		return sqrt(pow(x-element.x, 2) + pow( y - element.y, 2));
+	}
+
+
 }

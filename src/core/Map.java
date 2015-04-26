@@ -3,6 +3,7 @@
  */
 package core;
 
+import dataContainer.Coordinate;
 import dataContainer.GridState;
 
 import java.io.BufferedReader;
@@ -114,6 +115,22 @@ public class Map {
 			 System.err.println("Error: " + e.getMessage());
 		 }finally{
 		 }
+	}
+
+	/**
+	 * Checks whether a position on the map can be moved to.
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	public boolean isMoveable(int x, int y){
+		if ( x < 0 || x >= mapWidth || y < 0 || y >= mapHeight) return false;
+		//else
+		return map[x][y].moveable();
+	}
+
+	public boolean isMoveable(Coordinate coordinate){
+		return isMoveable(coordinate.x, coordinate.y);
 	}
 	
 	/**

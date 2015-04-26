@@ -3,10 +3,13 @@
  */
 package core.sprite;
 
-import core.actions.*;
+import core.actions.Action;
+import core.actions.Move;
+import core.actions.Turn;
+import core.actions.Wait;
 import core.events.Event;
+import core.events.Vision;
 import dataContainer.Coordinate;
-import dataContainer.MoveDirection;
 
 /**
  *
@@ -28,6 +31,7 @@ import dataContainer.MoveDirection;
  */
 public class Agent extends Sprite {
 
+
     public Agent(Coordinate coords) {
         super(coords);
     }
@@ -41,6 +45,9 @@ public class Agent extends Sprite {
 
 	}
 
+	private void processVision(Vision vision){
+
+	}
 	/**
 	 * Get the action that the agent currently wants to perform. This will consist of only a single
 	 * square with a certain speed, and possibly a turn.
@@ -95,4 +102,6 @@ public class Agent extends Sprite {
 	private double towerVisionRange = 15;
 	
 	private double timeKey;
+
+
 }
