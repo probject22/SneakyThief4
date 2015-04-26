@@ -1,5 +1,7 @@
-package core.Algorithms;
+package core.Algorithms.AStar.adapter;
 
+import core.Algorithms.AStar.HeuristicFunction;
+import core.Algorithms.AStar.Node;
 import dataContainer.Coordinate;
 
 /**
@@ -9,7 +11,7 @@ import dataContainer.Coordinate;
  *
  * Created by Stan on 26/04/15.
  */
-public class MapHeuristicFunction implements HeuristicFunction<Coordinate>{
+public class MapHeuristicFunction implements HeuristicFunction<Coordinate> {
     @Override
     /**
      * Returns the direct distance between two nodes (coordinates on the map)

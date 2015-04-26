@@ -1,5 +1,7 @@
-package core.Algorithms;
+package core.Algorithms.AStar.adapter;
 
+import core.Algorithms.AStar.CostFunction;
+import core.Algorithms.AStar.Node;
 import dataContainer.Coordinate;
 
 import static java.lang.Math.max;
@@ -11,7 +13,7 @@ import static java.lang.Math.min;
  *
  * Created by Stan on 26/04/15.
  */
-public class MapCostFunction implements CostFunction<Coordinate>{
+public class MapCostFunction implements CostFunction<Coordinate> {
 
     /**
      * Counts the amount of tiles between two coordinates on the map (assuming no obstructions).

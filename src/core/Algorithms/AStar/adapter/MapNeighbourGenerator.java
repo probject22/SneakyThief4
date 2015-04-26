@@ -1,5 +1,7 @@
-package core.Algorithms;
+package core.Algorithms.AStar.adapter;
 
+import core.Algorithms.AStar.NeighbourGenerator;
+import core.Algorithms.AStar.Node;
 import core.Map;
 
 import dataContainer.Coordinate;

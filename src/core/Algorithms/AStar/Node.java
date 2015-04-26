@@ -1,4 +1,4 @@
-package core.Algorithms;
+package core.Algorithms.AStar;
 
 /**
  *
@@ -7,11 +7,11 @@ package core.Algorithms;
  * Created by Stan on 26/04/15.
  */
 public class Node<E> {
-        Node parent;
-        double g; // cost value
-        double h; // heuristic value
-        double f; // cost + heuristic
-        E element;// identifying element
+        public Node parent;
+        public double g; // cost value
+        public double h; // heuristic value
+        public double f; // cost + heuristic
+        public E element;// identifying element
 
         /**
          * equals method checking whether the elements of the nodes are equal

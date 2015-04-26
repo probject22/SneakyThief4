@@ -1,5 +1,7 @@
-package core.Algorithms;
+package core.Algorithms.AStar.adapter;
 
+import core.Algorithms.AStar.Node;
+import core.Algorithms.AStar.ResultInterpreter;
 import dataContainer.Coordinate;
 import dataContainer.MoveDirection;
 
@@ -13,7 +15,7 @@ import java.util.List;
  *
  * Created by Stan on 26/04/15.
  */
-public class MapResultInterpreter implements ResultInterpreter<MoveDirection, Coordinate>{
+public class MapResultInterpreter implements ResultInterpreter<MoveDirection, Coordinate> {
     @Override
     public List<MoveDirection> getResult(Node<Coordinate> node) {
         List<MoveDirection> moves = new ArrayList<>();

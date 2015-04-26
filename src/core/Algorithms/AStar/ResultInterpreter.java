@@ -1,4 +1,6 @@
-package core.Algorithms;
+package core.Algorithms.AStar;
+
+import core.Algorithms.AStar.Node;
 
 import java.util.List;
 

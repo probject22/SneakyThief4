@@ -1,4 +1,4 @@
-package core.Algorithms;
+package core.Algorithms.AStar;
 
 /**
  *
