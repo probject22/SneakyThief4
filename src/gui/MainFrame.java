@@ -81,7 +81,7 @@ public class MainFrame extends JFrame {
 			int imgWidth = 0;
 			int imgHeight = 0;
 
-			URL url = getClass().getClassLoader().getResource("images/agent.png");
+			URL url = getClass().getClassLoader().getResource("resources/images/agent.png");
 			if (url == null) {
 				System.err.println("Couldn't find file: "
 						+ "images/agent.png");
