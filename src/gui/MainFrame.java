@@ -94,6 +94,7 @@ public class MainFrame extends JFrame {
 	}
 
 	private void drawSprites(Graphics g) {
+		boolean debug = true;
 		Style visionLines = new Style(null, null);
 		for (Sprite sprite : spriteManager.getAgentList()) {
 			if (sprite == null)
@@ -103,31 +104,40 @@ public class MainFrame extends JFrame {
 			int imgWidth = 0;
 			int imgHeight = 0;
 					String path = "";
+					if(debug)System.err.println(coords.angle);
 					switch(MoveDirection.getDirectionFromAngle(coords.angle)){
 					case E:
 					case EN:
 					case EP:
+						if(debug)System.err.println("Heading east");
 						path = "resources/images/east.png";
 						break;
 					case N:
+						if(debug)System.err.println("Heading north");
 						path = "resources/images/north.png";
 						break;
 					case NE:
+						if(debug)System.err.println("Heading NE");
 						path = "resources/images/north.png";
 						break;
 					case NW:
+						if(debug)System.err.println("Heading NW");
 						path = "resources/images/north.png";
 						break;
 					case S:
+						if(debug)System.err.println("Heading S");
 						path = "resources/images/south.png";
 						break;
 					case SE:
+						if(debug)System.err.println("Heading SE");
 						path = "resources/images/south.png";
 						break;
 					case SW:
+						if(debug)System.err.println("Heading SW");
 						path = "resources/images/south.png";
 						break;
 					case W:
+						if(debug)System.err.println("Heading W");
 						path = "resources/images/west.png";
 						break;
 					default:
@@ -156,12 +166,8 @@ public class MainFrame extends JFrame {
 			g2d.setStroke(new BasicStroke(3));
 			g2d.setColor(Color.RED);
 			int distence = (int) (20*((Agent)sprite).getMaxVisionRange());
-			System.err.println("base angle "+ coords.angle);
 			double angle1 = (coords.angle -((Agent)sprite).getVisionAngleRad()/2);
-			System.err.println("temp angle "+ angle1);
-			if(angle1 < 0) angle1+=2*Math.PI;
 			angle1 %= 2*Math.PI;
-			System.err.println("result "+ angle1);
 			double angle2 = (coords.angle +((Agent)sprite).getVisionAngleRad()/2);
 			if(angle2 < 0) angle1+=2*Math.PI;
 			angle2 %= 2*Math.PI;
