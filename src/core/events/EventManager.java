@@ -11,6 +11,7 @@ import core.actions.Move;
 import core.actions.Turn;
 import core.actions.Wait;
 import core.sprite.Agent;
+import core.sprite.Sprite;
 import core.sprite.SpriteManager;
 import dataContainer.Coordinate;
 
@@ -66,9 +67,36 @@ public class EventManager {
 		
 	}
 	
-	private void findInVision (double angle ,double radius, Vision vision) 
+	//Checks if a coordinate is clockwise to a vector
+	private Boolean isClockWise(double xT,double yT, double x, double y){
+		return -x*yT + y*xT > 0;
+	}
+	
+	//Checks if a coordinate is within radius
+	private Boolean isInRadius(double xT,double yT, double r){
+		return yT*yT + xT*xT <= Math.sqrt(r);
+	}
+	
+	
+	private Boolean isInView (Coordinate target,double angle ,double r, Vision vision) 
 	{ 
-	  
+		//initAngle is the oriantation of the agent
+		double initAngle = vision.getBaseCoords().angle;
+		
+		//Setting view barriers
+		double x1 = r*Math.cos(initAngle-angle/2);
+		double y1 = r*Math.sin(initAngle-angle/2);
+		
+		double x2 = r*Math.cos(initAngle+angle/2);
+		double y2 = r*Math.sin(initAngle+angle/2);
+		
+		double xTarget = target.x - vision.getBaseCoords().x;
+		double yTarget = target.y - vision.getBaseCoords().y;
+		
+		
+		
+		return true;
+		
 	}
 	
 	private void generateVisionEvent(Agent agent, double timeStamp){
@@ -81,6 +109,11 @@ public class EventManager {
 		
 		Coordinate baseCoords = agent.getCoordinates();
 		agent.giveEvent(vision);
+		
+		for (Sprite sprite: spriteManager.getAgentList()){
+			sprite.getCoordinates();
+		}
+		
 		
 		
 	}
