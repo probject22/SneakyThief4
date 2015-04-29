@@ -2,11 +2,11 @@ package core.Algorithms.BES;
 
 import dataContainer.Coordinate;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
 
 import static java.lang.Math.PI;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
 
 /**
  * Created by Stan on 29/04/15.
@@ -34,11 +34,19 @@ public class BES {
     }
 
     private Map<Coordinate, Double> getDirectionsMapping(Coordinate agent, Collection<Coordinate> otherAgents, Coordinate intruder, Collection<Double> escapeDirections) {
-        // TODO: implement
+        Map<Coordinate, Double> references = new HashMap<>();
+        for (Double escapeDirection : escapeDirections) {
+            Coordinate c = new Coordinate(
+                    intruder.x + (cos(escapeDirection) > 0 ? 1 : -1),
+                    intruder.y + (sin(escapeDirection) > 0 ? 1 : -1),0);
+            references.put(c, escapeDirection);
+        }
+
         return null;
     }
 
     private Coordinate getBlockingLocation(Coordinate agent, Coordinate intruder, double escapeDirection) {
+        // TODO: implement
         return null;
     }
 

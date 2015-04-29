@@ -13,6 +13,7 @@ public class MTES {
     Coordinate current;
     Map map;
     private Map<Coordinate, Integer> history;
+    private Coordinate target;
 
 
     public void updateLocation(Coordinate location){
@@ -31,7 +32,7 @@ public class MTES {
     public MoveDirection getMovingDirection(){
 
         RTTEh rtteh = new RTTEh();
-        MoveDirection d = rtteh.getMoveDirection();
+        MoveDirection d = rtteh.getMoveDirection(target);
 
         if (d != null){
             Set<Coordinate> n = getMinimumVisitNeighbours();
