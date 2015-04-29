@@ -134,8 +134,9 @@ public class Simulator {
 
 			/* this handles the turn actionElement */
 			if ( actionElement instanceof Turn){
+				//System.err.println("Current angle "+ agent.getCoordinates().angle + "add " + ((Turn) actionElement).getAngle());
 				agent.getCoordinates().addToAngle(((Turn) actionElement).getAngle());
-				
+				//System.err.println("result "+ agent.getCoordinates().angle);
 				agent.addTimeToKey(actionElement.duration());
 				eventManager.triggerEvent(actionElement,agent);
 			}

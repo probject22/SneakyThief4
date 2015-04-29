@@ -9,6 +9,7 @@ import dataContainer.MoveDirection;
 import java.awt.Graphics2D;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import java.awt.geom.AffineTransform;
 
@@ -19,10 +20,13 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import com.sun.javafx.css.Style;
+
 import java.io.*;
 
 import core.Map;
 import core.Simulator;
+import core.sprite.Agent;
 import core.sprite.Sprite;
 import core.sprite.SpriteManager;
 import dataContainer.Coordinate;
@@ -36,6 +40,7 @@ public class MainFrame extends JFrame {
 	int extra = 30;
 	
 	public MainFrame() {
+		
 		BorderLayout mainlayout = new BorderLayout();
 		JPanel controlpanel = new ControlPanel();
 		this.spriteManager = SpriteManager.instance();
@@ -89,6 +94,7 @@ public class MainFrame extends JFrame {
 	}
 
 	private void drawSprites(Graphics g) {
+		Style visionLines = new Style(null, null);
 		for (Sprite sprite : spriteManager.getAgentList()) {
 			if (sprite == null)
 				break;
@@ -142,18 +148,33 @@ public class MainFrame extends JFrame {
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
-			
+			int x = (coords.x)*20+extra;
+			int y = (coords.y*20)+extra;
 			Graphics2D g2d = (Graphics2D) g;
-			g2d.drawImage(img,(coords.x)*20+extra,(coords.y*20)+extra,this);
-			/*AffineTransform transform = new AffineTransform();
+			g2d.drawImage(img,x , y, this);
 			
-			//transform.translate((coords.x-imgWidth / 2)+extra, (coords.y - imgHeight / 2)+extra);
-			transform.rotate(coords.angle, imgWidth/2, imgHeight/2); // about its center
-			transform.translate((coords.x*20)+extra, ((coords.y*20))+extra);
-			transform.scale(0.15, 0.15);
-			g2d.drawImage(img, transform, this);*/
-			
-			//TODO draw the vision field
+			g2d.setStroke(new BasicStroke(3));
+			g2d.setColor(Color.RED);
+			int distence = (int) (20*((Agent)sprite).getMaxVisionRange());
+			System.err.println("base angle "+ coords.angle);
+			double angle1 = (coords.angle -((Agent)sprite).getVisionAngleRad()/2);
+			System.err.println("temp angle "+ angle1);
+			if(angle1 < 0) angle1+=2*Math.PI;
+			angle1 %= 2*Math.PI;
+			System.err.println("result "+ angle1);
+			double angle2 = (coords.angle +((Agent)sprite).getVisionAngleRad()/2);
+			if(angle2 < 0) angle1+=2*Math.PI;
+			angle2 %= 2*Math.PI;
+			int x1 = x + (int)((distence*Math.cos(angle1))+extra);
+			int y1 = y + (int)((distence*Math.sin(angle1))+extra);
+			int x2 = x + (int)((distence*Math.cos(coords.angle))+extra);
+			int y2 = y + (int)((distence*Math.sin(coords.angle))+extra);
+			int x3 = x + (int)((distence*Math.cos(angle2))+extra);
+			int y3 = y + (int)((distence*Math.sin(angle2))+extra);
+			g2d.drawLine(x+10, y+10, x1, y1);
+			g2d.drawLine(x+10, y+10, x2, y2);
+			g2d.drawLine(x+10, y+10, x3, y3);
+			//g2d.drawLine(x+10, y+10, 5000, 5000);
 		}
 	}
 	
