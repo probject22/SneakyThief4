@@ -6,31 +6,34 @@ import dataContainer.MoveDirection;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 /**
+ *
+ * RTTEh algorithm
+ *
  * Created by Stan on 26/04/15.
  */
 public class RTTEh {
     Map map;
     Coordinate current;
 
-    public MoveDirection getMoveDirection(){
+    public MoveDirection getMoveDirection(Coordinate target){
         List<MoveDirection> open = new ArrayList<>();
 
         //mark all the moving directions as open
         Collections.addAll(open, MoveDirection.values());
 
         double[] directions = new double[0];
-        List<MoveDirection> proposalDirections = new ArrayList<>();
+        java.util.Map<MoveDirection, Double> proposalDirections = new HashMap<>();
         for (double direction : directions) {
             Obstacle obstacle = castRay(direction);
             if (obstacle == null)
                 continue;
-            Border border = extractBorder(obstacle);
-            List<MoveDirection> closedDirections = detectClosedDirections(border);
+            List<MoveDirection> closedDirections = detectClosedDirections(obstacle);
 
-            proposalDirections.add(determineDirection(border));
+            addDirection(proposalDirections, obstacle, direction, current, target);
         }
 
         return mergeResults(proposalDirections);
@@ -38,15 +41,18 @@ public class RTTEh {
 
     }
 
-    private MoveDirection mergeResults(List<MoveDirection> proposalDirections) {
+    private MoveDirection mergeResults(java.util.Map<MoveDirection,Double> proposalDirections) {
         return null;
     }
 
-    private MoveDirection determineDirection(Border border) {
-        return null;
+    private void addDirection(java.util.Map<MoveDirection, Double> proposals, Obstacle obstacle, double rayDirection, Coordinate agent, Coordinate target) {
+        obstacle.setProposal(agent, target, rayDirection);
+        double direction = obstacle.getDirection();
+        proposals.put(MoveDirection.angleToMoveDirection(direction), obstacle.getEstimatedDistance());
+
     }
 
-    private List<MoveDirection> detectClosedDirections(Border border) {
+    private List<MoveDirection> detectClosedDirections(Obstacle obstacle) {
         return null;
     }
 

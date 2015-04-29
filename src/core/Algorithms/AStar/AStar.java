@@ -19,31 +19,14 @@ import java.util.*;
  *
  * Created by Stan on 26/04/15.
  */
-public class AStar<E,T> {
+abstract public class AStar<E,T> {
 
-
-    NeighbourGenerator neighbourGenerator;
-    CostFunction costFunction;
-    HeuristicFunction heuristicFunction;
-    ResultInterpreter<E,T> resultInterpreter;
 
     /**
      * Constructor
-     * @param neighbourGenerator
-     * @param costFunction
-     * @param heuristicFunction
-     * @param resultInterpreter
+     *
      */
-    public AStar(
-            NeighbourGenerator neighbourGenerator,
-            CostFunction costFunction,
-            HeuristicFunction heuristicFunction,
-            ResultInterpreter<E,T> resultInterpreter){
-        this.neighbourGenerator = neighbourGenerator;
-        this.costFunction = costFunction;
-        this.heuristicFunction = heuristicFunction;
-        this.resultInterpreter = resultInterpreter;
-    }
+    public AStar(){}
 
     /**
      * Returns a list of outcomes as specified in the generic variable.
@@ -63,7 +46,7 @@ public class AStar<E,T> {
 
         from.f = 0;
         from.g = 0;
-        from.h = heuristicFunction.getHeuristic(from, to);
+        from.h = getHeuristic(from, to);
         open.add(from);
 
 
@@ -77,18 +60,18 @@ public class AStar<E,T> {
             open.remove(current);
 
             // generate neighbours
-            List<Node> neighbours = neighbourGenerator.getNeighbours(current);
+            List<Node<T>> neighbours = getNeighbours(current);
 
             //loop through neighbours
             for (Node neighbour : neighbours) {
                 if (neighbour.equals(to)) {
                     //return result
-                    return resultInterpreter.getResult(neighbour);
+                    return getResult(neighbour);
                 }
 
                 // calculate functions
-                neighbour.g = costFunction.getCost(current, neighbour);
-                neighbour.h = heuristicFunction.getHeuristic(neighbour, to);
+                neighbour.g = getCost(current, neighbour);
+                neighbour.h = getHeuristic(neighbour, to);
                 neighbour.f = neighbour.g + neighbour.h;
 
                 // Check whether to add the new neighbour to the fringe
@@ -115,6 +98,14 @@ public class AStar<E,T> {
         return null;
     }
 
+    protected abstract List<Node<T>> getNeighbours(Node<T> current);
+
+    protected abstract List<E> getResult(Node<T> neighbour);
+
+    protected abstract double getCost(Node<T> current, Node<T> neighbour);
+
+    protected abstract double getHeuristic(Node<T> from, Node<T> to);
+
     /**
      * Compares two nodes based on their f
      */
@@ -126,6 +117,29 @@ public class AStar<E,T> {
             if (n1.f > n2.f)
                 return 1;
             return 0;
+        }
+    }
+
+    /**
+     *
+     * Node for use with the AStar algorithm
+     *
+     * Created by Stan on 26/04/15.
+     */
+    class Node<E> {
+        public Node parent;
+        public double g; // cost value
+        public double h; // heuristic value
+        public double f; // cost + heuristic
+        public E element;// identifying element
+
+        /**
+         * equals method checking whether the elements of the nodes are equal
+         * @param node node to be compared with
+         * @return true if equal, false otherwise
+         */
+        public boolean equals(Node<E> node){
+            return element.equals(node.element);
         }
     }
 

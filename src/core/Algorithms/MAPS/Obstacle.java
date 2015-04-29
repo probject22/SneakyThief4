@@ -162,6 +162,14 @@ public class Obstacle {
         }
     }
 
+    public double getDirection() {
+        return direction;
+    }
+
+    public double getEstimatedDistance() {
+        return estimatedDistance;
+    }
+
 
     /**
      * Inner class used to describe the border

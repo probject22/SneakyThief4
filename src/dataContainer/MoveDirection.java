@@ -85,4 +85,15 @@ public enum MoveDirection {
 	private int y;
 	private double startAngle;
 	private double endAngle;
+
+	/**
+	 * Takes an angle and discretises it to a direction.
+	 * @param direction
+	 * @return
+	 */
+	public static MoveDirection angleToMoveDirection(double direction) {
+//		if (direction < PI / 8 && direction > PI / 8)
+		//TODO: implement this method
+		return null;
+	}
 }
