@@ -66,11 +66,23 @@ public class EventManager {
 		
 	}
 	
+	private void findInVision (double angle ,double radius, Vision vision) 
+	{ 
+	  
+	}
+	
 	private void generateVisionEvent(Agent agent, double timeStamp){
 		Vision vision = new Vision(timeStamp);
 		vision.setBaseCoords(agent.getCoordinates().clone());
-		//TODO calculate what the agent can see and make a ?list? of it
+		double minVisionRange = agent.getMinVisionRange();
+		double maxVisionRange = agent.getMaxVisionRange();
+		double towerVisionRange = agent.getTowerVisionRange();
+		double structureVisionRange = agent.getStructureVisionRange();
+		
+		Coordinate baseCoords = agent.getCoordinates();
 		agent.giveEvent(vision);
+		
+		
 	}
 	
 	// Split the map into sub section.

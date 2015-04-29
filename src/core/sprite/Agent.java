@@ -93,6 +93,13 @@ public class Agent extends Sprite {
 	public double getVisionAngleRad(){
 		return Math.toRadians(this.visionAngle);
 	}
+	public double getStructureVisionRange() {
+		return structureVisionRange;
+	}
+
+	public double getTowerVisionRange() {
+		return towerVisionRange;
+	}
 	
 	/* the vision variable */
 	private double minVisionRange = 0;
