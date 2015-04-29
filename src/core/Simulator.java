@@ -18,7 +18,7 @@ import gui.MainFrame;
 public class Simulator {
 	private boolean debug = true;
     private static boolean stop = false;
-    private static boolean pause = false;
+    private static boolean pause = true;
     private double speed = 0.5;
     
     public static void setStop(boolean newvalue)
@@ -44,8 +44,8 @@ public class Simulator {
 		map = new Map();
 		
 		spriteManager = SpriteManager.instance();
-		spriteManager.addAgent(new Agent(new Coordinate(100,100,0.0)));
-		spriteManager.addAgent(new Agent(new Coordinate(200,200,0.0)));
+		spriteManager.addAgent(new Agent(new Coordinate(1,1,0.0)));
+		//spriteManager.addAgent(new Agent(new Coordinate(20,20,0.0)));
 		eventManager = new EventManager(map);
 		/*to get the agent list call spriteManager.getAgentList(); */
 		
@@ -57,15 +57,15 @@ public class Simulator {
 	}
 	
 	private void gameLoop(){
+		mainFrame.updateGui();
 		while (!stop){
+			while (pause && !stop){
+				sleep(0.1);
+			}
 			firstAgentAction();
 			/* finish the move by updateting the gui */
 			mainFrame.updateGui();
 			sleep(speed);
-			while (pause && !stop){
-				sleep(0.1);
-			}
-				
 		}
 		System.out.println("Stop");
 		System.exit(0);
