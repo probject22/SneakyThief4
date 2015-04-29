@@ -94,7 +94,7 @@ public class MainFrame extends JFrame {
 	}
 
 	private void drawSprites(Graphics g) {
-		boolean debug = true;
+		boolean debug = false;
 		Style visionLines = new Style(null, null);
 		for (Sprite sprite : spriteManager.getAgentList()) {
 			if (sprite == null)

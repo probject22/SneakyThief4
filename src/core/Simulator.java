@@ -173,6 +173,8 @@ public class Simulator {
 
 		/* put the agent back into the queue with a new duration */
 		spriteManager.addAgent(agent);
+		
+		System.err.println(agent.getCoordinates().toString());
 	}
 
 

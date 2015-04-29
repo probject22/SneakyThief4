@@ -49,5 +49,8 @@ public class Coordinate {
 	public double getAngle(Coordinate two){
 		return Math.atan((two.y - this.y) / (two.x - this.x));
 	}
+	public String toString(){
+		return "X = " +this.x +", y = "+this.y+", angle = "+this.angle+" rad/"+Math.toDegrees(angle)+" deg.";
+	}
 
 }
