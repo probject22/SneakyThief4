@@ -14,6 +14,7 @@ import core.sprite.Agent;
 import core.sprite.Sprite;
 import core.sprite.SpriteManager;
 import dataContainer.Coordinate;
+import dataContainer.GridState;
 
 /**
  *
@@ -78,10 +79,10 @@ public class EventManager {
 	}
 	
 	
-	private Boolean isInView (Coordinate target,double angle ,double r, Vision vision) 
+	private Boolean isInView (Coordinate target,double angle ,double r, Coordinate baseCoord) 
 	{ 
-		//initAngle is the oriantation of the agent
-		double initAngle = vision.getBaseCoords().angle;
+		//initAngle is the orientation of the agent
+		double initAngle = baseCoord.angle;
 		
 		//Setting view barriers
 		double x1 = r*Math.cos(initAngle-angle/2);
@@ -90,11 +91,11 @@ public class EventManager {
 		double x2 = r*Math.cos(initAngle+angle/2);
 		double y2 = r*Math.sin(initAngle+angle/2);
 		
-		double xTarget = target.x - vision.getBaseCoords().x;
-		double yTarget = target.y - vision.getBaseCoords().y;
+		double xTarget = target.x - baseCoord.x;
+		double yTarget = target.y - baseCoord.y;
 		
 		
-		
+		//Returns true if target is in view range
 		return !isClockWise(x1,y1,xTarget,yTarget) &&
 				isClockWise(x2,y2,xTarget,yTarget) &&
 				isInRadius (xTarget,yTarget,r);
@@ -102,10 +103,10 @@ public class EventManager {
 	}
 	
 	private void generateVisionEvent(Agent agent, double timeStamp){
+		
 		Vision vision = new Vision(timeStamp);
 		vision.setBaseCoords(agent.getCoordinates().clone());
-		//THis angle has to be read from somewhere, for now I leave it to 45 degrees
-		double visionAngle = Math.PI/4;
+		double visionAngle = agent.getVisionAngleRad();
 		double minVisionRange = agent.getMinVisionRange();
 		double maxVisionRange = agent.getMaxVisionRange();
 		double towerVisionRange = agent.getTowerVisionRange();
@@ -115,15 +116,40 @@ public class EventManager {
 		Coordinate baseCoords = agent.getCoordinates();
 		agent.giveEvent(vision);
 		
-		//Adding the sprites in the vision to the hash map
+		//Adding the sprite in the vision to the Sprite hash map
 		for (Sprite sprite: spriteManager.getAgentList()){
-			if (!isInView(sprite.getCoordinates(),visionAngle,minVisionRange,vision) &&
-					isInView(sprite.getCoordinates(),visionAngle,maxVisionRange,vision))
+			if (!isInView(sprite.getCoordinates(),visionAngle,minVisionRange,baseCoords) &&
+					isInView(sprite.getCoordinates(),visionAngle,maxVisionRange,baseCoords))
 				vision.addSprite(sprite.getCoordinates(), sprite);
 		}
-		// Is it possible to through the list of gris states ?
-		///for (GridState state: ????) {
-
+		
+		//Adding the states (towers,walls,trees) in the vision to the Grid hash map
+		GridState[][] state = map.getCopyOfMap();
+		for (int i=0; i<map.getMapWidth();i++){
+			for (int j=0; j<map.getMapHeight();j++){
+				
+				if (!isInView(new Coordinate(i,j,0),visionAngle,minVisionRange,baseCoords) &&
+						isInView(new Coordinate(i,j,0),visionAngle,maxVisionRange,baseCoords))
+					vision.addGrid(new Coordinate(i,j,0), state[i][j]);
+				else {
+					
+					// Adds the further centuries to the vision
+					if (state[i][j].getFileVal() == 'P')
+					if (!isInView(new Coordinate(i,j,0),visionAngle,maxVisionRange,baseCoords) &&
+						isInView(new Coordinate(i,j,0),visionAngle,towerVisionRange,baseCoords))
+					vision.addGrid(new Coordinate(i,j,0), state[i][j]);
+					
+					// Adds the structures to the vision
+					if (state[i][j].getFileVal() == '-' ||
+						state[i][j].getFileVal() == 'W' ||
+						state[i][j].getFileVal() == 'D')
+					if (!isInView(new Coordinate(i,j,0),visionAngle,maxVisionRange,baseCoords) &&
+							isInView(new Coordinate(i,j,0),visionAngle,structureVisionRange,baseCoords))
+						vision.addGrid(new Coordinate(i,j,0), state[i][j]);
+				
+				}
+			}
+		}
 	}
 	
 	// Split the map into sub section.
