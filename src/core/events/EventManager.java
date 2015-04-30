@@ -68,7 +68,7 @@ public class EventManager {
 	}
 	
 	//Checks if a coordinate is clockwise to a vector
-	private Boolean isClockWise(double xT,double yT, double x, double y){
+	private Boolean isClockWise(double x, double y,double xT,double yT){
 		return -x*yT + y*xT > 0;
 	}
 	
@@ -95,27 +95,35 @@ public class EventManager {
 		
 		
 		
-		return true;
+		return !isClockWise(x1,y1,xTarget,yTarget) &&
+				isClockWise(x2,y2,xTarget,yTarget) &&
+				isInRadius (xTarget,yTarget,r);
 		
 	}
 	
 	private void generateVisionEvent(Agent agent, double timeStamp){
 		Vision vision = new Vision(timeStamp);
 		vision.setBaseCoords(agent.getCoordinates().clone());
+		//THis angle has to be read from somewhere, for now I leave it to 45 degrees
+		double visionAngle = Math.PI/4;
 		double minVisionRange = agent.getMinVisionRange();
 		double maxVisionRange = agent.getMaxVisionRange();
 		double towerVisionRange = agent.getTowerVisionRange();
 		double structureVisionRange = agent.getStructureVisionRange();
 		
+		
 		Coordinate baseCoords = agent.getCoordinates();
 		agent.giveEvent(vision);
 		
+		//Adding the sprites in the vision to the hash map
 		for (Sprite sprite: spriteManager.getAgentList()){
-			sprite.getCoordinates();
+			if (!isInView(sprite.getCoordinates(),visionAngle,minVisionRange,vision) &&
+					isInView(sprite.getCoordinates(),visionAngle,maxVisionRange,vision))
+				vision.addSprite(sprite.getCoordinates(), sprite);
 		}
-		
-		
-		
+		// Is it possible to through the list of gris states ?
+		///for (GridState state: ????) {
+
 	}
 	
 	// Split the map into sub section.
