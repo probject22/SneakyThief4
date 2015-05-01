@@ -112,35 +112,35 @@ public class MainFrame extends JFrame {
 					case EN:
 					case EP:
 						if(debug)System.err.println("Heading east");
-						path = "resources/images/east.png";
+						path = "resources/images/e.png";
 						break;
 					case N:
 						if(debug)System.err.println("Heading north");
-						path = "resources/images/north.png";
+						path = "resources/images/n.png";
 						break;
 					case NE:
 						if(debug)System.err.println("Heading NE");
-						path = "resources/images/north.png";
+						path = "resources/images/ne.png";
 						break;
 					case NW:
 						if(debug)System.err.println("Heading NW");
-						path = "resources/images/north.png";
+						path = "resources/images/nw.png";
 						break;
 					case S:
 						if(debug)System.err.println("Heading S");
-						path = "resources/images/south.png";
+						path = "resources/images/s.png";
 						break;
 					case SE:
 						if(debug)System.err.println("Heading SE");
-						path = "resources/images/south.png";
+						path = "resources/images/se.png";
 						break;
 					case SW:
 						if(debug)System.err.println("Heading SW");
-						path = "resources/images/south.png";
+						path = "resources/images/sw.png";
 						break;
 					case W:
 						if(debug)System.err.println("Heading W");
-						path = "resources/images/west.png";
+						path = "resources/images/w.png";
 						break;
 					default:
 						break;
