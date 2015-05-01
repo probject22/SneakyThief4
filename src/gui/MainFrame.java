@@ -74,6 +74,8 @@ public class MainFrame extends JFrame {
 
 		GridState currentstate;
 
+		int xl = map.getCopyOfMap().length;
+		int yl = map.getCopyOfMap()[0].length;
 		// TODO: fix this 
 		for(int i = 0;i<map.getCopyOfMap().length;i++)
 			for(int j = 0; j<map.getCopyOfMap()[0].length;j++)
@@ -85,9 +87,9 @@ public class MainFrame extends JFrame {
 				//Fabric structure is commented out.
 				//g2.fill3DRect(i*pxPerGridState, j*pxPerGridState, pxPerGridState, pxPerGridState, true);
 				
-				g2.fillRect((i*pxPerGridState)+extra, (j*pxPerGridState)+extra, pxPerGridState, pxPerGridState);
+				g2.fillRect(((i)*pxPerGridState)+extra, ((yl-j)*pxPerGridState)+extra, pxPerGridState, pxPerGridState);
 				g2.setColor(Color.BLACK);
-				g2.drawRect((i*pxPerGridState)+extra, (j*pxPerGridState)+extra, pxPerGridState, pxPerGridState);
+				g2.drawRect(((i)*pxPerGridState)+extra, ((yl-j)*pxPerGridState)+extra, pxPerGridState, pxPerGridState);
 				
 			}
 
@@ -110,35 +112,35 @@ public class MainFrame extends JFrame {
 					case EN:
 					case EP:
 						if(debug)System.err.println("Heading east");
-						path = "resources/images/east.png";
+						path = "resources/images/e.png";
 						break;
 					case N:
 						if(debug)System.err.println("Heading north");
-						path = "resources/images/north.png";
+						path = "resources/images/n.png";
 						break;
 					case NE:
 						if(debug)System.err.println("Heading NE");
-						path = "resources/images/north.png";
+						path = "resources/images/ne.png";
 						break;
 					case NW:
 						if(debug)System.err.println("Heading NW");
-						path = "resources/images/north.png";
+						path = "resources/images/nw.png";
 						break;
 					case S:
 						if(debug)System.err.println("Heading S");
-						path = "resources/images/south.png";
+						path = "resources/images/s.png";
 						break;
 					case SE:
 						if(debug)System.err.println("Heading SE");
-						path = "resources/images/south.png";
+						path = "resources/images/se.png";
 						break;
 					case SW:
 						if(debug)System.err.println("Heading SW");
-						path = "resources/images/south.png";
+						path = "resources/images/sw.png";
 						break;
 					case W:
 						if(debug)System.err.println("Heading W");
-						path = "resources/images/west.png";
+						path = "resources/images/w.png";
 						break;
 					default:
 						break;
@@ -158,9 +160,12 @@ public class MainFrame extends JFrame {
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
+			int xl = map.getCopyOfMap().length;
+			int yl = map.getCopyOfMap()[0].length;
 			int x = (coords.x)*20+extra;
-			int y = (coords.y*20)+extra;
+			int y = (yl-coords.y)*20+extra;
 			Graphics2D g2d = (Graphics2D) g;
+
 			g2d.drawImage(img,x , y, this);
 			
 			g2d.setStroke(new BasicStroke(3));
@@ -172,11 +177,11 @@ public class MainFrame extends JFrame {
 			if(angle2 < 0) angle1+=2*Math.PI;
 			angle2 %= 2*Math.PI;
 			int x1 = x + (int)((distence*Math.cos(angle1))+extra);
-			int y1 = y + (int)((distence*Math.sin(angle1))+extra);
+			int y1 = y + yl-(int)((distence*Math.sin(angle1))+extra);
 			int x2 = x + (int)((distence*Math.cos(coords.angle))+extra);
-			int y2 = y + (int)((distence*Math.sin(coords.angle))+extra);
+			int y2 = y + yl-(int)((distence*Math.sin(coords.angle))+extra);
 			int x3 = x + (int)((distence*Math.cos(angle2))+extra);
-			int y3 = y + (int)((distence*Math.sin(angle2))+extra);
+			int y3 = y + yl-(int)((distence*Math.sin(angle2))+extra);
 			g2d.drawLine(x+10, y+10, x1, y1);
 			g2d.drawLine(x+10, y+10, x2, y2);
 			g2d.drawLine(x+10, y+10, x3, y3);
