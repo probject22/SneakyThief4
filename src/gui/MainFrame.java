@@ -74,6 +74,8 @@ public class MainFrame extends JFrame {
 
 		GridState currentstate;
 
+		int xl = map.getCopyOfMap().length;
+		int yl = map.getCopyOfMap()[0].length;
 		// TODO: fix this 
 		for(int i = 0;i<map.getCopyOfMap().length;i++)
 			for(int j = 0; j<map.getCopyOfMap()[0].length;j++)
@@ -85,9 +87,9 @@ public class MainFrame extends JFrame {
 				//Fabric structure is commented out.
 				//g2.fill3DRect(i*pxPerGridState, j*pxPerGridState, pxPerGridState, pxPerGridState, true);
 				
-				g2.fillRect((i*pxPerGridState)+extra, (j*pxPerGridState)+extra, pxPerGridState, pxPerGridState);
+				g2.fillRect(((i)*pxPerGridState)+extra, ((yl-j)*pxPerGridState)+extra, pxPerGridState, pxPerGridState);
 				g2.setColor(Color.BLACK);
-				g2.drawRect((i*pxPerGridState)+extra, (j*pxPerGridState)+extra, pxPerGridState, pxPerGridState);
+				g2.drawRect(((i)*pxPerGridState)+extra, ((yl-j)*pxPerGridState)+extra, pxPerGridState, pxPerGridState);
 				
 			}
 
@@ -158,9 +160,12 @@ public class MainFrame extends JFrame {
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
+			int xl = map.getCopyOfMap().length;
+			int yl = map.getCopyOfMap()[0].length;
 			int x = (coords.x)*20+extra;
-			int y = (coords.y*20)+extra;
+			int y = (yl-coords.y)*20+extra;
 			Graphics2D g2d = (Graphics2D) g;
+
 			g2d.drawImage(img,x , y, this);
 			
 			g2d.setStroke(new BasicStroke(3));
