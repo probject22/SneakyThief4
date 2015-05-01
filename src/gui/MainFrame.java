@@ -177,11 +177,11 @@ public class MainFrame extends JFrame {
 			if(angle2 < 0) angle1+=2*Math.PI;
 			angle2 %= 2*Math.PI;
 			int x1 = x + (int)((distence*Math.cos(angle1))+extra);
-			int y1 = y + (int)((distence*Math.sin(angle1))+extra);
+			int y1 = y + yl-(int)((distence*Math.sin(angle1))+extra);
 			int x2 = x + (int)((distence*Math.cos(coords.angle))+extra);
-			int y2 = y + (int)((distence*Math.sin(coords.angle))+extra);
+			int y2 = y + yl-(int)((distence*Math.sin(coords.angle))+extra);
 			int x3 = x + (int)((distence*Math.cos(angle2))+extra);
-			int y3 = y + (int)((distence*Math.sin(angle2))+extra);
+			int y3 = y + yl-(int)((distence*Math.sin(angle2))+extra);
 			g2d.drawLine(x+10, y+10, x1, y1);
 			g2d.drawLine(x+10, y+10, x2, y2);
 			g2d.drawLine(x+10, y+10, x3, y3);
