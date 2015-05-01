@@ -25,6 +25,14 @@ public class Action {
 	 */
 	public void addActionElement(ActionElement action){
 		//TODO: implement checking duplicate actiontypes
+		for (ActionElement element: actionElements){
+			
+			if (element.getClass() == action.getClass()){
+				System.err.println("There is already an element of this type in the action list");
+				return;
+				
+			}
+		}
 		actionElements.add(action);
 	}
 	public Set<ActionElement> getActionElements(){

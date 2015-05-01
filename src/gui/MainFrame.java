@@ -3,13 +3,13 @@
  */
 package gui;
 
-import java.awt.Frame;
-
 import dataContainer.GridState;
+import dataContainer.MoveDirection;
 
 import java.awt.Graphics2D;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import java.awt.geom.AffineTransform;
 
@@ -20,9 +20,13 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import com.sun.javafx.css.Style;
+
 import java.io.*;
 
 import core.Map;
+import core.Simulator;
+import core.sprite.Agent;
 import core.sprite.Sprite;
 import core.sprite.SpriteManager;
 import dataContainer.Coordinate;
@@ -33,10 +37,18 @@ import dataContainer.Coordinate;
  */
 public class MainFrame extends JFrame {
 	private SpriteManager spriteManager;
+	int extra = 30;
+	
 	public MainFrame() {
+		
+		BorderLayout mainlayout = new BorderLayout();
+		JPanel controlpanel = new ControlPanel();
 		this.spriteManager = SpriteManager.instance();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setExtendedState(Frame.MAXIMIZED_BOTH);
+		this.setSize(900,700);
+		this.setLocationRelativeTo(null);
+		//this.setExtendedState(Frame.MAXIMIZED_BOTH);
+		this.add(controlpanel, BorderLayout.SOUTH);
 		this.setVisible(true);
 		this.setName("MainFrame");
 
@@ -67,17 +79,23 @@ public class MainFrame extends JFrame {
 			for(int j = 0; j<map.getCopyOfMap()[0].length;j++)
 			{
 				currentstate = map.getCopyOfMap()[i][j];
-				int pxPerGridState = 50;
+				int pxPerGridState = 20;
 				//CHANGE COLOR DEPENDING ON THE GRIDSTATE
 				g2.setColor(currentstate.color());
 				//Fabric structure is commented out.
 				//g2.fill3DRect(i*pxPerGridState, j*pxPerGridState, pxPerGridState, pxPerGridState, true);
-				g2.fillRect(i*pxPerGridState, j*pxPerGridState, pxPerGridState, pxPerGridState);
+				
+				g2.fillRect((i*pxPerGridState)+extra, (j*pxPerGridState)+extra, pxPerGridState, pxPerGridState);
+				g2.setColor(Color.BLACK);
+				g2.drawRect((i*pxPerGridState)+extra, (j*pxPerGridState)+extra, pxPerGridState, pxPerGridState);
+				
 			}
 
 	}
 
 	private void drawSprites(Graphics g) {
+		boolean debug = false;
+		Style visionLines = new Style(null, null);
 		for (Sprite sprite : spriteManager.getAgentList()) {
 			if (sprite == null)
 				break;
@@ -85,14 +103,54 @@ public class MainFrame extends JFrame {
 			Image img = null;
 			int imgWidth = 0;
 			int imgHeight = 0;
-
-			URL url = getClass().getClassLoader().getResource(
-					"resources/images/agent.png");
-			if (url == null) {
-				System.err.println("Couldn't find file: "
-						+ "resources/images/agent.png");
-				break;
-			}
+					String path = "";
+					if(debug)System.err.println(coords.angle);
+					switch(MoveDirection.getDirectionFromAngle(coords.angle)){
+					case E:
+					case EN:
+					case EP:
+						if(debug)System.err.println("Heading east");
+						path = "resources/images/east.png";
+						break;
+					case N:
+						if(debug)System.err.println("Heading north");
+						path = "resources/images/north.png";
+						break;
+					case NE:
+						if(debug)System.err.println("Heading NE");
+						path = "resources/images/north.png";
+						break;
+					case NW:
+						if(debug)System.err.println("Heading NW");
+						path = "resources/images/north.png";
+						break;
+					case S:
+						if(debug)System.err.println("Heading S");
+						path = "resources/images/south.png";
+						break;
+					case SE:
+						if(debug)System.err.println("Heading SE");
+						path = "resources/images/south.png";
+						break;
+					case SW:
+						if(debug)System.err.println("Heading SW");
+						path = "resources/images/south.png";
+						break;
+					case W:
+						if(debug)System.err.println("Heading W");
+						path = "resources/images/west.png";
+						break;
+					default:
+						break;
+						
+					}
+				URL url = getClass().getClassLoader().getResource(
+						path);
+				if (url == null) {
+					System.err.println("Couldn't find file: "
+							+ path);
+					break;
+				}
 			try {
 				img = ImageIO.read(url);
 				imgWidth = img.getWidth(this);
@@ -100,16 +158,29 @@ public class MainFrame extends JFrame {
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
-			
+			int x = (coords.x)*20+extra;
+			int y = (coords.y*20)+extra;
 			Graphics2D g2d = (Graphics2D) g;
-			AffineTransform transform = new AffineTransform();
+			g2d.drawImage(img,x , y, this);
 			
-			transform.translate((coords.x-imgWidth / 2)*5, (coords.y - imgHeight / 2)*5);
-			transform.rotate(coords.angle, imgWidth/2, imgHeight/2); // about its center
-			transform.scale(0.2, 0.2);
-			g2d.drawImage(img, transform, this);
-			
-			//TODO draw the vision field
+			g2d.setStroke(new BasicStroke(3));
+			g2d.setColor(Color.RED);
+			int distence = (int) (20*((Agent)sprite).getMaxVisionRange());
+			double angle1 = (coords.angle -((Agent)sprite).getVisionAngleRad()/2);
+			angle1 %= 2*Math.PI;
+			double angle2 = (coords.angle +((Agent)sprite).getVisionAngleRad()/2);
+			if(angle2 < 0) angle1+=2*Math.PI;
+			angle2 %= 2*Math.PI;
+			int x1 = x + (int)((distence*Math.cos(angle1))+extra);
+			int y1 = y + (int)((distence*Math.sin(angle1))+extra);
+			int x2 = x + (int)((distence*Math.cos(coords.angle))+extra);
+			int y2 = y + (int)((distence*Math.sin(coords.angle))+extra);
+			int x3 = x + (int)((distence*Math.cos(angle2))+extra);
+			int y3 = y + (int)((distence*Math.sin(angle2))+extra);
+			g2d.drawLine(x+10, y+10, x1, y1);
+			g2d.drawLine(x+10, y+10, x2, y2);
+			g2d.drawLine(x+10, y+10, x3, y3);
+			//g2d.drawLine(x+10, y+10, 5000, 5000);
 		}
 	}
 	

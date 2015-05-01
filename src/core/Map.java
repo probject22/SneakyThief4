@@ -3,6 +3,7 @@
  */
 package core;
 
+import dataContainer.Coordinate;
 import dataContainer.GridState;
 
 import java.io.BufferedReader;
@@ -22,6 +23,9 @@ public class Map {
 	 */
 	public static double meters_per_unit = 1;
 	private boolean debug = false;
+	// height and width
+	private int mapHeight;
+	private int mapWidth;
 
 	/**
 	 * If no mapfile is set load the default map
@@ -52,6 +56,8 @@ public class Map {
 	public GridState[][] getCopyOfMap(){
 		return map == null ? null: map.clone();
 	}
+	
+	
 	
 	/**
 	 * Initialise the class and load in the map file
@@ -98,6 +104,10 @@ public class Map {
 				 			y++;
 				 			
 				 	}
+			 // Setting height and Width
+				 	mapHeight = height;
+				 	mapWidth  = width;
+			 
 			 }
 			 //Close the input stream
 			 br.close();
@@ -106,10 +116,36 @@ public class Map {
 		 }finally{
 		 }
 	}
+
+	/**
+	 * Checks whether a position on the map can be moved to.
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	public boolean isMoveable(int x, int y){
+		if ( x < 0 || x >= mapWidth || y < 0 || y >= mapHeight) return false;
+		//else
+		return map[x][y].moveable();
+	}
+
+	public boolean isMoveable(Coordinate coordinate){
+		return isMoveable(coordinate.x, coordinate.y);
+	}
 	
 	/**
 	 * The real map
 	 */
 	private GridState[][] map;
+
+	/**
+	 * Width and Height getters
+	 */
+	public int getMapHeight() {
+		return mapHeight;
+	}
+	public int getMapWidth() {
+		return mapWidth;
+	}
 	
 }
