@@ -53,4 +53,8 @@ public class Coordinate {
 		return "X = " +this.x +", y = "+this.y+", angle = "+this.angle+" rad/"+Math.toDegrees(angle)+" deg.";
 	}
 
+	public boolean equals(Coordinate coordinate){
+		return this.x == coordinate.x && this.y == coordinate.y;
+	}
+
 }
