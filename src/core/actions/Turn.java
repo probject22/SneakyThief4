@@ -9,6 +9,13 @@ package core.actions;
  * Created by Stan on 08/04/15.
  */
 public class Turn implements ActionElement {
+
+	public Turn(double from, double to, double angularVelocity){
+		this(
+				    Math.min(from - to, to - from),
+				    angularVelocity);
+	}
+
 	public Turn(double radians, double angularVelocity){
 		rad = radians % (2*Math.PI);
 		this.angularVelocity = angularVelocity;

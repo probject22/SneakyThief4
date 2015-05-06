@@ -56,9 +56,6 @@ public class RTTEh {
         return null;
     }
 
-    private Border extractBorder(Obstacle obstacle) {
-        return null;
-    }
 
     private Obstacle castRay(double direction) {
         return null;

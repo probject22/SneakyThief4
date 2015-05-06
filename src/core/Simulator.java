@@ -182,7 +182,7 @@ public class Simulator {
     	new Simulator();
     }
     
-	private Map map;
+	public static Map map;
 	private SpriteManager spriteManager;
 	private EventManager eventManager;
 	private MainFrame mainFrame;
