@@ -7,8 +7,8 @@ import dataContainer.Coordinate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Math.max;
-import static java.lang.Math.min;
+import static java.lang.Math.*;
+
 
 /**
  * Created by Stan on 29/04/15.
