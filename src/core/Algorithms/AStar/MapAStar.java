@@ -17,6 +17,9 @@ public class MapAStar extends AStar<Coordinate, Coordinate> implements PathFinde
 
     @Override
     public List<Coordinate> getResult (Node<Coordinate> node) {
+
+        System.out.println("Result found");
+
         List<Coordinate> moves = new ArrayList<>();
 
         while(node != null){

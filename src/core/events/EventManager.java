@@ -248,10 +248,10 @@ public class EventManager {
 		double distanceSound = 5;
 		
 		tick[nrOfArea][0] = tick[nrOfArea][0] + plusTick;
-		if(tick[nrOfArea][0] >= tick[nrOfArea][1]){ //Coordinate.distenceBetweenCoordinates()
+		if(tick[nrOfArea][0] >= tick[nrOfArea][1]){ //Coordinate.distanceBetweenCoordinates()
 			for (Agent tempAgent: spriteManager.getAgentList()) {
 				Coordinate soundCoo = new Coordinate((int)Math.random()*(bottomLeft.x-topRight.x), (int)Math.random()*(bottomLeft.y-topRight.y),0);
-				if(Coordinate.distenceBetweenCoordinates(soundCoo,tempAgent.getCoordinates()) <= distanceSound){ 
+				if(Coordinate.distanceBetweenCoordinates(soundCoo, tempAgent.getCoordinates()) <= distanceSound){
 					//calculate the angle under which the agent hears the sound and add the uncertainty to it
 					double dx = soundCoo.x - tempAgent.getCoordinates().x;
 					double dy = soundCoo.y - tempAgent.getCoordinates().y;
@@ -304,6 +304,6 @@ public class EventManager {
 	}
 	
 	private double distenceBetweenAgents(Agent agent1, Agent agent2){
-		return Coordinate.distenceBetweenCoordinates(agent1.getCoordinates(), agent2.getCoordinates());
+		return Coordinate.distanceBetweenCoordinates(agent1.getCoordinates(), agent2.getCoordinates());
 	}
 }
