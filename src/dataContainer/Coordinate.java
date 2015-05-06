@@ -47,13 +47,15 @@ public class Coordinate {
 	}
 
 	public double getAngle(Coordinate two){
-		return Math.atan((two.y - this.y) / (two.x - this.x));
+		return Math.atan2((two.y - this.y),(two.x - this.x));
 	}
 	public String toString(){
 		return "X = " +this.x +", y = "+this.y+", angle = "+this.angle+" rad/"+Math.toDegrees(angle)+" deg.";
 	}
 
-	public boolean equals(Coordinate coordinate){
+	public boolean equals(Object o){
+		if(!(o instanceof Coordinate)) return false;
+		Coordinate coordinate = (Coordinate) o;
 		return this.x == coordinate.x && this.y == coordinate.y;
 }
 
