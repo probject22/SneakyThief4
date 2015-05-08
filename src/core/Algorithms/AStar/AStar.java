@@ -38,6 +38,7 @@ abstract public class AStar<E,T> {
      * @return
      */
     public List<E> getShortestPath(T fromElement, T toElement){
+    	boolean debug = false;
 
         Node<T> from = new Node<>();
         from.element = fromElement;
@@ -59,7 +60,7 @@ abstract public class AStar<E,T> {
             // get the value with the lowest cost prospection
             Node current = Collections.min(open, new NodeComparator());
 
-            System.out.println("Current: " + current.element);
+            if (debug) System.out.println("Current: " + current.element);
             // remove the current element from the fringe
             open.remove(current);
 

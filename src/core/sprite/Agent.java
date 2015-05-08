@@ -76,11 +76,15 @@ public class Agent extends Sprite {
 	 * @return The action that the agents want to perform next
 	 */
 	public Action getAction(){
+		boolean debug = false;
+		if (debug) System.out.println("current coords " + getCoordinates().toString());
 		Action action = new Action();
 		List<Coordinate> path = pathFinder.getShortestPath(getCoordinates(), goal);
 		Coordinate next = path.get(path.size() - 2);
 		double angle = getCoordinates().angle;
 		double goalAngle = getCoordinates().getAngle(next);
+		if (debug)System.out.println("next " + next.toString());
+		if (debug)System.out.println("angle " + goalAngle + " " + Math.toDegrees(goalAngle));
 		action.addActionElement(new Turn(angle, goalAngle, Agent.MAX_ANG_VEL));
 		action.addActionElement(new Move(Agent.MAX_SPEED));
 		return action;

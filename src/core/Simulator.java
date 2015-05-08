@@ -44,7 +44,7 @@ public class Simulator {
 		map = new Map();
 		
 		spriteManager = SpriteManager.instance();
-		spriteManager.addAgent(new Agent(new Coordinate(3,3,Math.toRadians(45))));
+		spriteManager.addAgent(new Agent(new Coordinate(3,3,0)));
 		spriteManager.addAgent(new Agent(new Coordinate(20,20,0.0)));
 		eventManager = new EventManager(map);
 		/*to get the agent list call spriteManager.getAgentList(); */

@@ -12,11 +12,12 @@ public class Turn implements ActionElement {
 
 	public Turn(double from, double to, double angularVelocity){
 		this(
-				    Math.min(from - to, to - from),
+				    to - from,
 				    angularVelocity);
 	}
 
 	public Turn(double radians, double angularVelocity){
+		if (radians < 0) radians += (2*Math.PI);
 		rad = radians % (2*Math.PI);
 		this.angularVelocity = angularVelocity;
 	}
