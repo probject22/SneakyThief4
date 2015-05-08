@@ -1,41 +1,35 @@
 package core.Algorithms.AStar;
 
+import core.Algorithms.PathFinder;
 import core.Map;
 import dataContainer.Coordinate;
-import dataContainer.MoveDirection;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Math.max;
-import static java.lang.Math.min;
+import static java.lang.Math.*;
+
 
 /**
  * Created by Stan on 29/04/15.
  */
-public class MapAStar extends AStar<MoveDirection, Coordinate> {
+public class MapAStar extends AStar<Coordinate, Coordinate> implements PathFinder<Coordinate>{
 
     @Override
-    public List<MoveDirection> getResult(Node<Coordinate> node) {
-        List<MoveDirection> moves = new ArrayList<>();
+    public List<Coordinate> getResult (Node<Coordinate> node) {
+    	boolean debug = false;
+    	
+        if (debug) System.out.println("Result found");
+
+        List<Coordinate> moves = new ArrayList<>();
 
         while(node != null){
-            moves.add(getMoveDirection(node.parent, node));
+            moves.add(node.element);
             node = node.parent;
         }
 
         return moves;
     }
-
-    /**
-     * @param from
-     * @param to
-     * @return
-     */
-    private MoveDirection getMoveDirection(Node<Coordinate> from, Node<Coordinate> to){
-        return MoveDirection.getMoveDirection(from.element, to.element);
-    }
-
     /**
      * Counts the amount of tiles between two coordinates on the map (assuming no obstructions).
      * Method will generally be used to evaluate adjacent coordinates.

@@ -44,8 +44,8 @@ public class Simulator {
 		map = new Map();
 		
 		spriteManager = SpriteManager.instance();
-		spriteManager.addAgent(new Agent(new Coordinate(3,3,Math.toRadians(45))));
-		//spriteManager.addAgent(new Agent(new Coordinate(20,20,0.0)));
+		spriteManager.addAgent(new Agent(new Coordinate(3,3,0)));
+		spriteManager.addAgent(new Agent(new Coordinate(20,20,0.0)));
 		eventManager = new EventManager(map);
 		/*to get the agent list call spriteManager.getAgentList(); */
 		
@@ -174,7 +174,7 @@ public class Simulator {
 		/* put the agent back into the queue with a new duration */
 		spriteManager.addAgent(agent);
 		
-		System.err.println(agent.getCoordinates().toString());
+		//System.err.println(agent.getCoordinates().toString());
 	}
 
 
@@ -182,7 +182,7 @@ public class Simulator {
     	new Simulator();
     }
     
-	private Map map;
+	public static Map map;
 	private SpriteManager spriteManager;
 	private EventManager eventManager;
 	private MainFrame mainFrame;

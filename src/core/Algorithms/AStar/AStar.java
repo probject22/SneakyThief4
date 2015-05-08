@@ -1,6 +1,9 @@
 package core.Algorithms.AStar;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  *
@@ -35,6 +38,7 @@ abstract public class AStar<E,T> {
      * @return
      */
     public List<E> getShortestPath(T fromElement, T toElement){
+    	boolean debug = false;
 
         Node<T> from = new Node<>();
         from.element = fromElement;
@@ -56,6 +60,7 @@ abstract public class AStar<E,T> {
             // get the value with the lowest cost prospection
             Node current = Collections.min(open, new NodeComparator());
 
+            if (debug) System.out.println("Current: " + current.element);
             // remove the current element from the fringe
             open.remove(current);
 
@@ -64,6 +69,9 @@ abstract public class AStar<E,T> {
 
             //loop through neighbours
             for (Node neighbour : neighbours) {
+                // Set parent
+                neighbour.parent = current;
+
                 if (neighbour.equals(to)) {
                     //return result
                     return getResult(neighbour);
@@ -126,7 +134,7 @@ abstract public class AStar<E,T> {
      *
      * Created by Stan on 26/04/15.
      */
-    class Node<E> {
+    public class Node<E> {
         public Node parent;
         public double g; // cost value
         public double h; // heuristic value

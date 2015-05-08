@@ -35,7 +35,7 @@ public class Coordinate {
 		return new Coordinate(x, y, angle);
 	}
 	
-	static public double distenceBetweenCoordinates(Coordinate c1, Coordinate c2){
+	static public double distanceBetweenCoordinates (Coordinate c1, Coordinate c2){
 		double dx = c1.x - c2.x;
 		double dy = c1.y - c2.y;
 		
@@ -47,10 +47,16 @@ public class Coordinate {
 	}
 
 	public double getAngle(Coordinate two){
-		return Math.atan((two.y - this.y) / (two.x - this.x));
+		return Math.atan2((two.y - this.y),(two.x - this.x));
 	}
 	public String toString(){
 		return "X = " +this.x +", y = "+this.y+", angle = "+this.angle+" rad/"+Math.toDegrees(angle)+" deg.";
 	}
+
+	public boolean equals(Object o){
+		if(!(o instanceof Coordinate)) return false;
+		Coordinate coordinate = (Coordinate) o;
+		return this.x == coordinate.x && this.y == coordinate.y;
+}
 
 }
