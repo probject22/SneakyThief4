@@ -14,15 +14,7 @@ public class ControlPanel extends JPanel {
 	{
 		//Components of the Control Panel
 		
-		JButton startbutton = new JButton("Start");
-		startbutton.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				Simulator.setStop(false);
-			}
-		});
-		JButton pausebutton = new JButton("Pause");
+		JButton pausebutton = new JButton("Start/Pause");
 		pausebutton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -39,7 +31,6 @@ public class ControlPanel extends JPanel {
 			}
 		});
 		JSpinner speedinput = new JSpinner();
-		this.add(startbutton);
 		this.add(pausebutton);
 		this.add(stopbutton);
 		this.add(speedinput);
