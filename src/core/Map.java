@@ -22,11 +22,10 @@ public class Map {
 	 * the amount of meters in every square of the grid.
 	 */
 	public static double meters_per_unit = 1;
-	private boolean debug = false;
+	private boolean debug = DebugConstants.mapDebug;
 	// height and width
 	private int mapHeight;
 	private int mapWidth;
-
 	/**
 	 * If no mapfile is set load the default map
 	 */
@@ -44,8 +43,15 @@ public class Map {
 	 * Load a costom map
 	 * @param path The path to the map file (e.g. maps/default.map)
 	 */
-	public Map(String path){
-		intit(path);
+	public Map(String name){
+		URL url = Map.class.getResource("/resources/maps/" + name);
+		if (url != null)
+			intit(url.toString().replace("file:", ""));
+		else
+		{
+			System.err.println("The default map can't be found");
+			System.exit(-1);
+		}
 	}
 	
 	

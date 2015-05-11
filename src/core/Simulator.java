@@ -41,11 +41,12 @@ public class Simulator {
 	public Simulator(){
 		if (debug) System.err.println("The simulator has been started");
 		
-		map = new Map();
+		//map = new Map();
+		map = new Map("empty.map");
 		
 		spriteManager = SpriteManager.instance();
 		spriteManager.addAgent(new Agent(new Coordinate(3,3,0)));
-		spriteManager.addAgent(new Agent(new Coordinate(20,20,0.0)));
+		spriteManager.addAgent(new Agent(new Coordinate(20,20,0)));
 		eventManager = new EventManager(map);
 		/*to get the agent list call spriteManager.getAgentList(); */
 		

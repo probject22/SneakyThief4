@@ -44,5 +44,18 @@ public class Vision extends Event {
 	private Coordinate baseCoords = null;
 	HashMap <Coordinate, GridState> stateInVisionMap = new HashMap<Coordinate, GridState>();
 	HashMap <Coordinate, Sprite> spriteInVisionMap = new HashMap<Coordinate, Sprite>();
+	/**
+	 * @return the stateInVisionMap
+	 */
+	public HashMap<Coordinate, GridState> getStateInVisionMap() {
+		return stateInVisionMap;
+	}
+
+	/**
+	 * @return the spriteInVisionMap
+	 */
+	public HashMap<Coordinate, Sprite> getSpriteInVisionMap() {
+		return spriteInVisionMap;
+	}
 	
 }

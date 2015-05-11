@@ -5,6 +5,7 @@ package core.sprite;
 
 import core.Algorithms.AStar.MapAStar;
 import core.Algorithms.PathFinder;
+import core.DebugConstants;
 import core.Map;
 import core.Simulator;
 import core.actions.Action;
@@ -14,6 +15,7 @@ import core.events.Event;
 import core.events.Vision;
 import dataContainer.Coordinate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,8 +41,11 @@ public class Agent extends Sprite {
 	private static final double MAX_SPEED = 2.4;
 	private static final double MAX_ANG_VEL = 1;
 	private Map beliefMap;
-	private Coordinate goal = new Coordinate(20,20,0);
 	private PathFinder<Coordinate> pathFinder;
+	
+	private ArrayList<Event> events = new ArrayList<Event>();
+	
+	private boolean debug = DebugConstants.agentDebug;
 
 
 	public void setBeliefMap(Map map){
@@ -63,11 +68,18 @@ public class Agent extends Sprite {
 	 * @param event The event that the agent should know about.
 	 */
 	public void giveEvent(Event event){
-
+		events.add(event);
+		if (event instanceof Vision)
+			processVision(event);
 	}
 
+	private void processVision(Event vision){
+		processVision((Vision) vision);
+	}
 	private void processVision(Vision vision){
-
+		if (debug) System.out.println("A vision event occured");
+		
+		
 	}
 
 	/**
@@ -76,17 +88,22 @@ public class Agent extends Sprite {
 	 * @return The action that the agents want to perform next
 	 */
 	public Action getAction(){
-		boolean debug = false;
-		if (debug) System.out.println("current coords " + getCoordinates().toString());
+		Action action = new Action();
+		action.addActionElement(new Turn(Math.toRadians(5), Agent.MAX_SPEED));
+		action.addActionElement(new Move(Agent.MAX_SPEED));
+		
+		return action;
+	}
+	
+	protected Action aStar(Coordinate goal){
 		Action action = new Action();
 		List<Coordinate> path = pathFinder.getShortestPath(getCoordinates(), goal);
 		Coordinate next = path.get(path.size() - 2);
 		double angle = getCoordinates().angle;
 		double goalAngle = getCoordinates().getAngle(next);
-		if (debug)System.out.println("next " + next.toString());
-		if (debug)System.out.println("angle " + goalAngle + " " + Math.toDegrees(goalAngle));
-		action.addActionElement(new Turn(angle, goalAngle, Agent.MAX_ANG_VEL));
+		action.addActionElement(new Turn(angle, goalAngle, Agent.MAX_SPEED));
 		action.addActionElement(new Move(Agent.MAX_SPEED));
+		
 		return action;
 	}
 
@@ -142,13 +159,5 @@ public class Agent extends Sprite {
 
 	private void setPathFinder (PathFinder<Coordinate> pathFinder) {
 		this.pathFinder = pathFinder;
-	}
-
-	private Coordinate getGoal () {
-		return goal;
-	}
-
-	private void setGoal (Coordinate goal) {
-		this.goal = goal;
 	}
 }
