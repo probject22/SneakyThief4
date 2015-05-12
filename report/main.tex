@@ -4,6 +4,7 @@
 \usepackage[british]{babel}
 \usepackage[affil-it]{authblk}
 \usepackage{apacite}
+\usepackage[ruled,algosection,linesnumbered,vlined]{algorithm2e}
 
 \title{Sneaky Thief}
 \author{Stan Kerstjens\thanks{i6048794 : \texttt{s.kerstjens@student.maastrichtuniversity.nl}}}
@@ -19,7 +20,7 @@
 \pagenumbering{roman}
 \section*{Preface}
 \section*{Abstract}
-\section*{List of Graphs and Figures}
+\listoffigures
 \section*{List of Abbreviations and Symbols}
 \tableofcontents\newpage
 
@@ -46,13 +47,41 @@
 		As already mentioned in the introduction, the answer to the question on what path to take to a certain location is in many cases not important as long as we find the shortest path. This is why we can first discuss general methods of path finding without refering to what goal the moving of the agents serves. There are also cases where the shortest path is not the best path. This is heavily dependent on the task, and will therefore be discussed in the sections dealing with the specific tasks.
 
 		\subsection{A-star}
-			The A-star algorithm is a general purpose algorithm that searches a graph and is capable of providing the optimal path from one node to another. A-star is a heuristic search, and like many heuristic search algorithms its effectiveness depends on the heuristic employed. In our simulations the nodes of the graphs will be simple coordinates, so for our heuristic function we can simply take the direct distance to the destination coordinate as our heuristic function.
+%Introduction to A-star
+			The A-star algorithm is a general purpose algorithm that searches a graph and is capable of providing the optimal path from one node to another. A-star is a heuristic search, and like many heuristic search algorithms its effectiveness depends on the heuristic employed~\cite{4082128}.
 
-			%
-			% Explain how A-star works
-			%
+%Workings of A-star
+			A-star uses an evaluation function $f$ which depends on the cost function $g$ and the heuristic function $h$.
+			\begin{equation}
+				\label{eq:astarevaluation}
+			 	f = g + h
+			\end{equation} 
+			At every iteration it will expand the node that has the lowest cost as predicted by the evaluation function (see alg.~\ref{alg:astar}).
+			\begin{figure}
+			\begin{algorithm}[H]
+				\KwData{Starting node $s$; Set of target nodes $T$; evaluation function $f$}
+				Mark $s$ as 'open' and calculate $f(s)$\;
+				Select the open node $n$ with the smallest $f$\;
+				\eIf{$n \in T$}{
+					Mark $n$ 'closed' and terminate\;
+				}{
+					Mark $n$ 'closed'\;
+					Let $A$ be the successors of $n$\;
+					\For{$a \in A$}{
+						Calculate $f(a)$\;
+						\If{$a$ is not closed $\vee f(a) < f$ when s was closed}{
+							Mark $a$ as open\;
+						}
+					}
+				}
+				\caption{A-star algorithm~\protect\cite{4082128}}
+				\label{alg:astar}
+			\end{algorithm}
+			\end{figure}
 
-			A great disadvantage of the A-star algorithm in path finding is that it will not identify a certain coordinate as unreachable untill all possible routes have failed. As this would in take to long in most simulations to compute, it is necessary to provide a maximum amount of nodes the algorithm is allowed to explore before it has to give up the search. This, of course, is at the risk of falsly concluding that a certain position is unreachable.
+			In our simulations the nodes of the graphs will be simple coordinates, so for our heuristic function we can simply take the direct distance to the destination coordinate as our heuristic function.
+
+			A disadvantage of the A-star algorithm in path finding is that it will not identify a certain coordinate as unreachable untill all possible routes have failed. As this would in take to long in most simulations to compute, it is necessary to provide a maximum amount of nodes the algorithm is allowed to explore before it has to give up the search. This, of course, is at the risk of falsly concluding that a certain position is unreachable.
 
 			Another disadvantage of the A-star algorithm is that it is necessary to discretise the world in order for the algorithm to run. In real-world applications for robotic systems, most robots will not find themselves in a discrete world. Therefore the A-star algorithm will be very unlikely to find the optimal path in continuous world applications. If, however, the discretization is sufficiently narrow the proposed path will probably be sufficient for most purposes. Unfortunately, narrowing the discretisation inherently leads to the need for more computing power.
 
