@@ -4,7 +4,7 @@
 \usepackage[british]{babel}
 \usepackage[affil-it]{authblk}
 \usepackage{apacite}
-\usepackage[ruled,algosection,linesnumbered,vlined]{algorithm2e}
+\usepackage[ruled,linesnumbered,vlined]{algorithm2e}
 
 \title{Sneaky Thief}
 \author{Stan Kerstjens\thanks{i6048794 : \texttt{s.kerstjens@student.maastrichtuniversity.nl}}}
@@ -33,6 +33,12 @@
 
 %Begin of report body
 \chapter{Introduction}
+
+% Problem Descriptions
+
+
+
+% Paper overview
 	The problem posed can be divided into three main problems. The first problem is that guards put into a unknown environment should be able to create a 'mental map' of the environment. This is what we will call the exploration task. The second problem is that the guards should monitor the entire area as closely as possible to make it as difficult as possible for a possible intruder to pass through the area unseen. This will be called the coverage task. The third problem is that once an intruder has been detected, the guards should be able to actually catch the intruder. This will be called the pursuit task.
 
 	In every of these three main problems the guard should figure out two things, namely where it should go, and how it gets there. The 'where'-question is largely dependent on the specific task at hand, e.g. even if an intruder would only be 1 unit of distance away, but the task is exploration, then the guard does not necessarily have to move towards the intruder.
@@ -57,7 +63,7 @@
 			 	f = g + h
 			\end{equation} 
 			At every iteration it will expand the node that has the lowest cost as predicted by the evaluation function (see alg.~\ref{alg:astar}).
-			\begin{figure}
+
 			\begin{algorithm}[H]
 				\KwData{Starting node $s$; Set of target nodes $T$; evaluation function $f$}
 				Mark $s$ as 'open' and calculate $f(s)$\;
@@ -77,7 +83,6 @@
 				\caption{A-star algorithm~\protect\cite{4082128}}
 				\label{alg:astar}
 			\end{algorithm}
-			\end{figure}
 
 			In our simulations the nodes of the graphs will be simple coordinates, so for our heuristic function we can simply take the direct distance to the destination coordinate as our heuristic function.
 
@@ -85,15 +90,39 @@
 
 			Another disadvantage of the A-star algorithm is that it is necessary to discretise the world in order for the algorithm to run. In real-world applications for robotic systems, most robots will not find themselves in a discrete world. Therefore the A-star algorithm will be very unlikely to find the optimal path in continuous world applications. If, however, the discretization is sufficiently narrow the proposed path will probably be sufficient for most purposes. Unfortunately, narrowing the discretisation inherently leads to the need for more computing power.
 
-		\subsection{RTTEh}
+			\subsubsection{RTA-star}
+				An adaptation of A-star to be more accomodating to real-time applications is Real-Time A-star (RTA-star). When the computational resources are insufficient to at every step recalculate the entire path from the agent to the goal, this method should be employed. It is very similar to regular A-star with the adaptation that an agent is immediately moved to the most promising direction, instead of first calculating the entire path. This way A-star loses its optimality, but it will execute a lot faster, which is necessary when computing long paths for many agents~\cite{korf1990real}.
+
+		\subsection{RTTE-h}
 
 			%
 			% Explain how RTTEh works
 			%
+			\begin{algorithm}[H]
+				\KwData{The agent's current cell $s$}
+				\KwResult{Utilities of neighbours of $s$}
+				Mark all moving directions of $s$ as open\;
+				Propagate rays over the edges of the moving directions\;
+				\For{each ray $r$ hitting an obstacle}{
+					Let $o$ be the obstacle hit by $r$\;
+					Extract border $b$ from $o$\;
+					Detect closed directions of cell $s$ using $b$\;
+					Extract geometric features of $o$\;
+					Determine the best moving direction to avoid $o$\;
+				}
+				Merge the results\;
+				\Return utilities\;
+				\label{alg:rtteh}
+				\caption{RTTE-h algorithm~\protect\cite{undeger2010multi}}
+			\end{algorithm}
 
-			The RTTEh algorithm provides answers to two shortcomings of the A-star algorithm for path search. First, it is a continuous space algorithm, so it is not dependend on any kind of discretisation for real world applications. Second, it is capable of identifying whether a certain coordinate in space is unreachable without having to explore a large amount of possible routes.
+			The RTTEh algorithm \ref{alg:rtteh} provides answers to two shortcomings of the A-star algorithm for path search. First, it is a continuous space algorithm, so it is not dependend on any kind of discretisation for real world applications. Second, it is capable of identifying whether a certain coordinate in space is unreachable without having to explore a large amount of possible routes.
 
-		\subsection{MTES}
+			Another property that will be usefull later on is that this algorithm returns an ordering of all moving directions, instead of just the best one.
+
+			Although the algorithm operates in continuous space, the moving directions are still discretized. In real world applications this is usually not the case, and this will therefore lead to a suboptimal result.
+
+
 		
 
 	\section{Exploration}
@@ -103,12 +132,90 @@
 	\section{Pursuit}
 		For persuit there is a very simple intuitive answer, namely to go directly to the intruder following the shortest path. This, however, will only work if either the intruder is not actively avoiding the guard, or the guard is strictly faster than the intruder. As we are not prepared to assume any of these conditions, we need to act slightly more intelligently.
 
+		\subsection{MTES}
+			The Real-time Moving Target Evaluation Search (MTES) is an assisting algorithm that prevents an agent in retracing it steps. The concept is very simple: every visited cell is considered as an obstable, until the target becomes unreachable through visited cells. At this point it will clear the history and start over.
+
+			In a static environment where the target of the path search does not change there is a very low risk that an algorithm searching for the shortest path will ever try to visit the same cell twice. When the target moves, however, a path-finding algorithm might be advised to just go back and forth, which is undesirable.
+
+			This assisting algorithm requires the use of another path finding algorithm. The RTTE-h algorithm particularly suitable, since it does not only recommend a single moving direction, but multiple. If the first moving direction is blocked by a history cell, MTES can just select the second recommendation (see alg.~\ref{alg:mtes}).
+
+			\begin{algorithm}[H]
+				\KwData{Current cell $s$}
+				Let $d$ be the proposed direction as determined by RTTE-h\;
+				\eIf{$d$ exists}{
+					Let $n$ be the neighbour cells of $s$ with minimum visit count\;
+					Let $c$ be the cell in $n$ with maximum utility\;
+					Move to $c$\;
+					Increment the visit count of $s$\;
+					Insert $s$ into history\;
+				}{
+					\eIf{History is not empty}{
+						Clear history\;
+						Go to next iteration\;
+					}{
+						Stop search with failure\;
+					}
+				}
+				\label{alg:mtes}
+				\caption{Iteration of MTES~\protect\cite{undeger2010multi}}
+			\end{algorithm}
+
 		\subsection{Blocking Escape Directions}
 			A possible way of catching an intruder that is faster than the guards is to use the fact that there multiple guards persuing a single intruder. In this case the guards should surround the intruder as much as possible, as to block all the possible direction in which he could escape. Then the guards can draw in and catch the intruder. The most naive way of doing this is to disperse the available guards equally amongst the circumference of an intruder. The guard closest to the intruder will always move directly towards the intruder following the shortest path. The other guards will establish the amount of pursuing guards ($n$) and each block one of the angles resulting from dividing the total angle in which the agent can move in equal parts ($2\pi / n$).
 
 			%
 			% Insert explanatory graphics
 			%
+
+			\begin{algorithm}[H]
+			\KwData{The guard $p$; the current cell of the guard $s$; the current cell of the intruder $t$; the number of guards $n$}
+			\KwResult{Blocking location}
+			Let $(h_x,h_y)$ be the coordinate of cell $s$\;
+			Let $(t_x,t_y)$ be the coordinate of cell $t$\;
+			\eIf{ $n = 1$ or $p$ is the nearest guard to $t$}{
+				\Return $(t_x,t_y)$\;
+			}{
+				Calculate the set of escape directions $e$\;
+				Determine the map $m$ that maps the guard to $e$ optimally\;
+				Let $esc$ be the escape direction assigned to $p$ in $m$\;
+				\Return the blocking location using $esc$ (alg.~\ref{alg:calcblockloc}) \;
+			}
+			\label{alg:blockloc}
+			\caption{Determining the Blocking Location}
+			\end{algorithm}
+
+			To exactly calculate the blocking location in the last step of algorithm \ref{alg:blockloc} we execute algorithm~\ref{alg:calcblockloc}.
+
+			\begin{algorithm}[H]
+				\KwData{the guard $p$; the velocity of the guard $v_h$; the velocity of the intruder $v_p$; the escape direction $es$assigned to $p$}
+				Let $\epsilon$ be a small number (0.5)\;
+				Let $\varepsilon$ be a very small number(0.05)\; 
+				Let $\alpha$ be the smallest angle between $es$ and the direction from $p$ to the intruder\;
+				Let $d_{max}$ be the maximum permitted distance between the blocking location and the intruder\;
+				\eIf{$\epsilon < \alpha < 180 -\epsilon$}{
+					\eIf{$(\sin\alpha)(1+\epsilon)(v_p/v_h)\leq 1$}{
+						Let $\theta$ be $\arcsin((\sin\alpha)(1+\varepsilon)(v_p/v_h))$
+						\eIf{$\theta < 180 - \alpha - \epsilon$}{
+							Let $pdir$ be the guard direction using $\theta$\;
+							Let $bl$ be the intersection point of lines passing through $es$ and $pdir$\;
+							\eIf{Distance between $bl$ and the intruder $> d_{max}$}{
+								\Return the point with distance $d_max$ from the intruder in the direction of $es$\;
+							}{
+								\Return bl\;
+							}
+						}{
+							\Return the point with distance $d_max$ from the intruder in the direction of $es$\;
+						} 
+					}{
+						\Return the point with distance $d_max$ from the intruder in the direction of $es$\;
+					}
+				}{
+					\Return the location of the intruder\;
+				}
+				\label{alg:calcblockloc}
+				\caption{Calculating the Blocing Location}
+			\end{algorithm}
+
 
 
 \chapter{Methods}
