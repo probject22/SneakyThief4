@@ -53,6 +53,7 @@ public class Obstacle {
 
 
         //TODO: Feature calculation (See maps paper)
+        //TODO: Sharon/Sina
 
         // left tour
         Vertex vertex = hitPoint;

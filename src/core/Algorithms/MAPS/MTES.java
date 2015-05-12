@@ -14,6 +14,7 @@ public class MTES {
     Map map;
     private Map<Coordinate, Integer> history;
     private Coordinate target;
+    private RTTEh rtteh;
 
 
     public void updateLocation(Coordinate location){
@@ -31,8 +32,7 @@ public class MTES {
 
     public MoveDirection getMovingDirection(){
 
-        RTTEh rtteh = new RTTEh();
-        MoveDirection d = rtteh.getMoveDirection(target);
+        Coordinate d = rtteh.getMoveDirection(current, target);
 
         if (d != null){
             Set<Coordinate> n = getMinimumVisitNeighbours();
@@ -47,7 +47,6 @@ public class MTES {
             }
         }
 
-        //unreachable but otherwise java won't compile.
         return null;
     }
 

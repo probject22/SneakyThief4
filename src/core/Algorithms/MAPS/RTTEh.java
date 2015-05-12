@@ -1,5 +1,6 @@
 package core.Algorithms.MAPS;
 
+import core.Algorithms.PathFinder;
 import core.Map;
 import dataContainer.Coordinate;
 import dataContainer.MoveDirection;
@@ -15,49 +16,77 @@ import java.util.List;
  *
  * Created by Stan on 26/04/15.
  */
-public class RTTEh {
+public abstract class RTTEh {
     Map map;
-    Coordinate current;
 
-    public MoveDirection getMoveDirection(Coordinate target){
-        List<MoveDirection> open = new ArrayList<>();
+    public Coordinate getMoveDirection(Coordinate current, Coordinate target){
+        List<Coordinate> open = new ArrayList<>();
 
-        //mark all the moving directions as open
-        Collections.addAll(open, MoveDirection.values());
+        //mark all the neighbour cells as open
+        open.addAll(generateNeighbours(current));
 
-        double[] directions = new double[0];
-        java.util.Map<MoveDirection, Double> proposalDirections = new HashMap<>();
+        List<Double> proposals = new ArrayList<>();
+
+        //generate directions
+        double[] directions = getDirections(open.size());
+        java.util.Map<Coordinate, Double> utilities = new HashMap<>();
         for (double direction : directions) {
+
+            //Cast a ray in every direction
+            //Get the obstacle it runs into
             Obstacle obstacle = castRay(direction);
+
+            //If the ray does not hit an obstacle continue
             if (obstacle == null)
                 continue;
-            List<MoveDirection> closedDirections = detectClosedDirections(obstacle);
 
-            addDirection(proposalDirections, obstacle, direction, current, target);
+            //Calculate the features of the obstacle
+            obstacle.calculateFeatures(current,target,direction);
+
+            //Check whether the obstacle blocks a direction
+            //remove from open directions
+            open.remove(detectClosedDirections(obstacle));
+
+            proposals.add(obstacle.getDirection());
         }
 
-        return mergeResults(proposalDirections);
+        return mergeResults(proposals);
 
 
     }
 
-    private MoveDirection mergeResults(java.util.Map<MoveDirection,Double> proposalDirections) {
+    private Coordinate mergeResults(List<Double> proposals) {
         return null;
     }
 
-    private void addDirection(java.util.Map<MoveDirection, Double> proposals, Obstacle obstacle, double rayDirection, Coordinate agent, Coordinate target) {
+    private double[] getDirections(int amountOfDirections) {
+        double d = 2*Math.PI / amountOfDirections;
+        double[] directions = new double[amountOfDirections];
+        for (int i = 0; i < amountOfDirections; i++) {
+            directions[i] = (.5 + i) * d % (Math.PI * 2);
+        }
+        return directions;
+    }
+
+    private void addDirection(java.util.Map<MoveDirection, Double> proposals,
+                              Obstacle obstacle,
+                              double rayDirection,
+                              Coordinate agent,
+                              Coordinate target) {
         obstacle.setProposal(agent, target, rayDirection);
         double direction = obstacle.getDirection();
         proposals.put(MoveDirection.angleToMoveDirection(direction), obstacle.getEstimatedDistance());
 
     }
 
-    private List<MoveDirection> detectClosedDirections(Obstacle obstacle) {
+    private List<Coordinate> detectClosedDirections(Obstacle obstacle) {
         return null;
     }
 
+    protected abstract List<Coordinate> generateNeighbours(Coordinate c);
 
     private Obstacle castRay(double direction) {
         return null;
     }
+
 }
