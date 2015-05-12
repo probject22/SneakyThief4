@@ -7,6 +7,8 @@ import java.util.HashMap;
 
 import core.DebugConstants;
 import core.actions.Action;
+import core.actions.Move;
+import core.actions.Turn;
 import core.events.Vision;
 import core.sprite.Agent;
 import core.sprite.Sprite;
@@ -31,7 +33,11 @@ public class Staco {
 		if (sprites.size() != 0)
 			//TODO recalculate baseCoords
 			baseCoords = baseCoords;
-		return null;
+		Action action = new Action();
+		action.addActionElement(new Turn(Math.toRadians(5), Agent.MAX_ANG_VEL));
+		action.addActionElement(new Move(Agent.MAX_SPEED));
+		
+		return action;
 	}
 
 }

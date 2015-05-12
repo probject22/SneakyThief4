@@ -17,7 +17,7 @@ import dataContainer.Coordinate;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import core.Algorithms.Coverage.Staco.*;
 /**
  *
  * The integral intelligent class.
@@ -38,9 +38,12 @@ import java.util.List;
  */
 public class Agent extends Sprite {
 
-	private static final double MAX_SPEED = 2.4;
-	private static final double MAX_ANG_VEL = 1;
+	public static final double MAX_SPEED = 2.4;
+	public static final double MAX_ANG_VEL = 1;
 	private Map beliefMap;
+	private Vision lastSeen;
+	
+	private Staco staco;
 	private PathFinder<Coordinate> pathFinder;
 	
 	private ArrayList<Event> events = new ArrayList<Event>();
@@ -60,6 +63,7 @@ public class Agent extends Sprite {
 
 	    // Create an A* pathfinder
 	    pathFinder = new MapAStar(beliefMap);
+	    staco = new Staco(this);
     }
 
 	/**
@@ -79,7 +83,7 @@ public class Agent extends Sprite {
 	private void processVision(Vision vision){
 		if (debug) System.out.println("A vision event occured");
 		
-		
+		lastSeen = vision;
 	}
 
 	/**
@@ -88,10 +92,7 @@ public class Agent extends Sprite {
 	 * @return The action that the agents want to perform next
 	 */
 	public Action getAction(){
-		Action action = new Action();
-		action.addActionElement(new Turn(Math.toRadians(5), Agent.MAX_SPEED));
-		action.addActionElement(new Move(Agent.MAX_SPEED));
-		
+		Action action = staco.getMoveAction(lastSeen);
 		return action;
 	}
 	
