@@ -1,0 +1,28 @@
+The Real-time Moving Target Evaluation Search (MTES) is an assisting algorithm that prevents an agent in retracing it steps. The concept is very simple: every visited cell is considered as an obstable, until the target becomes unreachable through visited cells. At this point it will clear the history and start over.
+
+			In a static environment where the target of the path search does not change there is a very low risk that an algorithm searching for the shortest path will ever try to visit the same cell twice. When the target moves, however, a path-finding algorithm might be advised to just go back and forth, which is undesirable.
+
+			An example where this history could help is when two guards are pursuing an intruder around an obstacle. If the shortest path to the intruder is always chosen, the intruder and guards will continue to walk circles around the obstacle. If the guard, however, holds a record of where he's already been, he will try alternative paths as soon as one cycle has been made.
+
+			This assisting algorithm requires the use of another path finding algorithm. The RTTE-h algorithm particularly suitable, since it does not only recommend a single moving direction, but multiple. If the first moving direction is blocked by a history cell, MTES can just select the second recommendation (see alg.~\ref{alg:mtes}).
+
+			\begin{algorithm}[H]
+				\KwData{Current cell $s$}
+				Let $d$ be the proposed direction as determined by RTTE-h\;
+				\eIf{$d$ exists}{
+					Let $n$ be the neighbour cells of $s$ with minimum visit count\;
+					Let $c$ be the cell in $n$ with maximum utility\;
+					Move to $c$\;
+					Increment the visit count of $s$\;
+					Insert $s$ into history\;
+				}{
+					\eIf{History is not empty}{
+						Clear history\;
+						Go to next iteration\;
+					}{
+						Stop search with failure\;
+					}
+				}
+				\label{alg:mtes}
+				\caption{Iteration of MTES~\protect\cite{undeger2010multi}}
+			\end{algorithm}

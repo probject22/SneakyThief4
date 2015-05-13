@@ -1,0 +1,108 @@
+\documentclass{report}
+
+\usepackage[toc,page]{appendix}
+\usepackage[british]{babel}
+\usepackage[affil-it]{authblk}
+\usepackage{apacite}
+\usepackage[ruled,linesnumbered,vlined]{algorithm2e}
+
+\title{Sneaky Thief}
+\author{Stan Kerstjens\thanks{i6048794 : \texttt{s.kerstjens@student.maastrichtuniversity.nl}}}
+\author{ing. R.J.H.M. Stevens\thanks{i6079131 : \texttt{rj.stevens@student.maastrichtuniversity.nl}}} % Sorry if I didn't get all your credentials - Stan
+\author{Sina \thanks{}} %Sorry I do not dare spelling your last name - Stan
+\author{Rob Clinch\thanks{i6044978 :
+\texttt{r.clinch@student.maastrichtuniversity.nl}}}
+\author{Sharon Hallmanns\thanks{}} % is this spelling correct? - Stan
+\affil{Department of Knowledge Engineering, Maastricht University}
+
+\date{\today}
+\begin{document}
+\maketitle
+
+%Start roman numbering
+\pagenumbering{roman}
+\section*{Preface}
+\section*{Abstract}
+\listoffigures
+\section*{List of Abbreviations and Symbols}
+\tableofcontents\newpage
+
+
+
+\newpage
+\begin{center} 
+	This page is intentionally left blank 
+\end{center}
+
+%Start arabic numbering
+\pagenumbering{arabic}
+\newpage
+
+%Begin of report body
+\chapter{Introduction}
+
+% Problem Descriptions
+
+
+
+% Paper overview
+	The problem posed can be divided into three main problems. The first problem is that guards put into a unknown environment should be able to create a 'mental map' of the environment. This is what we will call the exploration task. The second problem is that the guards should monitor the entire area as closely as possible to make it as difficult as possible for a possible intruder to pass through the area unseen. This will be called the coverage task. The third problem is that once an intruder has been detected, the guards should be able to actually catch the intruder. This will be called the pursuit task.
+
+	In every of these three main problems the guard should figure out two things, namely where it should go, and how it gets there. The 'where'-question is largely dependent on the specific task at hand, e.g. even if an intruder would only be 1 unit of distance away, but the task is exploration, then the guard does not necessarily have to move towards the intruder.
+
+	The 'how'-question, on the other hand, is in many cases independent of the exact task that we want to achieve, and therefore finding the shortest route to the destination does usually suffice, and is often even the best route. We will call the 'how'-question the pathfinding problem.
+
+	The final task of the guards is to combine the three main problems and decide when the guard should solve what problem. The intuitive solution would be to explore untill the entire environment is known, and then start, and continue, covering the area. During this process pursuit is started as soon as an intruder is detected. This intuitive answer, however, runs into issues once it is not known to the guard how big the area actually is, so it will never know if the map if fully explored or not. Another possible issue arises when an intruder, for instance, dissapears behind a wall. The pursuing guard does not detect the intruder anymore and stops pursuit. He should, however, have the intelligence to predict where the guard has gone.
+
+\chapter{Approaches}
+	
+	\section{Path finding}
+		As already mentioned in the introduction, the answer to the question on what path to take to a certain location is in many cases not important as long as we find the shortest path. This is why we can first discuss general methods of path finding without refering to what goal the moving of the agents serves. There are also cases where the shortest path is not the best path. This is heavily dependent on the task, and will therefore be discussed in the sections dealing with the specific tasks.
+
+		\subsection{A-star}
+			\input{astar.tex}
+
+		\subsection{RTTE-h}
+			\input{rtteh.tex}
+
+	\section{Exploration}
+
+	\section{Coverage}
+
+	\section{Pursuit}
+		When considering the problem of persuit, there is a very simple intuitive answer, namely to go directly to the location of the intruder following the shortest path. This, however, will only work if either the intruder is not actively avoiding the guard, or the guard is strictly faster than the intruder. As we are not prepared to assume any of these conditions, we need to act slightly more intelligently.
+
+		\subsection{MTES}
+			\input{mtes.tex}
+
+		\subsection{Blocking Escape Directions}
+			\input{bes.tex}
+
+\chapter{Methods}
+	%This chapter should describe what experiments we perform and how.
+
+\chapter{Implementation}
+	%This chapter should describe our implementation of the software
+
+\chapter{Results}
+	% This chapter should contain all experimental results that we obtain (lots of graphs!)
+
+
+\chapter{Conclusions}
+	% This chapter should contain all our conclusions of how the experimental results compare to our initial expectations.
+	% Also it should contain our evaluation of the different approaches we took towards the problems
+
+\bibliographystyle{apacite}
+\bibliography{references.bib}
+% All references APA style
+
+\begin{appendices}
+\chapter{Software Engineering Patterns and Principles}	
+	\section{UML diagrams}
+\chapter{Other Data}
+	
+\end{appendices}
+
+
+
+\end{document}
