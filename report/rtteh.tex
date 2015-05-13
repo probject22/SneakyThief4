@@ -1,0 +1,53 @@
+
+			%
+			% Explain how RTTEh works
+			%
+			\begin{algorithm}
+				\KwData{The agent's current cell $s$}
+				\KwResult{Utilities of neighbours of $s$}
+				Mark all moving directions of $s$ as open\;
+				Propagate rays over the edges of the moving directions\;
+				\For{each ray $r$ hitting an obstacle}{
+					Let $o$ be the obstacle hit by $r$\;
+					Extract border $b$ from $o$\;
+					Detect closed directions of cell $s$ using $b$\;
+					Extract geometric features of $o$\;
+					Determine the best moving direction to avoid $o$\;
+				}
+				Merge the results (see alg.~\ref{alg:rrtehmerge})\;
+				\Return utilities\;
+				\label{alg:rtteh}
+				\caption{RTTE-h algorithm~\protect\cite{undeger2010multi}}
+			\end{algorithm}
+
+			The merging phase of the algorithm determines the utilities as is described in algorithm~\ref{alg:rrtehmerge}.
+
+			\begin{algorithm}
+				\KwData{current coordinate of the guard $s$; current coordinate of the target $t$; results from the rays $r$.}
+				\If{All neighbours of $s$ are closed}{
+					\Return failure\;
+				}
+				Determine most constraining obstacle $m$ from $r$\;
+				\eIf{$m$ exists}{
+					Let proposed direction $d$ be the direction that gets around $m$\;
+				}{
+					Let proposed direction $d$ be direct direction to $t$\;
+				}
+				\For{each neighbour $n$ of $s$}{
+					\eIf{$n$ is closed}{
+						Let utility of $n$ be $0$\;
+					}{
+						Let $dif$ be the smallest angle between $d$ and the direction of the cell $n$\;
+						Let the utility of $n$ be $(181-dif)/181$\;
+					}
+				}
+				\label{alg:rrtehmerge}
+				\caption{Merging Phase of RTTE-h~\protect\cite{undeger2010multi}}
+				\Return utilities\;
+			\end{algorithm}
+
+			The RTTEh algorithm \ref{alg:rtteh} provides answers to two shortcomings of the A-star algorithm for path search. First, it is a continuous space algorithm, so it is not dependend on any kind of discretisation for real world applications. Second, it is capable of identifying whether a certain coordinate in space is unreachable without having to explore a large amount of possible routes.
+
+			Another property that will be usefull later on is that this algorithm returns an ordering of all moving directions, instead of just the best one.
+
+			Although the algorithm operates in continuous space, the moving directions are still discretized. In real world applications this is usually not the case, and this will therefore lead to a suboptimal result.

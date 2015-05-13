@@ -1,0 +1,39 @@
+%Introduction to A-star
+			The A-star algorithm is a general purpose algorithm that searches a graph and is capable of providing the optimal path from one node to another. A-star is a heuristic search, and like many heuristic search algorithms its effectiveness depends on the heuristic employed~\cite{4082128}.
+
+%Workings of A-star
+			A-star uses an evaluation function $f$ which depends on the cost function $g$ and the heuristic function $h$.
+			\begin{equation}
+				\label{eq:astarevaluation}
+			 	f = g + h
+			\end{equation} 
+			At every iteration it will expand the node that has the lowest cost as predicted by the evaluation function (see alg.~\ref{alg:astar}).
+
+			\begin{algorithm}
+				\KwData{Starting node $s$; Set of target nodes $T$; evaluation function $f$}
+				Mark $s$ as 'open' and calculate $f(s)$\;
+				Select the open node $n$ with the smallest $f$\;
+				\eIf{$n \in T$}{
+					Mark $n$ 'closed' and terminate\;
+				}{
+					Mark $n$ 'closed'\;
+					Let $A$ be the successors of $n$\;
+					\For{$a \in A$}{
+						Calculate $f(a)$\;
+						\If{$a$ is not closed $\vee f(a) < f$ when s was closed}{
+							Mark $a$ as open\;
+						}
+					}
+				}
+				\caption{A-star algorithm~\protect\cite{4082128}}
+				\label{alg:astar}
+			\end{algorithm}
+
+			In our simulations the nodes of the graphs will be simple coordinates, so for our heuristic function we can simply take the direct distance to the destination coordinate as our heuristic function.
+
+			A disadvantage of the A-star algorithm in path finding is that it will not identify a certain coordinate as unreachable untill all possible routes have failed. As this would in take to long in most simulations to compute, it is necessary to provide a maximum amount of nodes the algorithm is allowed to explore before it has to give up the search. This, of course, is at the risk of falsly concluding that a certain position is unreachable.
+
+			Another disadvantage of the A-star algorithm is that it is necessary to discretise the world in order for the algorithm to run. In real-world applications for robotic systems, most robots will not find themselves in a discrete world. Therefore the A-star algorithm will be very unlikely to find the optimal path in continuous world applications. If, however, the discretization is sufficiently narrow the proposed path will probably be sufficient for most purposes. Unfortunately, narrowing the discretisation inherently leads to the need for more computing power.
+
+			\subsubsection{RTA-star}
+				An adaptation of A-star to be more accomodating to real-time applications is Real-Time A-star (RTA-star). When the computational resources are insufficient to at every step recalculate the entire path from the agent to the goal, this method should be employed. It is very similar to regular A-star with the adaptation that an agent is immediately moved to the most promising direction, instead of first calculating the entire path. This way A-star loses its optimality, but it will execute a lot faster, which is necessary when computing long paths for many agents~\cite{korf1990real}.
