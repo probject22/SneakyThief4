@@ -1,24 +1,27 @@
-\documentclass{article}
+\documentclass[a4paper]{article}
 \usepackage[british]{babel}
 \usepackage{tabularx}
 \usepackage{marginnote}
+\usepackage{titlesec}
+
+\newcommand{\sectionbreak}{\clearpage}
+
 \title{Task Division}
 \author{Stan Kerstjens}
 \date{May 13th 2015}
 \begin{document}
 	\maketitle
+
+	\section{Introduction}
+		The task division in this document reflects the issues as they appear on GitHub.
 	\section{Stan}
 		\input{stan.tex}
-		\newpage
 	\section{Rob}
 		\input{rob.tex}
-		\newpage
 	\section{Sina}
 		\input{sina.tex}
-		\newpage
 	\section{Sharon}
 		\input{sharon.tex}
-		\newpage
 	\section{Robert}
 		\input{robert.tex}
 \end{document}
