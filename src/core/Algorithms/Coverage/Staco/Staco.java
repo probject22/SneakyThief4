@@ -19,6 +19,7 @@ import dataContainer.Coordinate;
  *
  */
 public class Staco {
+	private float distenceBetweenSprites = 7;
 	private boolean debug = DebugConstants.stacoDebug;
 	private Coordinate baseCoords;
 	/**
@@ -31,7 +32,9 @@ public class Staco {
 	public Action getMoveAction(Vision vision){
 		HashMap<Coordinate, Sprite> sprites = vision.getSpriteInVisionMap();
 		if (sprites.size() != 0)
-			//TODO recalculate baseCoords
+			for(Coordinate coord: sprites.keySet()){
+				
+			}
 			baseCoords = baseCoords;
 		Action action = new Action();
 		action.addActionElement(new Turn(Math.toRadians(5), Agent.MAX_ANG_VEL));
