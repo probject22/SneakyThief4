@@ -1,0 +1,54 @@
+A possible way of catching an intruder that is faster than the guards is to use the fact that there multiple guards persuing a single intruder. In this case the guards should surround the intruder as much as possible, as to block all the possible direction in which he could escape. Then the guards can draw in and catch the intruder. The most naive way of doing this is to disperse the available guards equally amongst the circumference of an intruder. The guard closest to the intruder will always move directly towards the intruder following the shortest path. The other guards will establish the amount of pursuing guards ($n$) and each block one of the angles resulting from dividing the total angle in which the agent can move in equal parts ($2\pi / n$).
+
+			%
+			% Insert explanatory graphics
+			%
+
+			\begin{algorithm}[H]
+			\KwData{The guard $p$; the current cell of the guard $s$; the current cell of the intruder $t$; the number of guards $n$}
+			\KwResult{Blocking location}
+			Let $(h_x,h_y)$ be the coordinate of cell $s$\;
+			Let $(t_x,t_y)$ be the coordinate of cell $t$\;
+			\eIf{ $n = 1$ or $p$ is the nearest guard to $t$}{
+				\Return $(t_x,t_y)$\;
+			}{
+				Calculate the set of escape directions $e$\;
+				Determine the map $m$ that maps the guard to $e$ optimally\;
+				Let $esc$ be the escape direction assigned to $p$ in $m$\;
+				\Return the blocking location using $esc$ (alg.~\ref{alg:calcblockloc}) \;
+			}
+			\label{alg:blockloc}
+			\caption{Determining the Blocking Location}
+			\end{algorithm}
+
+			To exactly calculate the blocking location in the last step of algorithm \ref{alg:blockloc} we execute algorithm~\ref{alg:calcblockloc}.
+
+			\begin{algorithm}[H]
+				\KwData{the guard $p$; the velocity of the guard $v_h$; the velocity of the intruder $v_p$; the escape direction $es$assigned to $p$}
+				Let $\epsilon$ be a small number (0.5)\;
+				Let $\varepsilon$ be a very small number(0.05)\; 
+				Let $\alpha$ be the smallest angle between $es$ and the direction from $p$ to the intruder\;
+				Let $d_{max}$ be the maximum permitted distance between the blocking location and the intruder\;
+				\eIf{$\epsilon < \alpha < 180 -\epsilon$}{
+					\eIf{$(\sin\alpha)(1+\epsilon)(v_p/v_h)\leq 1$}{
+						Let $\theta$ be $\arcsin((\sin\alpha)(1+\varepsilon)(v_p/v_h))$
+						\eIf{$\theta < 180 - \alpha - \epsilon$}{
+							Let $pdir$ be the guard direction using $\theta$\;
+							Let $bl$ be the intersection point of lines passing through $es$ and $pdir$\;
+							\eIf{Distance between $bl$ and the intruder $> d_{max}$}{
+								\Return the point with distance $d_max$ from the intruder in the direction of $es$\;
+							}{
+								\Return bl\;
+							}
+						}{
+							\Return the point with distance $d_max$ from the intruder in the direction of $es$\;
+						} 
+					}{
+						\Return the point with distance $d_max$ from the intruder in the direction of $es$\;
+					}
+				}{
+					\Return the location of the intruder\;
+				}
+				\label{alg:calcblockloc}
+				\caption{Calculating the Blocing Location}
+			\end{algorithm}
