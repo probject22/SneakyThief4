@@ -3,10 +3,13 @@ package core.Algorithms.MAPS;
 import core.Algorithms.PathFinder;
 import core.Map;
 import dataContainer.Coordinate;
-import dataContainer.GridState;
 import dataContainer.MoveDirection;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.StreamSupport;
 
 /**
  *
@@ -23,7 +26,8 @@ public abstract class RTTEh {
         //mark all the neighbour cells as open
         open.addAll(generateNeighbours(current));
 
-        List<Double> proposals = new ArrayList<>();
+        
+        java.util.Map<Double,Double> proposals = new HashMap<>();
 
         //generate directions
         double[] directions = getDirections(open.size());
@@ -32,31 +36,83 @@ public abstract class RTTEh {
 
             //Cast a ray in every direction
             //Get the obstacle it runs into
-            List<Obstacle> obstacles = castRay(direction, current);
+            Obstacle obstacle = castRay(direction);
 
             //If the ray does not hit an obstacle continue
-            if (obstacles.isEmpty())
+            if (obstacle == null)
                 continue;
 
-            for (Obstacle obstacle : obstacles) {
-                //Calculate the features of the obstacle
-                obstacle.calculateFeatures(current, target, direction);
+            //Calculate the features of the obstacle
+            obstacle.calculateFeatures(current,target,direction);
 
-                //Check whether the obstacle blocks a direction
-                //remove from open directions
-                open.remove(detectClosedDirections(obstacle));
+            //Check whether the obstacle blocks a direction
+            //remove from open directions
+            open.remove(detectClosedDirections(obstacle));
 
-                proposals.add(obstacle.getDirection());
-            }
+            proposals.put(obstacle.getDirection(), obstacle.getEstimatedDistance());
+
         }
+        
+        
 
-        return mergeResults(proposals);
-
+        return mergeResults(current,target,proposals);
+        
 
     }
 
-    private Coordinate mergeResults(List<Double> proposals) {
-        return null;
+    private Coordinate mergeResults(Coordinate current, Coordinate target, java.util.Map<Double,Double> proposals) {
+    	
+    	double suggestedDirection = (Double) null;
+    	
+    	List<Coordinate> neighbours = generateNeighbours(current);
+        //check if the agent is not fully blocked.
+        if(StreamSupport.stream(neighbours.spliterator(), true).allMatch(o -> o == null))
+        	return null;
+        
+        
+        
+        //Direct angle to target.
+        double flyDirection = current.getAngle(target);
+        
+        //Iterate through proposals find the most direct paths using three scenarios 
+        //select the one with the longest distance
+        double longestPath = 0;
+        //scenario 1 - 90 degrees
+        for(Double pDirection : proposals.keySet()){
+        	 if (Math.abs(pDirection - flyDirection) <= (Math.PI)/4)
+             	if (proposals.get(pDirection) > longestPath) {
+             		longestPath = proposals.get(pDirection);
+             		suggestedDirection = pDirection;
+             	}
+        }
+        // scenario 2 - 180 degrees
+        if (longestPath == 0)
+        	for(Double pDirection : proposals.keySet()){
+           	 if (Math.abs(pDirection - flyDirection) <= (Math.PI)/2)
+                	if (proposals.get(pDirection) > longestPath) {
+                		longestPath = proposals.get(pDirection);
+                		suggestedDirection = pDirection;
+                	}
+           }
+        // scenario 3 - 360 degrees
+        if (longestPath == 0)
+        	for(Double pDirection : proposals.keySet()){
+                	if (proposals.get(pDirection) > longestPath) {
+                		longestPath = proposals.get(pDirection);
+                		suggestedDirection = pDirection;
+                	}
+           }
+        
+        //scenario 4 no obstacles around
+        if (longestPath == 0)
+        	return target;
+        
+        Coordinate result = new Coordinate();
+        
+        result.x = (int) (longestPath*Math.cos(suggestedDirection));
+        result.y = (int) (longestPath*Math.sin(suggestedDirection));
+        
+        return result;
     }
 
     private double[] getDirections(int amountOfDirections) {
@@ -85,70 +141,8 @@ public abstract class RTTEh {
 
     protected abstract List<Coordinate> generateNeighbours(Coordinate c);
 
-    private List<Obstacle> castRay(double direction, Coordinate from) {
-
-        Coordinate to = from.addPolar(
-                direction,
-                Math.max(map.getMapHeight(),map.getMapHeight())
-        );
-
-        java.util.Map<Coordinate, GridState> intersections = map.getIntersectingGridstates(from, to);
-
-        Queue<Coordinate> obstructionCoordinates = new ArrayDeque<>();
-
-        for (java.util.Map.Entry<Coordinate, GridState> entry : intersections.entrySet()) {
-            if( !entry.getValue().moveable() )
-                obstructionCoordinates.add(entry.getKey());
-        }
-
-        Queue<Coordinate> evaluate = new ArrayDeque<>();
-        List<Coordinate> history = new ArrayList<>();
-        evaluate.add(obstructionCoordinates.poll());
-        ArrayList<Obstacle> obstacles = new ArrayList<>();
-
-        while (!evaluate.isEmpty()) {
-
-            Queue<Coordinate> leafs = new ArrayDeque<>();
-
-            boolean grown = true;
-
-            while (grown) {
-                Coordinate current = evaluate.poll();
-                int count = 0;
-                grown = false;
-                for (Coordinate obstructionCoordinate : obstructionCoordinates) {
-                    if (obstructionCoordinate.isNeighbour(current)) {
-                        count++;
-                        if (!history.contains(obstructionCoordinate)) {
-                            evaluate.add(obstructionCoordinate);
-                            grown = true;
-                        }
-                    }
-                }
-                if (count < 8) {
-                    leafs.add(current);
-                }
-                history.add(current);
-            }
-
-            Obstacle obstacle = new Obstacle();
-            while(!leafs.isEmpty())
-                obstacle.addCoordinate(leafs.poll());
-
-            //TODO: convert leafs into obstacle
-            //TODO: I don't really know how to solve this... I now have a queue of coordinates, I just need to somehow
-            //TODO: turn them into an obstacle for RTTEh
-
-
-            obstacles.add(obstacle);
-        }
-
-
-
-
-
-
-        return obstacles;
+    private Obstacle castRay(double direction) {
+        return null;
     }
 
 }
