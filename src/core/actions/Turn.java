@@ -35,6 +35,8 @@ public class Turn implements ActionElement {
 
 	@Override
 	public double duration() {
-		return Math.abs(rad / angularVelocity);
+		if (rad < Math.PI)
+			return Math.abs(rad / angularVelocity);
+		return Math.abs((rad-Math.PI*2) / angularVelocity);
 	}
 }
