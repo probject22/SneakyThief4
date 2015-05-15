@@ -46,6 +46,7 @@ public class Simulator {
 		
 		spriteManager = SpriteManager.instance();
 		spriteManager.addAgent(new Agent(new Coordinate(3,3,0)));
+		spriteManager.addAgent(new Agent(new Coordinate(6,3,0)));
 		spriteManager.addAgent(new Agent(new Coordinate(20,20,0)));
 		eventManager = new EventManager(map);
 		/*to get the agent list call spriteManager.getAgentList(); */
