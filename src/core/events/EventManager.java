@@ -75,7 +75,8 @@ public class EventManager {
 	
 	//Checks if a coordinate is within radius
 	private Boolean isInRadius(double xT,double yT, double r){
-		return yT*yT + xT*xT <= Math.sqrt(r);
+		double distence =  Math.sqrt(yT*yT + xT*xT);
+		return distence <= r;
 	}
 	
 	
