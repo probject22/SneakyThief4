@@ -12,6 +12,8 @@ import static java.lang.Math.sin;
  * Created by Stan on 29/04/15.
  */
 public class BES {
+
+
     public Coordinate getBlockingLocation(
             Coordinate agent,
             Collection<Coordinate> otherAgents,
@@ -22,19 +24,31 @@ public class BES {
         if(isClosestToIntruder(agent,otherAgents,intruder))
             return intruder;
 
+        // Get the set of escape directions
         Collection<Double> escapeDirections = getEscapeDirections(agent, otherAgents, intruder);
 
-        Map<Coordinate, Double> directionsMap = getDirectionsMapping(agent, otherAgents, intruder, escapeDirections);
+        List<Coordinate> agents = new ArrayList<>();
+        agents.add(agent);
+        agents.addAll(otherAgents);
 
+        // Determine the optimal matting of agents to directions
+        Map<Coordinate, Double> directionsMap = getDirectionsMapping(agents, intruder, escapeDirections);
+
+        // Select the escape direction assigned to the current agent
         double escapeDirection = directionsMap.get(agent);
 
+        // Determine the blocking location
         Coordinate blockingLocation = getBlockingLocation(agent, intruder, escapeDirection);
 
         return blockingLocation;
     }
 
-    private Map<Coordinate, Double> getDirectionsMapping(Coordinate agent, Collection<Coordinate> otherAgents, Coordinate intruder, Collection<Double> escapeDirections) {
+    private Map<Coordinate, Double> getDirectionsMapping(Collection<Coordinate> allAgents, Coordinate intruder, Collection<Double> escapeDirections) {
+        Map<Coordinate,Double> directionsMapping = new HashMap<>();
+
         Map<Coordinate, Double> references = new HashMap<>();
+
+        //calculate reference points
         for (Double escapeDirection : escapeDirections) {
             Coordinate c = new Coordinate(
                     intruder.x + (cos(escapeDirection) > 0 ? 1 : -1),
@@ -42,7 +56,25 @@ public class BES {
             references.put(c, escapeDirection);
         }
 
-        return null;
+        Collection<Coordinate> agents = new ArrayList<>();
+        agents.addAll(allAgents);
+
+        for (Map.Entry<Coordinate, Double> entry : references.entrySet()) {
+            Coordinate min = new Coordinate(Integer.MAX_VALUE, Integer.MAX_VALUE, 0);
+
+            //Find agent closest to the reference point
+            for (Coordinate agent : agents) {
+                if (entry.getKey().distance(agent) < entry.getKey().distance(min))
+                    min = agent;
+            }
+
+            agents.remove(min);
+            directionsMapping.put(min, entry.getValue());
+
+        }
+
+
+        return directionsMapping;
     }
 
     private Coordinate getBlockingLocation(Coordinate agent, Coordinate intruder, double escapeDirection) {
