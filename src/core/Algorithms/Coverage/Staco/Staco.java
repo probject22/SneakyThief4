@@ -19,8 +19,8 @@ import dataContainer.Coordinate;
  *
  */
 public class Staco {
-	private float distenceBetweenSprites = 10;
-	private float minDistencBetweenSprites = 7;
+	int steps = 0;
+	private float minDistencBetweenSprites = 6;
 	private boolean debug = DebugConstants.stacoDebug;
 	private boolean dir = true;
 	private Agent agent;
@@ -32,24 +32,49 @@ public class Staco {
 	}
 	
 	public Action getMoveAction(Vision vision){
+		float distenceBetweenSprites = 10;
+		double angle = 0;
 		HashMap<Coordinate, Sprite> sprites = vision.getSpriteInVisionMap();
 		if (sprites.size() != 0)
 			for(Coordinate coord: sprites.keySet()){
+				angle = agent.getCoordinates().getAngle(coord);
 				distenceBetweenSprites = (float) Coordinate.distanceBetweenCoordinates(coord, agent.getCoordinates());
-				if(debug) System.err.println("The distence between the agents is " +distenceBetweenSprites);
 			}
 		Action action = new Action();
 		if (distenceBetweenSprites < minDistencBetweenSprites){
-			dir = !dir;
-			if (debug) System.err.println("The agent with coords " + agent.getCoordinates() + " changed direction");
-			distenceBetweenSprites = minDistencBetweenSprites+1;
+			if(debug) System.err.println("dir " + dir + " angle "+ angle);
+			if (dir && angle < Math.PI){
+				if(debug) System.err.println("case 1");
+				dir = !dir;
+				action.addActionElement(new Turn(Math.toRadians(-90), Agent.MAX_ANG_VEL));
+				steps = 2;
+			}
+			else if (!dir && angle < Math.PI){
+				if(debug) System.err.println("case 2");
+				dir = !dir;
+				action.addActionElement(new Turn(Math.toRadians(90), Agent.MAX_ANG_VEL));
+				steps =2;
+			}
+			else if (dir && angle > Math.PI){
+				if(debug) System.err.println("case 3");
+			}
+			else if (!dir && angle > Math.PI){
+				if(debug) System.err.println("case 4");
+			}
+			
+			
+			//steps = (int)(minDistencBetweenSprites - distenceBetweenSprites)+1;
 		}
-		if (dir){
-			action.addActionElement(new Turn(Math.toRadians(22.5), Agent.MAX_ANG_VEL));
+		if (steps != 0){
+			steps--;
+			action.addActionElement(new Move(Agent.MAX_SPEED));
+		}
+		else if (dir){
+			action.addActionElement(new Turn(Math.toRadians(45), Agent.MAX_ANG_VEL));
 			action.addActionElement(new Move(Agent.MAX_SPEED));
 		}
 		else{
-			action.addActionElement(new Turn(Math.toRadians(-22.5), Agent.MAX_ANG_VEL));
+			action.addActionElement(new Turn(Math.toRadians(-45), Agent.MAX_ANG_VEL));
 			action.addActionElement(new Move(Agent.MAX_SPEED));
 		}
 		
