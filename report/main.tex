@@ -5,6 +5,7 @@
 \usepackage[affil-it]{authblk}
 \usepackage{apacite}
 \usepackage[ruled,linesnumbered,vlined]{algorithm2e}
+\usepackage{graphicx}
 
 \title{Sneaky Thief}
 \author{Stan Kerstjens\thanks{i6048794 : \texttt{s.kerstjens@student.maastrichtuniversity.nl}}}
@@ -68,6 +69,9 @@
 	\section{Exploration}
 
 	\section{Coverage}
+	
+	\subsection{StiCo}
+			\input{stico.tex}
 
 	\section{Pursuit}
 		When considering the problem of persuit, there is a very simple intuitive answer, namely to go directly to the location of the intruder following the shortest path. This, however, will only work if either the intruder is not actively avoiding the guard, or the guard is strictly faster than the intruder. As we are not prepared to assume any of these conditions, we need to act slightly more intelligently.
