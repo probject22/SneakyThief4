@@ -9,6 +9,7 @@ import dataContainer.GridState;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.net.URL;
+import java.util.*;
 
 /**
  * the map is stored as GridState[x][y]
@@ -152,6 +153,29 @@ public class Map {
 	}
 	public int getMapWidth() {
 		return mapWidth;
+	}
+
+	public java.util.Map<Coordinate,GridState> getIntersectingGridstates(Coordinate from, Coordinate to){
+
+		java.util.Map<Coordinate, GridState> intersections = new HashMap<>();
+
+		Queue<Coordinate> fringe = new ArrayDeque<>();
+		List<Coordinate> history = new ArrayList<>();
+		fringe.add(from);
+
+		while (!fringe.isEmpty()){
+			Coordinate current = fringe.poll();
+			if (!history.contains(current) && current.onLine(from, to)){
+				fringe.add(current.left());
+				fringe.add(current.top());
+				fringe.add(current.bottom());
+				fringe.add(current.right());
+				intersections.put(current,map[current.x][current.y]);
+				history.add(current);
+			}
+		}
+
+		return intersections;
 	}
 	
 }

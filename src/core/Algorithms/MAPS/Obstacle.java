@@ -172,6 +172,25 @@ public class Obstacle {
     }
 
 
+    public void addCoordinate(Coordinate coordinate){
+
+        Vertex vertex = new Vertex();
+        vertex.x = coordinate.x;
+        vertex.y = coordinate.y;
+
+
+        if(hitPoint == null) {
+            vertex.left = hitPoint;
+            vertex.right = hitPoint;
+            hitPoint = vertex;
+        } else {
+            vertex.right = hitPoint;
+            vertex.left = hitPoint.left;
+            hitPoint.left.right = vertex;
+            hitPoint.left = vertex;
+        }
+    }
+
     /**
      * Inner class used to describe the border
      */
