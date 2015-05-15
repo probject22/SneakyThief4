@@ -22,6 +22,7 @@ public class Staco {
 	private float distenceBetweenSprites = 10;
 	private float minDistencBetweenSprites = 7;
 	private boolean debug = DebugConstants.stacoDebug;
+	private boolean dir = true;
 	private Agent agent;
 	/**
 	 * 
@@ -38,12 +39,17 @@ public class Staco {
 				if(debug) System.err.println("The distence between the agents is " +distenceBetweenSprites);
 			}
 		Action action = new Action();
-		if (distenceBetweenSprites > minDistencBetweenSprites){
+		if (distenceBetweenSprites < minDistencBetweenSprites){
+			dir = !dir;
+			if (debug) System.err.println("The agent with coords " + agent.getCoordinates() + " changed direction");
+			distenceBetweenSprites = minDistencBetweenSprites+1;
+		}
+		if (dir){
 			action.addActionElement(new Turn(Math.toRadians(22.5), Agent.MAX_ANG_VEL));
 			action.addActionElement(new Move(Agent.MAX_SPEED));
 		}
 		else{
-			action.addActionElement(new Turn(Math.toRadians(180), Agent.MAX_ANG_VEL));
+			action.addActionElement(new Turn(Math.toRadians(-22.5), Agent.MAX_ANG_VEL));
 			action.addActionElement(new Move(Agent.MAX_SPEED));
 		}
 		
