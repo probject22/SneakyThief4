@@ -78,8 +78,28 @@ public class BES {
     }
 
     private Coordinate getBlockingLocation(Coordinate agent, Coordinate intruder, double escapeDirection) {
-        // TODO: implement
+
+
+        return intruder.addPolar(escapeDirection,5);
+
+        // Enhanced method
+        /*
+        double e = 0.5;
+        double ep = 0.05;
+        double alpha = Math.min(Math.abs(escapeDirection - intruder.getAngle(agent)),Math.abs(intruder.getAngle(agent)- escapeDirection) );
+        double dmax = 10; // maximum distance between the blocking location and the prey
+
+        if ( e < alpha && alpha < 180 - e){
+            if (sin(alpha) * (1+ep) <= 1){
+                double theta = Math.asin((sin(alpha)*(1+ep));
+                if(theta < 180 - alpha - e){
+                    //TODO: continue here
+                }
+            }
+        }
+
         return null;
+        */
     }
 
     private Collection<Double> getEscapeDirections(Coordinate agent, Collection<Coordinate> otherAgents, Coordinate intruder) {
