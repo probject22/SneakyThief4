@@ -21,7 +21,7 @@ import dataContainer.Coordinate;
 public class Stico {
 	int steps = 0;
 	private float minDistencBetweenSprites = 6;
-	private boolean debug = DebugConstants.stacoDebug;
+	private boolean debug = DebugConstants.sticoDebug;
 	private boolean dir = true;
 	private Agent agent;
 	/**
