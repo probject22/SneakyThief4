@@ -74,8 +74,8 @@ public class EventManager {
 	}
 	
 	//Checks if a coordinate is within radius
-	private Boolean isInRadius(double xT,double yT, double r){
-		double distence =  Math.sqrt(yT*yT + xT*xT);
+	private Boolean isInRadius(Coordinate target,Coordinate baseCoord, double r){
+		double distence =  Coordinate.distanceBetweenCoordinates(target, baseCoord);
 		return distence <= r;
 	}
 	
@@ -99,7 +99,7 @@ public class EventManager {
 		//Returns true if target is in view range
 		return !isClockWise(x1,y1,xTarget,yTarget) &&
 				isClockWise(x2,y2,xTarget,yTarget) &&
-				isInRadius (xTarget,yTarget,r);
+				isInRadius (target,baseCoord,r);
 		
 	}
 	
