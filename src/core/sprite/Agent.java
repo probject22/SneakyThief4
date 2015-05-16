@@ -4,6 +4,7 @@
 package core.sprite;
 
 import core.Algorithms.AStar.MapAStar;
+import core.Algorithms.BeliefMap.BeliefMap;
 import core.Algorithms.PathFinder;
 import core.DebugConstants;
 import core.Map;
@@ -41,7 +42,7 @@ public class Agent extends Sprite {
 
 	public static final double MAX_SPEED = 2.4;
 	public static final double MAX_ANG_VEL = 1;
-	private Map beliefMap;
+	private BeliefMap beliefMap;
 	private Vision lastSeen;
 	
 	private Stico staco;
@@ -53,15 +54,12 @@ public class Agent extends Sprite {
 
 
 	public void setBeliefMap(Map map){
-		this.beliefMap = map;
+		this.beliefMap =  new BeliefMap();
 	}
 
     public Agent(Coordinate coords) {
         super(coords);
-
-	    // Use the full map
-		beliefMap = Simulator.map;
-
+        this.beliefMap =  new BeliefMap();
 	    // Create an A* pathfinder
 	    pathFinder = new MapAStar(beliefMap);
 	    staco = new Stico(this);
@@ -83,7 +81,10 @@ public class Agent extends Sprite {
 	}
 	private void processVision(Vision vision){
 		if (debug) System.out.println("A vision event occured");
-		
+		if (beliefMap != null)
+			beliefMap.processVision(vision);
+		else
+			System.err.println("The beliefmap is null");
 		lastSeen = vision;
 	}
 

@@ -57,11 +57,11 @@ public class Stico {
 			}
 			else if (dir && angle > Math.PI){
 				if(debug) System.err.println("case 3");
-				while(true);
+				System.err.println("case 3 of stico is not implemented yet");
 			}
 			else if (!dir && angle > Math.PI){
 				if(debug) System.err.println("case 4");
-				while(true);
+				System.err.println("case 4 of stico is not implemented yet");
 			}
 			
 			
