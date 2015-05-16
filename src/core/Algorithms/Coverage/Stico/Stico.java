@@ -20,7 +20,7 @@ import dataContainer.Coordinate;
  */
 public class Stico {
 	int steps = 0;
-	private float minDistencBetweenSprites = 6;
+	private float minDistencBetweenSprites = 10;
 	private boolean debug = DebugConstants.sticoDebug;
 	private boolean dir = true;
 	private Agent agent;
@@ -32,7 +32,7 @@ public class Stico {
 	}
 	
 	public Action getMoveAction(Vision vision){
-		float distenceBetweenSprites = 10;
+		float distenceBetweenSprites = minDistencBetweenSprites+1;
 		double angle = 0;
 		HashMap<Coordinate, Sprite> sprites = vision.getSpriteInVisionMap();
 		if (sprites.size() != 0)
@@ -57,9 +57,11 @@ public class Stico {
 			}
 			else if (dir && angle > Math.PI){
 				if(debug) System.err.println("case 3");
+				while(true);
 			}
 			else if (!dir && angle > Math.PI){
 				if(debug) System.err.println("case 4");
+				while(true);
 			}
 			
 			
