@@ -1,7 +1,7 @@
 /**
  * 
  */
-package core.Algorithms.Coverage.Staco;
+package core.Algorithms.Coverage.Stico;
 
 import java.util.HashMap;
 
@@ -18,7 +18,7 @@ import dataContainer.Coordinate;
  * @author ing. R.J.H.M. Stevens
  *
  */
-public class Staco {
+public class Stico {
 	int steps = 0;
 	private float minDistencBetweenSprites = 6;
 	private boolean debug = DebugConstants.stacoDebug;
@@ -27,7 +27,7 @@ public class Staco {
 	/**
 	 * 
 	 */
-	public Staco(Agent agent) {
+	public Stico(Agent agent) {
 		this.agent = agent;
 	}
 	

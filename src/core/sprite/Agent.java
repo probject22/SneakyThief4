@@ -17,7 +17,8 @@ import dataContainer.Coordinate;
 
 import java.util.ArrayList;
 import java.util.List;
-import core.Algorithms.Coverage.Staco.*;
+
+import core.Algorithms.Coverage.Stico.*;
 /**
  *
  * The integral intelligent class.
@@ -43,7 +44,7 @@ public class Agent extends Sprite {
 	private Map beliefMap;
 	private Vision lastSeen;
 	
-	private Staco staco;
+	private Stico staco;
 	private PathFinder<Coordinate> pathFinder;
 	
 	private ArrayList<Event> events = new ArrayList<Event>();
@@ -63,7 +64,7 @@ public class Agent extends Sprite {
 
 	    // Create an A* pathfinder
 	    pathFinder = new MapAStar(beliefMap);
-	    staco = new Staco(this);
+	    staco = new Stico(this);
     }
 
 	/**
