@@ -1,0 +1,15 @@
+Skype Meeting 16/05 - 19:06-
+
+Presence:
+	- Sina
+	- Rob Clinch (absent)
+	- Stan
+	- Robert
+	- Sharon
+
+Sina
+1. RTA* and RTTEh Merge implemented. But without the Pathfinder interface. 
+
+2. RTA* and RTTEh should both implement the Pathfinder interface
+
+3. Other minutes are reflected in the task division.
