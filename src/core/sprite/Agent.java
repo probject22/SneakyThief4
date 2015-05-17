@@ -100,8 +100,7 @@ public class Agent extends Sprite {
 	
 	protected Action aStar(Coordinate goal){
 		Action action = new Action();
-		List<Coordinate> path = pathFinder.getShortestPath(getCoordinates(), goal);
-		Coordinate next = path.get(path.size() - 2);
+		Coordinate next = pathFinder.getShortestPath(getCoordinates(), goal);
 		double angle = getCoordinates().angle;
 		double goalAngle = getCoordinates().getAngle(next);
 		action.addActionElement(new Turn(angle, goalAngle, Agent.MAX_SPEED));

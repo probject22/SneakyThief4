@@ -16,7 +16,7 @@ import static java.lang.Math.*;
 public class MapAStar extends AStar<Coordinate, Coordinate> implements PathFinder<Coordinate>{
 
     @Override
-    public List<Coordinate> getResult (Node<Coordinate> node) {
+    public Coordinate getResult (Node<Coordinate> node) {
     	boolean debug = false;
     	
         if (debug) System.out.println("Result found");
@@ -28,7 +28,7 @@ public class MapAStar extends AStar<Coordinate, Coordinate> implements PathFinde
             node = node.parent;
         }
 
-        return moves;
+        return moves.get(moves.size() -1);
     }
     /**
      * Counts the amount of tiles between two coordinates on the map (assuming no obstructions).

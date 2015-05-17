@@ -15,7 +15,7 @@ import static java.lang.Math.*;
 /**
  * Created by Sina copied from Stan on 15/05/15.
  */
-public class MapRTAStar extends RTAStar<Coordinate, Coordinate> {
+public class MapRTAStar extends RTAStar<Coordinate, Coordinate> implements PathFinder<Coordinate> {
 
 	public double getCost(Node<Coordinate> from, Node<Coordinate> to) {
         int counter = 0;

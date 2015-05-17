@@ -37,7 +37,7 @@ import java.util.List;
 	     * @param toElement final element
 	     * @return
 	     */
-	    public Node<E> getShortestPath(T fromElement, T toElement){
+	    public E getShortestPath(T fromElement, T toElement){
 
 	        Node<T> from = new Node<>();
 	        from.element = fromElement;
@@ -65,7 +65,7 @@ import java.util.List;
 
 	                if (neighbour.equals(to)) {
 	                    //return result
-	                    return neighbour;
+	                    return (E) neighbour.element;
 	                }
 
 	                // calculate functions
@@ -80,7 +80,7 @@ import java.util.List;
 	                	result = neighbour;
 	            }
 	            
-	        return result;
+	        return result.element;
 	    }
 
 	    protected abstract List<Node<T>> getNeighbours(Node<T> current);
