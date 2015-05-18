@@ -32,7 +32,7 @@ public class MTES {
 
     public MoveDirection getMovingDirection(){
 
-        Coordinate d = rtteh.getMoveDirection(current, target);
+        Coordinate d = rtteh.getShortestPath(current, target);
 
         if (d != null){
             Set<Coordinate> n = getMinimumVisitNeighbours();
