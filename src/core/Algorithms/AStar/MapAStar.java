@@ -28,7 +28,7 @@ public class MapAStar extends AStar<Coordinate, Coordinate> implements PathFinde
             node = node.parent;
         }
 
-        return moves.get(moves.size() -1);
+        return moves.get(0);
     }
     /**
      * Counts the amount of tiles between two coordinates on the map (assuming no obstructions).
