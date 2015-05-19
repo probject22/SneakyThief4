@@ -1,7 +1,7 @@
 /**
  * 
  */
-package core.Algorithms.Coverage.Staco;
+package core.Algorithms.Coverage.Stico;
 
 import java.util.HashMap;
 
@@ -18,21 +18,21 @@ import dataContainer.Coordinate;
  * @author ing. R.J.H.M. Stevens
  *
  */
-public class Staco {
+public class Stico {
 	int steps = 0;
-	private float minDistencBetweenSprites = 6;
-	private boolean debug = DebugConstants.stacoDebug;
+	private float minDistencBetweenSprites = 10;
+	private boolean debug = DebugConstants.sticoDebug;
 	private boolean dir = true;
 	private Agent agent;
 	/**
 	 * 
 	 */
-	public Staco(Agent agent) {
+	public Stico(Agent agent) {
 		this.agent = agent;
 	}
 	
 	public Action getMoveAction(Vision vision){
-		float distenceBetweenSprites = 10;
+		float distenceBetweenSprites = minDistencBetweenSprites+1;
 		double angle = 0;
 		HashMap<Coordinate, Sprite> sprites = vision.getSpriteInVisionMap();
 		if (sprites.size() != 0)
@@ -57,9 +57,11 @@ public class Staco {
 			}
 			else if (dir && angle > Math.PI){
 				if(debug) System.err.println("case 3");
+				System.err.println("case 3 of stico is not implemented yet");
 			}
 			else if (!dir && angle > Math.PI){
 				if(debug) System.err.println("case 4");
+				System.err.println("case 4 of stico is not implemented yet");
 			}
 			
 			

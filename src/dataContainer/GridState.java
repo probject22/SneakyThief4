@@ -18,7 +18,8 @@ public enum GridState {
 	Door			(	new Color(102,51,0),	true,			'D'			),
 	Target			(	Color.ORANGE,			true,			'T'			),
 	Tree			(	new Color(128,128,0),	false,			'B'			),
-	OuterWall		(	Color.DARK_GRAY,		false,			'+'			);
+	OuterWall		(	Color.DARK_GRAY,		false,			'+'			),
+	unknown			(	Color.RED,				true,			'9'			);
 
 
 

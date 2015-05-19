@@ -37,7 +37,7 @@ abstract public class AStar<E,T> {
      * @param toElement final element
      * @return
      */
-    public List<E> getShortestPath(T fromElement, T toElement){
+    public E getShortestPath(T fromElement, T toElement){
     	boolean debug = false;
 
         Node<T> from = new Node<>();
@@ -108,7 +108,7 @@ abstract public class AStar<E,T> {
 
     protected abstract List<Node<T>> getNeighbours(Node<T> current);
 
-    protected abstract List<E> getResult(Node<T> neighbour);
+    protected abstract E getResult(Node<T> neighbour);
 
     protected abstract double getCost(Node<T> current, Node<T> neighbour);
 

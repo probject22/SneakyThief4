@@ -22,6 +22,7 @@ public class Map {
 	/**
 	 * the amount of meters in every square of the grid.
 	 */
+	public static Map mapClass;
 	public static double meters_per_unit = 1;
 	private boolean debug = DebugConstants.mapDebug;
 	// height and width
@@ -31,6 +32,7 @@ public class Map {
 	 * If no mapfile is set load the default map
 	 */
 	public Map(){
+		mapClass = this;
 		URL url = Map.class.getResource("/resources/maps/default.map");
 		if (url != null)
 			intit(url.toString().replace("file:", ""));
@@ -45,6 +47,7 @@ public class Map {
 	 * @param path The path to the map file (e.g. maps/default.map)
 	 */
 	public Map(String name){
+		mapClass = this;
 		URL url = Map.class.getResource("/resources/maps/" + name);
 		if (url != null)
 			intit(url.toString().replace("file:", ""));
@@ -143,7 +146,7 @@ public class Map {
 	/**
 	 * The real map
 	 */
-	private GridState[][] map;
+	protected GridState[][] map;
 
 	/**
 	 * Width and Height getters

@@ -6,6 +6,8 @@ public class DebugConstants {
 	
 	static public boolean agentDebug = false;
 	
-	static public boolean stacoDebug = false;
+	static public boolean sticoDebug = false;
+	
+	static public boolean beliefMapDebug = false;
 
 }

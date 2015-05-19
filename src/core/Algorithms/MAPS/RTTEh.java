@@ -17,10 +17,18 @@ import java.util.stream.StreamSupport;
  *
  * Created by Stan on 26/04/15.
  */
-public abstract class RTTEh {
+public class RTTEh implements PathFinder<Coordinate> {
     Map map;
+    
+    /**
+     * Constructor
+     * @param map
+     */
+    public RTTEh(Map map){
+        this.map = map;
+    }
 
-    public Coordinate getMoveDirection(Coordinate current, Coordinate target){
+    public Coordinate getShortestPath(Coordinate current, Coordinate target){
         List<Coordinate> open = new ArrayList<>();
 
         //mark all the neighbour cells as open
@@ -114,6 +122,8 @@ public abstract class RTTEh {
         
         return result;
     }
+    
+    
 
     private double[] getDirections(int amountOfDirections) {
         double d = 2*Math.PI / amountOfDirections;
@@ -139,7 +149,9 @@ public abstract class RTTEh {
         return null;
     }
 
-    protected abstract List<Coordinate> generateNeighbours(Coordinate c);
+    protected List<Coordinate> generateNeighbours(Coordinate c) {
+		return null;
+	}
 
     private Obstacle castRay(double direction) {
         return null;

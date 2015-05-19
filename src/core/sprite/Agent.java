@@ -4,6 +4,7 @@
 package core.sprite;
 
 import core.Algorithms.AStar.MapAStar;
+import core.Algorithms.BeliefMap.BeliefMap;
 import core.Algorithms.PathFinder;
 import core.DebugConstants;
 import core.Map;
@@ -14,10 +15,12 @@ import core.actions.Turn;
 import core.events.Event;
 import core.events.Vision;
 import dataContainer.Coordinate;
+import gui.BeliefMapGui;
 
 import java.util.ArrayList;
 import java.util.List;
-import core.Algorithms.Coverage.Staco.*;
+
+import core.Algorithms.Coverage.Stico.*;
 /**
  *
  * The integral intelligent class.
@@ -40,30 +43,29 @@ public class Agent extends Sprite {
 
 	public static final double MAX_SPEED = 2.4;
 	public static final double MAX_ANG_VEL = 1;
-	private Map beliefMap;
+	private BeliefMap beliefMap;
 	private Vision lastSeen;
 	
-	private Staco staco;
+	private Stico staco;
 	private PathFinder<Coordinate> pathFinder;
 	
 	private ArrayList<Event> events = new ArrayList<Event>();
 	
 	private boolean debug = DebugConstants.agentDebug;
+	private BeliefMapGui beliefMapGUi;
 
 
 	public void setBeliefMap(Map map){
-		this.beliefMap = map;
+		this.beliefMap =  (BeliefMap) map;
 	}
 
     public Agent(Coordinate coords) {
         super(coords);
-
-	    // Use the full map
-		beliefMap = Simulator.map;
-
+        this.beliefMap =  new BeliefMap();
+        beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 	    // Create an A* pathfinder
 	    pathFinder = new MapAStar(beliefMap);
-	    staco = new Staco(this);
+	    staco = new Stico(this);
     }
 
 	/**
@@ -82,7 +84,12 @@ public class Agent extends Sprite {
 	}
 	private void processVision(Vision vision){
 		if (debug) System.out.println("A vision event occured");
-		
+		if (beliefMap != null){
+			beliefMap.processVision(vision);
+			beliefMapGUi.updateGui();
+		}
+		else
+			System.err.println("The beliefmap is null");
 		lastSeen = vision;
 	}
 
@@ -98,8 +105,7 @@ public class Agent extends Sprite {
 	
 	protected Action aStar(Coordinate goal){
 		Action action = new Action();
-		List<Coordinate> path = pathFinder.getShortestPath(getCoordinates(), goal);
-		Coordinate next = path.get(path.size() - 2);
+		Coordinate next = pathFinder.getShortestPath(getCoordinates(), goal);
 		double angle = getCoordinates().angle;
 		double goalAngle = getCoordinates().getAngle(next);
 		action.addActionElement(new Turn(angle, goalAngle, Agent.MAX_SPEED));

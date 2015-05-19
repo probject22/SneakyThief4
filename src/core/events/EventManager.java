@@ -74,8 +74,8 @@ public class EventManager {
 	}
 	
 	//Checks if a coordinate is within radius
-	private Boolean isInRadius(double xT,double yT, double r){
-		double distence =  Math.sqrt(yT*yT + xT*xT);
+	private Boolean isInRadius(Coordinate target,Coordinate baseCoord, double r){
+		double distence =  Coordinate.distanceBetweenCoordinates(target, baseCoord);
 		return distence <= r;
 	}
 	
@@ -99,7 +99,7 @@ public class EventManager {
 		//Returns true if target is in view range
 		return !isClockWise(x1,y1,xTarget,yTarget) &&
 				isClockWise(x2,y2,xTarget,yTarget) &&
-				isInRadius (xTarget,yTarget,r);
+				isInRadius (target,baseCoord,r);
 		
 	}
 	
@@ -115,7 +115,6 @@ public class EventManager {
 		
 		
 		Coordinate baseCoords = agent.getCoordinates();
-		agent.giveEvent(vision);
 		
 		//Adding the sprite in the vision to the Sprite hash map
 		for (Sprite sprite: spriteManager.getAgentList()){
@@ -135,15 +134,16 @@ public class EventManager {
 				else {
 					
 					// Adds the further centuries to the vision
-					if (state[i][j].getFileVal() == 'P')
+					if (state[i][j] == GridState.Sentry)
 					if (!isInView(new Coordinate(i,j,0),visionAngle,maxVisionRange,baseCoords) &&
 						isInView(new Coordinate(i,j,0),visionAngle,towerVisionRange,baseCoords))
 					vision.addGrid(new Coordinate(i,j,0), state[i][j]);
 					
 					// Adds the structures to the vision
-					if (state[i][j].getFileVal() == '-' ||
-						state[i][j].getFileVal() == 'W' ||
-						state[i][j].getFileVal() == 'D')
+					if (state[i][j] == GridState.Door ||
+						state[i][j] == GridState.OuterWall ||
+						state[i][j] == GridState.Wall ||
+						state[i][j] == GridState.Window)
 					if (!isInView(new Coordinate(i,j,0),visionAngle,maxVisionRange,baseCoords) &&
 							isInView(new Coordinate(i,j,0),visionAngle,structureVisionRange,baseCoords))
 						vision.addGrid(new Coordinate(i,j,0), state[i][j]);
@@ -151,6 +151,8 @@ public class EventManager {
 				}
 			}
 		}
+		
+		agent.giveEvent(vision);
 	}
 	
 	// Split the map into sub section.

@@ -7,6 +7,7 @@ import core.sprite.SpriteManager;
 import dataContainer.Coordinate;
 import dataContainer.GridState;
 import dataContainer.MoveDirection;
+import gui.BeliefMapGui;
 import gui.MainFrame;
 
 /**
@@ -54,6 +55,7 @@ public class Simulator {
 		/* gui stuff */
 		mainFrame = new MainFrame();
 		mainFrame.setMap(map);
+		
 		
 		gameLoop();
 	}

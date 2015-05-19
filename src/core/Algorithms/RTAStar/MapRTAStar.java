@@ -1,6 +1,8 @@
-package core.Algorithms.AStar;
+package core.Algorithms.RTAStar;
 
 import core.Algorithms.PathFinder;
+import core.Algorithms.RTAStar.RTAStar;
+import core.Algorithms.RTAStar.RTAStar.Node;
 import core.Map;
 import dataContainer.Coordinate;
 
@@ -11,36 +13,11 @@ import static java.lang.Math.*;
 
 
 /**
- * Created by Stan on 29/04/15.
+ * Created by Sina copied from Stan on 15/05/15.
  */
-public class MapAStar extends AStar<Coordinate, Coordinate> implements PathFinder<Coordinate>{
+public class MapRTAStar extends RTAStar<Coordinate, Coordinate> implements PathFinder<Coordinate> {
 
-    @Override
-    public Coordinate getResult (Node<Coordinate> node) {
-    	boolean debug = false;
-    	
-        if (debug) System.out.println("Result found");
-
-        List<Coordinate> moves = new ArrayList<>();
-
-        while(node != null){
-            moves.add(node.element);
-            node = node.parent;
-        }
-
-        return moves.get(moves.size() -1);
-    }
-    /**
-     * Counts the amount of tiles between two coordinates on the map (assuming no obstructions).
-     * Method will generally be used to evaluate adjacent coordinates.
-     * @param from
-     * @param to
-     * @return
-     */
-    @Override
-    // currently counts moves
-    // can be improved to not count moves, but time
-    public double getCost(Node<Coordinate> from, Node<Coordinate> to) {
+	public double getCost(Node<Coordinate> from, Node<Coordinate> to) {
         int counter = 0;
         int x = min(from.element.x, to.element.x);
         int y = min(from.element.y, to.element.y);
@@ -81,7 +58,7 @@ public class MapAStar extends AStar<Coordinate, Coordinate> implements PathFinde
      * Constructor
      * @param map
      */
-    public MapAStar(Map map){
+    public MapRTAStar(Map map){
         this.map = map;
     }
 
