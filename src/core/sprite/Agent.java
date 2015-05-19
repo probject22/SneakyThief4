@@ -15,6 +15,7 @@ import core.actions.Turn;
 import core.events.Event;
 import core.events.Vision;
 import dataContainer.Coordinate;
+import gui.BeliefMapGui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +52,7 @@ public class Agent extends Sprite {
 	private ArrayList<Event> events = new ArrayList<Event>();
 	
 	private boolean debug = DebugConstants.agentDebug;
+	private BeliefMapGui beliefMapGUi;
 
 
 	public void setBeliefMap(Map map){
@@ -60,6 +62,7 @@ public class Agent extends Sprite {
     public Agent(Coordinate coords) {
         super(coords);
         this.beliefMap =  new BeliefMap();
+        beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 	    // Create an A* pathfinder
 	    pathFinder = new MapAStar(beliefMap);
 	    staco = new Stico(this);
@@ -81,8 +84,10 @@ public class Agent extends Sprite {
 	}
 	private void processVision(Vision vision){
 		if (debug) System.out.println("A vision event occured");
-		if (beliefMap != null)
+		if (beliefMap != null){
 			beliefMap.processVision(vision);
+			beliefMapGUi.updateGui();
+		}
 		else
 			System.err.println("The beliefmap is null");
 		lastSeen = vision;
