@@ -59,7 +59,7 @@ public class Agent extends Sprite {
 
     public Agent(Coordinate coords) {
         super(coords);
-        this.beliefMap =  (BeliefMap) Map.mapClass;//new BeliefMap();
+        this.beliefMap =  new BeliefMap();
 	    // Create an A* pathfinder
 	    pathFinder = new MapAStar(beliefMap);
 	    staco = new Stico(this);
