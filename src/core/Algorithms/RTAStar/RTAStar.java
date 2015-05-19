@@ -53,31 +53,29 @@ import java.util.List;
 
 	            
 
-	            // generate neighbours
-	            List<Node<T>> neighbours = getNeighbours(from);
+	        // generate neighbours
+	        List<Node<T>> neighbours = getNeighbours(from);
 	            
-	            //returning node
-	            Node<E> result = null;
-	            //loop through neighbours
-	            for (Node neighbour : neighbours) {
-	                // Set parent
-	                neighbour.parent = from;
+	        //returning node
+	        Node<E> result = null;
+	        //loop through neighbors
+	        for (Node neighbour : neighbours) {
 
-	                if (neighbour.equals(to)) {
-	                    //return result
-	                    return (E) neighbour.element;
+	            if (neighbour.equals(to)) {
+	            	//return result
+	            	return (E) neighbour.element;
 	                }
 
-	                // calculate functions
-	                neighbour.g = getCost(from, neighbour);
-	                neighbour.h = getHeuristic(from, to);
-	                neighbour.f = neighbour.g + neighbour.h;
+	            // calculate functions
+	            neighbour.g = getCost(from, neighbour);
+	            neighbour.h = getHeuristic(neighbour, to);
+	            neighbour.f = neighbour.g + neighbour.h;
 
-	                // Return The moving neighbor min(f(x))
-	                if (result == null)
-	                	result = neighbour;
-	                else if (result.f < neighbour.f)
-	                	result = neighbour;
+	            // Return The moving neighbor min(f(x))
+	            if (result == null)
+	              	result = neighbour;
+	            else if (result.f < neighbour.f)
+	                result = neighbour;
 	            }
 	            
 	        return result.element;
