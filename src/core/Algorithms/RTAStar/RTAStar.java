@@ -74,7 +74,7 @@ import java.util.List;
 	            // Return The moving neighbor min(f(x))
 	            if (result == null)
 	              	result = neighbour;
-	            else if (result.f < neighbour.f)
+	            else if (result.f > neighbour.f)
 	                result = neighbour;
 	            }
 	            
