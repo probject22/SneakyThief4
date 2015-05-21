@@ -14,7 +14,7 @@ import static java.lang.Math.sin;
 public class BES {
 
 
-    public Coordinate getBlockingLocation(
+    public static Coordinate getBlockingLocation(
             Coordinate agent,
             Collection<Coordinate> otherAgents,
             Coordinate intruder ){
@@ -43,7 +43,7 @@ public class BES {
         return blockingLocation;
     }
 
-    private Map<Coordinate, Double> getDirectionsMapping(Collection<Coordinate> allAgents, Coordinate intruder, Collection<Double> escapeDirections) {
+    private static Map<Coordinate, Double> getDirectionsMapping(Collection<Coordinate> allAgents, Coordinate intruder, Collection<Double> escapeDirections) {
         Map<Coordinate,Double> directionsMapping = new HashMap<>();
 
         Map<Coordinate, Double> references = new HashMap<>();
@@ -77,7 +77,7 @@ public class BES {
         return directionsMapping;
     }
 
-    private Coordinate getBlockingLocation(Coordinate agent, Coordinate intruder, double escapeDirection) {
+    private static Coordinate getBlockingLocation(Coordinate agent, Coordinate intruder, double escapeDirection) {
 
 
         return intruder.addPolar(escapeDirection,5);
@@ -107,7 +107,7 @@ public class BES {
         */
     }
 
-    private Collection<Double> getEscapeDirections(Coordinate agent, Collection<Coordinate> otherAgents, Coordinate intruder) {
+    private static Collection<Double> getEscapeDirections(Coordinate agent, Collection<Coordinate> otherAgents, Coordinate intruder) {
         int n = otherAgents.size() + 1;
 
         Collection<Double> directions = new ArrayList<>();
@@ -127,7 +127,7 @@ public class BES {
      * @param intruder
      * @return
      */
-    private boolean isClosestToIntruder(Coordinate agent, Collection<Coordinate> otherAgents, Coordinate intruder){
+    private static boolean isClosestToIntruder(Coordinate agent, Collection<Coordinate> otherAgents, Coordinate intruder){
         for (Coordinate otherAgent : otherAgents) {
             if(otherAgent.distance(intruder) > agent.distance(intruder))
                 return false;

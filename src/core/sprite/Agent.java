@@ -4,6 +4,7 @@
 package core.sprite;
 
 import core.Algorithms.AStar.MapAStar;
+import core.Algorithms.BES.BES;
 import core.Algorithms.BeliefMap.BeliefMap;
 import core.Algorithms.PathFinder;
 import core.DebugConstants;
@@ -18,6 +19,7 @@ import dataContainer.Coordinate;
 import gui.BeliefMapGui;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import core.Algorithms.Coverage.Stico.*;
@@ -97,9 +99,18 @@ public class Agent extends Sprite {
 	 * Get the action that the agent currently wants to perform. This will consist of only a single
 	 * square with a certain speed, and possibly a turn.
 	 * @return The action that the agents want to perform next
+	 * 
+	 * 
 	 */
 	public Action getAction(){
 		Action action = staco.getMoveAction(lastSeen);
+		
+		// Check if there is a intruder in View (This should be done using belief map instead)!!
+		//If yes Use BES to get Action
+		for (Sprite s : lastSeen.getSpriteInVisionMap().values())
+			if (s instanceof Thief)
+				action = BlockingES(s.getCoordinates());
+		
 		return action;
 	}
 	
@@ -112,6 +123,20 @@ public class Agent extends Sprite {
 		action.addActionElement(new Move(Agent.MAX_SPEED));
 		
 		return action;
+	}
+	
+	/**
+	 * Returns an Blocking Action 
+	 * according to the Blocking Coordinate
+	 * found using BES
+	 * @author Sina (21/05/2015)
+	 */
+	protected Action BlockingES(Coordinate intruder){
+		Collection<Coordinate> otherAgents = lastSeen.getSpriteInVisionMap().keySet();
+		Coordinate next = BES.getBlockingLocation(this.getCoordinates(),otherAgents,intruder);
+		
+		//Use A* or RTA* to get to the Blocking Coordinate.
+		return aStar(next);
 	}
 
 	/**
