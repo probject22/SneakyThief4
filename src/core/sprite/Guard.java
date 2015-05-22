@@ -30,5 +30,7 @@ public class Guard extends Agent {
 		
 		return action;
 	}
+	
+	
 
 }
