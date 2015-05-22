@@ -180,5 +180,9 @@ public class Map {
 
 		return intersections;
 	}
+	public static Map generate(double complexity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
