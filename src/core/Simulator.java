@@ -71,7 +71,7 @@ public class Simulator {
 		mainFrame.updateGui();
 		while (!stop){
 			while (pause && !stop){
-				sleep(0.1);
+				sleep(0.00001);
 			}
 			firstAgentAction();
 			/* finish the move by updateting the gui */
