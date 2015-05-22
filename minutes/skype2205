@@ -1,0 +1,40 @@
+Minutes 22/05
+
+Attendees:
+Rob
+Stan
+Sina (L-1934)
+Robert(L-1936)
+
+Start time: 19:32
+
+Project Progress
+
+Stan:
+Experiments have been designed:
+A Star vs RT A Starting
+
+Rob:
+Working on Variables
+Sprint function
+
+Robert:
+Start working on exploration implementation
+Perhaps figure out agent coordination(blackboard model)
+
+Sina:
+Thought experiments
+
+
+Points:
+Exploration vs Coverage
+Win/Lose conditions
+Testing discussions
+Map versions for testing
+
+
+Meeting closed 19:59
+
+
+
+
