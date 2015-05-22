@@ -282,19 +282,19 @@ public class EventManager {
 		/*variance in rad */
 		double varianceRad = Math.toRadians(variance);
 		
-		double distence = 0;
+		double distance = 0;
 		if (speed >0 && speed < 0.5)
-			distence = 1;
+			distance = 1;
 		else if (speed < 1)
-			distence = 3;
+			distance = 3;
 		else if (speed < 2)
-			distence = 5;
+			distance = 5;
 		else
-			distence = 10;
+			distance = 10;
 		
 		
 		for (Agent tempAgent: spriteManager.getAgentList())
-			if (distenceBetweenAgents(agent, tempAgent) <= distence){
+			if (distenceBetweenAgents(agent, tempAgent) <= distance){
 				/* calculate the angle under witch the agent hears the sound and add the variance to it */
 				double dx = agent.getCoordinates().x - tempAgent.getCoordinates().x;
 				double dy = agent.getCoordinates().y - tempAgent.getCoordinates().y;

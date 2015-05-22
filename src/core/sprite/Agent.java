@@ -45,7 +45,7 @@ import core.Algorithms.reverseRTAStar.MapReverseRTAStar;
  */
 public class Agent extends Sprite {
 
-	public static final double MAX_SPEED = 2.4;
+	public static final double MAX_SPEED = 1.4;
 	public static final double MAX_ANG_VEL = 1;
 	private BeliefMap beliefMap;
 	protected Vision lastSeen;

@@ -32,4 +32,14 @@ public class Thief extends Agent {
 		return action;
 	}
 	
+	public boolean canSprint(){
+		//if within 10 ticks of previous sprint false
+		//else return true
+		return false;
+	}
+	public boolean shouldSprint(){
+		//if a guard is near by, return true
+		//else return false
+		return false;
+	}
 }
