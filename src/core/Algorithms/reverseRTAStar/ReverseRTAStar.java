@@ -22,16 +22,17 @@ import java.util.List;
  * E is the type of the result (for instance move directions) T is the type of
  * the node elements (for instance map coordinates)
  *
- * Created by Sina Coppied mostly from Stan on 15/05/15.
+ * Created by Sina Coppied code mostly from Stan on 15/05/15.
  */
 public abstract class ReverseRTAStar<E, T> {
-
+	
+	// THe weight of tendency to go toward the target should be between 0 and 1
+	double weight = 1;
 	/**
 	 * Constructor
 	 *
 	 */
-	public ReverseRTAStar() {
-	}
+	public ReverseRTAStar() {}
 
 	/**
 	 * Returns a list of outcomes as specified in the generic variable.
@@ -42,7 +43,7 @@ public abstract class ReverseRTAStar<E, T> {
 	 *            final element
 	 * @return
 	 */
-	public E getShortestPath(T fromElement, T toElement) {
+	public E getBestEscape(T fromElement, List<T> chasers, T toElement) {
 
 		Node<T> from = new Node<>();
 		from.element = fromElement;
@@ -52,6 +53,8 @@ public abstract class ReverseRTAStar<E, T> {
 		from.f = 0;
 		from.g = 0;
 		from.h = getHeuristic(from, to);
+		
+		
 
 		// generate neighbours
 		List<Node<T>> neighbours = getNeighbours(from);
@@ -66,12 +69,22 @@ public abstract class ReverseRTAStar<E, T> {
 				return (E) neighbour.element;
 			}
 
+			
+			
 			// calculate functions
 			neighbour.g = getCost(from, neighbour);
-			neighbour.h = getHeuristic(neighbour, to);
+			neighbour.h = - getHeuristic(neighbour, to)*weight;
+			
+			for (T chaser : chasers){
+				Node<T> follower = new Node<T>();
+				follower.element = chaser;
+				neighbour.h += getHeuristic(neighbour, follower);
+			}
+			
+			
 			neighbour.f = neighbour.g + neighbour.h;
 
-			// Return The moving neighbor min(f(x))
+			// Return The moving neighbor max(f(x))
 			if (result == null)
 				result = neighbour;
 			else if (result.f < neighbour.f)

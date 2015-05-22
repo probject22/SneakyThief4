@@ -7,6 +7,7 @@ import core.Algorithms.AStar.MapAStar;
 import core.Algorithms.BES.BES;
 import core.Algorithms.BeliefMap.BeliefMap;
 import core.Algorithms.PathFinder;
+import core.Algorithms.ThiefPath;
 import core.DebugConstants;
 import core.Map;
 import core.Simulator;
@@ -23,6 +24,7 @@ import java.util.Collection;
 import java.util.List;
 
 import core.Algorithms.Coverage.Stico.*;
+import core.Algorithms.reverseRTAStar.MapReverseRTAStar;
 /**
  *
  * The integral intelligent class.
@@ -46,10 +48,13 @@ public class Agent extends Sprite {
 	public static final double MAX_SPEED = 2.4;
 	public static final double MAX_ANG_VEL = 1;
 	private BeliefMap beliefMap;
-	private Vision lastSeen;
+	protected Vision lastSeen;
+	// Set the Target Coordinate
+	protected Coordinate target = new Coordinate(18,18,0);
 	
-	private Stico staco;
+	protected Stico staco;
 	private PathFinder<Coordinate> pathFinder;
+	private ThiefPath<Coordinate> thiefPath;
 	
 	private ArrayList<Event> events = new ArrayList<Event>();
 	
@@ -67,6 +72,8 @@ public class Agent extends Sprite {
         beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 	    // Create an A* pathfinder
 	    pathFinder = new MapAStar(beliefMap);
+	    // Create an Escape map for Thief
+	    thiefPath = new MapReverseRTAStar(beliefMap);
 	    staco = new Stico(this);
     }
 
@@ -107,9 +114,9 @@ public class Agent extends Sprite {
 		
 		// Check if there is a intruder in View (This should be done using belief map instead)!!
 		//If yes Use BES to get Action
-		for (Sprite s : lastSeen.getSpriteInVisionMap().values())
-			if (s instanceof Thief)
-				action = BlockingES(s.getCoordinates());
+		//for (Sprite s : lastSeen.getSpriteInVisionMap().values())
+		//	if (s instanceof Thief)
+		//		action = BlockingES(s.getCoordinates());
 		
 		return action;
 	}
@@ -117,6 +124,17 @@ public class Agent extends Sprite {
 	protected Action aStar(Coordinate goal){
 		Action action = new Action();
 		Coordinate next = pathFinder.getShortestPath(getCoordinates(), goal);
+		double angle = getCoordinates().angle;
+		double goalAngle = getCoordinates().getAngle(next);
+		action.addActionElement(new Turn(angle, goalAngle, Agent.MAX_SPEED));
+		action.addActionElement(new Move(Agent.MAX_SPEED));
+		
+		return action;
+	}
+	
+	protected Action reverseAStar(List<Coordinate> followers){
+		Action action = new Action();
+		Coordinate next = thiefPath.getBestEscape(getCoordinates(),followers, target);
 		double angle = getCoordinates().angle;
 		double goalAngle = getCoordinates().getAngle(next);
 		action.addActionElement(new Turn(angle, goalAngle, Agent.MAX_SPEED));

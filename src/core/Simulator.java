@@ -3,7 +3,9 @@ package core;
 import core.actions.*;
 import core.events.EventManager;
 import core.sprite.Agent;
+import core.sprite.Guard;
 import core.sprite.SpriteManager;
+import core.sprite.Thief;
 import dataContainer.Coordinate;
 import dataContainer.GridState;
 import dataContainer.MoveDirection;
@@ -46,9 +48,10 @@ public class Simulator {
 		map = new Map("empty.map");
 		
 		spriteManager = SpriteManager.instance();
-		spriteManager.addAgent(new Agent(new Coordinate(3,3,0)));
-		spriteManager.addAgent(new Agent(new Coordinate(6,3,0)));
-		spriteManager.addAgent(new Agent(new Coordinate(20,20,0)));
+		spriteManager.addAgent(new Guard(new Coordinate(3,13,0)));
+		spriteManager.addAgent(new Guard(new Coordinate(16,3,0)));
+		spriteManager.addAgent(new Guard(new Coordinate(15,15,0)));
+		spriteManager.addAgent(new Thief(new Coordinate(2,2,0)));
 		eventManager = new EventManager(map);
 		/*to get the agent list call spriteManager.getAgentList(); */
 		

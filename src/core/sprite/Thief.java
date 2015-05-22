@@ -1,5 +1,9 @@
 package core.sprite;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import core.actions.Action;
 import dataContainer.Coordinate;
 
 /**
@@ -14,4 +18,18 @@ public class Thief extends Agent {
 		super(coords);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Action getAction(){
+		
+		Action action = aStar(target);
+		
+		// Check if there is a Agent in View (This should be done using belief map instead)!!
+		//If yes use reverse RTA* to escape.
+		List<Coordinate> agentsInView = new ArrayList<Coordinate>(lastSeen.getSpriteInVisionMap().keySet());
+		for (Sprite s : lastSeen.getSpriteInVisionMap().values())
+			if (s instanceof Guard)
+				action = reverseAStar(agentsInView);
+		return action;
+	}
+	
 }
