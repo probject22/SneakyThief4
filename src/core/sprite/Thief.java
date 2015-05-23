@@ -11,6 +11,8 @@ import dataContainer.Coordinate;
  */
 public class Thief extends Agent {
 
+	
+	
 	/**
 	 * @param coords
 	 */
@@ -30,6 +32,7 @@ public class Thief extends Agent {
 			if (s instanceof Guard)
 				action = reverseAStar(agentsInView);
 		return action;
+		
 	}
 	
 	public boolean canSprint(){

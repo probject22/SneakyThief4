@@ -16,7 +16,7 @@ public class AStarExperiment extends AbstractExperiment {
 	public void experiment(int repeats){
 		double complexity = 0;
 		
-		Map map = Map.generate(complexity);
+		Map map = Map.maze(100,100);
 		
 		long start = System.nanoTime();
 		long end = System.nanoTime();

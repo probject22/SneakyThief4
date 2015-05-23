@@ -3,13 +3,19 @@
  */
 package core;
 
-import dataContainer.Coordinate;
-import dataContainer.GridState;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Queue;
+import java.util.Random;
+
+import mazeGenerator.MazeGenerator;
+import dataContainer.Coordinate;
+import dataContainer.GridState;
 
 /**
  * the map is stored as GridState[x][y]
@@ -58,7 +64,20 @@ public class Map {
 		}
 	}
 	
+	public Map(int width, int height){
+		this.map = new GridState[width][height];
+		for (int i = 0; i < map.length; i++) {
+			for (int j = 0; j < map[i].length; j++) {
+				map[i][j] = GridState.Empty;
+			}
+		}
+	}
 	
+	public Map(GridState[][] map) {
+		this.map = map;
+		this.mapHeight = map[0].length;
+		this.mapWidth = map.length;
+	}
 	/**
 	 * Get the map
 	 * @return a CLONE of the map
@@ -180,9 +199,35 @@ public class Map {
 
 		return intersections;
 	}
-	public static Map generate(double complexity) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public static Map maze(int width, int height){
+		MazeGenerator gen = new MazeGenerator(width,height);
+		gen.prim();
+	
+		GridState[][] g = new GridState[width][height];
+		
+		for (int i = 0; i < gen.getMaze().length; i++) {
+			for (int j = 0; j < gen.getMaze()[i].length; j++) {
+				g[i][j] = gen.getMaze()[i][j] == 1 ? GridState.Wall : GridState.Empty;
+			}
+		}		
+		
+		return new Map(g);
+	}
+		
+
+	public String toString(){
+		String s = "";
+		for (int i = 0; i < map.length; i++) {
+			for (int j = 0; j < map[i].length; j++) {
+				if(map[i][j].moveable())
+					s += " ";
+				else
+					s += "x";
+			}
+			s += "\n";
+		}
+		return s;
 	}
 	
 }

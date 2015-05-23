@@ -49,6 +49,7 @@ public class Agent extends Sprite {
 	public static final double MAX_ANG_VEL = 1;
 	private BeliefMap beliefMap;
 	protected Vision lastSeen;
+	
 	// Set the Target Coordinate
 	protected Coordinate target = new Coordinate(18,18,0);
 	
