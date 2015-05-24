@@ -24,6 +24,7 @@ import java.util.List;
  */
 abstract public class AStar<E,T> {
 
+	private int maxDepth = 300;
 
     /**
      * Constructor
@@ -56,9 +57,14 @@ abstract public class AStar<E,T> {
 
         // loop through the fringe
         while (!open.isEmpty()){
+        	
 
             // get the value with the lowest cost prospection
             Node current = Collections.min(open, new NodeComparator());
+            
+            if(current.g< maxDepth){
+        		return getResult(current);
+        	}
 
             if (debug) System.out.println("Current: " + current.element);
             // remove the current element from the fringe
