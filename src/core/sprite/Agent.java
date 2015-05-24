@@ -101,6 +101,10 @@ public class Agent extends Sprite {
 			System.err.println("The beliefmap is null or its not an instance of the beliefmap");
 		lastSeen = vision;
 	}
+	
+	public Vision getLastSeen(){
+		return lastSeen;
+	}
 
 	/**
 	 * Get the action that the agent currently wants to perform. This will consist of only a single

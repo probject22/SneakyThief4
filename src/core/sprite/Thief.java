@@ -61,4 +61,12 @@ public class Thief extends Agent {
 		//else return false
 		return false;
 	}
+	
+	public boolean atGoal(){
+		if(Theif f: allThieves)
+			(if next to goal)
+			return true
+		
+		return false;
+	}
 }
