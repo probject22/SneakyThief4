@@ -1,7 +1,7 @@
 /**
  * 
  */
-package core.Algorithms.BeliefMap;
+package core;
 
 import java.util.HashMap;
 import java.util.Set;

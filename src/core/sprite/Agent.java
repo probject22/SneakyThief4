@@ -4,7 +4,7 @@
 package core.sprite;
 
 import core.Algorithms.AStar.MapAStar;
-import core.Algorithms.BeliefMap.BeliefMap;
+import core.BeliefMap;
 import core.Algorithms.PathFinder;
 import core.DebugConstants;
 import core.Map;
