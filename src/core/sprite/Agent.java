@@ -24,11 +24,11 @@ import java.util.Collection;
 import java.util.List;
 
 import core.Algorithms.Coverage.Stico.*;
-<<<<<<< Updated upstream
+//<<<<<<< Updated upstream
 import core.Algorithms.reverseRTAStar.MapReverseRTAStar;
-=======
+//=======
 import core.Algorithms.RTAStar.MapRTAStar;
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes
 /**
  *
  * The integral intelligent class.
@@ -115,8 +115,8 @@ public class Agent extends Sprite {
 	 * 
 	 */
 	public Action getAction(){
-<<<<<<< Updated upstream
-		Action action = staco.getMoveAction(lastSeen);
+//<<<<<<< Updated upstream
+		//Action action = staco.getMoveAction(lastSeen);
 		
 		// Check if there is a intruder in View (This should be done using belief map instead)!!
 		//If yes Use BES to get Action
@@ -124,10 +124,10 @@ public class Agent extends Sprite {
 		//	if (s instanceof Thief)
 		//		action = BlockingES(s.getCoordinates());
 		
-=======
+//=======
 		//Action action = staco.getMoveAction(lastSeen);
 		Action action = aStar(new Coordinate(10,10,0));
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes
 		return action;
 	}
 	
