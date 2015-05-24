@@ -4,13 +4,10 @@
 package core.sprite;
 
 import core.Algorithms.AStar.MapAStar;
-import core.Algorithms.BES.BES;
 import core.Algorithms.BeliefMap.BeliefMap;
 import core.Algorithms.PathFinder;
-import core.Algorithms.ThiefPath;
 import core.DebugConstants;
 import core.Map;
-import core.Simulator;
 import core.actions.Action;
 import core.actions.Move;
 import core.actions.Turn;
@@ -20,15 +17,7 @@ import dataContainer.Coordinate;
 import gui.BeliefMapGui;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
-import core.Algorithms.Coverage.Stico.*;
-//<<<<<<< Updated upstream
-import core.Algorithms.reverseRTAStar.MapReverseRTAStar;
-//=======
-import core.Algorithms.RTAStar.MapRTAStar;
-//>>>>>>> Stashed changes
 /**
  *
  * The integral intelligent class.
@@ -51,15 +40,15 @@ public class Agent extends Sprite {
 
 	public static final double MAX_SPEED = 1.4;
 	public static final double MAX_ANG_VEL = 1;
-	private BeliefMap beliefMap;
+	protected Map beliefMap;
 	protected Vision lastSeen;
 	
 	// Set the Target Coordinate
 	protected Coordinate target = new Coordinate(18,18,0);
 	
-	protected Stico staco;
+	
 	private PathFinder<Coordinate> pathFinder;
-	private ThiefPath<Coordinate> thiefPath;
+	
 	
 	private ArrayList<Event> events = new ArrayList<Event>();
 	
@@ -68,7 +57,7 @@ public class Agent extends Sprite {
 
 
 	public void setBeliefMap(Map map){
-		this.beliefMap =  (BeliefMap) map;
+		this.beliefMap =  map;
 	}
 
     public Agent(Coordinate coords) {
@@ -77,11 +66,14 @@ public class Agent extends Sprite {
         beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 	    // Create an A* pathfinder
 	    pathFinder = new MapAStar(beliefMap);
-	    // Create an Escape map for Thief
-	    thiefPath = new MapReverseRTAStar(beliefMap);
-	    staco = new Stico(this);
+	    
+	    
     }
 
+    /***********************************************************************************\
+    *	All function that have something to do with the events that get returned 		*
+    *	e.g. Vision, sound																*
+    \***********************************************************************************/
 	/**
 	 * Method that processes events to update the belief state of the agent. The simulator will
 	 * hand events to the agents using this method.
@@ -98,12 +90,12 @@ public class Agent extends Sprite {
 	}
 	private void processVision(Vision vision){
 		if (debug) System.out.println("A vision event occured");
-		if (beliefMap != null){
-			beliefMap.processVision(vision);
+		if (beliefMap != null && beliefMap instanceof BeliefMap){
+			((BeliefMap)beliefMap).processVision(vision);
 			beliefMapGUi.updateGui();
 		}
 		else
-			System.err.println("The beliefmap is null");
+			System.err.println("The beliefmap is null or its not an instance of the beliefmap");
 		lastSeen = vision;
 	}
 
@@ -115,22 +107,13 @@ public class Agent extends Sprite {
 	 * 
 	 */
 	public Action getAction(){
-//<<<<<<< Updated upstream
-		//Action action = staco.getMoveAction(lastSeen);
-		
-		// Check if there is a intruder in View (This should be done using belief map instead)!!
-		//If yes Use BES to get Action
-		//for (Sprite s : lastSeen.getSpriteInVisionMap().values())
-		//	if (s instanceof Thief)
-		//		action = BlockingES(s.getCoordinates());
-		
-//=======
-		//Action action = staco.getMoveAction(lastSeen);
 		Action action = aStar(new Coordinate(10,10,0));
-//>>>>>>> Stashed changes
 		return action;
 	}
 	
+    /***********************************************************************************\
+    *	All functions with create basic actions											*
+    \***********************************************************************************/
 	protected Action aStar(Coordinate goal){
 		Action action = new Action();
 		Coordinate next = pathFinder.getShortestPath(getCoordinates(), goal);
@@ -142,30 +125,8 @@ public class Agent extends Sprite {
 		return action;
 	}
 	
-	protected Action reverseAStar(List<Coordinate> followers){
-		Action action = new Action();
-		Coordinate next = thiefPath.getBestEscape(getCoordinates(),followers, target);
-		double angle = getCoordinates().angle;
-		double goalAngle = getCoordinates().getAngle(next);
-		action.addActionElement(new Turn(angle, goalAngle, Agent.MAX_SPEED));
-		action.addActionElement(new Move(Agent.MAX_SPEED));
-		
-		return action;
-	}
-	
-	/**
-	 * Returns an Blocking Action 
-	 * according to the Blocking Coordinate
-	 * found using BES
-	 * @author Sina (21/05/2015)
-	 */
-	protected Action BlockingES(Coordinate intruder){
-		Collection<Coordinate> otherAgents = lastSeen.getSpriteInVisionMap().keySet();
-		Coordinate next = BES.getBlockingLocation(this.getCoordinates(),otherAgents,intruder);
-		
-		//Use A* or RTA* to get to the Blocking Coordinate.
-		return aStar(next);
-	}
+
+
 
 	/**
 	 * increments the time of the agent.
@@ -217,7 +178,7 @@ public class Agent extends Sprite {
 	
 	private double timeKey;
 
-	private void setPathFinder (PathFinder<Coordinate> pathFinder) {
+	public void setPathFinder (PathFinder<Coordinate> pathFinder) {
 		this.pathFinder = pathFinder;
 	}
 }

@@ -3,7 +3,11 @@ package core.sprite;
 import java.util.ArrayList;
 import java.util.List;
 
+import core.Algorithms.ThiefPath;
+import core.Algorithms.reverseRTAStar.MapReverseRTAStar;
 import core.actions.Action;
+import core.actions.Move;
+import core.actions.Turn;
 import dataContainer.Coordinate;
 
 /**
@@ -11,14 +15,15 @@ import dataContainer.Coordinate;
  */
 public class Thief extends Agent {
 
-	
+	private ThiefPath<Coordinate> thiefPath;
 	
 	/**
 	 * @param coords
 	 */
 	public Thief(Coordinate coords) {
 		super(coords);
-		// TODO Auto-generated constructor stub
+		// Create an Escape map for Thief
+	    thiefPath = new MapReverseRTAStar(beliefMap);
 	}
 	
 	public Action getAction(){
@@ -33,6 +38,17 @@ public class Thief extends Agent {
 				action = reverseAStar(agentsInView);
 		return action;
 		
+	}
+	
+	protected Action reverseAStar(List<Coordinate> followers){
+		Action action = new Action();
+		Coordinate next = thiefPath.getBestEscape(getCoordinates(),followers, target);
+		double angle = getCoordinates().angle;
+		double goalAngle = getCoordinates().getAngle(next);
+		action.addActionElement(new Turn(angle, goalAngle, Agent.MAX_SPEED));
+		action.addActionElement(new Move(Agent.MAX_SPEED));
+		
+		return action;
 	}
 	
 	public boolean canSprint(){
