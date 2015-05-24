@@ -71,9 +71,10 @@ public class Simulator {
 		mainFrame.updateGui();
 		while (!stop){
 			while (pause && !stop){
-				sleep(0.00001);
+				sleep(0.1);
 			}
 			firstAgentAction();
+			//TODO: WIN/LOSE CONDITIONS****************************
 			/* finish the move by updateting the gui */
 			mainFrame.updateGui();
 			sleep(speed);
