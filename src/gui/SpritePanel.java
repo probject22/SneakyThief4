@@ -15,8 +15,10 @@ import com.sun.javafx.css.Style;
 
 import core.Map;
 import core.sprite.Agent;
+import core.sprite.Guard;
 import core.sprite.Sprite;
 import core.sprite.SpriteManager;
+import core.sprite.Thief;
 import dataContainer.Coordinate;
 import dataContainer.MoveDirection;
 
@@ -110,7 +112,14 @@ public class SpritePanel extends JPanel{
 			g2d.drawImage(img,x , y, this);
 			
 			g2d.setStroke(new BasicStroke(3));
-			g2d.setColor(Color.RED);
+			
+			if (sprite instanceof Thief)
+				g2d.setColor(Color.RED);
+			else if(sprite instanceof Guard)
+				g2d.setColor(Color.GREEN);
+			else
+				g2d.setColor(Color.BLACK);
+			
 			int distence = (int) (20*((Agent)sprite).getMaxVisionRange());
 			double angle1 = (coords.angle -((Agent)sprite).getVisionAngleRad()/2);
 			angle1 %= 2*Math.PI;
