@@ -107,8 +107,7 @@ public class Agent extends Sprite {
 	 * 
 	 */
 	public Action getAction(){
-		Action action = aStar(new Coordinate(10,10,0));
-		return action;
+		return null;
 	}
 	
     /***********************************************************************************\

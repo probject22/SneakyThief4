@@ -56,13 +56,12 @@ abstract public class AStar<E,T> {
 
 
         // loop through the fringe
-        while (!open.isEmpty()){
-        	
+        while (!open.isEmpty()){	
 
             // get the value with the lowest cost prospection
             Node current = Collections.min(open, new NodeComparator());
             
-            if(current.g< maxDepth){
+            if(closed.size() > maxDepth){
         		return getResult(current);
         	}
 

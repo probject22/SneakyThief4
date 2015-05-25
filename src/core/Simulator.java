@@ -51,16 +51,12 @@ public class Simulator {
 		map = new Map("empty.map");
 		
 		spriteManager = SpriteManager.instance();
-//<<<<<<< Updated upstream
+
 		spriteManager.addAgent(new Guard(new Coordinate(3,13,0)));
 		spriteManager.addAgent(new Guard(new Coordinate(16,3,0)));
 		spriteManager.addAgent(new Guard(new Coordinate(15,15,0)));
 		spriteManager.addAgent(new Thief(new Coordinate(2,2,0)));
-//=======
-		//spriteManager.addAgent(new Agent(new Coordinate(3,3,0)));
-		//spriteManager.addAgent(new Agent(new Coordinate(6,3,0)));
-//		spriteManager.addAgent(new Agent(new Coordinate(20,20,0)));
-//>>>>>>> Stashed changes
+
 		eventManager = new EventManager(map);
 		
 		/*to get the agent list call spriteManager.getAgentList(); */
