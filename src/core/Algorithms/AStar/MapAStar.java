@@ -75,7 +75,7 @@ public class MapAStar extends AStar<Coordinate, Coordinate> implements PathFinde
         return from.element.distance(to.element);
     }
 
-    private final Map map; //map of the world
+    private Map map; //map of the world
 
     /**
      * Constructor

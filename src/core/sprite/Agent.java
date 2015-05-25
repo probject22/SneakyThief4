@@ -61,6 +61,7 @@ public class Agent extends Sprite {
 		beliefMapGUi.close();
 		beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 		beliefMapGUi.updateGui();
+		pathFinder = new MapAStar(beliefMap);
 	}
 
     public Agent(Coordinate coords) {
@@ -97,8 +98,6 @@ public class Agent extends Sprite {
 			((BeliefMap)beliefMap).processVision(vision);
 			beliefMapGUi.updateGui();
 		}
-		else
-			System.err.println("The beliefmap is null or its not an instance of the beliefmap");
 		lastSeen = vision;
 	}
 	
