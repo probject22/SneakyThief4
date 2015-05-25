@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractExperiment {
-	protected List<String> names;
-	protected List<double[]> values;
+	protected static List<String> names;
+	protected static List<double[]> values;
 	
 	public AbstractExperiment(){
 		names = new ArrayList<>();
 		values = new ArrayList<>();
 	}
 	
-	public void writeCsv(String path){
+	public static void writeCsv(String path){
 		
 		try{
 			File file = new File(path);
