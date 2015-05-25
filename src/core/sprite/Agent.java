@@ -58,6 +58,8 @@ public class Agent extends Sprite {
 
 	public void setBeliefMap(Map map){
 		this.beliefMap =  map;
+		beliefMapGUi.updateGui();
+		beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 	}
 
     public Agent(Coordinate coords) {
