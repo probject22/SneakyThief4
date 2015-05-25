@@ -9,6 +9,7 @@ import core.actions.Action;
 import core.actions.Move;
 import core.actions.Turn;
 import dataContainer.Coordinate;
+import dataContainer.GridState;
 
 /**
  * Created by Stan on 08/04/15.
@@ -63,10 +64,43 @@ public class Thief extends Agent {
 	}
 	
 	public boolean atGoal(){
-		if(Theif f: allThieves)
-			(if next to goal)
-			return true
+		/*Coordinate currentCoord = this.getCoordinates();
+		Coordinate adjacentCoord = currentCoord.leftTop();
+		GridState adjacentState = adjacentCoord.getGridState();
+		(if grd.Target){return true;}
+		Coordinate adjacentCoord = currentCoord.top();
+		GridState adjacentState = adjacentCoord.getGridState();
+		(if grd.Target){return true;}
+		Coordinate adjacentCoord = currentCoord.rightTop();
+		GridState adjacentState = adjacentCoord.getGridState();
+		(if grd.Target){return true;}
+		Coordinate adjacentCoord = currentCoord.left();
+		GridState adjacentState = adjacentCoord.getGridState();
+		(if grd.Target){return true;}
+		Coordinate adjacentCoord = currentCoord.right();
+		GridState adjacentState = adjacentCoord.getGridState();
+		(if grd.Target){return true;}
+		Coordinate adjacentCoord = currentCoord.leftBottom();
+		GridState adjacentState = adjacentCoord.getGridState();
+		(if grd.Target){return true;}
+		Coordinate adjacentCoord = currentCoord.bottom();
+		GridState adjacentState = adjacentCoord.getGridState();
+		(if grd.Target){return true;}
+		Coordinate adjacentCoord = currentCoord.rightBottom();
+		GridState adjacentState = adjacentCoord.getGridState();
+		(if grd.Target){return true;}*/
+		
+		
 		
 		return false;
+	}
+	
+	public boolean isCaught(){
+		for (Sprite s : lastSeen.getSpriteInVisionMap().values())
+			if (s instanceof Thief)
+				return true;
+		
+		return false;				
+		
 	}
 }
