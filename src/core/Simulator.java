@@ -47,8 +47,8 @@ public class Simulator {
 	public Simulator(){
 		if (debug) System.err.println("The simulator has been started");
 		
-		//map = new Map();
-		map = new Map("empty.map");
+		map = new Map();
+		//map = new Map("empty.map");
 		
 		spriteManager = SpriteManager.instance();
 
