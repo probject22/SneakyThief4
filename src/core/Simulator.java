@@ -72,12 +72,21 @@ public class Simulator {
 	
 	private void gameLoop(){
 		mainFrame.updateGui();
+		//0 = running, 1 = thieves win, 2 = thieves loss
+		int winLossValue = 0;
 		while (!stop){
 			while (pause && !stop){
 				sleep(0.1);
 			}
 			firstAgentAction();
-			//TODO: WIN/LOSE CONDITIONS****************************
+			if(winLossValue == 1){
+				//Present win 
+				stop = !stop;
+			}
+			if(winLossValue == 2){
+				//Present loss
+				stop = !stop;
+			}
 			/* finish the move by updateting the gui */
 			mainFrame.updateGui();
 			sleep(speed);
