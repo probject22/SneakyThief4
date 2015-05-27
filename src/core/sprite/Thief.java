@@ -1,13 +1,16 @@
 package core.sprite;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import core.Map;
 import core.Algorithms.ThiefPath;
 import core.Algorithms.reverseRTAStar.MapReverseRTAStar;
 import core.actions.Action;
 import core.actions.Move;
 import core.actions.Turn;
+import core.events.Vision;
 import dataContainer.Coordinate;
 import dataContainer.GridState;
 
@@ -64,43 +67,36 @@ public class Thief extends Agent {
 	}
 	
 	public boolean atGoal(){
-		/*Coordinate currentCoord = this.getCoordinates();
-		Coordinate adjacentCoord = currentCoord.leftTop();
-		GridState adjacentState = adjacentCoord.getGridState();
-		(if grd.Target){return true;}
-		Coordinate adjacentCoord = currentCoord.top();
-		GridState adjacentState = adjacentCoord.getGridState();
-		(if grd.Target){return true;}
-		Coordinate adjacentCoord = currentCoord.rightTop();
-		GridState adjacentState = adjacentCoord.getGridState();
-		(if grd.Target){return true;}
-		Coordinate adjacentCoord = currentCoord.left();
-		GridState adjacentState = adjacentCoord.getGridState();
-		(if grd.Target){return true;}
-		Coordinate adjacentCoord = currentCoord.right();
-		GridState adjacentState = adjacentCoord.getGridState();
-		(if grd.Target){return true;}
-		Coordinate adjacentCoord = currentCoord.leftBottom();
-		GridState adjacentState = adjacentCoord.getGridState();
-		(if grd.Target){return true;}
-		Coordinate adjacentCoord = currentCoord.bottom();
-		GridState adjacentState = adjacentCoord.getGridState();
-		(if grd.Target){return true;}
-		Coordinate adjacentCoord = currentCoord.rightBottom();
-		GridState adjacentState = adjacentCoord.getGridState();
-		(if grd.Target){return true;}*/
-		
-		
+		Coordinate currentCoord = this.getCoordinates();
+		GridState[][] thisMap = beliefMap.getCopyOfMap();
+		if(thisMap[currentCoord.x][currentCoord.y]== GridState.Target)
+			{return true;}
 		
 		return false;
 	}
 	
 	public boolean isCaught(){
-		for (Sprite s : lastSeen.getSpriteInVisionMap().values())
-			if (s instanceof Thief)
-				return true;
-		
-		return false;				
+		SpriteManager spriteManager = SpriteManager.instance();
+		List<Agent> agentList = spriteManager.getAgentList();
+		Coordinate myCoords = this.getCoordinates();
+		for(int i = 0; i<agentList.size();i++){
+			Agent thisAgent = agentList.get(i);
+			Coordinate agentCoords = thisAgent.getCoordinates();
+			double distance = myCoords.distanceBetweenCoordinates(myCoords, agentCoords);
+			if(distance<2&&distance!=0){
+				Vision vision = thisAgent.getLastSeen();
+				HashMap<Coordinate, Sprite> agentsInVision = vision.getSpriteInVisionMap();
+				for(int j = 0;j<agentsInVision.size();j++){
+					if(this == agentsInVision.get(j)){
+						return true;
+					}
+					else return false;
+				}
+				
+			}
+
+		}
+		return false;
 		
 	}
 }
