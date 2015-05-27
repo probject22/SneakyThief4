@@ -61,9 +61,9 @@ abstract public class AStar<E,T> {
             // get the value with the lowest cost prospection
             Node current = Collections.min(open, new NodeComparator());
             
-            if(closed.size() > maxDepth){
-        		return getResult(current);
-        	}
+            //if(closed.size() > maxDepth){
+        	//	return getResult(current);
+        	//}
 
             if (debug) System.out.println("Current: " + current.element);
             // remove the current element from the fringe
