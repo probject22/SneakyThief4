@@ -30,7 +30,7 @@ public class Guard extends Agent {
 		Action action = basicExploration(); 
 			if (action == null)
 				stico.getMoveAction(lastSeen);
-		
+		//Action action = aStar(new Coordinate(3,16,0));
 		// Check if there is a intruder in View (This should be done using belief map instead)!!
 		//If yes Use BES to get Action
 		for (Sprite s : lastSeen.getSpriteInVisionMap().values())

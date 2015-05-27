@@ -55,7 +55,6 @@ public class TestaSTAR implements PathFinder<Coordinate> {
 			Node best =  Collections.min(openNodes, new NodeComparator());
 			openNodes.remove(best);
 			closedNodes.add(best);
-			System.err.println("best x " + best.x + " y " + best.y);
 			if (best.x == goal.x && best.y == goal.y)
 				return backtrackPath(best);
 			
@@ -173,6 +172,7 @@ public class TestaSTAR implements PathFinder<Coordinate> {
 		for (Node tempNode: options){
 			if (tempNode.x < grid.length && tempNode.x >= 0 && tempNode.y < grid[0].length && tempNode.y >= 0){
 				if (grid[tempNode.x][tempNode.y].moveable()){
+					//TODO check if there is no sprite on the tile
 					out.add(tempNode);
 				}
 			}
