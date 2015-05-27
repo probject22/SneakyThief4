@@ -1,14 +1,19 @@
 package core;
 
-import core.actions.*;
+import gui.MainFrame;
+import core.actions.Action;
+import core.actions.ActionElement;
+import core.actions.Move;
+import core.actions.Turn;
+import core.actions.Wait;
 import core.events.EventManager;
 import core.sprite.Agent;
+import core.sprite.Guard;
 import core.sprite.SpriteManager;
+import core.sprite.Thief;
 import dataContainer.Coordinate;
 import dataContainer.GridState;
 import dataContainer.MoveDirection;
-import gui.BeliefMapGui;
-import gui.MainFrame;
 
 /**
  *
@@ -42,14 +47,19 @@ public class Simulator {
 	public Simulator(){
 		if (debug) System.err.println("The simulator has been started");
 		
-		//map = new Map();
-		map = new Map("empty.map");
+		map = new Map();
+		//map = new Map("empty.map");
 		
 		spriteManager = SpriteManager.instance();
-		spriteManager.addAgent(new Agent(new Coordinate(3,3,0)));
-		spriteManager.addAgent(new Agent(new Coordinate(6,3,0)));
-		spriteManager.addAgent(new Agent(new Coordinate(20,20,0)));
+
+		spriteManager.addAgent(new Guard(new Coordinate(3,13,0)));
+		spriteManager.addAgent(new Guard(new Coordinate(16,3,0)));
+		spriteManager.addAgent(new Guard(new Coordinate(15,15,0)));
+
+		spriteManager.addAgent(new Thief(new Coordinate(2,2,0)));
+
 		eventManager = new EventManager(map);
+		
 		/*to get the agent list call spriteManager.getAgentList(); */
 		
 		/* gui stuff */
@@ -67,6 +77,7 @@ public class Simulator {
 				sleep(0.1);
 			}
 			firstAgentAction();
+			//TODO: WIN/LOSE CONDITIONS****************************
 			/* finish the move by updateting the gui */
 			mainFrame.updateGui();
 			sleep(speed);

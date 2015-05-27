@@ -26,4 +26,8 @@ public class BeliefMapGui extends JFrame {
 		//spritePanel.repaint();
 	}
 
+	public void close(){
+		setVisible(false); //you can't see me!
+		dispose(); //Destroy the JFrame object
+	}
 }

@@ -4,11 +4,12 @@
 package core.sprite;
 
 import core.Algorithms.AStar.MapAStar;
-import core.Algorithms.BeliefMap.BeliefMap;
+import core.Algorithms.BasicExploration.BasicExploration;
+import core.BeliefMap;
+import core.Algorithms.Exploration;
 import core.Algorithms.PathFinder;
 import core.DebugConstants;
 import core.Map;
-import core.Simulator;
 import core.actions.Action;
 import core.actions.Move;
 import core.actions.Turn;
@@ -18,9 +19,7 @@ import dataContainer.Coordinate;
 import gui.BeliefMapGui;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import core.Algorithms.Coverage.Stico.*;
 /**
  *
  * The integral intelligent class.
@@ -41,13 +40,19 @@ import core.Algorithms.Coverage.Stico.*;
  */
 public class Agent extends Sprite {
 
-	public static final double MAX_SPEED = 2.4;
+	public static final double MAX_SPEED = 1.4;
 	public static final double MAX_ANG_VEL = 1;
-	private BeliefMap beliefMap;
-	private Vision lastSeen;
+	protected Map beliefMap;
+	protected Vision lastSeen;
 	
-	private Stico staco;
+	private Exploration exploration;
+	
+	// Set the Target Coordinate
+	protected Coordinate target = new Coordinate(18,18,0);
+	
+	
 	private PathFinder<Coordinate> pathFinder;
+	
 	
 	private ArrayList<Event> events = new ArrayList<Event>();
 	
@@ -56,7 +61,12 @@ public class Agent extends Sprite {
 
 
 	public void setBeliefMap(Map map){
-		this.beliefMap =  (BeliefMap) map;
+		this.beliefMap =  map;
+		beliefMapGUi.close();
+		beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
+		beliefMapGUi.updateGui();
+		pathFinder = new MapAStar(beliefMap);
+		exploration.setBeliefMap(map);
 	}
 
     public Agent(Coordinate coords) {
@@ -65,9 +75,15 @@ public class Agent extends Sprite {
         beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 	    // Create an A* pathfinder
 	    pathFinder = new MapAStar(beliefMap);
-	    staco = new Stico(this);
+	    exploration = new BasicExploration(this,beliefMap);
+	    
+	    
     }
 
+    /***********************************************************************************\
+    *	All function that have something to do with the events that get returned 		*
+    *	e.g. Vision, sound																*
+    \***********************************************************************************/
 	/**
 	 * Method that processes events to update the belief state of the agent. The simulator will
 	 * hand events to the agents using this method.
@@ -84,25 +100,32 @@ public class Agent extends Sprite {
 	}
 	private void processVision(Vision vision){
 		if (debug) System.out.println("A vision event occured");
-		if (beliefMap != null){
-			beliefMap.processVision(vision);
+		if (beliefMap != null && beliefMap instanceof BeliefMap){
+			((BeliefMap)beliefMap).processVision(vision);
 			beliefMapGUi.updateGui();
 		}
-		else
-			System.err.println("The beliefmap is null");
 		lastSeen = vision;
+	}
+	
+	public Vision getLastSeen(){
+		return lastSeen;
 	}
 
 	/**
 	 * Get the action that the agent currently wants to perform. This will consist of only a single
 	 * square with a certain speed, and possibly a turn.
 	 * @return The action that the agents want to perform next
+	 * 
+	 * 
 	 */
 	public Action getAction(){
-		Action action = staco.getMoveAction(lastSeen);
-		return action;
+		return basicExploration();
+		//return null;
 	}
 	
+    /***********************************************************************************\
+    *	All functions with create basic actions											*
+    \***********************************************************************************/
 	protected Action aStar(Coordinate goal){
 		Action action = new Action();
 		Coordinate next = pathFinder.getShortestPath(getCoordinates(), goal);
@@ -113,6 +136,20 @@ public class Agent extends Sprite {
 		
 		return action;
 	}
+	
+	protected Action basicExploration(){
+		pathFinder = new MapAStar(beliefMap);
+		Action action = new Action();
+		Coordinate next = pathFinder.getShortestPath(getCoordinates(), exploration.getGoal());
+		double angle = getCoordinates().angle;
+		double goalAngle = getCoordinates().getAngle(next);
+		action.addActionElement(new Turn(angle, goalAngle, Agent.MAX_SPEED));
+		action.addActionElement(new Move(Agent.MAX_SPEED));
+		
+		return action;
+	}
+
+
 
 	/**
 	 * increments the time of the agent.
@@ -164,7 +201,7 @@ public class Agent extends Sprite {
 	
 	private double timeKey;
 
-	private void setPathFinder (PathFinder<Coordinate> pathFinder) {
+	public void setPathFinder (PathFinder<Coordinate> pathFinder) {
 		this.pathFinder = pathFinder;
 	}
 }

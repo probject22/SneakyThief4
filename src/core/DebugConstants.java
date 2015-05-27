@@ -9,5 +9,7 @@ public class DebugConstants {
 	static public boolean sticoDebug = false;
 	
 	static public boolean beliefMapDebug = false;
+	
+	static public boolean basicExplorationDebug = true;
 
 }

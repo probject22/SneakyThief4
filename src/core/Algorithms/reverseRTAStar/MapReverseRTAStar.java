@@ -1,46 +1,19 @@
-package core.Algorithms.AStar;
+package core.Algorithms.reverseRTAStar;
 
-import core.Algorithms.PathFinder;
-import core.Map;
-import dataContainer.Coordinate;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Math.*;
+import core.Map;
+import core.Algorithms.PathFinder;
+import core.Algorithms.ThiefPath;
+import dataContainer.Coordinate;
 
-
-/**
- * Created by Stan on 29/04/15.
- */
-public class MapAStar extends AStar<Coordinate, Coordinate> implements PathFinder<Coordinate>{
-
-    @Override
-    public Coordinate getResult (Node<Coordinate> node) {
-    	boolean debug = false;
-    	
-        if (debug) System.out.println("Result found");
-
-        List<Coordinate> moves = new ArrayList<>();
-
-        while(node != null){
-            moves.add(node.element);
-            node = node.parent;
-        }
-
-        return moves.get(moves.size()-2);
-    }
-    /**
-     * Counts the amount of tiles between two coordinates on the map (assuming no obstructions).
-     * Method will generally be used to evaluate adjacent coordinates.
-     * @param from
-     * @param to
-     * @return
-     */
-    @Override
-    // currently counts moves
-    // can be improved to not count moves, but time
-    public double getCost(Node<Coordinate> from, Node<Coordinate> to) {
+public class MapReverseRTAStar extends ReverseRTAStar<Coordinate, Coordinate> implements ThiefPath<Coordinate>{
+	
+	public double getCost(Node<Coordinate> from, Node<Coordinate> to) {
         int counter = 0;
         int x = min(from.element.x, to.element.x);
         int y = min(from.element.y, to.element.y);
@@ -75,13 +48,13 @@ public class MapAStar extends AStar<Coordinate, Coordinate> implements PathFinde
         return from.element.distance(to.element);
     }
 
-    private Map map; //map of the world
+    private final Map map; //map of the world
 
     /**
      * Constructor
      * @param map
      */
-    public MapAStar(Map map){
+    public MapReverseRTAStar(Map map){
         this.map = map;
     }
 
