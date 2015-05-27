@@ -5,6 +5,8 @@ package core.sprite;
 
 import core.Algorithms.AStar.MapAStar;
 import core.Algorithms.BasicExploration.BasicExploration;
+import core.Algorithms.RTAStar.MapRTAStar;
+import core.Algorithms.RTAStar.RTAStar;
 import core.BeliefMap;
 import core.Algorithms.Exploration;
 import core.Algorithms.PathFinder;
@@ -52,7 +54,7 @@ public class Agent extends Sprite {
 	
 	
 	private PathFinder<Coordinate> pathFinder;
-	
+	private PathFinder<Coordinate> rtPathFinder;
 	
 	private ArrayList<Event> events = new ArrayList<Event>();
 	
@@ -66,6 +68,7 @@ public class Agent extends Sprite {
 		beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 		beliefMapGUi.updateGui();
 		pathFinder = new MapAStar(beliefMap);
+		rtPathFinder =  new MapRTAStar(beliefMap);
 		exploration.setBeliefMap(map);
 	}
 
@@ -76,6 +79,7 @@ public class Agent extends Sprite {
 	    // Create an A* pathfinder
 	    pathFinder = new MapAStar(beliefMap);
 	    exploration = new BasicExploration(this,beliefMap);
+	    rtPathFinder =  new MapRTAStar(beliefMap);
 	    
 	    
     }
@@ -119,7 +123,7 @@ public class Agent extends Sprite {
 	 * 
 	 */
 	public Action getAction(){
-		return basicExploration();
+		return null;
 		//return null;
 	}
 	
@@ -138,9 +142,11 @@ public class Agent extends Sprite {
 	}
 	
 	protected Action basicExploration(){
-		pathFinder = new MapAStar(beliefMap);
 		Action action = new Action();
-		Coordinate next = pathFinder.getShortestPath(getCoordinates(), exploration.getGoal());
+		Coordinate goal = exploration.getGoal();
+		if (goal == null)
+			return null;
+		Coordinate next = rtPathFinder.getShortestPath(getCoordinates(), goal);
 		double angle = getCoordinates().angle;
 		double goalAngle = getCoordinates().getAngle(next);
 		action.addActionElement(new Turn(angle, goalAngle, Agent.MAX_SPEED));

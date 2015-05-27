@@ -26,7 +26,10 @@ public class Guard extends Agent {
 	}
 	
 	public Action getAction(){
-		Action action = stico.getMoveAction(lastSeen);
+		
+		Action action = basicExploration(); 
+			if (action == null)
+				stico.getMoveAction(lastSeen);
 		
 		// Check if there is a intruder in View (This should be done using belief map instead)!!
 		//If yes Use BES to get Action
