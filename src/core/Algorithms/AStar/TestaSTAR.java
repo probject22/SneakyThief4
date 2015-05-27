@@ -3,6 +3,8 @@
  */
 package core.Algorithms.AStar;
 
+import static java.lang.Math.sqrt;
+
 import java.util.ArrayList;
 
 import core.Map;
@@ -74,16 +76,36 @@ public class TestaSTAR implements PathFinder<Coordinate> {
 		
 	}
 	
+	/**
+	 * Tells you how deep you are inside the tree
+	 */
 	private void setDepth(Node node){
 		node.depth = node.parent.depth +1;
 	}
+	
+	/**
+	 * The cost you have to pay to get to this node
+	 * @param node
+	 */
 	private void setCost(Node node){
 		//TODO calculate the actual cost
 		node.g = node.parent.g + 1;
 	}
+	/**
+	 * heuristic the expected cost to go from this node to the goal
+	 * @param node
+	 */
 	private void setHeuristic(Node node){
-		//calculate the heuristic of the node and set it
+		double dx = node.x - goal.x;
+		double dy = node.y - goal.y;
+		
+		node.h =  sqrt(dx * dx + dy * dy);
 	}
+	
+	/**
+	 * the total estimation of the cost to get from start to goal
+	 * @param node
+	 */
 	private void setEstemator(Node node){
 		node.f = node.g+node.h;
 	}
