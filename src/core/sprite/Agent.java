@@ -146,7 +146,7 @@ public class Agent extends Sprite {
 		Coordinate goal = exploration.getGoal();
 		if (goal == null)
 			return null;
-		Coordinate next = pathFinder.getShortestPath(getCoordinates(), goal);
+		Coordinate next = rtPathFinder.getShortestPath(getCoordinates(), goal);
 		double angle = getCoordinates().angle;
 		double goalAngle = getCoordinates().getAngle(next);
 		action.addActionElement(new Turn(angle, goalAngle, Agent.MAX_SPEED));
