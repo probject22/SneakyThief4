@@ -39,40 +39,60 @@ public class TestaSTAR implements PathFinder<Coordinate> {
 		//if the openlist.size() == 0 stop
 		//remove it from the open list and add it to the closed list
 		closedNodes.add(best);
-		ArrayList<Node> neightbors = getNeightbors(best);
+		ArrayList<Node> neighbors = getNeighbors(best);
 		
 		boolean found = false;
-		for (Node neightbor: neightbors){
+		for (Node neighbor: neighbors){
 		//calculate the values of the neighbors
-		
+			
+			neighbor.parent = best;
+			setDepth(neighbor);
+			setCost(neighbor);
+			setHeuristic(neighbor);
+			setEstemator(neighbor);
+			
 			for (Node tempOpenNode: openNodes){
-				if (tempOpenNode.x == neightbor.x && tempOpenNode.y == neightbor.y){
-					updateNode(tempOpenNode,neightbor);
+				if (tempOpenNode.x == neighbor.x && tempOpenNode.y == neighbor.y){
+					updateNode(tempOpenNode,neighbor);
 					found = true;
 					break;
 				}
 			}
 			if (!found){
 				for (Node tempClosedNode: closedNodes){
-					if (tempClosedNode.x == neightbor.x && tempClosedNode.y == neightbor.y){
-						updateNode(tempClosedNode,neightbor);
+					if (tempClosedNode.x == neighbor.x && tempClosedNode.y == neighbor.y){
+						updateNode(tempClosedNode,neighbor);
 						found = true;
 						break;
 					}
 				}
 			}
 			if (!found){
-				openNodes.add(neightbor);
+				openNodes.add(neighbor);
 			}
 		}
 		
+	}
+	
+	private void setDepth(Node node){
+		node.depth = node.parent.depth +1;
+	}
+	private void setCost(Node node){
+		//TODO calculate the actual cost
+		node.g = node.parent.g + 1;
+	}
+	private void setHeuristic(Node node){
+		//calculate the heuristic of the node and set it
+	}
+	private void setEstemator(Node node){
+		node.f = node.g+node.h;
 	}
 	
 	
 	private void updateNode(Node orginal, Node newVals){
 		//TODO implement this
 	}
-	private ArrayList<Node> getNeightbors(Node node){
+	private ArrayList<Node> getNeighbors(Node node){
 		//TODO implement this
 		return null;
 	}
@@ -86,6 +106,8 @@ public class TestaSTAR implements PathFinder<Coordinate> {
 		public double g = 0;
 		public double h = 0;
 		public double f = 0;
+		
+		public int depth = 0;
 		public Node parent;
 		
 		public int x = 0;
