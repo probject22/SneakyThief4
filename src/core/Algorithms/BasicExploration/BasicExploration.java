@@ -82,8 +82,10 @@ public class BasicExploration implements Exploration {
 			}
 			else{
 				for (int i = 0; i < toVisit.size(); i++){
-					if(goal == toVisit.get(i))
+					if(goal == toVisit.get(i)){
 						toVisit.remove(i);
+						break;
+					}
 				}
 				goal = null;
 			}	
