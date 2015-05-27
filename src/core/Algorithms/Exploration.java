@@ -4,13 +4,15 @@
 package core.Algorithms;
 
 import core.BeliefMap;
+import core.Map;
 import core.actions.Action;
+import dataContainer.Coordinate;
 
 /**
  * @author ing. R.J.H.M. Stevens
  *
  */
 public interface Exploration {
-	void setBeliefMap(BeliefMap beliefMap);
-	Action getAction();
+	Coordinate getGoal();
+	void setBeliefMap(Map beliefMap);
 }
