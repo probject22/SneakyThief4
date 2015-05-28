@@ -33,7 +33,7 @@ public class ControlPanel extends JPanel {
 		JSpinner speedinput = new JSpinner();
 		this.add(pausebutton);
 		this.add(stopbutton);
-		this.add(speedinput);
+		//this.add(speedinput);
 	}
 }
 

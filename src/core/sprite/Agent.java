@@ -4,7 +4,10 @@
 package core.sprite;
 
 import core.Algorithms.AStar.MapAStar;
+import core.Algorithms.AStar.TestaSTAR;
 import core.Algorithms.BasicExploration.BasicExploration;
+import core.Algorithms.RTAStar.MapRTAStar;
+import core.Algorithms.RTAStar.RTAStar;
 import core.BeliefMap;
 import core.Algorithms.Exploration;
 import core.Algorithms.PathFinder;
@@ -53,7 +56,6 @@ public class Agent extends Sprite {
 	
 	private PathFinder<Coordinate> pathFinder;
 	
-	
 	private ArrayList<Event> events = new ArrayList<Event>();
 	
 	private boolean debug = DebugConstants.agentDebug;
@@ -65,7 +67,7 @@ public class Agent extends Sprite {
 		beliefMapGUi.close();
 		beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 		beliefMapGUi.updateGui();
-		pathFinder = new MapAStar(beliefMap);
+		pathFinder = new TestaSTAR(beliefMap);
 		exploration.setBeliefMap(map);
 	}
 
@@ -74,7 +76,7 @@ public class Agent extends Sprite {
         this.beliefMap =  new BeliefMap();
         beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 	    // Create an A* pathfinder
-	    pathFinder = new MapAStar(beliefMap);
+	    pathFinder = new TestaSTAR(beliefMap);
 	    exploration = new BasicExploration(this,beliefMap);
 	    
 	    
@@ -119,7 +121,7 @@ public class Agent extends Sprite {
 	 * 
 	 */
 	public Action getAction(){
-		return basicExploration();
+		return null;
 		//return null;
 	}
 	
@@ -129,6 +131,8 @@ public class Agent extends Sprite {
 	protected Action aStar(Coordinate goal){
 		Action action = new Action();
 		Coordinate next = pathFinder.getShortestPath(getCoordinates(), goal);
+		if (next == null)
+			return null;
 		double angle = getCoordinates().angle;
 		double goalAngle = getCoordinates().getAngle(next);
 		action.addActionElement(new Turn(angle, goalAngle, Agent.MAX_SPEED));
@@ -138,9 +142,12 @@ public class Agent extends Sprite {
 	}
 	
 	protected Action basicExploration(){
-		pathFinder = new MapAStar(beliefMap);
 		Action action = new Action();
-		Coordinate next = pathFinder.getShortestPath(getCoordinates(), exploration.getGoal());
+		Coordinate goal = exploration.getGoal();
+		if (goal == null)
+			return null;
+		System.err.println(goal);
+		Coordinate next = pathFinder.getShortestPath(getCoordinates(), goal);
 		double angle = getCoordinates().angle;
 		double goalAngle = getCoordinates().getAngle(next);
 		action.addActionElement(new Turn(angle, goalAngle, Agent.MAX_SPEED));

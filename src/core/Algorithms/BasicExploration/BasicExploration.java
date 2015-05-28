@@ -76,8 +76,8 @@ public class BasicExploration implements Exploration {
 				return null;
 			if (goal == null)
 				goal = toVisit.get(randomGenerator.nextInt(toVisit.size()));
-			if (grid[goal.x][goal.y].moveable()){
-				System.err.println(goal);
+			if (grid[goal.x][goal.y] == GridState.unknown){
+				//System.err.println(goal);
 				return goal;
 			}
 			else{
@@ -89,7 +89,7 @@ public class BasicExploration implements Exploration {
 				}
 				goal = null;
 			}	
-			System.err.println("while true");
+			//System.err.println("while true");
 		}
 	}
 
