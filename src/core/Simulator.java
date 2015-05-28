@@ -27,6 +27,9 @@ public class Simulator {
     private static boolean pause = true;
     private double speed = 0.5;
     
+    public void setSpeed(double newSpeed){
+    	speed = newSpeed;
+    }
     public static void setStop(boolean newvalue)
     {
     	stop = newvalue;
@@ -54,7 +57,7 @@ public class Simulator {
 		spriteManager = SpriteManager.instance();
 
 		//spriteManager.addAgent(new Guard(new Coordinate(3,13,0)));
-		//spriteManager.addAgent(new Guard(new Coordinate(16,3,0)));
+		spriteManager.addAgent(new Guard(new Coordinate(16,3,0)));
 		spriteManager.addAgent(new Guard(new Coordinate(15,15,0)));
 
 		//spriteManager.addAgent(new Thief(new Coordinate(2,2,0)));

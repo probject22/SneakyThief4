@@ -5,12 +5,15 @@ package core.Algorithms.AStar;
 
 import static java.lang.Math.sqrt;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 import core.Map;
 import core.Algorithms.PathFinder;
+import core.sprite.Agent;
+import core.sprite.SpriteManager;
 import dataContainer.Coordinate;
 import dataContainer.GridState;
 
@@ -173,10 +176,18 @@ public class TestaSTAR implements PathFinder<Coordinate> {
 			if (tempNode.x < grid.length && tempNode.x >= 0 && tempNode.y < grid[0].length && tempNode.y >= 0){
 				if (grid[tempNode.x][tempNode.y].moveable()){
 					//TODO check if there is no sprite on the tile
-					out.add(tempNode);
+					SpriteManager manager = SpriteManager.instance();
+					List<Agent> agents = manager.getAgentList();
+					for(Agent agent: agents){
+						Node checkedAgent = new Node(null, agent.getCoordinates().x, agent.getCoordinates().y);
+					if(checkedAgent.x != tempNode.x||checkedAgent.y!=tempNode.y)
+					out.add(tempNode);	
+					}
+					
 				}
 			}
 		}
+	
 		return out;
 	}
 	
