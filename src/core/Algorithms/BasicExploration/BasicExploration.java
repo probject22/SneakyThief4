@@ -20,13 +20,13 @@ import dataContainer.GridState;
  *
  */
 public class BasicExploration implements Exploration {
-	private boolean debug = DebugConstants.basicExplorationDebug;
-	private Map beliefMap;
-	private ArrayList<Coordinate> toVisit = new ArrayList<Coordinate>();
-	private Sprite sprite;
-	private Coordinate goal;
-	private Random randomGenerator = new Random();
-	private GridState[][] grid;
+	protected boolean debug = DebugConstants.basicExplorationDebug;
+	protected Map beliefMap;
+	protected ArrayList<Coordinate> toVisit = new ArrayList<Coordinate>();
+	protected Sprite sprite;
+	protected Coordinate goal;
+	protected Random randomGenerator = new Random();
+	protected GridState[][] grid;
 	/**
 	 * 
 	 */
