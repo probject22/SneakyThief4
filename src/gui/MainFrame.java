@@ -28,10 +28,10 @@ public class MainFrame extends JFrame {
 		new BorderLayout();
 		JPanel controlpanel = new ControlPanel();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(900,700);
+		this.setSize(1100,700);
 		this.setLocationRelativeTo(null);
 		//this.setExtendedState(Frame.MAXIMIZED_BOTH);
-		this.add(controlpanel, BorderLayout.SOUTH);
+		this.add(controlpanel, BorderLayout.EAST);
 		this.setName("MainFrame");
 		 lpane.setVisible(true);
 		 this.add(lpane, BorderLayout.CENTER);
