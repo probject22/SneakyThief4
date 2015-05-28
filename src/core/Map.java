@@ -86,7 +86,17 @@ public class Map {
 		return map == null ? null: map.clone();
 	}
 	
-	
+	public ArrayList<Coordinate> getGoal(){
+		ArrayList<Coordinate> goals = null;
+		for(int i =0;i<this.getMapHeight();i++){
+			for(int j =0;j<this.getMapWidth();j++){
+				if(this.map[i][j] == GridState.Target){
+					goals.add(new Coordinate(i,j,0));
+				}
+			}
+		}
+		return goals;
+	}
 	
 	/**
 	 * Initialise the class and load in the map file
