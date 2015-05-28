@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import core.Map;
 import core.Algorithms.ThiefPath;
 import core.Algorithms.reverseRTAStar.MapReverseRTAStar;
 import core.actions.Action;
@@ -71,16 +70,15 @@ public class Thief extends Agent {
 		GridState[][] thisMap = beliefMap.getCopyOfMap();
 		if(thisMap[currentCoord.x][currentCoord.y]== GridState.Target)
 			{return true;}
-		
 		return false;
 	}
 	
 	public boolean isCaught(){
 		SpriteManager spriteManager = SpriteManager.instance();
-		List<Agent> agentList = spriteManager.getAgentList();
+		ArrayList<Guard> guardList = spriteManager.getGuards();
 		Coordinate myCoords = this.getCoordinates();
-		for(int i = 0; i<agentList.size();i++){
-			Agent thisAgent = agentList.get(i);
+		for(int i = 0; i<guardList.size();i++){
+			Agent thisAgent = guardList.get(i);
 			Coordinate agentCoords = thisAgent.getCoordinates();
 			double distance = myCoords.distanceBetweenCoordinates(myCoords, agentCoords);
 			if(distance<2&&distance!=0){
