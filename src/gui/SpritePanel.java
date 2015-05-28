@@ -132,9 +132,9 @@ public class SpritePanel extends JPanel{
 			int y2 = y + yl-(int)((distence*Math.sin(coords.angle))+extra);
 			int x3 = x + (int)((distence*Math.cos(angle2))+extra);
 			int y3 = y + yl-(int)((distence*Math.sin(angle2))+extra);
-			g2d.drawLine(x+10, y+10, x1, y1);
-			g2d.drawLine(x+10, y+10, x2, y2);
-			g2d.drawLine(x+10, y+10, x3, y3);
+			g2d.drawLine(x+10, y+10, x1-15, y1+15);
+			g2d.drawLine(x+10, y+10, x2-15, y2+15);
+			g2d.drawLine(x+10, y+10, x3-15, y3+15);
 			//g2d.drawLine(x+10, y+10, 5000, 5000);
 		}
 	}

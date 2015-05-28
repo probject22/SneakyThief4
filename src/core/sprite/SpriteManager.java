@@ -65,10 +65,26 @@ public class SpriteManager {
 		return new ArrayList<>(agents);
 	}
 	
-
-	
-
-
+	public ArrayList<Thief> getThieves(){
+		ArrayList<Thief> allThieves = new ArrayList<Thief>();
+		while(!agents.isEmpty()){
+			Agent agent = (Agent) agents.remove();
+			if(agent instanceof Thief){
+				allThieves.add((Thief) agent);
+			}
+		}
+		return allThieves;
+	}
+	public ArrayList<Guard> getGuards(){
+		ArrayList<Guard> allGuards = new ArrayList<Guard>();
+		while(!agents.isEmpty()){
+			Agent agent = (Agent) agents.remove();
+			if(agent instanceof Guard){
+				allGuards.add((Guard) agent);
+			}
+		}
+		return allGuards;
+	}
 
 	/**
 	 * A queue with agents. The priority queue ensured that the queue of agents is always sorted
