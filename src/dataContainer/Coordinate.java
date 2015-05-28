@@ -34,7 +34,7 @@ public class Coordinate {
 		return new Coordinate(x, y, angle);
 	}
 	
-	static public double distanceBetweenCoordinates (Coordinate c1, Coordinate c2){
+	static public double distanceBetweenCoordinates(Coordinate c1, Coordinate c2){
 		double dx = c1.x - c2.x;
 		double dy = c1.y - c2.y;
 		

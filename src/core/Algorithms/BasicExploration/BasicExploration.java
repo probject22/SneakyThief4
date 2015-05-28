@@ -60,7 +60,7 @@ public class BasicExploration implements Exploration {
 	 * @see core.Algorithms.Exploration#getAction()
 	 */
 	@Override
-	public Coordinate getGoal() {
+	/*public Coordinate getGoal() {
 		Coordinate currentCoord = sprite.getCoordinates();
 		if (goal != null && currentCoord.equals(goal)){
 			goal = null;
@@ -76,6 +76,47 @@ public class BasicExploration implements Exploration {
 				return null;
 			if (goal == null)
 				goal = toVisit.get(randomGenerator.nextInt(toVisit.size()));
+			if (grid[goal.x][goal.y] == GridState.unknown){
+				//System.err.println(goal);
+				return goal;
+			}
+			else{
+				for (int i = 0; i < toVisit.size(); i++){
+					if(goal == toVisit.get(i)){
+						toVisit.remove(i);
+						break;
+					}
+				}
+				goal = null;
+			}	
+			//System.err.println("while true");
+		}
+	}*/
+	public Coordinate getGoal() {
+		Coordinate currentCoord = sprite.getCoordinates();
+		if (goal != null && currentCoord.equals(goal)){
+			goal = null;
+		}
+		for (int i = 0; i < toVisit.size(); i++){
+			Coordinate coord = toVisit.get(i);
+		//for (Coordinate coord: toVisit){
+			if (currentCoord.equals(coord))
+				toVisit.remove(i);
+		}
+		while (true){
+			if (toVisit.size() == 0)
+				return null;
+			if (goal == null){
+				//goal = toVisit.get(randomGenerator.nextInt(toVisit.size()));
+				double distance = Integer.MAX_VALUE;
+				for(Coordinate coord: toVisit){
+					double tempDistance = Coordinate.distanceBetweenCoordinates(currentCoord, coord);
+					if(tempDistance<distance){
+						distance = tempDistance;
+						goal = coord;
+					}
+				}
+				}
 			if (grid[goal.x][goal.y] == GridState.unknown){
 				//System.err.println(goal);
 				return goal;
