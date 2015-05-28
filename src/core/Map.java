@@ -90,9 +90,10 @@ public class Map {
 		ArrayList<Coordinate> goals = null;
 		for(int i =0;i<this.getMapHeight();i++){
 			for(int j =0;j<this.getMapWidth();j++){
-				if(this.map[i][j] == GridState.Target){
-					goals.add(new Coordinate(i,j,0));
-				}
+				if (i< this.map.length && i >= 0 && j < this.map[0].length && j >= 0)
+					if(this.map[i][j] == GridState.Target){
+						goals.add(new Coordinate(i,j,0));
+					}
 			}
 		}
 		return goals;
