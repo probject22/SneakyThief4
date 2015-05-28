@@ -149,6 +149,8 @@ public class Agent extends Sprite {
 			return null;
 		System.err.println(goal);
 		Coordinate next = pathFinder.getShortestPath(getCoordinates(), goal);
+		if (next == null)
+			return null;
 		double angle = getCoordinates().angle;
 		double goalAngle = getCoordinates().getAngle(next);
 		action.addActionElement(new Turn(angle, goalAngle, Agent.MAX_SPEED));
