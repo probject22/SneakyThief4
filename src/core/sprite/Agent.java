@@ -6,6 +6,7 @@ package core.sprite;
 import core.Algorithms.AStar.MapAStar;
 import core.Algorithms.AStar.TestaSTAR;
 import core.Algorithms.BasicExploration.BasicExploration;
+import core.Algorithms.BasicExploration.BasicRandomExploration;
 import core.Algorithms.RTAStar.MapRTAStar;
 import core.Algorithms.RTAStar.RTAStar;
 import core.BeliefMap;
@@ -77,7 +78,7 @@ public class Agent extends Sprite {
         beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 	    // Create an A* pathfinder
 	    pathFinder = new TestaSTAR(beliefMap);
-	    exploration = new BasicExploration(this,beliefMap);
+	    exploration = new BasicRandomExploration(this,beliefMap);
 	    
 	    
     }
@@ -198,11 +199,11 @@ public class Agent extends Sprite {
 	}
 	
 	/* the vision variable */
-	private double minVisionRange = 0;
-	private double maxVisionRange = 10;
-	private double visionAngle = 45;
-	private double structureVisionRange = 10;
-	private double towerVisionRange = 15;
+	protected double minVisionRange = 0;
+	protected double maxVisionRange = 10;
+	protected double visionAngle = 45;
+	protected double structureVisionRange = 10;
+	protected double towerVisionRange = 15;
 
 
 	
