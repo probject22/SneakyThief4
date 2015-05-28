@@ -25,7 +25,7 @@ public class Simulator {
 	private boolean debug = true;
     private static boolean stop = false;
     private static boolean pause = true;
-    private double speed = 1;
+    private double speed = 0.5;
     
     public static void setStop(boolean newvalue)
     {
@@ -48,6 +48,7 @@ public class Simulator {
 		if (debug) System.err.println("The simulator has been started");
 		
 		map = new Map();
+		//map = map.maze(map.getMapWidth(),map.getMapHeight());
 		//map = new Map("empty.map");
 		
 		spriteManager = SpriteManager.instance();
@@ -79,6 +80,7 @@ public class Simulator {
 				sleep(0.1);
 			}
 			firstAgentAction();
+			//TODO: Check through thieves for win/loss condition
 			if(winLossValue == 1){
 				//Present win 
 				stop = !stop;
