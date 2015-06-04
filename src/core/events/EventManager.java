@@ -3,6 +3,7 @@
  */
 package core.events;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import core.Map;
@@ -103,6 +104,12 @@ public class EventManager {
 		
 	}
 	
+	private double getBlockingAngle(Coordinate base,Coordinate block){
+		double diffAngle = base.getAngle(block);
+		double dist = base.distance(block);
+		return 2*Math.atan(0.5*(Math.sin(diffAngle)+Math.cos(diffAngle))/dist);
+	}
+	
 	private void generateVisionEvent(Agent agent, double timeStamp){
 		
 		Vision vision = new Vision(timeStamp);
@@ -116,12 +123,6 @@ public class EventManager {
 		
 		Coordinate baseCoords = agent.getCoordinates();
 		
-		//Adding the sprite in the vision to the Sprite hash map
-		for (Sprite sprite: spriteManager.getAgentList()){
-			if (!isInView(sprite.getCoordinates(),visionAngle,minVisionRange,baseCoords) &&
-					isInView(sprite.getCoordinates(),visionAngle,maxVisionRange,baseCoords))
-				vision.addSprite(sprite.getCoordinates(), sprite);
-		}
 		
 		//Adding the states (towers,walls,trees) in the vision to the Grid hash map
 		GridState[][] state = map.getCopyOfMap();
@@ -151,6 +152,36 @@ public class EventManager {
 				}
 			}
 		}
+		
+		
+		//Deleting the Areas behind the walls
+		double blockAngle = 0;
+		ArrayList<Coordinate> remove = new ArrayList<Coordinate>();
+		for(Coordinate barrier : vision.getStateInVisionMap().keySet())
+		{
+			if(vision.getStateInVisionMap().get(barrier) == GridState.Wall)
+			{
+				
+				blockAngle = Math.PI;//getBlockingAngle(baseCoords,barrier);
+				
+				for(Coordinate gridCheck : vision.getStateInVisionMap().keySet()){
+					if (!isInView(gridCheck,blockAngle,baseCoords.distance(barrier),baseCoords) &&
+							isInView(gridCheck,blockAngle,maxVisionRange,baseCoords)){
+						remove.add(gridCheck);
+					}
+				}
+			}
+		}
+		vision.deleteGrid(remove);
+		
+		//Adding the sprite in the vision to the Sprite hash map
+				for (Sprite sprite: spriteManager.getAgentList()){
+					if (!isInView(sprite.getCoordinates(),visionAngle,minVisionRange,baseCoords) &&
+							isInView(sprite.getCoordinates(),visionAngle,maxVisionRange,baseCoords) &&
+							vision.getStateInVisionMap().containsKey(sprite.getCoordinates())){
+						vision.addSprite(sprite.getCoordinates(), sprite);
+					}
+				}
 		
 		agent.giveEvent(vision);
 	}

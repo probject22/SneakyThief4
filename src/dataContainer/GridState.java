@@ -9,23 +9,24 @@ import java.awt.Color;
  */
 public enum GridState {
 	
-	//					Color				|	Moveable	|	 char
-	Empty			(	Color.WHITE, 			true,			' '			),
-	Wall			(	Color.BLACK, 			false,			'-'			),
-	Sentry			(	Color.BLUE,				true,			'P'			),
-	Shade 			(	Color.GRAY,				true,			'S'			),
-	Window			(	Color.YELLOW,			true,			'W'			),
-	Door			(	new Color(102,51,0),	true,			'D'			),
-	Target			(	Color.ORANGE,			true,			'T'			),
-	Tree			(	new Color(128,128,0),	false,			'B'			),
-	OuterWall		(	Color.DARK_GRAY,		false,			'+'			),
-	unknown			(	Color.RED,				true,			'9'			);
+	//					Color				|	Moveable	|	 char 	|	Cost 
+	Empty			(	Color.WHITE, 			true,			' ',		1.0			),
+	Wall			(	Color.BLACK, 			false,			'-',		1.0			),
+	Sentry			(	Color.BLUE,				true,			'P',		1.0			),
+	Shade 			(	Color.GRAY,				true,			'S',		1.0			),
+	Window			(	Color.YELLOW,			true,			'W',		1.0			),
+	Door			(	new Color(102,51,0),	true,			'D',		1.0			),
+	Target			(	Color.ORANGE,			true,			'T',		1.0			),
+	Tree			(	new Color(128,128,0),	false,			'B',		1.0			),
+	OuterWall		(	Color.DARK_GRAY,		false,			'+',		1.0			),
+	unknown			(	Color.RED,				true,			'9',		0.5			);
 
 
 
-	GridState(Color color, boolean moveable,  char fileVal){
+	GridState(Color color, boolean moveable,  char fileVal, double cost){
 		m_moveable = moveable;
 		this.color = color;
+		this.cost = 0;
 		m_fileVal = fileVal;
 	}
 
@@ -43,9 +44,14 @@ public enum GridState {
 	public char getFileVal(){
 		return m_fileVal;
 	}
+	
+	public double getCost(){
+		return cost;
+	}
 
 	Color color;
 	private boolean m_moveable;
 	private GridState m_freedState;
 	private char m_fileVal;
+	private double cost;
 }

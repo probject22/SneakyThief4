@@ -20,13 +20,13 @@ import dataContainer.GridState;
  *
  */
 public class BasicExploration implements Exploration {
-	private boolean debug = DebugConstants.basicExplorationDebug;
-	private Map beliefMap;
-	private ArrayList<Coordinate> toVisit = new ArrayList<Coordinate>();
-	private Sprite sprite;
-	private Coordinate goal;
-	private Random randomGenerator = new Random();
-	private GridState[][] grid;
+	protected boolean debug = DebugConstants.basicExplorationDebug;
+	protected Map beliefMap;
+	protected ArrayList<Coordinate> toVisit = new ArrayList<Coordinate>();
+	protected Sprite sprite;
+	protected Coordinate goal;
+	protected Random randomGenerator = new Random();
+	protected GridState[][] grid;
 	/**
 	 * 
 	 */
@@ -60,7 +60,7 @@ public class BasicExploration implements Exploration {
 	 * @see core.Algorithms.Exploration#getAction()
 	 */
 	@Override
-	public Coordinate getGoal() {
+	/*public Coordinate getGoal() {
 		Coordinate currentCoord = sprite.getCoordinates();
 		if (goal != null && currentCoord.equals(goal)){
 			goal = null;
@@ -76,18 +76,61 @@ public class BasicExploration implements Exploration {
 				return null;
 			if (goal == null)
 				goal = toVisit.get(randomGenerator.nextInt(toVisit.size()));
-			if (grid[goal.x][goal.y].moveable()){
-				System.err.println(goal);
+			if (grid[goal.x][goal.y] == GridState.unknown){
+				//System.err.println(goal);
 				return goal;
 			}
 			else{
 				for (int i = 0; i < toVisit.size(); i++){
-					if(goal == toVisit.get(i))
+					if(goal == toVisit.get(i)){
 						toVisit.remove(i);
+						break;
+					}
 				}
 				goal = null;
 			}	
-			System.err.println("while true");
+			//System.err.println("while true");
+		}
+	}*/
+	public Coordinate getGoal() {
+		Coordinate currentCoord = sprite.getCoordinates();
+		if (goal != null && currentCoord.equals(goal)){
+			goal = null;
+		}
+		for (int i = 0; i < toVisit.size(); i++){
+			Coordinate coord = toVisit.get(i);
+		//for (Coordinate coord: toVisit){
+			if (currentCoord.equals(coord))
+				toVisit.remove(i);
+		}
+		while (true){
+			if (toVisit.size() == 0)
+				return null;
+			if (goal == null){
+				//goal = toVisit.get(randomGenerator.nextInt(toVisit.size()));
+				double distance = Integer.MAX_VALUE;
+				for(Coordinate coord: toVisit){
+					double tempDistance = Coordinate.distanceBetweenCoordinates(currentCoord, coord);
+					if(tempDistance<distance){
+						distance = tempDistance;
+						goal = coord;
+					}
+				}
+				}
+			if (grid[goal.x][goal.y] == GridState.unknown){
+				//System.err.println(goal);
+				return goal;
+			}
+			else{
+				for (int i = 0; i < toVisit.size(); i++){
+					if(goal == toVisit.get(i)){
+						toVisit.remove(i);
+						break;
+					}
+				}
+				goal = null;
+			}	
+			//System.err.println("while true");
 		}
 	}
 

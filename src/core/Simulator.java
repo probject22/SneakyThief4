@@ -25,8 +25,11 @@ public class Simulator {
 	private boolean debug = true;
     private static boolean stop = false;
     private static boolean pause = true;
-    private double speed = 1;
+    private double speed = 0.5;
     
+    public void setSpeed(double newSpeed){
+    	speed = newSpeed;
+    }
     public static void setStop(boolean newvalue)
     {
     	stop = newvalue;
@@ -48,15 +51,16 @@ public class Simulator {
 		if (debug) System.err.println("The simulator has been started");
 		
 		map = new Map();
+		//map = map.maze(map.getMapWidth(),map.getMapHeight());
 		//map = new Map("empty.map");
 		
 		spriteManager = SpriteManager.instance();
 
-		spriteManager.addAgent(new Guard(new Coordinate(3,13,0)));
+		//spriteManager.addAgent(new Guard(new Coordinate(3,13,0)));
 		spriteManager.addAgent(new Guard(new Coordinate(16,3,0)));
 		spriteManager.addAgent(new Guard(new Coordinate(15,15,0)));
 
-		spriteManager.addAgent(new Thief(new Coordinate(2,2,0)));
+		//spriteManager.addAgent(new Thief(new Coordinate(2,2,0)));
 
 		eventManager = new EventManager(map);
 		
@@ -72,12 +76,22 @@ public class Simulator {
 	
 	private void gameLoop(){
 		mainFrame.updateGui();
+		//0 = running, 1 = thieves win, 2 = thieves loss
+		int winLossValue = 0;
 		while (!stop){
 			while (pause && !stop){
 				sleep(0.1);
 			}
 			firstAgentAction();
-			//TODO: WIN/LOSE CONDITIONS****************************
+			//TODO: Check through thieves for win/loss condition
+			if(winLossValue == 1){
+				//Present win 
+				stop = !stop;
+			}
+			if(winLossValue == 2){
+				//Present loss
+				stop = !stop;
+			}
 			/* finish the move by updateting the gui */
 			mainFrame.updateGui();
 			sleep(speed);

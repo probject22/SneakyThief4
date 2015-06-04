@@ -1,6 +1,8 @@
 package core.events;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 import core.sprite.Sprite;
 import dataContainer.Coordinate;
@@ -37,8 +39,28 @@ public class Vision extends Event {
 		spriteInVisionMap.put(coords.clone(), sprite);
 	}
 	
+	public void deleteSprite(Coordinate coords){
+		spriteInVisionMap.remove(coords.clone());
+	}
+	
 	public void addGrid(Coordinate coords, GridState state){
 		stateInVisionMap.put(coords.clone(),state);
+	}
+	public void deleteGrid(ArrayList<Coordinate> remove) {
+		while (remove.size() != 0){
+			deleteGrid(remove.remove(0));
+		}
+		
+	}
+	public void deleteGrid(Coordinate coords){
+		Set<Coordinate> coordinates = stateInVisionMap.keySet();
+		for (int i = 0; i < coordinates.size(); i++ ){
+			Coordinate coord = (Coordinate) coordinates.toArray()[i];
+			if (coords.equals(coord)){
+				stateInVisionMap.remove(coord);
+			}
+		}
+		//System.out.print(stateInVisionMap.remove(coords.clone()));
 	}
 
 	private Coordinate baseCoords = null;
@@ -57,5 +79,7 @@ public class Vision extends Event {
 	public HashMap<Coordinate, Sprite> getSpriteInVisionMap() {
 		return spriteInVisionMap;
 	}
+
+
 	
 }
