@@ -1,127 +1,210 @@
+/**
+ * 
+ */
 package core.Algorithms.AStar;
 
+import static java.lang.Math.sqrt;
+
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
+
+import core.Map;
+import core.Algorithms.PathFinder;
+import core.sprite.Agent;
+import core.sprite.SpriteManager;
+import dataContainer.Coordinate;
+import dataContainer.GridState;
 
 /**
+ * @author ing. R.J.H.M. Stevens
  *
- * Class that generically performs the AStar algorithm. It takes a neighbourGenerator that generates the neighbours of
- * a node, a CostFunction that should evaluates the actual cost between two nodes, and a HeuristicFunction that evaluates
- * the heuristic cost between two nodes. This way we can change the heuristic without touching this class.
- *
- * To change the heuristic, look at the MapHeuristicFunction class.
- * To change the cost function, look at the MapCostFunction class.
- *
- * To apply on something else than the map, make new classes that implement HeuristicFunction, CostFunction, and
- * NeighbourGenerator.
- *
- * E is the type of the result (for instance move directions)
- * T is the type of the node elements (for instance map coordinates)
- *
- * Created by Stan on 26/04/15.
  */
-abstract public class AStar<E,T> {
-
-	private int maxDepth = 300;
-
-    /**
-     * Constructor
-     *
-     */
-    public AStar(){}
-
-    /**
-     * Returns a list of outcomes as specified in the generic variable.
-     * @param fromElement starting element
-     * @param toElement final element
-     * @return
-     */
-    public E getShortestPath(T fromElement, T toElement){
-    	boolean debug = false;
-
-        Node<T> from = new Node<>();
-        from.element = fromElement;
-        Node<T> to = new Node<>();
-        to.element = toElement;
-
-        List<Node> open = new ArrayList<>();
-        List<Node> closed = new ArrayList<>();
-
-        from.f = 0;
-        from.g = 0;
-        from.h = getHeuristic(from, to);
-        open.add(from);
-
-
-        // loop through the fringe
-        while (!open.isEmpty()){	
-
-            // get the value with the lowest cost prospection
-            Node current = Collections.min(open, new NodeComparator());
-            
-            //if(closed.size() > maxDepth){
-        	//	return getResult(current);
-        	//}
-
-            if (debug) System.out.println("Current: " + current.element);
-            // remove the current element from the fringe
-            open.remove(current);
-
-            // generate neighbours
-            List<Node<T>> neighbours = getNeighbours(current);
-
-            //loop through neighbours
-            for (Node neighbour : neighbours) {
-                // Set parent
-                neighbour.parent = current;
-
-                if (neighbour.equals(to)) {
-                    //return result
-                    return getResult(neighbour);
-                }
-
-                // calculate functions
-                neighbour.g = getCost(current, neighbour);
-                neighbour.h = getHeuristic(neighbour, to);
-                neighbour.f = neighbour.g + neighbour.h;
-
-                // Check whether to add the new neighbour to the fringe
-                if (open.contains(neighbour)) {
-                    int i = open.indexOf(neighbour);
-                    Node neighbour2 = open.get(i);
-                    if (neighbour.f < neighbour2.f)
-                        open.set(i, neighbour);
-                }
-                else if (closed.contains(neighbour)){
-                    int i = open.indexOf(neighbour);
-                    Node neighbour2 = open.get(i);
-                    if (neighbour.f < neighbour2.f)
-                        open.add(neighbour);
-                }
-                else open.add(neighbour);
-
-                // remove the current node from the fringe
-                closed.add(current);
-
-            }
-
-        }
-        return null;
-    }
-
-    protected abstract List<Node<T>> getNeighbours(Node<T> current);
-
-    protected abstract E getResult(Node<T> neighbour);
-
-    protected abstract double getCost(Node<T> current, Node<T> neighbour);
-
-    protected abstract double getHeuristic(Node<T> from, Node<T> to);
-
-    /**
-     * Compares two nodes based on their f
-     */
+public class AStar implements PathFinder<Coordinate> {
+	Map map;
+	private ArrayList<Node> openNodes = new ArrayList<Node>(); 
+	private ArrayList<Node> closedNodes = new ArrayList<Node>(); 
+	private Coordinate goal;
+	/**
+	 * 
+	 */
+	public AStar(Map map) {
+		this.map = map;
+	}
+	@Override
+	public Coordinate getShortestPath(Coordinate from, Coordinate to) {
+		this.goal = to;
+		
+		System.err.println("goal "+goal);
+		
+		openNodes = new ArrayList<Node>(); 
+		closedNodes = new ArrayList<Node>();
+		openNodes.add(new Node(null, from.x, from.y));
+		ArrayList<Node> nodeTree = createTree();
+		if (nodeTree == null)
+			return null;
+		
+		Node outNode = null;
+		if (nodeTree.size() > 2)
+			outNode = nodeTree.get(nodeTree.size()-2);
+		else 
+			outNode = nodeTree.get(0);
+		return new Coordinate(outNode.x, outNode.y, 0);
+	}
+	
+	private ArrayList<Node> createTree(){
+		while (openNodes.size() != 0){
+			Node best =  Collections.min(openNodes, new NodeComparator());
+			openNodes.remove(best);
+			closedNodes.add(best);
+			if (best.x == goal.x && best.y == goal.y)
+				return backtrackPath(best);
+			
+			ArrayList<Node> neighbors = getNeighbors(best);
+			
+			
+			for (Node neighbor: neighbors){
+			//calculate the values of the neighbors
+				boolean found = false;
+				neighbor.parent = best;
+				setDepth(neighbor);
+				setCost(neighbor);
+				setHeuristic(neighbor);
+				setEstemator(neighbor);
+				
+				for (Node tempOpenNode: openNodes){
+					if (tempOpenNode.x == neighbor.x && tempOpenNode.y == neighbor.y){
+						updateNode(tempOpenNode,neighbor);
+						found = true;
+						break;
+					}
+				}
+				if (!found){
+					for (Node tempClosedNode: closedNodes){
+						if (tempClosedNode.x == neighbor.x && tempClosedNode.y == neighbor.y){
+							updateNode(tempClosedNode,neighbor);
+							found = true;
+							break;
+						}
+					}
+				}
+				if (!found){
+					openNodes.add(neighbor);
+				}
+			}
+		}
+		return null;
+		
+	}
+	
+	/**
+	 * returns the path back from the endNode to the start node
+	 * @param endNode
+	 * @return
+	 */
+	private ArrayList<Node> backtrackPath(Node endNode) {
+		ArrayList<Node> out = new ArrayList<Node>();
+		while(endNode != null){
+			out.add(endNode);
+			endNode = endNode.parent;
+		}
+		return out;
+	}
+	/**
+	 * Tells you how deep you are inside the tree
+	 */
+	private void setDepth(Node node){
+		node.depth = node.parent.depth +1;
+	}
+	
+	/**
+	 * The cost you have to pay to get to this node
+	 * @param node
+	 */
+	private void setCost(Node node){
+		node.g = node.parent.g + 1;
+	}
+	/**
+	 * heuristic the expected cost to go from this node to the goal
+	 * @param node
+	 */
+	private void setHeuristic(Node node){
+		double dx = node.x - goal.x;
+		double dy = node.y - goal.y;
+		
+		node.h =  sqrt(dx * dx + dy * dy);
+	}
+	
+	/**
+	 * the total estimation of the cost to get from start to goal
+	 * @param node
+	 */
+	private void setEstemator(Node node){
+		node.f = node.g+node.h;
+	}
+	
+	
+	private void updateNode(Node origonal, Node newVals){
+		if (origonal.f > newVals.f){
+			
+			origonal.f = newVals.f;
+			origonal.g = newVals.g;
+			origonal.h = newVals.h;
+			
+			origonal.parent = newVals.parent;
+			origonal.depth = newVals.depth;
+		}
+	}
+	private ArrayList<Node> getNeighbors(Node node){
+		ArrayList<Node> options = new ArrayList<Node>();
+		ArrayList<Node> out = new ArrayList<Node>();
+		
+		options.add(new Node(node, node.x-1, node.y-1));
+		options.add(new Node(node, node.x  , node.y-1));
+		options.add(new Node(node, node.x+1, node.y-1));
+		options.add(new Node(node, node.x-1, node.y));
+		options.add(new Node(node, node.x+1, node.y));
+		options.add(new Node(node, node.x-1, node.y+1));
+		options.add(new Node(node, node.x  , node.y+1));
+		options.add(new Node(node, node.x+1, node.y+1));
+		
+		GridState[][] grid = map.getCopyOfMap();
+		
+		for (Node tempNode: options){
+			if (tempNode.x < grid.length && tempNode.x >= 0 && tempNode.y < grid[0].length && tempNode.y >= 0){
+				if (grid[tempNode.x][tempNode.y].moveable()){
+					SpriteManager manager = SpriteManager.instance();
+					List<Agent> agents = manager.getAgentList();
+					for(Agent agent: agents){
+						Node checkedAgent = new Node(null, agent.getCoordinates().x, agent.getCoordinates().y);
+					if(checkedAgent.x != tempNode.x||checkedAgent.y!=tempNode.y)
+					out.add(tempNode);	
+					}
+					
+				}
+			}
+		}
+	
+		return out;
+	}
+	
+	public class Node{
+		public Node(Node parent, int x, int y){
+			this.parent = parent;
+			this.x = x;
+			this.y = y;
+		}
+		public double g = 0;
+		public double h = 0;
+		public double f = 0;
+		
+		public int depth = 0;
+		public Node parent;
+		
+		public int x = 0;
+		public int y = 0;
+	}
     class NodeComparator implements Comparator<Node>{
         @Override
         public int compare(Node n1, Node n2) {
@@ -132,28 +215,4 @@ abstract public class AStar<E,T> {
             return 0;
         }
     }
-
-    /**
-     *
-     * Node for use with the AStar algorithm
-     *
-     * Created by Stan on 26/04/15.
-     */
-    public class Node<E> {
-        public Node parent;
-        public double g; // cost value
-        public double h; // heuristic value
-        public double f; // cost + heuristic
-        public E element;// identifying element
-
-        /**
-         * equals method checking whether the elements of the nodes are equal
-         * @param node node to be compared with
-         * @return true if equal, false otherwise
-         */
-        public boolean equals(Node<E> node){
-            return element.equals(node.element);
-        }
-    }
-
 }

@@ -24,7 +24,6 @@ public class Action {
 	 * @param action
 	 */
 	public void addActionElement(ActionElement action){
-		//TODO: implement checking duplicate actiontypes
 		for (ActionElement element: actionElements){
 			
 			if (element.getClass() == action.getClass()){
