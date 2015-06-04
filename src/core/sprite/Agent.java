@@ -3,12 +3,8 @@
  */
 package core.sprite;
 
-import core.Algorithms.AStar.MapAStar;
-import core.Algorithms.AStar.TestaSTAR;
-import core.Algorithms.BasicExploration.BasicExploration;
+import core.Algorithms.AStar.AStar;
 import core.Algorithms.BasicExploration.BasicRandomExploration;
-import core.Algorithms.RTAStar.MapRTAStar;
-import core.Algorithms.RTAStar.RTAStar;
 import core.BeliefMap;
 import core.Algorithms.Exploration;
 import core.Algorithms.PathFinder;
@@ -68,7 +64,7 @@ public class Agent extends Sprite {
 		beliefMapGUi.close();
 		beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 		beliefMapGUi.updateGui();
-		pathFinder = new TestaSTAR(beliefMap);
+		pathFinder = new AStar(beliefMap);
 		exploration.setBeliefMap(map);
 	}
 
@@ -77,7 +73,7 @@ public class Agent extends Sprite {
         this.beliefMap =  new BeliefMap();
         beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 	    // Create an A* pathfinder
-	    pathFinder = new TestaSTAR(beliefMap);
+	    pathFinder = new AStar(beliefMap);
 	    exploration = new BasicRandomExploration(this,beliefMap);
 	    
 	    
