@@ -2,7 +2,7 @@ package experiments;
 
 import core.Map;
 import core.Algorithms.PathFinder;
-import core.Algorithms.AStar.MapAStar;
+import core.Algorithms.AStar.AStar;
 import core.Algorithms.RTAStar.MapRTAStar;
 import dataContainer.Coordinate;
 
@@ -28,7 +28,7 @@ public class AStarExperiment extends AbstractExperiment {
 		Coordinate target = new Coordinate(100,100,0);
 		
 		//test A*
-		pathFinder = new MapAStar(map);
+		pathFinder = new AStar(map);
 		Coordinate current = home;
 		int aSteps  = 0;
 		long aStart = System.nanoTime();

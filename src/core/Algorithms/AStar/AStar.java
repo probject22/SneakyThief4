@@ -16,13 +16,14 @@ import core.sprite.Agent;
 import core.sprite.SpriteManager;
 import dataContainer.Coordinate;
 import dataContainer.GridState;
-
+import core.DebugConstants;
 /**
  * @author ing. R.J.H.M. Stevens
  *
  */
 public class AStar implements PathFinder<Coordinate> {
 	Map map;
+	private boolean debug = DebugConstants.astarDebug;
 	private ArrayList<Node> openNodes = new ArrayList<Node>(); 
 	private ArrayList<Node> closedNodes = new ArrayList<Node>(); 
 	private Coordinate goal;
@@ -36,7 +37,7 @@ public class AStar implements PathFinder<Coordinate> {
 	public Coordinate getShortestPath(Coordinate from, Coordinate to) {
 		this.goal = to;
 		
-		System.err.println("goal "+goal);
+		if(debug)System.err.println("goal "+goal);
 		
 		openNodes = new ArrayList<Node>(); 
 		closedNodes = new ArrayList<Node>();
@@ -123,7 +124,9 @@ public class AStar implements PathFinder<Coordinate> {
 	 * @param node
 	 */
 	private void setCost(Node node){
-		node.g = node.parent.g + 1;
+		GridState[][] grid = map.getCopyOfMap();
+		double cost = grid[node.x][node.y].getAstarCost();
+		node.g = node.parent.g + cost;
 	}
 	/**
 	 * heuristic the expected cost to go from this node to the goal

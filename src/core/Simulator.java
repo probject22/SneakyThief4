@@ -178,9 +178,12 @@ public class Simulator {
 					MoveDirection dir = MoveDirection.getDirectionFromAngle(coordinate.angle);
 					coordinate.x += dir.getDx();
 					coordinate.y += dir.getDy();
-					
-					
-					agent.addTimeToKey(actionElement.duration());
+					double time = actionElement.duration();
+					if (agent instanceof Thief)
+						time *= map.getCopyOfMap()[coordinate.x][coordinate.y].getThiefCost();
+					else
+						time *= map.getCopyOfMap()[coordinate.x][coordinate.y].getCost();
+					agent.addTimeToKey(time);
 					//Always trigger events AFTER EXECUTION OF THE ACTIONELEMENT
 					eventManager.triggerEvent(actionElement,agent);
 				}
