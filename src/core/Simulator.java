@@ -58,7 +58,7 @@ public class Simulator {
 
 		//spriteManager.addAgent(new Guard(new Coordinate(3,13,0)));
 		spriteManager.addAgent(new Guard(new Coordinate(16,3,0)));
-		spriteManager.addAgent(new Guard(new Coordinate(15,15,0)));
+		//spriteManager.addAgent(new Guard(new Coordinate(15,15,0)));
 
 		//spriteManager.addAgent(new Thief(new Coordinate(2,2,0)));
 

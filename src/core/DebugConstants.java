@@ -13,5 +13,7 @@ public class DebugConstants {
 	static public boolean basicExplorationDebug = false;
 	
 	static public boolean astarDebug = false;
+	
+	static public boolean lrtastarDebug = false;
 
 }
