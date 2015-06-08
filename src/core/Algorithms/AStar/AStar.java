@@ -184,6 +184,8 @@ public class AStar implements PathFinder<Coordinate> {
 					if(checkedAgent.x != tempNode.x||checkedAgent.y!=tempNode.y)
 					out.add(tempNode);	
 					}
+					if (agents.size() == 0)
+						out.add(tempNode);	
 					
 				}
 			}
