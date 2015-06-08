@@ -43,8 +43,7 @@ public class MapPanel extends JPanel{
 				//40->20, 100->6, 200 ->3
 				int cx = map.getMapWidth();
 				int pxPerGridState= ((61*cx*cx)/48000)-((329*cx)/800)+(413/12)+1;
-				System.out.println(pxPerGridState);
-				//System.out.println(pxPerGridState);
+				
 				//CHANGE COLOR DEPENDING ON THE GRIDSTATE
 				g2.setColor(currentstate.color());
 				//Fabric structure is commented out.
