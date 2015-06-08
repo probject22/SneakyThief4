@@ -26,8 +26,8 @@ public class Guard extends Agent {
 	}
 	
 	public Action getAction(){
-		Action action = aStar(new Coordinate(20,20,0));
-		//Action action = basicExploration(); 
+		//Action action = aStar(new Coordinate(20,20,0));
+		Action action = basicExploration(); 
 			if (action == null || action.getActionElements() == null || action.getActionElements().isEmpty())
 				action = stico.getMoveAction(lastSeen);
 		//Action action = aStar(new Coordinate(3,16,0));

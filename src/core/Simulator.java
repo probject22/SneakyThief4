@@ -9,6 +9,7 @@ import core.actions.Wait;
 import core.events.EventManager;
 import core.sprite.Agent;
 import core.sprite.Guard;
+import core.sprite.Sprite;
 import core.sprite.SpriteManager;
 import core.sprite.Thief;
 import dataContainer.Coordinate;
@@ -50,14 +51,17 @@ public class Simulator {
 	public Simulator(){
 		if (debug) System.err.println("The simulator has been started");
 		
+
 		//map = new Map();
+		map = new Map("default.map");
 		//map = map.maze(map.getMapWidth(),map.getMapHeight());
-		map = new Map("empty.map");
-		
+		//map = new Map("empty.map");
+		Sprite tempSprite = new Guard(new Coordinate(16,3,0));
+		((Agent)tempSprite).setBeliefMap(new BeliefMap(map));
 		spriteManager = SpriteManager.instance();
 
 		//spriteManager.addAgent(new Guard(new Coordinate(3,13,0)));
-		spriteManager.addAgent(new Guard(new Coordinate(16,3,0)));
+		spriteManager.addAgent((Agent)tempSprite);
 		//spriteManager.addAgent(new Guard(new Coordinate(15,15,0)));
 
 		//spriteManager.addAgent(new Thief(new Coordinate(2,2,0)));

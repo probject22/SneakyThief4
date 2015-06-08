@@ -39,9 +39,11 @@ public class MapPanel extends JPanel{
 			for(int j = 0; j<map.getCopyOfMap()[0].length;j++)
 			{
 				currentstate = map.getCopyOfMap()[i][j];
-				//int t = xl*600;
-				//int pxPerGridState = (t/(xl*xl));
-				int pxPerGridState=(int)(this.getWidth()/xl)-1;
+				//IF THIS IS CHANGED, CHANGE SPRITEPANEL.SCALE AS WELL
+				//40->20, 100->6, 200 ->3
+				int cx = map.getMapWidth();
+				int pxPerGridState= ((61*cx*cx)/48000)-((329*cx)/800)+(413/12)+1;
+				System.out.println(pxPerGridState);
 				//System.out.println(pxPerGridState);
 				//CHANGE COLOR DEPENDING ON THE GRIDSTATE
 				g2.setColor(currentstate.color());

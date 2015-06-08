@@ -40,6 +40,7 @@ public class LRTAStar implements PathFinder<Coordinate> {
 		if (from.equals(to))
 			return to;
 		
+		if (costMap.length < from.x && costMap[0].length <from.y)
 		costMap[from.x][from.y] += 5;
 		
 		double bestEstemator = 0;
@@ -57,7 +58,8 @@ public class LRTAStar implements PathFinder<Coordinate> {
 			estemator += grid[tempCoord.x][tempCoord.y].getAstarCost();
 			
 			//the memory
-			estemator += (double)costMap[tempCoord.x][tempCoord.y];
+			if (costMap.length < tempCoord.x && costMap[0].length <tempCoord.y)
+				estemator += (double)costMap[tempCoord.x][tempCoord.y];
 			
 			if (bestCoord == null || estemator < bestEstemator){
 				bestCoord = tempCoord;
