@@ -2,8 +2,10 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Panel;
 
 import javax.swing.JPanel;
 
@@ -37,7 +39,10 @@ public class MapPanel extends JPanel{
 			for(int j = 0; j<map.getCopyOfMap()[0].length;j++)
 			{
 				currentstate = map.getCopyOfMap()[i][j];
-				int pxPerGridState = 20;
+				//int t = xl*600;
+				//int pxPerGridState = (t/(xl*xl));
+				int pxPerGridState=(int)(this.getWidth()/xl)-1;
+				//System.out.println(pxPerGridState);
 				//CHANGE COLOR DEPENDING ON THE GRIDSTATE
 				g2.setColor(currentstate.color());
 				//Fabric structure is commented out.
@@ -45,7 +50,7 @@ public class MapPanel extends JPanel{
 				
 				g2.fillRect(((i)*pxPerGridState)+extra, ((yl-j)*pxPerGridState)+extra, pxPerGridState, pxPerGridState);
 				g2.setColor(Color.BLACK);
-				g2.drawRect(((i)*pxPerGridState)+extra, ((yl-j)*pxPerGridState)+extra, pxPerGridState, pxPerGridState);
+				//g2.drawRect(((i)*pxPerGridState)+extra, ((yl-j)*pxPerGridState)+extra, pxPerGridState, pxPerGridState);
 				
 			}
 
