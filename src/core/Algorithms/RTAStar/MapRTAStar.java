@@ -52,7 +52,7 @@ public class MapRTAStar extends RTAStar<Coordinate, Coordinate> implements PathF
         return from.element.distance(to.element);
     }
 
-    private final Map map; //map of the world
+    private Map map; //map of the world
 
     /**
      * Constructor
@@ -76,12 +76,12 @@ public class MapRTAStar extends RTAStar<Coordinate, Coordinate> implements PathF
         List<Coordinate> neighbourCoordinates = neighbourCoordinates(node.element);
 
         //loop through neighbouring coordinates
-        for (Coordinate coordinate : neighbourCoordinates) {
+        for (Coordinate coordinate : neighbourCoordinates)
             // if an agent can move there
             if(map.isMoveable(coordinate))
                 //create a new node
                 neighbours.add(createNode(coordinate, node));
-        }
+        
 
         return neighbours;
     }

@@ -65,10 +65,6 @@ public class AStarExperiment extends AbstractExperiment {
 		
 		}
 		
-		
-		
-		
-		
 		writeCsv("data/astar_experiment.csv");
 	}
 	
