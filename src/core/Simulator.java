@@ -176,25 +176,39 @@ public class Simulator {
 
 			/* this handles the move actionElement (THIS NEEDS TO BE IMPLEMENTED) */
 			if ( actionElement instanceof Move){
-				Move move = (Move) actionElement;
-				if(isMovePossible(agent, move)){
-					Coordinate coordinate = agent.getCoordinates();
-					MoveDirection dir = MoveDirection.getDirectionFromAngle(coordinate.angle);
-					coordinate.x += dir.getDx();
-					coordinate.y += dir.getDy();
-					double time = actionElement.duration();
-					if (agent instanceof Thief)
-						time *= map.getCopyOfMap()[coordinate.x][coordinate.y].getThiefCost();
-					else
-						time *= map.getCopyOfMap()[coordinate.x][coordinate.y].getCost();
-					agent.addTimeToKey(time);
-					//Always trigger events AFTER EXECUTION OF THE ACTIONELEMENT
-					eventManager.triggerEvent(actionElement,agent);
-				}
+					if (!(agent instanceof Guard) || !((Guard)agent).isInTower()){
+						Move move = (Move) actionElement;
+						if (isMovePossible(agent, move)) {
+							Coordinate coordinate = agent.getCoordinates();
+							MoveDirection dir = MoveDirection
+									.getDirectionFromAngle(coordinate.angle);
+							coordinate.x += dir.getDx();
+							coordinate.y += dir.getDy();
+							double time = actionElement.duration();
+							if (agent instanceof Thief)
+								time *= map.getCopyOfMap()[coordinate.x][coordinate.y]
+										.getThiefCost();
+							else
+								time *= map.getCopyOfMap()[coordinate.x][coordinate.y]
+										.getCost();
+							agent.addTimeToKey(time);
+							// Always trigger events AFTER EXECUTION OF THE
+							// ACTIONELEMENT
+							eventManager.triggerEvent(actionElement, agent);
+						}
+					}
 			}
 
 			/* handle the wait ActionElement */
 			if ( actionElement instanceof Wait){
+				if (agent instanceof Guard)
+					if (map.getCopyOfMap()[agent.getCoordinates().x][agent.getCoordinates().y] == GridState.Sentry)
+						if (actionElement.duration() > 3.0)
+							if (((Guard)agent).isInTower())
+								((Guard)agent).leaveTower();
+							else
+								((Guard)agent).enterTower();
+						
 				agent.addTimeToKey( actionElement.duration());
 				
 				eventManager.triggerEvent(actionElement,agent);
