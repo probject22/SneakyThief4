@@ -65,7 +65,7 @@ public class AStarExperiment extends AbstractExperiment {
 		
 		}
 		
-		writeCsv("data/astar_experiment.csv");
+		writeCsv("experiments/data/astar_experiment.csv");
 	}
 	
 	public static void main(String[] args){

@@ -60,7 +60,7 @@ public class Thief extends Agent {
 		return false;
 	}
 	public boolean shouldSprint(){
-		//if a guard is near by, return true
+		//if a guard is near by and thief is in the opposite direction, return true
 		//else return false
 		return false;
 	}
