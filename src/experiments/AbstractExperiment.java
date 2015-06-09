@@ -8,7 +8,7 @@ import java.util.List;
 
 public abstract class AbstractExperiment {
 	protected static List<String> names = new ArrayList<>();
-	protected static List<double[]> values = new ArrayList<>();
+	protected static List<String[]> values = new ArrayList<>();
 	
 	public AbstractExperiment(){
 	}
@@ -24,15 +24,15 @@ public abstract class AbstractExperiment {
 			//write names
 			for (String name : names) {
 				writer.append(name);
-				writer.append(", ");
+				writer.append(",");
 			}
 			writer.append("\n");
 			
 			//write values
-			for (double[] v : values) {
-				for (double d : v) {
-					writer.append(Double.toString(d));
-					writer.append(", ");
+			for (String[] v : values) {
+				for (String d : v) {
+					writer.append(d);
+					writer.append(",");
 				}
 				writer.append("\n");
 			}

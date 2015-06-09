@@ -52,12 +52,13 @@ public class AStarExperiment extends AbstractExperiment {
 		
 		
 		//save measurement
-		double[] measurements =  new double[names.size()];
-		measurements[0] = aEnd - aStart;
-		measurements[1] = aSteps;
-		measurements[2] = rTAEnd - rTAStart;
-		measurements[3] = rTASteps;
-		measurements[4] = complexity;
+		String[] measurements =  new String[names.size()];
+
+		measurements[0] = Double.toString(aEnd - aStart);
+		measurements[1] = Double.toString(aSteps);
+		measurements[2] = Double.toString(rTAEnd - rTAStart);
+		measurements[3] = Double.toString(rTASteps);
+		measurements[4] = Double.toString(complexity);
 		
 		//System.out.println(measurements.toString());
 		values.add(measurements);
@@ -65,7 +66,7 @@ public class AStarExperiment extends AbstractExperiment {
 		
 		}
 		
-		writeCsv("data/astar_experiment.csv");
+		writeCsv("experiments/data/astar_experiment.csv");
 	}
 	
 	public static void main(String[] args){
