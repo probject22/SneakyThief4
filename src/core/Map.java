@@ -182,10 +182,12 @@ public class Map {
 	 * Width and Height getters
 	 */
 	public int getMapHeight() {
-		return mapHeight;
+		return map[0].length;
+		//return mapHeight;
 	}
 	public int getMapWidth() {
-		return mapWidth;
+		return map.length;
+		//return mapWidth;
 	}
 
 	public java.util.Map<Coordinate,GridState> getIntersectingGridstates(Coordinate from, Coordinate to){
