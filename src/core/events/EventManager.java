@@ -110,9 +110,20 @@ public class EventManager {
 	}
 	
 	private double getBlockingAngle(Coordinate base,Coordinate block){
-		double diffAngle = base.getAngle(block);
-		double dist = base.distance(block);
-		return 2*Math.atan(0.5*(Math.sin(diffAngle)+Math.cos(diffAngle))/dist);
+		
+		if((base.x > block.x && base.y > block.y) || (base.x < block.x && base.y < block.y))
+			return Math.abs(base.getAngle(new Coordinate(block.x+1,block.y-1,0)) - 
+					base.getAngle(new Coordinate(block.x-1,block.y+1,0)));
+		if((base.x < block.x && base.y > block.y) || (base.x > block.x && base.y < block.y))
+			return Math.abs(base.getAngle(new Coordinate(block.x+1,block.y+1,0)) - 
+					base.getAngle(new Coordinate(block.x-1,block.y-1,0)));
+		if(base.x == block.x)
+				return Math.abs(base.getAngle(new Coordinate(block.x,block.y+1,0)) - 
+								base.getAngle(new Coordinate(block.x,block.y-1,0)));
+		else
+			return Math.abs(base.getAngle(new Coordinate(block.x+1,block.y,0)) - 
+							base.getAngle(new Coordinate(block.x-1,block.y,0)));
+		
 	}
 	
 	private void generateVisionEvent(Agent agent, double timeStamp){
@@ -167,11 +178,12 @@ public class EventManager {
 			if(vision.getStateInVisionMap().get(barrier) == GridState.Wall)
 			{
 				
-				blockAngle = Math.PI;//getBlockingAngle(baseCoords,barrier);
-				
+				blockAngle = getBlockingAngle(baseCoords,barrier);
+				Coordinate newBase = baseCoords.clone();
+				newBase.angle = baseCoords.getAngle(barrier);
 				for(Coordinate gridCheck : vision.getStateInVisionMap().keySet()){
-					if (!isInView(gridCheck,blockAngle,baseCoords.distance(barrier),baseCoords) &&
-							isInView(gridCheck,blockAngle,maxVisionRange,baseCoords)){
+					if (!isInView(gridCheck,blockAngle,baseCoords.distance(barrier),newBase) &&
+							isInView(gridCheck,blockAngle,maxVisionRange,newBase)){
 						remove.add(gridCheck);
 					}
 				}
