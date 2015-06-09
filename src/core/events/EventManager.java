@@ -120,8 +120,8 @@ public class EventManager {
 		Vision vision = new Vision(timeStamp);
 		vision.setBaseCoords(agent.getCoordinates().clone());
 		double visionAngle = agent.getVisionAngleRad();
-		double minVisionRange = agent.getMinVisionRange();
-		double maxVisionRange = agent.getMaxVisionRange();
+		double minVisionRange = agent.getCurrentMinVisionRange();
+		double maxVisionRange = agent.getCurrentMaxVisionRange();
 		double towerVisionRange = agent.getTowerVisionRange();
 		double structureVisionRange = agent.getStructureVisionRange();
 		

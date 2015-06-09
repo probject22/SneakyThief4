@@ -201,14 +201,14 @@ public class Agent extends Sprite {
 	/**
 	 * @return the currentminVisionRange
 	 */
-	public double getCurrentminVisionRange() {
+	public double getCurrentMinVisionRange() {
 		return currentminVisionRange;
 	}
 
 	/**
 	 * @return the currentMaXVisionRange
 	 */
-	public double getCurrentMaXVisionRange() {
+	public double getCurrentMaxVisionRange() {
 		return currentMaXVisionRange;
 	}
 	
