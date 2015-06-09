@@ -198,6 +198,20 @@ public class Agent extends Sprite {
 		return towerVisionRange;
 	}
 	
+	/**
+	 * @return the currentminVisionRange
+	 */
+	public double getCurrentminVisionRange() {
+		return currentminVisionRange;
+	}
+
+	/**
+	 * @return the currentMaXVisionRange
+	 */
+	public double getCurrentMaXVisionRange() {
+		return currentMaXVisionRange;
+	}
+	
 	/* the vision variable */
 	protected double minVisionRange = 0;
 	protected double maxVisionRange = 10;
@@ -205,7 +219,8 @@ public class Agent extends Sprite {
 	protected double structureVisionRange = 10;
 	protected double towerVisionRange = 15;
 
-
+	protected double currentminVisionRange = minVisionRange;
+	protected double currentMaXVisionRange = maxVisionRange;
 	
 	private double timeKey;
 
