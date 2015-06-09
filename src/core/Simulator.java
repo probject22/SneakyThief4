@@ -52,8 +52,8 @@ public class Simulator {
 		if (debug) System.err.println("The simulator has been started");
 		
 
-		//map = new Map();
-		map = new Map("test100.map");
+		map = new Map();
+		//map = new Map("test100.map");
 		//map = map.maze(map.getMapWidth(),map.getMapHeight());
 		//map = new Map("empty.map");
 		Sprite tempSprite = new Guard(new Coordinate(16,3,0));

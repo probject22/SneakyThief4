@@ -108,7 +108,13 @@ public class EventManager {
 				isInRadius (target,baseCoord,r);
 		
 	}
-	
+	/**
+	 * Looks at four different conditions to find if the corners that 
+	 * have the largest angles from the agent(base).
+	 * @param base : agents position
+	 * @param block: blocks position
+	 * @return angle vision around a block
+	 */
 	private double getBlockingAngle(Coordinate base,Coordinate block){
 		
 		if((base.x > block.x && base.y > block.y) || (base.x < block.x && base.y < block.y))
@@ -173,14 +179,17 @@ public class EventManager {
 		//Deleting the Areas behind the walls
 		double blockAngle = 0;
 		ArrayList<Coordinate> remove = new ArrayList<Coordinate>();
+		//Goes through all the Grids in the view Cone which does not care about walls
 		for(Coordinate barrier : vision.getStateInVisionMap().keySet())
 		{
 			if(vision.getStateInVisionMap().get(barrier) == GridState.Wall)
 			{
-				
+				//Gets the angle of the left side of the barrier - right side of the barrier
 				blockAngle = getBlockingAngle(baseCoords,barrier);
 				Coordinate newBase = baseCoords.clone();
 				newBase.angle = baseCoords.getAngle(barrier);
+				// Goes through all the grids again and deletes 
+				//the ones which are behind the barrier at the found angle
 				for(Coordinate gridCheck : vision.getStateInVisionMap().keySet()){
 					if (!isInView(gridCheck,blockAngle,baseCoords.distance(barrier),newBase) &&
 							isInView(gridCheck,blockAngle,maxVisionRange,newBase)){
