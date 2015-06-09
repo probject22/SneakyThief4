@@ -24,7 +24,7 @@ public abstract class AbstractExperiment {
 			//write names
 			for (String name : names) {
 				writer.append(name);
-				writer.append(", ");
+				writer.append(",");
 			}
 			writer.append("\n");
 			
@@ -32,7 +32,7 @@ public abstract class AbstractExperiment {
 			for (String[] v : values) {
 				for (String d : v) {
 					writer.append(d);
-					writer.append(", ");
+					writer.append(",");
 				}
 				writer.append("\n");
 			}

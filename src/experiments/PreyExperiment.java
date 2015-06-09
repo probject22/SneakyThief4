@@ -33,12 +33,12 @@ public class PreyExperiment extends AbstractExperiment {
 			String run_time = Long.toString(r.nextLong());
 			String n_guards = Integer.toString(r.nextInt(100));
 			int a = r.nextInt(5);
-			String map_type = "rooms";
-			/*if (a == 0) map_type = "blank";
+			String map_type;
+			if (a == 0) map_type = "blank";
 			else if(a == 1)map_type = "maze";
 			else if(a == 2)map_type = "rooms";
 			else if(a == 3)map_type = "walls";
-			else map_type = "Us";*/
+			else map_type = "Us";
 			String map_area = Integer.toString(r.nextInt(4000));
 			String map_density = Double.toString(r.nextDouble());
 			String multi_agent_coordination = r.nextBoolean() ? "none" : "bes";
