@@ -48,9 +48,10 @@ public class PreyExperiment extends AbstractExperiment {
 				n_guards, map_type, map_area, 
 				map_density, multi_agent_coordination
 			};
-				
 			values.add(v);
 		}
+		
+		writeCsv("experiments/reverse_a_star/data/dummy.csv");
 		
 	}
 

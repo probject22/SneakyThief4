@@ -53,10 +53,11 @@ public class AStarExperiment extends AbstractExperiment {
 		
 		//save measurement
 		String[] measurements =  new String[names.size()];
-		measurements[0] = Long.toString(aEnd - aStart);
-		measurements[1] = Integer.toString(aSteps);
-		measurements[2] = Long.toString(rTAEnd - rTAStart);
-		measurements[3] = Integer.toString(rTASteps);
+
+		measurements[0] = Double.toString(aEnd - aStart);
+		measurements[1] = Double.toString(aSteps);
+		measurements[2] = Double.toString(rTAEnd - rTAStart);
+		measurements[3] = Double.toString(rTASteps);
 		measurements[4] = Double.toString(complexity);
 		
 		//System.out.println(measurements.toString());
