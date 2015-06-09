@@ -41,7 +41,7 @@ public class PreyExperiment extends AbstractExperiment {
 			else map_type = "Us";
 			String map_area = Integer.toString(r.nextInt(4000));
 			String map_density = Double.toString(r.nextDouble());
-			String multi_agent_coordination = r.nextBoolean() ? "none" : "BES";
+			String multi_agent_coordination = r.nextBoolean() ? "none" : "bes";
 			
 			String[] v = new String[]{
 				algorithm, success, run_time, 
