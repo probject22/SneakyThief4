@@ -6,7 +6,7 @@ public class PreyExperiment extends AbstractExperiment {
 	
 	public static void main(String[] args){
 		PreyExperiment exp = new PreyExperiment();
-		exp.experiment(100);
+		exp.experiment(1000);
 	}
 	
 	public PreyExperiment(){
