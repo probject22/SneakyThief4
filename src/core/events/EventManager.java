@@ -58,6 +58,11 @@ public class EventManager {
 		/* this handles the move actionElement (THIS NEEDS TO BE IMPLEMENTED) */
 		else if ( actionElement instanceof Move){
 			//TODO dont trigger this event when a guard is entering a tower leaving a tower or when the agent turns for more then 45 degrees (page 4) 
+			if(map.getCopyOfMap()[agent.getCoordinates().x][agent.getCoordinates().y] == GridState.Door)
+				generateDoorSoundEvent(agent, timeStamp);
+			if(map.getCopyOfMap()[agent.getCoordinates().x][agent.getCoordinates().y] == GridState.Window)
+				generateWindowSoundEvent(agent, timeStamp);
+			
 			generateVisionEvent(agent, timeStamp);
 			generateMoveSoundEvent(agent, timeStamp, ((Move)actionElement).speed);
 		}
@@ -303,15 +308,15 @@ public class EventManager {
 			}
 		}
 	}
-	
+	private void generateDoorSoundEvent(Agent agent, double timeStamp){
+		generateSoundEvent(agent, timeStamp, 5);
+	}
+	private void generateWindowSoundEvent(Agent agent, double timeStamp){
+		generateSoundEvent(agent, timeStamp, 10);
+	}
 	private void generateMoveSoundEvent(Agent agent, double timeStamp, double speed){
 		//TODO check if the standardDeviation is applied correctly
-		/* in degree */
-		double standardDeviation = 10;
-		double variance = Math.pow(standardDeviation, 2);
 		
-		/*variance in rad */
-		double varianceRad = Math.toRadians(variance);
 		
 		double distance = 0;
 		if (speed >0 && speed < 0.5)
@@ -323,7 +328,17 @@ public class EventManager {
 		else
 			distance = 10;
 		
+		generateSoundEvent(agent, timeStamp, distance);
+	}
+	
+	private void generateSoundEvent(Agent agent, double timeStamp, double distance){
+		/* in degree */
+		double standardDeviation = 10;
+		double variance = Math.pow(standardDeviation, 2);
 		
+		/*variance in rad */
+		double varianceRad = Math.toRadians(variance);
+
 		for (Agent tempAgent: spriteManager.getAgentList())
 			if (distenceBetweenAgents(agent, tempAgent) <= distance){
 				/* calculate the angle under witch the agent hears the sound and add the variance to it */
