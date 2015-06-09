@@ -9,6 +9,8 @@ import core.Algorithms.reverseRTAStar.MapReverseRTAStar;
 import core.actions.Action;
 import core.actions.Move;
 import core.actions.Turn;
+import core.events.Event;
+import core.events.Sound;
 import core.events.Vision;
 import dataContainer.Coordinate;
 import dataContainer.GridState;
@@ -18,8 +20,9 @@ import dataContainer.GridState;
  */
 public class Thief extends Agent {
 
-	private ThiefPath<Coordinate> thiefPath;
-	
+	protected ThiefPath<Coordinate> thiefPath;
+	protected ArrayList<Double> soundsDirection = new ArrayList<Double>();
+	protected boolean panic;
 	/**
 	 * @param coords
 	 */
@@ -29,18 +32,46 @@ public class Thief extends Agent {
 	    thiefPath = new MapReverseRTAStar(beliefMap);
 	}
 	
+	protected void processSound(Event sound){ 
+		processSound((Sound)sound);
+	}
+	protected void processSound(Sound sound){ 
+		soundsDirection.add(sound.getDirection());
+	}
 	public Action getAction(){
 		
 		Action action = aStar(target);
 		
+		if (panic){
+			
+			if(soundsDirection.isEmpty())
+				panic = false;
+			else{
+				List<Coordinate> followers = new ArrayList<Coordinate>(lastSeen.getSpriteInVisionMap().keySet());
+				for(double soundDirection : soundsDirection){
+					followers.add(new Coordinate((int)(Math.sin(soundDirection)*2),
+											(int)(Math.cos(soundDirection)*2),0));
+				}
+				action = reverseAStar(followers);
+				soundsDirection.clear();		
+				return action;	
+				}
+		}
+			
 		// Check if there is a Agent in View (This should be done using belief map instead)!!
 		//If yes use reverse RTA* to escape.
-		List<Coordinate> agentsInView = new ArrayList<Coordinate>(lastSeen.getSpriteInVisionMap().keySet());
-		for (Sprite s : lastSeen.getSpriteInVisionMap().values())
-			if (s instanceof Guard)
-				action = reverseAStar(agentsInView);
-		return action;
 		
+		List<Coordinate> agentsInView = new ArrayList<Coordinate>(lastSeen.getSpriteInVisionMap().keySet());
+		System.out.println(agentsInView.size());
+		for (Sprite s : lastSeen.getSpriteInVisionMap().values()) {
+			if (s instanceof Guard){
+				action = reverseAStar(agentsInView);
+				panic = true;
+				System.out.println("panic");
+				break;
+			}
+		}
+		return action;
 	}
 	
 	protected Action reverseAStar(List<Coordinate> followers){

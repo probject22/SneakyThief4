@@ -205,7 +205,7 @@ public class EventManager {
 					if (!isInView(sprite.getCoordinates(),visionAngle,minVisionRange,baseCoords) &&
 							isInView(sprite.getCoordinates(),visionAngle,maxVisionRange,baseCoords) &&
 							vision.getStateInVisionMap().containsKey(sprite.getCoordinates())){
-						vision.addSprite(sprite.getCoordinates(), sprite);
+							vision.addSprite(sprite.getCoordinates(), sprite);
 					}
 				}
 		

@@ -26,7 +26,7 @@ public class Simulator {
 	private boolean debug = true;
     private static boolean stop = false;
     private static boolean pause = true;
-    private double speed = 0.5;
+    private double speed = 0.1;
     
     public void setSpeed(double newSpeed){
     	speed = newSpeed;
@@ -52,19 +52,30 @@ public class Simulator {
 		if (debug) System.err.println("The simulator has been started");
 		
 
-		map = new Map();
+		//map = new Map();
 		//map = new Map("test100.map");
 		//map = map.maze(map.getMapWidth(),map.getMapHeight());
-		//map = new Map("empty.map");
-		Sprite tempSprite = new Guard(new Coordinate(16,3,0));
-		((Agent)tempSprite).setBeliefMap(new BeliefMap(map));
+		map = new Map("empty.map");
+		
 		spriteManager = SpriteManager.instance();
 
 		//spriteManager.addAgent(new Guard(new Coordinate(3,13,0)));
+		Sprite tempSprite = new Guard(new Coordinate(3,3,0));
+		((Agent)tempSprite).setBeliefMap(new BeliefMap(map));
 		spriteManager.addAgent((Agent)tempSprite);
-		//spriteManager.addAgent(new Guard(new Coordinate(15,15,0)));
-
-		//spriteManager.addAgent(new Thief(new Coordinate(2,2,0)));
+		
+		tempSprite = new Guard(new Coordinate(16,16,0));
+		((Agent)tempSprite).setBeliefMap(new BeliefMap(map));
+		spriteManager.addAgent((Agent)tempSprite);
+		
+		tempSprite = new Guard(new Coordinate(10,10,0));
+		((Agent)tempSprite).setBeliefMap(new BeliefMap(map));
+		spriteManager.addAgent((Agent)tempSprite);
+		
+		tempSprite = new Thief(new Coordinate(20,20,0));
+		((Agent)tempSprite).setBeliefMap(new BeliefMap(map));
+		spriteManager.addAgent((Agent)tempSprite);
+		
 
 		eventManager = new EventManager(map);
 		
