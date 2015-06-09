@@ -9,25 +9,27 @@ import java.awt.Color;
  */
 public enum GridState {
 	
-	//					Color				|	Moveable	|	 char 	|	Cost 
-	Empty			(	Color.WHITE, 			true,			' ',		1.0			),
-	Wall			(	Color.BLACK, 			false,			'-',		1.0			),
-	Sentry			(	Color.BLUE,				true,			'P',		1.0			),
-	Shade 			(	Color.GRAY,				true,			'S',		1.0			),
-	Window			(	Color.YELLOW,			true,			'W',		1.0			),
-	Door			(	new Color(102,51,0),	true,			'D',		1.0			),
-	Target			(	Color.ORANGE,			true,			'T',		1.0			),
-	Tree			(	new Color(128,128,0),	false,			'B',		1.0			),
-	OuterWall		(	Color.DARK_GRAY,		false,			'+',		1.0			),
-	unknown			(	Color.RED,				true,			'9',		0.5			);
+	//					Color				|	Moveable	|	 char 	|	Cost	| ThiefCost		|astarCost
+	Empty			(	Color.WHITE, 			true,			' ',		1.0,			1.0,			1.0			),
+	Wall			(	Color.BLACK, 			false,			'-',		1.0,			1.0,			1.0			),
+	Sentry			(	Color.BLUE,				true,			'P',		1.0,			1.0,			1.0			),
+	Shade 			(	Color.GRAY,				true,			'S',		1.0,			1.0,			1.0			),
+	Window			(	Color.YELLOW,			true,			'W',		5.0,			3.0,			5.0			),
+	Door			(	new Color(102,51,0),	true,			'D',		4.0,			5.0,			5.0			),
+	Target			(	Color.ORANGE,			true,			'T',		1.0,			1.0,			1.0			),
+	Tree			(	new Color(128,128,0),	false,			'B',		2.0,			2.0,			2.0			),
+	OuterWall		(	Color.DARK_GRAY,		false,			'+',		1.0,			1.0,			1.0			),
+	unknown			(	Color.RED,				true,			'9',		1.0,			1.0,			100.0		);
 
 
 
-	GridState(Color color, boolean moveable,  char fileVal, double cost){
+	GridState(Color color, boolean moveable,  char fileVal, double agentCost, double thiefCost, double astarCost){
 		m_moveable = moveable;
 		this.color = color;
-		this.cost = 0;
+		this.cost = agentCost;
 		m_fileVal = fileVal;
+		this.thiefCost = thiefCost;
+		this.astarCost = astarCost;
 	}
 
 	public Color color(){
@@ -48,10 +50,19 @@ public enum GridState {
 	public double getCost(){
 		return cost;
 	}
-
+	
+	public double getThiefCost(){
+		return thiefCost;
+	}
+	
+	public double getAstarCost(){
+		return astarCost;
+	}
 	Color color;
 	private boolean m_moveable;
 	private GridState m_freedState;
 	private char m_fileVal;
 	private double cost;
+	private double thiefCost;
+	private double astarCost;
 }

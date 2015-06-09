@@ -26,7 +26,7 @@ public class Guard extends Agent {
 	}
 	
 	public Action getAction(){
-		
+		//Action action = aStar(new Coordinate(20,20,0));
 		Action action = basicExploration(); 
 			if (action == null || action.getActionElements() == null || action.getActionElements().isEmpty())
 				action = stico.getMoveAction(lastSeen);
@@ -36,7 +36,7 @@ public class Guard extends Agent {
 		for (Sprite s : lastSeen.getSpriteInVisionMap().values())
 			if (s instanceof Thief)
 				action = BlockingES(s.getCoordinates());
-		
+		//action = aStar(new Coordinate(15,15,0));
 		return action;
 	}
 	

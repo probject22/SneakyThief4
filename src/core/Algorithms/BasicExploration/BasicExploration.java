@@ -6,11 +6,9 @@ package core.Algorithms.BasicExploration;
 import java.util.ArrayList;
 import java.util.Random;
 
-import core.BeliefMap;
 import core.DebugConstants;
 import core.Map;
 import core.Algorithms.Exploration;
-import core.actions.Action;
 import core.sprite.Sprite;
 import dataContainer.Coordinate;
 import dataContainer.GridState;

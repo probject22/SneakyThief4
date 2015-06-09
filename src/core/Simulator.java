@@ -9,6 +9,7 @@ import core.actions.Wait;
 import core.events.EventManager;
 import core.sprite.Agent;
 import core.sprite.Guard;
+import core.sprite.Sprite;
 import core.sprite.SpriteManager;
 import core.sprite.Thief;
 import dataContainer.Coordinate;
@@ -50,15 +51,18 @@ public class Simulator {
 	public Simulator(){
 		if (debug) System.err.println("The simulator has been started");
 		
-		map = new Map();
+
+		//map = new Map();
+		map = new Map("test100.map");
 		//map = map.maze(map.getMapWidth(),map.getMapHeight());
 		//map = new Map("empty.map");
-		
+		Sprite tempSprite = new Guard(new Coordinate(16,3,0));
+		((Agent)tempSprite).setBeliefMap(new BeliefMap(map));
 		spriteManager = SpriteManager.instance();
 
 		//spriteManager.addAgent(new Guard(new Coordinate(3,13,0)));
-		spriteManager.addAgent(new Guard(new Coordinate(16,3,0)));
-		spriteManager.addAgent(new Guard(new Coordinate(15,15,0)));
+		spriteManager.addAgent((Agent)tempSprite);
+		//spriteManager.addAgent(new Guard(new Coordinate(15,15,0)));
 
 		//spriteManager.addAgent(new Thief(new Coordinate(2,2,0)));
 
@@ -178,9 +182,12 @@ public class Simulator {
 					MoveDirection dir = MoveDirection.getDirectionFromAngle(coordinate.angle);
 					coordinate.x += dir.getDx();
 					coordinate.y += dir.getDy();
-					
-					
-					agent.addTimeToKey(actionElement.duration());
+					double time = actionElement.duration();
+					if (agent instanceof Thief)
+						time *= map.getCopyOfMap()[coordinate.x][coordinate.y].getThiefCost();
+					else
+						time *= map.getCopyOfMap()[coordinate.x][coordinate.y].getCost();
+					agent.addTimeToKey(time);
 					//Always trigger events AFTER EXECUTION OF THE ACTIONELEMENT
 					eventManager.triggerEvent(actionElement,agent);
 				}

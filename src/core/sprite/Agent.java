@@ -5,6 +5,7 @@ package core.sprite;
 
 import core.Algorithms.AStar.AStar;
 import core.Algorithms.BasicExploration.BasicRandomExploration;
+import core.Algorithms.LRTAStar.LRTAStar;
 import core.BeliefMap;
 import core.Algorithms.Exploration;
 import core.Algorithms.PathFinder;
@@ -65,6 +66,7 @@ public class Agent extends Sprite {
 		beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 		beliefMapGUi.updateGui();
 		pathFinder = new AStar(beliefMap);
+		//pathFinder = new LRTAStar(beliefMap);
 		exploration.setBeliefMap(map);
 	}
 
@@ -74,6 +76,7 @@ public class Agent extends Sprite {
         beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 	    // Create an A* pathfinder
 	    pathFinder = new AStar(beliefMap);
+	    //pathFinder = new LRTAStar(beliefMap);
 	    exploration = new BasicRandomExploration(this,beliefMap);
 	    
 	    
@@ -143,7 +146,6 @@ public class Agent extends Sprite {
 		Coordinate goal = exploration.getGoal();
 		if (goal == null)
 			return null;
-		System.err.println(goal);
 		Coordinate next = pathFinder.getShortestPath(getCoordinates(), goal);
 		if (next == null)
 			return null;

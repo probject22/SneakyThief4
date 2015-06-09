@@ -28,6 +28,14 @@ public class BeliefMap extends Map {
 			}
 		}
 	}
+	public BeliefMap(Map map){
+		this.map = new GridState[map.getMapWidth()][map.getMapHeight()];
+		for (int i = 0; i<this.map.length; i++){
+			for (int j = 0; j<this.map[0].length; j++){
+				this.map[i][j] = GridState.unknown;
+			}
+		}
+	}
 	
 	public void processVision(Vision vision){
 		HashMap<Coordinate, GridState> stateList = vision.getStateInVisionMap();

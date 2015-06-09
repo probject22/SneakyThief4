@@ -10,6 +10,10 @@ public class DebugConstants {
 	
 	static public boolean beliefMapDebug = false;
 	
-	static public boolean basicExplorationDebug = true;
+	static public boolean basicExplorationDebug = false;
+	
+	static public boolean astarDebug = false;
+	
+	static public boolean lrtastarDebug = false;
 
 }

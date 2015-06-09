@@ -86,7 +86,18 @@ public class Map {
 		return map == null ? null: map.clone();
 	}
 	
-	
+	public ArrayList<Coordinate> getGoal(){
+		ArrayList<Coordinate> goals = null;
+		for(int i =0;i<this.getMapHeight();i++){
+			for(int j =0;j<this.getMapWidth();j++){
+				if (i< this.map.length && i >= 0 && j < this.map[0].length && j >= 0)
+					if(this.map[i][j] == GridState.Target){
+						goals.add(new Coordinate(i,j,0));
+					}
+			}
+		}
+		return goals;
+	}
 	
 	/**
 	 * Initialise the class and load in the map file
@@ -171,10 +182,12 @@ public class Map {
 	 * Width and Height getters
 	 */
 	public int getMapHeight() {
-		return mapHeight;
+		return map[0].length;
+		//return mapHeight;
 	}
 	public int getMapWidth() {
-		return mapWidth;
+		return map.length;
+		//return mapWidth;
 	}
 
 	public java.util.Map<Coordinate,GridState> getIntersectingGridstates(Coordinate from, Coordinate to){
