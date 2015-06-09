@@ -11,7 +11,7 @@ public class PreyExperiment extends AbstractExperiment {
 	
 	public PreyExperiment(){
 		super();
-		names.add("algorithms");
+		names.add("algorithm");
 		names.add("success");
 		names.add("run_time");
 		names.add("n_guards");
@@ -28,7 +28,7 @@ public class PreyExperiment extends AbstractExperiment {
 		
 		for(int i= 0; i < repeats;i++){
 			
-			String algorithms = r.nextBoolean() ? "prey_a_star" : "reverse_a_star";
+			String algorithm = r.nextBoolean() ? "prey_a_star" : "reverse_a_star";
 			String success = r.nextBoolean() ? "-1" : "1";
 			String run_time = Long.toString(r.nextLong());
 			String n_guards = Integer.toString(r.nextInt(100));
@@ -44,7 +44,7 @@ public class PreyExperiment extends AbstractExperiment {
 			String multi_agent_coordination = r.nextBoolean() ? "none" : "BES";
 			
 			String[] v = new String[]{
-				algorithms, success, run_time, 
+				algorithm, success, run_time, 
 				n_guards, map_type, map_area, 
 				map_density, multi_agent_coordination
 			};
