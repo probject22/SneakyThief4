@@ -3,6 +3,7 @@ package mazeGenerator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 
 public class MazeGenerator {
@@ -42,7 +43,7 @@ public class MazeGenerator {
 		passages.add(start);
 		walls.addAll(start.neighbours());
 		while(!walls.isEmpty()){
-			Collections.shuffle(walls);
+			Collections.shuffle(walls, new Random(10));
 			C wall = walls.get(0);
 			int count = 0;
 			for(C c : wall.neighbours()) count += passages.contains(c) ? 1 : 0;
