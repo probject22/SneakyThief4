@@ -49,10 +49,6 @@ import java.util.List;
 	        from.g = 0;
 	        from.h = getHeuristic(from, to);
 
-	            
-
-	            
-
 	        // generate neighbours
 	        List<Node<T>> neighbours = getNeighbours(from);
 	            
