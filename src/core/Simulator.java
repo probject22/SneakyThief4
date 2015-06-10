@@ -27,85 +27,90 @@ public class Simulator {
     private static boolean stop = false;
     private static boolean pause = true;
     private double speed = 0.1;
-    
-    public void setSpeed(double newSpeed){
-    	speed = newSpeed;
-    }
-    public static void setStop(boolean newvalue)
-    {
-    	stop = newvalue;
-    }
-    public static boolean getStop()
-    {
-    	return stop;
-    }
-    public static void setPause(boolean newvalue)
-    {
-    	pause = newvalue;
-    }
-    
-    public static boolean getPause()
-    {
-    	return pause;
-    }
-	public Simulator(){
-		if (debug) System.err.println("The simulator has been started");
-		
 
-		//map = new Map();
-		//map = new Map("test100.map");
-		//map = map.maze(map.getMapWidth(),map.getMapHeight());
-		map = new Map("empty.map");
-		
+	public void setSpeed(double newSpeed) {
+		speed = newSpeed;
+	}
+	public static void setStop(boolean newvalue) {
+		stop = newvalue;
+	}
+	public static boolean getStop() {
+		return stop;
+	}
+	public static void setPause(boolean newvalue) {
+		pause = newvalue;
+	}
+
+	public static boolean getPause() {
+		return pause;
+	}
+
+	public Simulator() {
+		if (debug)
+			System.err.println("The simulator has been started");
+
+		// map = new Map();
+		// map = new Map("test100.map");
+		// map = map.maze(map.getMapWidth(),map.getMapHeight());
+		map = new Map("default.map");
+
 		spriteManager = SpriteManager.instance();
 
-		//spriteManager.addAgent(new Guard(new Coordinate(3,13,0)));
-		Sprite tempSprite = new Guard(new Coordinate(3,3,0));
-		((Agent)tempSprite).setBeliefMap(new BeliefMap(map));
-		spriteManager.addAgent((Agent)tempSprite);
-		
-		tempSprite = new Guard(new Coordinate(16,16,0));
-		((Agent)tempSprite).setBeliefMap(new BeliefMap(map));
-		spriteManager.addAgent((Agent)tempSprite);
-		
-		tempSprite = new Guard(new Coordinate(10,10,0));
-		((Agent)tempSprite).setBeliefMap(new BeliefMap(map));
-		spriteManager.addAgent((Agent)tempSprite);
-		
-		tempSprite = new Thief(new Coordinate(20,20,0));
-		((Agent)tempSprite).setBeliefMap(new BeliefMap(map));
-		spriteManager.addAgent((Agent)tempSprite);
-		
+		// spriteManager.addAgent(new Guard(new Coordinate(3,13,0)));
+		Sprite tempSprite = new Guard(new Coordinate(3, 3, 0));
+		((Agent) tempSprite).setBeliefMap(new BeliefMap(map));
+		spriteManager.addAgent((Agent) tempSprite);
+
+		/*
+		 * tempSprite = new Guard(new Coordinate(16,16,0));
+		 * ((Agent)tempSprite).setBeliefMap(new BeliefMap(map));
+		 * spriteManager.addAgent((Agent)tempSprite);
+		 * 
+		 * tempSprite = new Guard(new Coordinate(10,10,0));
+		 * ((Agent)tempSprite).setBeliefMap(new BeliefMap(map));
+		 * spriteManager.addAgent((Agent)tempSprite);
+		 */
+
+		tempSprite = new Thief(new Coordinate(20, 20, 0));
+		((Agent) tempSprite).setBeliefMap(new BeliefMap(map));
+		spriteManager.addAgent((Agent) tempSprite);
 
 		eventManager = new EventManager(map);
-		
-		/*to get the agent list call spriteManager.getAgentList(); */
-		
+
+		/* to get the agent list call spriteManager.getAgentList(); */
+
 		/* gui stuff */
 		mainFrame = new MainFrame();
 		mainFrame.setMap(map);
-		
-		
+
 		gameLoop();
 	}
-	
-	private void gameLoop(){
+
+	private void gameLoop() {
 		mainFrame.updateGui();
-		//0 = running, 1 = thieves win, 2 = thieves loss
+		// 0 = running, 1 = thieves win, 2 = thieves loss
 		int winLossValue = 0;
-		while (!stop){
-			while (pause && !stop){
+		while (!stop) {
+			while (pause && !stop) {
 				sleep(0.1);
 			}
 			firstAgentAction();
-			//TODO: Check through thieves for win/loss condition
-			if(winLossValue == 1){
-				//Present win 
-				stop = !stop;
+			for (Agent f : spriteManager.getAgentList()) {
+				if (f instanceof Thief) {
+					if (((Thief) f).isCaught()) {
+						winLossValue = 2;
+					} else if (((Thief) f).atGoal()) {
+						winLossValue = 1;
+					}
+				}
 			}
-			if(winLossValue == 2){
-				//Present loss
-				stop = !stop;
+			if (winLossValue == 1) {
+				System.out.println("VERY SNEAKY THIEF!");
+				pause = !pause;
+			}
+			if (winLossValue == 2) {
+				System.out.println("NOT A SNEAKY THIEF!");
+				pause = !pause;
 			}
 			/* finish the move by updateting the gui */
 			mainFrame.updateGui();
@@ -114,31 +119,37 @@ public class Simulator {
 		System.out.println("Stop");
 		System.exit(0);
 	}
+
 	/**
 	 * This puts the current thread into sleep
-	 * @param time the time that the thread has to sleep in seconds
+	 * 
+	 * @param time
+	 *            the time that the thread has to sleep in seconds
 	 */
-	private void sleep(double time){
+	private void sleep(double time) {
 		time *= 1000;
 		try {
-			Thread.sleep((long)time);
+			Thread.sleep((long) time);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * this function checks if a move is possible
-	 * TODO: check diagonal movement.
+	 * this function checks if a move is possible TODO: check diagonal movement.
 	 * this check should be done both on the map and against the list of agents
-	 * @param agent	The agent who want to do the move
-	 * @param move the move the agent wants to perform
+	 * 
+	 * @param agent
+	 *            The agent who want to do the move
+	 * @param move
+	 *            the move the agent wants to perform
 	 * @return true if the move is possible else false
 	 */
 	private boolean isMovePossible(Agent agent, Move move) {
-		
+
 		Coordinate coordinate = agent.getCoordinates().clone();
-		MoveDirection dir = MoveDirection.getDirectionFromAngle(coordinate.angle);
+		MoveDirection dir = MoveDirection
+				.getDirectionFromAngle(coordinate.angle);
 		coordinate.x += dir.getDx();
 		coordinate.y += dir.getDy();
 		GridState[][] tempMap = map.getCopyOfMap();
@@ -146,8 +157,8 @@ public class Simulator {
 			return false;
 		if (!(coordinate.x < tempMap.length && coordinate.y < tempMap[0].length))
 			return true;
-		if (tempMap[coordinate.x][coordinate.y].moveable()){
-			for (Agent tempAgent: spriteManager.getAgentList()){
+		if (tempMap[coordinate.x][coordinate.y].moveable()) {
+			for (Agent tempAgent : spriteManager.getAgentList()) {
 				Coordinate coords = tempAgent.getCoordinates();
 				if ((coords.x == coordinate.x && coords.y == coordinate.y))
 					return false; // if there is an agent in the way
@@ -158,98 +169,100 @@ public class Simulator {
 	}
 
 	/**
-	 * Get the action list of the agent who spend the least duration and execute the list
+	 * Get the action list of the agent who spend the least duration and execute
+	 * the list
 	 */
-	public void firstAgentAction(){
+	public void firstAgentAction() {
 		Agent agent = spriteManager.getFirstAgent();
-		
-		/*trigger the wait event to send an update of the vision to the agent */
-		eventManager.triggerEvent( new Wait(0),agent);
-		
+
+		/* trigger the wait event to send an update of the vision to the agent */
+		eventManager.triggerEvent(new Wait(0), agent);
+
 		Action agentAction = agent.getAction();
 
-		for (ActionElement actionElement: agentAction.getActionElements()){
+		for (ActionElement actionElement : agentAction.getActionElements()) {
 
 			/*
-			Find a way of using polymorphism to do this instead of a switch
+			 * Find a way of using polymorphism to do this instead of a switch
 			 */
 
-
-
 			/* this handles the turn actionElement */
-			if ( actionElement instanceof Turn){
-				//System.err.println("Current angle "+ agent.getCoordinates().angle + "add " + ((Turn) actionElement).getAngle());
-				agent.getCoordinates().addToAngle(((Turn) actionElement).getAngle());
-				//System.err.println("result "+ agent.getCoordinates().angle);
+			if (actionElement instanceof Turn) {
+				// System.err.println("Current angle "+
+				// agent.getCoordinates().angle + "add " + ((Turn)
+				// actionElement).getAngle());
+				agent.getCoordinates().addToAngle(
+						((Turn) actionElement).getAngle());
+				// System.err.println("result "+ agent.getCoordinates().angle);
 				agent.addTimeToKey(actionElement.duration());
-				eventManager.triggerEvent(actionElement,agent);
+				eventManager.triggerEvent(actionElement, agent);
 			}
 
-			/* this handles the move actionElement (THIS NEEDS TO BE IMPLEMENTED) */
-			if ( actionElement instanceof Move){
-					if (!(agent instanceof Guard) || !((Guard)agent).isInTower()){
-						Move move = (Move) actionElement;
-						if (isMovePossible(agent, move)) {
-							Coordinate coordinate = agent.getCoordinates();
-							MoveDirection dir = MoveDirection
-									.getDirectionFromAngle(coordinate.angle);
-							coordinate.x += dir.getDx();
-							coordinate.y += dir.getDy();
-							double time = actionElement.duration();
-							if (agent instanceof Thief)
-								time *= map.getCopyOfMap()[coordinate.x][coordinate.y]
-										.getThiefCost();
-							else
-								time *= map.getCopyOfMap()[coordinate.x][coordinate.y]
-										.getCost();
-							agent.addTimeToKey(time);
-							// Always trigger events AFTER EXECUTION OF THE
-							// ACTIONELEMENT
-							eventManager.triggerEvent(actionElement, agent);
-						}
+			/*
+			 * this handles the move actionElement (THIS NEEDS TO BE
+			 * IMPLEMENTED)
+			 */
+			if (actionElement instanceof Move) {
+				if (!(agent instanceof Guard) || !((Guard) agent).isInTower()) {
+					Move move = (Move) actionElement;
+					if (isMovePossible(agent, move)) {
+						Coordinate coordinate = agent.getCoordinates();
+						MoveDirection dir = MoveDirection
+								.getDirectionFromAngle(coordinate.angle);
+						coordinate.x += dir.getDx();
+						coordinate.y += dir.getDy();
+						double time = actionElement.duration();
+						if (agent instanceof Thief)
+							time *= map.getCopyOfMap()[coordinate.x][coordinate.y]
+									.getThiefCost();
 						else
-						{
-							//if a agent trys to go somewhere where it doesnt belong give him a time penalty
-							//this avoids that the simulator crashes
-							agent.addTimeToKey(0.1);
-						}
-						
+							time *= map.getCopyOfMap()[coordinate.x][coordinate.y]
+									.getCost();
+						agent.addTimeToKey(time);
+						// Always trigger events AFTER EXECUTION OF THE
+						// ACTIONELEMENT
+						eventManager.triggerEvent(actionElement, agent);
+					} else {
+						// if a agent trys to go somewhere where it doesnt
+						// belong give him a time penalty
+						// this avoids that the simulator crashes
+						agent.addTimeToKey(0.1);
 					}
+
+				}
 			}
 
 			/* handle the wait ActionElement */
-			if ( actionElement instanceof Wait){
+			if (actionElement instanceof Wait) {
 				if (agent instanceof Guard)
-					if (map.getCopyOfMap()[agent.getCoordinates().x][agent.getCoordinates().y] == GridState.Sentry)
+					if (map.getCopyOfMap()[agent.getCoordinates().x][agent
+							.getCoordinates().y] == GridState.Sentry)
 						if (actionElement.duration() > 3.0)
-							if (((Guard)agent).isInTower())
-								((Guard)agent).leaveTower();
+							if (((Guard) agent).isInTower())
+								((Guard) agent).leaveTower();
 							else
-								((Guard)agent).enterTower();
-						
-				agent.addTimeToKey( actionElement.duration());
-				
-				eventManager.triggerEvent(actionElement,agent);
+								((Guard) agent).enterTower();
+
+				agent.addTimeToKey(actionElement.duration());
+
+				eventManager.triggerEvent(actionElement, agent);
 			}
 
 		}
-
-
 
 		/* update the duration witch was spend to execute the agentAction */
 		;
 
 		/* put the agent back into the queue with a new duration */
 		spriteManager.addAgent(agent);
-		
-		//System.err.println(agent.getCoordinates().toString());
+
+		// System.err.println(agent.getCoordinates().toString());
 	}
 
+	public static void main(String[] args) {
+		new Simulator();
+	}
 
-    public static void main(String [] args){
-    	new Simulator();
-    }
-    
 	public static Map map;
 	private SpriteManager spriteManager;
 	private EventManager eventManager;
