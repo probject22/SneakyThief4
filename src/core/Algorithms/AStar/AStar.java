@@ -179,11 +179,14 @@ public class AStar implements PathFinder<Coordinate> {
 				if (grid[tempNode.x][tempNode.y].moveable()){
 					SpriteManager manager = SpriteManager.instance();
 					List<Agent> agents = manager.getAgentList();
+					boolean found = false;
 					for(Agent agent: agents){
 						Node checkedAgent = new Node(null, agent.getCoordinates().x, agent.getCoordinates().y);
-					if(checkedAgent.x != tempNode.x||checkedAgent.y!=tempNode.y)
-					out.add(tempNode);	
+						if(checkedAgent.x == tempNode.x && checkedAgent.y == tempNode.y)
+							found = true;
 					}
+					if (!found)
+						out.add(tempNode);
 					if (agents.size() == 0)
 						out.add(tempNode);	
 					
