@@ -37,7 +37,8 @@ public class RealTimeAStar implements PathFinder<Coordinate> {
 		start.f = start.c.distance(to);
 		
 		Node n = start;
-		
+		int MAX_ITERATION = 100000;
+		int i = 0;
 		while(!n.c.equals(to)){
 			//System.out.println(n.c);
 			List<Node> neighbours = neighbours(n);
@@ -53,6 +54,7 @@ public class RealTimeAStar implements PathFinder<Coordinate> {
 			Node p = n;
 			n = neighbours.get(0);
 			n.parent = p;	
+			if(i++ > MAX_ITERATION) break;
 		}
 		
 		while (n.parent.parent != null)
