@@ -45,23 +45,29 @@ public class Guard extends Agent {
 		
 		if(catchMode){
 			
+			//if the thief is still in view cone follow him.
 			if (lastSeen.getSpriteInVisionMap().containsValue(lastSeenThief)){
 				return BlockingES(lastSeenThiefDirection);
 			}
+			
+			//if hear no sound gets out of catch mode
 			if (soundsDirection.isEmpty()){
 				catchMode = false;
 			}
+			//else try to find where the sound comes from
 			else{
+				
 				System.out.println("catchingHear");
 				double closestThief = soundsDirection.get(0);
-				double closestThiefDirection = Math.abs(getCoordinates().getAngle(lastSeenThiefDirection)- soundsDirection.remove(0));
+				double closestThiefDirection = Math.abs(getCoordinates().getAngle(lastSeenThiefDirection) - soundsDirection.remove(0));
 				
 				for (double direction : soundsDirection){
-					if (Math.abs(this.getCoordinates().clone().getAngle(lastSeenThiefDirection)-direction) < closestThiefDirection){
+					if (Math.abs(getCoordinates().clone().getAngle(lastSeenThiefDirection) - direction) < closestThiefDirection){
 						closestThiefDirection = Math.abs(this.getCoordinates().getAngle(lastSeenThiefDirection)-direction);
 						closestThief = direction;
 					}
 				}
+				System.out.println(closestThief);
 				lastSeenThiefDirection = new Coordinate((int)(Math.sin(closestThief)*2)+getCoordinates().x,(int)(Math.cos(closestThief)*2)+getCoordinates().y,0);
 				soundsDirection.clear();
 				
@@ -100,7 +106,7 @@ public class Guard extends Agent {
 		otherAgents.remove(lastSeenThiefDirection);
 		Coordinate next = BES.getBlockingLocation(getCoordinates().clone(),otherAgents,intruder);
 		//Use A* or RTA* to get to the Blocking Coordinate.
-		return rTAStar(next);
+		return rTAStar(intruder);
 	}
 	public void enterTower(){
 		this.currentMaXVisionRange = this.towerMaxVisionRange;
@@ -124,6 +130,8 @@ public class Guard extends Agent {
 	}
 	
 	public boolean hasCaught(){
+		if (lastSeen == null ||lastSeen.getSpriteInVisionMap() == null || lastSeen.getSpriteInVisionMap().size() ==0)
+			return false;
 		for (Sprite s : lastSeen.getSpriteInVisionMap().values()){
 			if (s instanceof Thief){
 					if(s.getCoordinates().isNeighbour(this.getCoordinates())){

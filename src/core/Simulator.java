@@ -70,7 +70,10 @@ public class Simulator {
 		 * ((Agent)tempSprite).setBeliefMap(new BeliefMap(map));
 		 * spriteManager.addAgent((Agent)tempSprite);
 		 */
-
+		tempSprite = new Guard(new Coordinate(10, 10, 0));
+		((Agent) tempSprite).setBeliefMap(new BeliefMap(map));
+		spriteManager.addAgent((Agent) tempSprite);
+		
 		tempSprite = new Thief(new Coordinate(20, 20, 0));
 		((Agent) tempSprite).setBeliefMap(new BeliefMap(map));
 		spriteManager.addAgent((Agent) tempSprite);
