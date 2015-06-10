@@ -6,6 +6,7 @@ package core.sprite;
 import core.Algorithms.AStar.AStar;
 import core.Algorithms.BasicExploration.BasicRandomExploration;
 import core.Algorithms.LRTAStar.LRTAStar;
+import core.Algorithms.RTAStar.MapRTAStar;
 import core.BeliefMap;
 import core.Algorithms.Exploration;
 import core.Algorithms.PathFinder;
@@ -54,6 +55,7 @@ public class Agent extends Sprite {
 	
 	
 	private PathFinder<Coordinate> pathFinder;
+	private PathFinder<Coordinate> realTimePathFinder;
 	
 	protected ArrayList<Event> events = new ArrayList<Event>();
 	
@@ -67,7 +69,7 @@ public class Agent extends Sprite {
 		beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 		beliefMapGUi.updateGui();
 		pathFinder = new AStar(beliefMap);
-		//pathFinder = new LRTAStar(beliefMap);
+		realTimePathFinder = new MapRTAStar(beliefMap);
 		exploration.setBeliefMap(map);
 	}
 
@@ -77,7 +79,7 @@ public class Agent extends Sprite {
         beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 	    // Create an A* pathfinder
 	    pathFinder = new AStar(beliefMap);
-	    //pathFinder = new LRTAStar(beliefMap);
+	    realTimePathFinder = new MapRTAStar(beliefMap);
 	    exploration = new BasicRandomExploration(this,beliefMap);
 	    
 	    
@@ -98,6 +100,8 @@ public class Agent extends Sprite {
 			processVision(event);
 		if (event instanceof Sound && this instanceof Thief)
 			((Thief)this).processSound(event);
+		if (event instanceof Sound && this instanceof Guard)
+			((Guard)this).processSound(event);
 	}
 
 	private void processVision(Event vision){
@@ -134,6 +138,20 @@ public class Agent extends Sprite {
 	protected Action aStar(Coordinate goal){
 		Action action = new Action();
 		Coordinate next = pathFinder.getShortestPath(getCoordinates(), goal);
+		if (next == null)
+			return null;
+		double angle = getCoordinates().angle;
+		double goalAngle = getCoordinates().getAngle(next);
+		action.addActionElement(new Turn(angle, goalAngle, Agent.MAX_SPEED));
+		action.addActionElement(new Move(Agent.MAX_SPEED));
+		
+		return action;
+	}
+	
+	
+	protected Action rTAStar(Coordinate goal){
+		Action action = new Action();
+		Coordinate next = realTimePathFinder.getShortestPath(getCoordinates(), goal);
 		if (next == null)
 			return null;
 		double angle = getCoordinates().angle;

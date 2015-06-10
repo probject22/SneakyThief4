@@ -62,7 +62,6 @@ public class Thief extends Agent {
 		//If yes use reverse RTA* to escape.
 		
 		List<Coordinate> agentsInView = new ArrayList<Coordinate>(lastSeen.getSpriteInVisionMap().keySet());
-		System.out.println(agentsInView.size());
 		for (Sprite s : lastSeen.getSpriteInVisionMap().values()) {
 			if (s instanceof Guard){
 				action = reverseAStar(agentsInView);
