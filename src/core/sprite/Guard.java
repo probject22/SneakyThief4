@@ -112,4 +112,16 @@ public class Guard extends Agent {
 	public boolean isInTower(){
 		return inTower;
 	}
+	
+	public boolean hasCought(){
+		for (Sprite s : lastSeen.getSpriteInVisionMap().values()){
+			if (s instanceof Thief){
+					if(s.getCoordinates().isNeighbour(this.getCoordinates())){
+						System.out.println("We WON");
+						return true;
+					}
+			}
+	}
+		return false;
+	}
 }

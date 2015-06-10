@@ -102,29 +102,4 @@ public class Thief extends Agent {
 			{return true;}
 		return false;
 	}
-	
-	public boolean isCaught(){
-		SpriteManager spriteManager = SpriteManager.instance();
-		ArrayList<Guard> guardList = spriteManager.getGuards();
-		Coordinate myCoords = this.getCoordinates();
-		for(int i = 0; i<guardList.size();i++){
-			Agent thisAgent = guardList.get(i);
-			Coordinate agentCoords = thisAgent.getCoordinates();
-			double distance = myCoords.distanceBetweenCoordinates(myCoords, agentCoords);
-			if(distance<2&&distance!=0){
-				Vision vision = thisAgent.getLastSeen();
-				HashMap<Coordinate, Sprite> agentsInVision = vision.getSpriteInVisionMap();
-				for(int j = 0;j<agentsInVision.size();j++){
-					if(this == agentsInVision.get(j)){
-						return true;
-					}
-					else return false;
-				}
-				
-			}
-
-		}
-		return false;
-		
-	}
 }
