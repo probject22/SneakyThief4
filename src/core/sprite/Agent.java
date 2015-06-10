@@ -3,15 +3,19 @@
  */
 package core.sprite;
 
-import core.Algorithms.AStar.AStar;
-import core.Algorithms.BasicExploration.BasicRandomExploration;
-import core.Algorithms.LRTAStar.LRTAStar;
-import core.Algorithms.RTAStar.MapRTAStar;
+import gui.BeliefMapGui;
+
+import java.util.ArrayList;
+
 import core.BeliefMap;
-import core.Algorithms.Exploration;
-import core.Algorithms.PathFinder;
 import core.DebugConstants;
 import core.Map;
+import core.Algorithms.Exploration;
+import core.Algorithms.PathFinder;
+import core.Algorithms.AStar.AStar;
+import core.Algorithms.BasicExploration.BasicRandomExploration;
+import core.Algorithms.RTAStar.MapRTAStar;
+import core.Algorithms.RTAStar.RealTimeAStar;
 import core.actions.Action;
 import core.actions.Move;
 import core.actions.Turn;
@@ -19,9 +23,6 @@ import core.events.Event;
 import core.events.Sound;
 import core.events.Vision;
 import dataContainer.Coordinate;
-import gui.BeliefMapGui;
-
-import java.util.ArrayList;
 
 /**
  *
@@ -68,7 +69,7 @@ public class Agent extends Sprite {
 		beliefMapGUi.close();
 		beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 		beliefMapGUi.updateGui();
-		pathFinder = new AStar(beliefMap);
+		pathFinder = new RealTimeAStar(beliefMap);
 		realTimePathFinder = new MapRTAStar(beliefMap);
 		exploration.setBeliefMap(map);
 	}
@@ -78,7 +79,7 @@ public class Agent extends Sprite {
         this.beliefMap =  new BeliefMap();
         beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 	    // Create an A* pathfinder
-	    pathFinder = new AStar(beliefMap);
+	    pathFinder = new RealTimeAStar(beliefMap);
 	    realTimePathFinder = new MapRTAStar(beliefMap);
 	    exploration = new BasicRandomExploration(this,beliefMap);
 	    

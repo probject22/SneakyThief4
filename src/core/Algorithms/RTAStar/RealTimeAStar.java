@@ -36,7 +36,8 @@ public class RealTimeAStar implements PathFinder<Coordinate> {
 		
 		Node n = start;
 		
-		while(!n.equals(to)){
+		while(!n.c.equals(to)){
+			//System.out.println(n.c);
 			List<Node> neighbours = neighbours(n);
 			
 			// don't visit a node twice
@@ -49,7 +50,7 @@ public class RealTimeAStar implements PathFinder<Coordinate> {
 			n.f = neighbours.get(1).f;
 			Node p = n;
 			n = neighbours.get(0);
-			p.parent = n;
+			n.parent = p;	
 		}
 		
 		while (n.parent.parent != null)
