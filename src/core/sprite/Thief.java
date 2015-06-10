@@ -9,6 +9,7 @@ import core.Algorithms.reverseRTAStar.MapReverseRTAStar;
 import core.actions.Action;
 import core.actions.Move;
 import core.actions.Turn;
+import core.actions.Wait;
 import core.events.Event;
 import core.events.Sound;
 import core.events.Vision;
@@ -23,6 +24,7 @@ public class Thief extends Agent {
 	protected ThiefPath<Coordinate> thiefPath;
 	protected ArrayList<Double> soundsDirection = new ArrayList<Double>();
 	protected boolean panic;
+	protected ThiefStates currentState = ThiefStates.EXPLORATION;
 	/**
 	 * @param coords
 	 */
@@ -39,38 +41,95 @@ public class Thief extends Agent {
 		soundsDirection.add(sound.getDirection());
 	}
 	public Action getAction(){
+		Action out = null;
 		
-		Action action = aStar(target);
-		
-		if (panic){
-			
-			if(soundsDirection.isEmpty())
-				panic = false;
+		switch(currentState){
+		case EXPLORATION:
+			if (toPanicState()){
+				currentState = ThiefStates.PANIC;
+			}
+			else if (!toTargetState()){
+				out = explorationState();
+				if (out != null)
+					return out;
+			}
+			currentState = ThiefStates.TARGET;
+			/////////////////////////////////////////////////////////////////////////////
+		case TARGET:
+			if (toPanicState()){
+				currentState = ThiefStates.PANIC;
+			}
 			else{
-				List<Coordinate> followers = new ArrayList<Coordinate>(lastSeen.getSpriteInVisionMap().keySet());
-				for(double soundDirection : soundsDirection){
-					followers.add(new Coordinate((int)(Math.sin(soundDirection)*2),
-											(int)(Math.cos(soundDirection)*2),0));
-				}
-				action = reverseAStar(followers);
-				soundsDirection.clear();		
-				return action;	
-				}
+				out = targetState();
+				if (out != null)
+					return out;
+			}
+			////////////////////////////////////////////////////////////////
+		case PANIC:
+			out = panicState();
+			if (out != null)
+				return out;
+			currentState = ThiefStates.EXPLORATION;
 		}
-			
-		// Check if there is a Agent in View (This should be done using belief map instead)!!
-		//If yes use reverse RTA* to escape.
 		
-		List<Coordinate> agentsInView = new ArrayList<Coordinate>(lastSeen.getSpriteInVisionMap().keySet());
+		
+		//To avoid null errors
+		if (out == null){
+			out = new Action();
+			out.addActionElement(new Wait(0.01));
+		}
+		return out;
+
+	}
+	protected boolean toPanicState(){
 		for (Sprite s : lastSeen.getSpriteInVisionMap().values()) {
 			if (s instanceof Guard){
-				action = reverseAStar(agentsInView);
-				panic = true;
-				System.out.println("panic");
-				break;
+				return true;
 			}
 		}
-		return action;
+		return false;
+	}
+	protected Action panicState(){
+		List<Coordinate> followers = new ArrayList<Coordinate>(lastSeen.getSpriteInVisionMap().keySet());
+		for (Sprite s : lastSeen.getSpriteInVisionMap().values()) {
+			if (s instanceof Guard){
+				Action action = reverseAStar(followers);
+				if (action != null)
+					return action;
+			}
+		}
+		if(soundsDirection.isEmpty())
+			return null;
+		else{
+			followers = new ArrayList<Coordinate>(lastSeen.getSpriteInVisionMap().keySet());
+			for(double soundDirection : soundsDirection){
+				followers.add(new Coordinate((int)(Math.sin(soundDirection)*2+getCoordinates().x),
+										(int)(Math.cos(soundDirection)*2+getCoordinates().y),0));
+			}
+			Action action = reverseAStar(followers);
+			soundsDirection.clear();		
+			return action;	
+			}
+	}
+	
+	protected boolean toTargetState(){
+		if (target != null)
+			return true;
+		return false;
+	}
+	
+	protected Action targetState(){
+		return aStar(target);
+	}
+	
+	protected boolean toExplorationState(){
+		if (target != null)
+			return false;
+		return true;
+	}
+	protected Action explorationState(){
+		target = new Coordinate(20,25,0);
+		return null;
 	}
 	
 	protected Action reverseAStar(List<Coordinate> followers){
@@ -101,5 +160,11 @@ public class Thief extends Agent {
 		if(thisMap[currentCoord.x][currentCoord.y]== GridState.Target)
 			{return true;}
 		return false;
+	}
+	
+	protected enum ThiefStates{
+		PANIC,
+		EXPLORATION,
+		TARGET
 	}
 }
