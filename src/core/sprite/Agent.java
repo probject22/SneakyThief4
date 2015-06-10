@@ -51,7 +51,7 @@ public class Agent extends Sprite {
 	private Exploration exploration;
 	
 	// Set the Target Coordinate
-	protected Coordinate target = new Coordinate(1,1,0);
+	protected Coordinate target = new Coordinate(15,10	,0);
 	
 	
 	private PathFinder<Coordinate> pathFinder;
