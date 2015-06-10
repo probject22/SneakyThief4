@@ -96,6 +96,10 @@ public class MazeGenerator {
 			n.add(new C(x,y-1));
 			n.add(new C(x+1,y));
 			n.add(new C(x,y+1));
+			n.add(new C(x+1,y+1));
+			n.add(new C(x+1,y-1));
+			n.add(new C(x-1,y+1));
+			n.add(new C(x-1,y-1));
 			List<C> r = new ArrayList<>();
 			for (C c : n) if(c.x < 0 || c.x >= maze.length || c.y < 0 || c.y >= maze[0].length) r.add(c);
 			for (C c : r) n.remove(c);

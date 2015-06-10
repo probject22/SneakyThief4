@@ -40,8 +40,11 @@ public class RealTimeAStar implements PathFinder<Coordinate> {
 		int MAX_ITERATION = 1000000;
 		int i = 0;
 		while(!n.c.equals(to)){
-			//System.out.println(n.c);
+			System.out.println(n.c);
 			List<Node> neighbours = neighbours(n);
+			
+			if(neighbours.size() == 1)
+				return neighbours.get(0).c;
 			
 			// don't visit a node twice
 			for(Node no : neighbours){
