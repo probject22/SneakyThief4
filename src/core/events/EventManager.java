@@ -202,9 +202,10 @@ public class EventManager {
 		
 		//Adding the sprite in the vision to the Sprite hash map
 				for (Sprite sprite: spriteManager.getAgentList()){
-					if (!isInView(sprite.getCoordinates(),visionAngle,minVisionRange,baseCoords) &&
-							isInView(sprite.getCoordinates(),visionAngle,maxVisionRange,baseCoords)){
-							vision.addSprite(sprite.getCoordinates(), sprite);
+					for(Coordinate tempCoord :vision.getStateInVisionMap().keySet()){
+						Coordinate spriteCoord = sprite.getCoordinates();
+						if (tempCoord.x == spriteCoord.x && tempCoord.y == spriteCoord.y)
+							vision.addSprite(sprite.getCoordinates().clone(), sprite);
 					}
 				}
 		
