@@ -207,6 +207,13 @@ public class Simulator {
 							// ACTIONELEMENT
 							eventManager.triggerEvent(actionElement, agent);
 						}
+						else
+						{
+							//if a agent trys to go somewhere where it doesnt belong give him a time penalty
+							//this avoids that the simulator crashes
+							agent.addTimeToKey(0.1);
+						}
+						
 					}
 			}
 
