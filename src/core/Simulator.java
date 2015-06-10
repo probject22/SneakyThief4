@@ -97,11 +97,14 @@ public class Simulator {
 			firstAgentAction();
 			for (Agent f : spriteManager.getAgentList()) {
 				if (f instanceof Thief) {
-					if (((Thief) f).isCaught()) {
-						winLossValue = 2;
-					} else if (((Thief) f).atGoal()) {
+					if (((Thief) f).atGoal()) {
 						winLossValue = 1;
 					}
+				}
+				else if (f instanceof Guard)
+				{
+					if (((Guard)f).hasCaught())
+						winLossValue = 2;
 				}
 			}
 			if (winLossValue == 1) {
