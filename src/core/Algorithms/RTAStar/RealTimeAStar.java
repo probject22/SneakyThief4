@@ -29,6 +29,8 @@ public class RealTimeAStar implements PathFinder<Coordinate> {
 	@Override
 	public Coordinate getShortestPath(Coordinate from, Coordinate to) {
 		
+		if(!map.isMoveable(to)) return null;
+		
 		Node start = new Node();
 		start.c = from.clone();
 		start.parent = null;
