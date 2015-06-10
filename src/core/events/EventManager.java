@@ -108,11 +108,28 @@ public class EventManager {
 				isInRadius (target,baseCoord,r);
 		
 	}
-	
+	/**
+	 * Looks at four different conditions to find if the corners that 
+	 * have the largest angles from the agent(base).
+	 * @param base : agents position
+	 * @param block: blocks position
+	 * @return angle vision around a block
+	 */
 	private double getBlockingAngle(Coordinate base,Coordinate block){
-		double diffAngle = base.getAngle(block);
-		double dist = base.distance(block);
-		return 2*Math.atan(0.5*(Math.sin(diffAngle)+Math.cos(diffAngle))/dist);
+		
+		if((base.x > block.x && base.y > block.y) || (base.x < block.x && base.y < block.y))
+			return Math.abs(base.getAngle(new Coordinate(block.x+1,block.y-1,0)) - 
+					base.getAngle(new Coordinate(block.x-1,block.y+1,0)));
+		if((base.x < block.x && base.y > block.y) || (base.x > block.x && base.y < block.y))
+			return Math.abs(base.getAngle(new Coordinate(block.x+1,block.y+1,0)) - 
+					base.getAngle(new Coordinate(block.x-1,block.y-1,0)));
+		if(base.x == block.x)
+				return Math.abs(base.getAngle(new Coordinate(block.x,block.y+1,0)) - 
+								base.getAngle(new Coordinate(block.x,block.y-1,0)));
+		else
+			return Math.abs(base.getAngle(new Coordinate(block.x+1,block.y,0)) - 
+							base.getAngle(new Coordinate(block.x-1,block.y,0)));
+		
 	}
 	
 	private void generateVisionEvent(Agent agent, double timeStamp){
@@ -120,8 +137,8 @@ public class EventManager {
 		Vision vision = new Vision(timeStamp);
 		vision.setBaseCoords(agent.getCoordinates().clone());
 		double visionAngle = agent.getVisionAngleRad();
-		double minVisionRange = agent.getMinVisionRange();
-		double maxVisionRange = agent.getMaxVisionRange();
+		double minVisionRange = agent.getCurrentMinVisionRange();
+		double maxVisionRange = agent.getCurrentMaxVisionRange();
 		double towerVisionRange = agent.getTowerVisionRange();
 		double structureVisionRange = agent.getStructureVisionRange();
 		
@@ -162,16 +179,20 @@ public class EventManager {
 		//Deleting the Areas behind the walls
 		double blockAngle = 0;
 		ArrayList<Coordinate> remove = new ArrayList<Coordinate>();
+		//Goes through all the Grids in the view Cone which does not care about walls
 		for(Coordinate barrier : vision.getStateInVisionMap().keySet())
 		{
 			if(vision.getStateInVisionMap().get(barrier) == GridState.Wall)
 			{
-				
-				blockAngle = Math.PI;//getBlockingAngle(baseCoords,barrier);
-				
+				//Gets the angle of the left side of the barrier - right side of the barrier
+				blockAngle = getBlockingAngle(baseCoords,barrier);
+				Coordinate newBase = baseCoords.clone();
+				newBase.angle = baseCoords.getAngle(barrier);
+				// Goes through all the grids again and deletes 
+				//the ones which are behind the barrier at the found angle
 				for(Coordinate gridCheck : vision.getStateInVisionMap().keySet()){
-					if (!isInView(gridCheck,blockAngle,baseCoords.distance(barrier),baseCoords) &&
-							isInView(gridCheck,blockAngle,maxVisionRange,baseCoords)){
+					if (!isInView(gridCheck,blockAngle,baseCoords.distance(barrier),newBase) &&
+							isInView(gridCheck,blockAngle,maxVisionRange,newBase)){
 						remove.add(gridCheck);
 					}
 				}
@@ -184,7 +205,7 @@ public class EventManager {
 					if (!isInView(sprite.getCoordinates(),visionAngle,minVisionRange,baseCoords) &&
 							isInView(sprite.getCoordinates(),visionAngle,maxVisionRange,baseCoords) &&
 							vision.getStateInVisionMap().containsKey(sprite.getCoordinates())){
-						vision.addSprite(sprite.getCoordinates(), sprite);
+							vision.addSprite(sprite.getCoordinates(), sprite);
 					}
 				}
 		

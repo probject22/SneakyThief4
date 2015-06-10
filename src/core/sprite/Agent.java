@@ -15,6 +15,7 @@ import core.actions.Action;
 import core.actions.Move;
 import core.actions.Turn;
 import core.events.Event;
+import core.events.Sound;
 import core.events.Vision;
 import dataContainer.Coordinate;
 import gui.BeliefMapGui;
@@ -49,12 +50,12 @@ public class Agent extends Sprite {
 	private Exploration exploration;
 	
 	// Set the Target Coordinate
-	protected Coordinate target = new Coordinate(18,18,0);
+	protected Coordinate target = new Coordinate(1,1,0);
 	
 	
 	private PathFinder<Coordinate> pathFinder;
 	
-	private ArrayList<Event> events = new ArrayList<Event>();
+	protected ArrayList<Event> events = new ArrayList<Event>();
 	
 	private boolean debug = DebugConstants.agentDebug;
 	private BeliefMapGui beliefMapGUi;
@@ -95,6 +96,8 @@ public class Agent extends Sprite {
 		events.add(event);
 		if (event instanceof Vision)
 			processVision(event);
+		if (event instanceof Sound && this instanceof Thief)
+			((Thief)this).processSound(event);
 	}
 
 	private void processVision(Event vision){
@@ -198,6 +201,20 @@ public class Agent extends Sprite {
 		return towerVisionRange;
 	}
 	
+	/**
+	 * @return the currentminVisionRange
+	 */
+	public double getCurrentMinVisionRange() {
+		return currentminVisionRange;
+	}
+
+	/**
+	 * @return the currentMaXVisionRange
+	 */
+	public double getCurrentMaxVisionRange() {
+		return currentMaXVisionRange;
+	}
+	
 	/* the vision variable */
 	protected double minVisionRange = 0;
 	protected double maxVisionRange = 10;
@@ -205,7 +222,8 @@ public class Agent extends Sprite {
 	protected double structureVisionRange = 10;
 	protected double towerVisionRange = 15;
 
-
+	protected double currentminVisionRange = minVisionRange;
+	protected double currentMaXVisionRange = maxVisionRange;
 	
 	private double timeKey;
 

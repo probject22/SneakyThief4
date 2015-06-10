@@ -5,6 +5,9 @@ package dataContainer;
 
 import static java.lang.Math.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The coordinates are stored in this container
  * @author ing. Robert Stevens
@@ -83,7 +86,25 @@ public class Coordinate {
 	public Coordinate bottom(){
 		return new Coordinate(x,y-1,angle);
 	}
+	
+	public List<Coordinate> neighbourCoordinates(){
+        List<Coordinate> coordinates = new ArrayList<>();
+        int x = this.x;
+        int y = this.y;
 
+        coordinates.add(new Coordinate(x-1  ,y-1    ,0));
+        coordinates.add(new Coordinate(x    ,y-1    ,0));
+        coordinates.add(new Coordinate(x+1  ,y-1    ,0));
+        coordinates.add(new Coordinate(x-1  ,y      ,0));
+        coordinates.add(new Coordinate(x+1  ,y      ,0));
+        coordinates.add(new Coordinate(x-1  ,y+1    ,0));
+        coordinates.add(new Coordinate(x    ,y+1    ,0));
+        coordinates.add(new Coordinate(x+1  ,y+1    ,0));
+
+        return coordinates;
+
+    }
+	
 	public boolean onLine(Coordinate from, Coordinate to){
 
 		double slope,intercept;

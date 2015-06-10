@@ -53,7 +53,24 @@ public class Guard extends Agent {
 		//Use A* or RTA* to get to the Blocking Coordinate.
 		return aStar(next);
 	}
+	public void enterTower(){
+		this.currentMaXVisionRange = this.towerMaxVisionRange;
+		this.currentminVisionRange = this.towerMinVisionRange;
+		inTower = true;
+	}
 	
+	public void leaveTower(){
+		this.currentMaXVisionRange = this.towerMaxVisionRange;
+		this.currentminVisionRange = this.towerMinVisionRange;
+		inTower = false;
+	}
 	
-
+	protected double towerMinVisionRange = 2;
+	protected double towerMaxVisionRange = 15;
+	
+	protected boolean inTower = false;
+	
+	public boolean isInTower(){
+		return inTower;
+	}
 }
