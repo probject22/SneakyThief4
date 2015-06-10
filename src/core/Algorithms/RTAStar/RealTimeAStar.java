@@ -43,6 +43,9 @@ public class RealTimeAStar implements PathFinder<Coordinate> {
 			System.out.println(n.c);
 			List<Node> neighbours = neighbours(n);
 			
+			if(neighbours.size() == 1)
+				return neighbours.get(0).c;
+			
 			// don't visit a node twice
 			for(Node no : neighbours){
 				if(no.f == 0)
