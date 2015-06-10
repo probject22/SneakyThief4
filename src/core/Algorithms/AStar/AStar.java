@@ -23,10 +23,16 @@ import core.DebugConstants;
  */
 public class AStar implements PathFinder<Coordinate> {
 	Map map;
-	private boolean debug = DebugConstants.astarDebug;
-	private ArrayList<Node> openNodes = new ArrayList<Node>(); 
-	private ArrayList<Node> closedNodes = new ArrayList<Node>(); 
-	private Coordinate goal;
+	protected boolean debug = DebugConstants.astarDebug;
+	protected ArrayList<Node> openNodes = new ArrayList<Node>(); 
+	protected ArrayList<Node> closedNodes = new ArrayList<Node>(); 
+	/**
+	 * @return the closedNodes
+	 */
+	public ArrayList<Node> getClosedNodes() {
+		return closedNodes;
+	}
+	protected Coordinate goal;
 	/**
 	 * 
 	 */
@@ -37,8 +43,8 @@ public class AStar implements PathFinder<Coordinate> {
 	public Coordinate getShortestPath(Coordinate from, Coordinate to) {
 		this.goal = to;
 		
-		if(debug)System.err.println("goal "+goal);
-		
+		if(debug && goal != null)System.err.println("goal "+goal);
+		else if (debug)System.err.println("The astar class is in prey mode");
 		openNodes = new ArrayList<Node>(); 
 		closedNodes = new ArrayList<Node>();
 		openNodes.add(new Node(null, from.x, from.y));
@@ -54,13 +60,14 @@ public class AStar implements PathFinder<Coordinate> {
 		return new Coordinate(outNode.x, outNode.y, 0);
 	}
 	
-	private ArrayList<Node> createTree(){
+	protected ArrayList<Node> createTree(){
 		while (openNodes.size() != 0){
 			Node best =  Collections.min(openNodes, new NodeComparator());
 			openNodes.remove(best);
 			closedNodes.add(best);
-			if (best.x == goal.x && best.y == goal.y)
-				return backtrackPath(best);
+			if (goal != null)
+				if (best.x == goal.x && best.y == goal.y)
+					return backtrackPath(best);
 			
 			ArrayList<Node> neighbors = getNeighbors(best);
 			
@@ -104,7 +111,7 @@ public class AStar implements PathFinder<Coordinate> {
 	 * @param endNode
 	 * @return
 	 */
-	private ArrayList<Node> backtrackPath(Node endNode) {
+	protected ArrayList<Node> backtrackPath(Node endNode) {
 		ArrayList<Node> out = new ArrayList<Node>();
 		while(endNode != null){
 			out.add(endNode);
@@ -115,7 +122,7 @@ public class AStar implements PathFinder<Coordinate> {
 	/**
 	 * Tells you how deep you are inside the tree
 	 */
-	private void setDepth(Node node){
+	protected void setDepth(Node node){
 		node.depth = node.parent.depth +1;
 	}
 	
@@ -123,7 +130,7 @@ public class AStar implements PathFinder<Coordinate> {
 	 * The cost you have to pay to get to this node
 	 * @param node
 	 */
-	private void setCost(Node node){
+	protected void setCost(Node node){
 		GridState[][] grid = map.getCopyOfMap();
 		double cost = grid[node.x][node.y].getAstarCost();
 		node.g = node.parent.g + cost;
@@ -132,23 +139,25 @@ public class AStar implements PathFinder<Coordinate> {
 	 * heuristic the expected cost to go from this node to the goal
 	 * @param node
 	 */
-	private void setHeuristic(Node node){
-		double dx = node.x - goal.x;
-		double dy = node.y - goal.y;
+	protected void setHeuristic(Node node){
+		if (goal != null){
+			double dx = node.x - goal.x;
+			double dy = node.y - goal.y;
 		
-		node.h =  sqrt(dx * dx + dy * dy);
+			node.h =  sqrt(dx * dx + dy * dy);
+		}
 	}
 	
 	/**
 	 * the total estimation of the cost to get from start to goal
 	 * @param node
 	 */
-	private void setEstemator(Node node){
+	protected void setEstemator(Node node){
 		node.f = node.g+node.h;
 	}
 	
 	
-	private void updateNode(Node origonal, Node newVals){
+	protected void updateNode(Node origonal, Node newVals){
 		if (origonal.f > newVals.f){
 			
 			origonal.f = newVals.f;
@@ -159,7 +168,7 @@ public class AStar implements PathFinder<Coordinate> {
 			origonal.depth = newVals.depth;
 		}
 	}
-	private ArrayList<Node> getNeighbors(Node node){
+	protected ArrayList<Node> getNeighbors(Node node){
 		ArrayList<Node> options = new ArrayList<Node>();
 		ArrayList<Node> out = new ArrayList<Node>();
 		
