@@ -32,6 +32,7 @@ public class Thief extends Agent {
 		super(coords);
 		// Create an Escape map for Thief
 	    thiefPath = new MapReverseRTAStar(beliefMap);
+	    target = null;
 	}
 	
 	protected void processSound(Event sound){ 
@@ -128,7 +129,7 @@ public class Thief extends Agent {
 		return true;
 	}
 	protected Action explorationState(){
-		target = new Coordinate(20,25,0);
+		target = new Coordinate(19,25,0);
 		return null;
 	}
 	
