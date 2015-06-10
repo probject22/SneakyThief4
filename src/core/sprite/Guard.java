@@ -113,7 +113,7 @@ public class Guard extends Agent {
 		return inTower;
 	}
 	
-	public boolean hasCought(){
+	public boolean hasCaught(){
 		for (Sprite s : lastSeen.getSpriteInVisionMap().values()){
 			if (s instanceof Thief){
 					if(s.getCoordinates().isNeighbour(this.getCoordinates())){
