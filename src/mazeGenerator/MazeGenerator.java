@@ -12,7 +12,7 @@ public class MazeGenerator {
 	
 	public MazeGenerator(int x, int y){
 		maze = new int[x][y];
-		makeEmpty();
+		//makeEmpty();
 	}
 	
 	private void makeEmpty(){
@@ -38,7 +38,7 @@ public class MazeGenerator {
 		List<C> passages = new ArrayList<>();
 		List<C> walls = new ArrayList<>();
 		
-		C start = new C(0,0);
+		C start = new C(1,1);
 		
 		passages.add(start);
 		walls.addAll(start.neighbours());
@@ -101,7 +101,7 @@ public class MazeGenerator {
 			n.add(new C(x-1,y+1));
 			n.add(new C(x-1,y-1));
 			List<C> r = new ArrayList<>();
-			for (C c : n) if(c.x < 0 || c.x >= maze.length || c.y < 0 || c.y >= maze[0].length) r.add(c);
+			for (C c : n) if(c.x < 1 || c.x >= maze.length-1 || c.y < 1 || c.y >= maze[0].length-1) r.add(c);
 			for (C c : r) n.remove(c);
 			return n;
 		}
