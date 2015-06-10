@@ -155,10 +155,10 @@ public class Thief extends Agent {
 	}
 	
 	public boolean atGoal(){
-		Coordinate currentCoord = this.getCoordinates().clone();
-		GridState[][] thisMap = beliefMap.getCopyOfMap();
-		if(thisMap[currentCoord.x][currentCoord.y]== GridState.Target)
-			{return true;}
+		if (target == null)
+			return false;
+		if (target.x == getCoordinates().x && target.y == getCoordinates().y)
+			return true;
 		return false;
 	}
 	
