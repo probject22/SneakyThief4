@@ -47,18 +47,18 @@
 
 
 % Paper overview
-	The problem posed can be divided into three main problems. The first problem is that guards put into a unknown environment should be able to create a 'mental map' of the environment. This is what we will call the exploration task. The second problem is that the guards should monitor the entire area as closely as possible to make it as difficult as possible for a possible intruder to pass through the area unseen. This will be called the coverage task. The third problem is that once an intruder has been detected, the guards should be able to actually catch the intruder. This will be called the pursuit task.
+	The problem posed can be divided into three main problems. The first problem is that guards put into an unknown environment should be able to create a 'mental map' of the environment. This is what we will call the exploration task. The second problem is that the guards should monitor the entire area as closely as possible to make it as difficult as possible for a possible intruder to pass through the area unseen. This will be called the coverage task. The third problem is that once an intruder has been detected, the guards should be able to actually catch the intruder. This will be called the pursuit task.
 
-	In every of these three main problems the guard should figure out two things, namely where it should go, and how it gets there. The 'where'-question is largely dependent on the specific task at hand, e.g. even if an intruder would only be 1 unit of distance away, but the task is exploration, then the guard does not necessarily have to move towards the intruder.
+	In every of these three main problems the guard should figure out two things, namely where it should go, and how it gets there. The 'where'-question is largely dependent on the specific task at hand, e.g. even if an intruder would only be one unit of distance away, but the task is exploration, then the guard does not necessarily have to move towards the intruder.
 
 	The 'how'-question, on the other hand, is in many cases independent of the exact task that we want to achieve, and therefore finding the shortest route to the destination does usually suffice, and is often even the best route. We will call the 'how'-question the pathfinding problem.
 
-	The final task of the guards is to combine the three main problems and decide when the guard should solve what problem. The intuitive solution would be to explore untill the entire environment is known, and then start, and continue, covering the area. During this process pursuit is started as soon as an intruder is detected. This intuitive answer, however, runs into issues once it is not known to the guard how big the area actually is, so it will never know if the map if fully explored or not. Another possible issue arises when an intruder, for instance, dissapears behind a wall. The pursuing guard does not detect the intruder anymore and stops pursuit. He should, however, have the intelligence to predict where the guard has gone.
+	The final task of the guards is to combine the three main problems and decide when the guard should solve what problem. The intuitive solution would be to explore until the entire environment is known, and then start, and continue, covering the area. During this process pursuit is started as soon as an intruder is detected. This intuitive answer, however, runs into issues once it is not known to the guard how big the area actually is, so it will never know if the map if fully explored or not. Another possible issue arises when an intruder, for instance, disappears behind a wall. The pursuing guard does not detect the intruder anymore and stops pursuit. He should, however, have the intelligence to predict where the guard has gone.
 
 \chapter{Approaches}
 	
 	\section{Path finding}
-		As already mentioned in the introduction, the answer to the question on what path to take to a certain location is in many cases not important as long as we find the shortest path. This is why we can first discuss general methods of path finding without refering to what goal the moving of the agents serves. There are also cases where the shortest path is not the best path. This is heavily dependent on the task, and will therefore be discussed in the sections dealing with the specific tasks.
+		As already mentioned in the introduction, the answer to the question on what path to take to a certain location is in many cases not important as long as we find the shortest path. This is why we can first discuss general methods of path finding without referring to what goal the moving of the agents serves. There are also cases where the shortest path is not the best path. This is heavily dependent on the task, and will therefore be discussed in the sections dealing with the specific tasks.
 
 		\subsection{A-star}
 			\input{astar.tex}
@@ -69,13 +69,13 @@
 	\section{Exploration}
 
 	\section{Coverage}
-		Any intruder will try to be undetected. In order to increase the chance of detecting an intruder we need to make sure that the environment is monitored as closely as possible. This is the problem of coverage. Given the environment we want our agents so move in such a way that no intruder can move through the enviroment undetected. The intuitive answer behind this problem is to try to disperse the guards over the environment as well as possible, which is exactly what the StiCo algorithm aims to do.
+		Any intruder will try to be undetected. In order to increase the chance of detecting an intruder we need to make sure that the environment is monitored as closely as possible. This is the problem of coverage. Given the environment we want our agents so move in such a way that no intruder can move through the environment undetected. The intuitive answer behind this problem is to try to disperse the guards over the environment as well as possible, which is exactly what the StiCo algorithm aims to do.
 	
 		\subsection{StiCo}
 				\input{stico.tex}
 
 	\section{Pursuit}
-		When considering the problem of persuit, there is again a very simple intuitive answer, namely to go directly to the location of the intruder following the shortest path. This will often be the best solution if you are a lone guard pursuing an intruder. Yet even then, this strategy will only work if either the intruder is not actively avoiding the guard, or the guard is faster than the intruder. As we are not prepared to assume any of these conditions, we need to act slightly more intelligently.
+		When considering the problem of pursuit, there is again a very simple intuitive answer, namely to go directly to the location of the intruder following the shortest path. This will often be the best solution if you are a lone guard pursuing an intruder. Yet even then, this strategy will only work if either the intruder is not actively avoiding the guard, or the guard is faster than the intruder. As we are not prepared to assume any of these conditions, we need to act slightly more intelligently.
 
 		\subsection{MTES}
 			\input{mtes.tex}
