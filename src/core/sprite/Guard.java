@@ -21,6 +21,8 @@ public class Guard extends Agent {
 	
 	protected Stico stico;
 	protected boolean catchMode;
+	protected Coordinate lastSeenThiefDirection;
+	protected Thief lastSeenThief;
 	protected ArrayList<Double> soundsDirection = new ArrayList<Double>();
 	/**
 	 * @param coords
@@ -39,26 +41,42 @@ public class Guard extends Agent {
 	
 	public Action getAction(){
 		
-		
-		
-		
 		Action action = basicExploration(); 
-			if (action == null || action.getActionElements() == null || action.getActionElements().isEmpty())
-				action = stico.getMoveAction(lastSeen);
-		//Action action = aStar(new Coordinate(3,16,0));
-		// Check if there is a intruder in View (This should be done using belief map instead)!!
-		//If yes Use BES to get Action
 		
-			
-			
+		if(catchMode){
+			if (lastSeen.getSpriteInVisionMap().containsValue(lastSeenThief))
+				return BlockingES(lastSeenThiefDirection);
+			if (soundsDirection.isEmpty())
+				catchMode = false;
+			else{
+				double closestThief = soundsDirection.get(0);
+				double closestThiefDirection = Math.abs(this.getCoordinates().clone().getAngle(lastSeenThiefDirection)- soundsDirection.remove(0));
+				for (double direction : soundsDirection){
+					if (Math.abs(this.getCoordinates().clone().getAngle(lastSeenThiefDirection)-direction) < closestThiefDirection){
+						closestThiefDirection = Math.abs(this.getCoordinates().clone().getAngle(lastSeenThiefDirection)-direction);
+						closestThief = direction;
+					}
+				}
+				lastSeenThiefDirection = new Coordinate((int)(Math.sin(closestThief)*2),(int)(Math.cos(closestThief)*2),0);
+				soundsDirection.clear();
+				return BlockingES(lastSeenThiefDirection);
+				}	
+		}
+	
+		// Check if there is a intruder in View !!
+		//If yes Use BES to get Action	
+		soundsDirection.clear();	
 		for (Sprite s : lastSeen.getSpriteInVisionMap().values()){
 			if (s instanceof Thief){
-				action = BlockingES(s.getCoordinates());
 				catchMode = true;
 				System.out.println("catching");
-				return action;
+				lastSeenThiefDirection = s.getCoordinates().clone();
+				lastSeenThief = (Thief) s;
+				return BlockingES(s.getCoordinates().clone());
 			}
 		}
+		if (action == null || action.getActionElements() == null || action.getActionElements().isEmpty())
+			action = stico.getMoveAction(lastSeen);
 		return action;
 	}
 	
@@ -70,8 +88,7 @@ public class Guard extends Agent {
 	 */
 	protected Action BlockingES(Coordinate intruder){
 		Collection<Coordinate> otherAgents = lastSeen.getSpriteInVisionMap().keySet();
-		Coordinate next = BES.getBlockingLocation(this.getCoordinates(),otherAgents,intruder);
-		
+		Coordinate next = BES.getBlockingLocation(this.getCoordinates().clone(),otherAgents,intruder);
 		//Use A* or RTA* to get to the Blocking Coordinate.
 		return rTAStar(next);
 	}

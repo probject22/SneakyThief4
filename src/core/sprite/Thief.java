@@ -75,9 +75,9 @@ public class Thief extends Agent {
 	
 	protected Action reverseAStar(List<Coordinate> followers){
 		Action action = new Action();
-		Coordinate next = thiefPath.getBestEscape(getCoordinates(),followers, target);
-		double angle = getCoordinates().angle;
-		double goalAngle = getCoordinates().getAngle(next);
+		Coordinate next = thiefPath.getBestEscape(getCoordinates().clone(),followers, target);
+		double angle = getCoordinates().clone().angle;
+		double goalAngle = getCoordinates().clone().getAngle(next);
 		action.addActionElement(new Turn(angle, goalAngle, Agent.MAX_SPEED));
 		action.addActionElement(new Move(Agent.MAX_SPEED));
 		
@@ -96,7 +96,7 @@ public class Thief extends Agent {
 	}
 	
 	public boolean atGoal(){
-		Coordinate currentCoord = this.getCoordinates();
+		Coordinate currentCoord = this.getCoordinates().clone();
 		GridState[][] thisMap = beliefMap.getCopyOfMap();
 		if(thisMap[currentCoord.x][currentCoord.y]== GridState.Target)
 			{return true;}
