@@ -5,6 +5,7 @@ package core.Algorithms.RTAStar;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import core.Map;
@@ -26,6 +27,9 @@ public class RealTimeAStar implements PathFinder<Coordinate> {
 	public RealTimeAStar(Map map) {
 		this.map = map;
 	}
+	
+	HashMap<Coordinate,Node> nodes = new HashMap<Coordinate,Node>();
+	
 	@Override
 	public Coordinate getShortestPath(Coordinate from, Coordinate to) {
 		
@@ -40,8 +44,9 @@ public class RealTimeAStar implements PathFinder<Coordinate> {
 		//int MAX_ITERATION = 1000000;
 		//int i = 0;
 		while(!n.c.equals(to)){
-			//System.out.println(n.c);
+			
 			List<Node> neighbours = neighbours(n);
+			
 			
 			//if there are no possible moves return null
 			if(neighbours.isEmpty())
@@ -54,16 +59,21 @@ public class RealTimeAStar implements PathFinder<Coordinate> {
 			// don't visit a node twice
 			for(Node no : neighbours){
 				if(no.f == 0)
-					no.f = no.c.distance(to) + 1;
+					no.f = no.c.distance(to)+1;
 			}
 			
-			// select the best neighbour
+			// select the second best neighbour
 			Collections.sort(neighbours);
-			n.f = neighbours.get(1).f;
+			
+			
+			n.f = neighbours.get(1).f + 1;
 			
 			//move
 			Node p = n;
+				
 			n = neighbours.get(0);
+			System.out.println("p.f " + p.f + " " + p.c);
+			System.out.println("n.f " + n.f + " " + neighbours.get(1).c);
 			n.parent = p;
 			//if(i++ > MAX_ITERATION) break;
 		}
@@ -79,14 +89,35 @@ public class RealTimeAStar implements PathFinder<Coordinate> {
 		ArrayList<Node> options = new ArrayList<Node>();
 		ArrayList<Node> out = new ArrayList<Node>();
 		
-		options.add(new Node(node, node.c.x-1, node.c.y-1));
-		options.add(new Node(node, node.c.x  , node.c.y-1));
-		options.add(new Node(node, node.c.x+1, node.c.y-1));
-		options.add(new Node(node, node.c.x-1, node.c.y));
-		options.add(new Node(node, node.c.x+1, node.c.y));
-		options.add(new Node(node, node.c.x-1, node.c.y+1));
-		options.add(new Node(node, node.c.x  , node.c.y+1));
-		options.add(new Node(node, node.c.x+1, node.c.y+1));
+		ArrayList<Coordinate> co = new ArrayList<>();
+		
+		co.add(new Coordinate(node.c.x-1,node.c.y-1,0));
+		co.add(new Coordinate(node.c.x-1,node.c.y,0));
+		co.add(new Coordinate(node.c.x-1,node.c.y+1,0));
+		co.add(new Coordinate(node.c.x,node.c.y-1,0));
+		co.add(new Coordinate(node.c.x,node.c.y+1,0));
+		co.add(new Coordinate(node.c.x+1,node.c.y,0));
+		co.add(new Coordinate(node.c.x+1,node.c.y-1,0));
+		co.add(new Coordinate(node.c.x+1,node.c.y+1,0));
+		
+		
+		for(Coordinate c : co){
+			boolean found = false;
+			for(Coordinate tempCoord :nodes.keySet()){
+				if (tempCoord.x == c.x && tempCoord.y == c.y){
+				options.add(nodes.get(tempCoord));
+				System.out.println("node exist");
+				found = true;
+				}
+			}
+			if(!found){
+				Node a = new Node(node, c.x,c.y);
+				options.add(a);
+				System.out.println("not exist");
+				nodes.put(c, a);
+			}
+			
+		}
 		
 		GridState[][] grid = map.getCopyOfMap();
 		
