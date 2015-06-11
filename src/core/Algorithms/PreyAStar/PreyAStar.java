@@ -106,7 +106,15 @@ public class PreyAStar implements PathFinder<Coordinate> {
 	 * @return the best node of the two
 	 */
 	protected EvaluationNode evaluationFunction(EvaluationNode node1, EvaluationNode node2){
-		return node1;
+		EvaluationNode bestnode;
+		double n1score = node1.predatorCost-node1.preyCost;
+		double n2score = node2.predatorCost-node2.preyCost;
+		if(n1score<n2score){
+			return node1;
+		}
+		else{
+			return node2;
+		}
 	}
 
 	public class EvaluationNode{
