@@ -61,6 +61,10 @@ public class MazeGenerator {
 		for(C c : passages)
 			maze[c.x][c.y] = 0;
 		
+		maze[1][1] = 0;
+		maze[maze.length-2][1] = 0;
+		maze[maze.length-2][maze[maze.length-2].length-2] = 0;
+		maze[1][maze[1].length - 2] = 0;
 	}
 	
 	private void randomWalls(double complexity){
