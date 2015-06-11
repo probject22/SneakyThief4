@@ -212,9 +212,9 @@ public class Map {
 		return intersections;
 	}
 	
-	public static Map maze(int width, int height){
+	public static Map maze(int width, int height, double difficulty){
 		MazeGenerator gen = new MazeGenerator(width,height);
-		gen.prim();
+		gen.prim(difficulty);
 	
 		GridState[][] g = new GridState[width][height];
 		
@@ -225,6 +225,10 @@ public class Map {
 		}		
 		
 		return new Map(g);
+	}
+	
+	public static Map maze(int width, int height){
+		return maze(width,height,1);
 	}
 		
 

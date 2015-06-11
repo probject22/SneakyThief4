@@ -14,7 +14,7 @@ import core.sprite.SpriteManager;
 import dataContainer.Coordinate;
 import dataContainer.GridState;
 /**
- * @author ing. R.J.H.M. Stevens
+ * @author Stan Kerstjens
  *
  */
 public class RealTimeAStar implements PathFinder<Coordinate> {
@@ -37,12 +37,17 @@ public class RealTimeAStar implements PathFinder<Coordinate> {
 		start.f = start.c.distance(to);
 		
 		Node n = start;
-		int MAX_ITERATION = 1000000;
-		int i = 0;
+		//int MAX_ITERATION = 1000000;
+		//int i = 0;
 		while(!n.c.equals(to)){
-			System.out.println(n.c);
+			//System.out.println(n.c);
 			List<Node> neighbours = neighbours(n);
 			
+			//if there are no possible moves return null
+			if(neighbours.isEmpty())
+				return null;
+			
+			//if there is only one possible move, make that move
 			if(neighbours.size() == 1)
 				return neighbours.get(0).c;
 			
@@ -51,17 +56,21 @@ public class RealTimeAStar implements PathFinder<Coordinate> {
 				if(no.f == 0)
 					no.f = no.c.distance(to) + 1;
 			}
-			Collections.sort(neighbours);
 			
+			// select the best neighbour
+			Collections.sort(neighbours);
 			n.f = neighbours.get(1).f;
+			
+			//move
 			Node p = n;
 			n = neighbours.get(0);
-			n.parent = p;	
-			if(i++ > MAX_ITERATION) break;
+			n.parent = p;
+			//if(i++ > MAX_ITERATION) break;
 		}
+		
 		if(n.parent != null)
-		while (n.parent.parent != null)
-			n = n.parent;
+			while (n.parent.parent != null)
+				n = n.parent;
 		
 		return n.c;
 	}

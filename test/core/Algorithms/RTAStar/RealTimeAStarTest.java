@@ -12,7 +12,7 @@ public class RealTimeAStarTest {
 	@Test
 	public static void main(String[] args) {
 		
-		Map map = Map.maze(50, 50);
+		Map map = Map.maze(20, 20, .8);
 		
 		RealTimeAStar rta = new RealTimeAStar(map);
 		
@@ -20,8 +20,8 @@ public class RealTimeAStarTest {
 		
 		System.out.println(
 			rta.getShortestPath(
-					new Coordinate(0,0,0), 
-					new Coordinate(49,48,0)
+					new Coordinate(1,1,0), 
+					new Coordinate(18,18,0)
 			)
 		);
 	}
