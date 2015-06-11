@@ -33,6 +33,12 @@ public class Thief extends Agent {
 		// Create an Escape map for Thief
 	    thiefPath = new MapReverseRTAStar(beliefMap);
 	    target = null;
+	    
+		minVisionRange = 0;
+		maxVisionRange = 10;
+		visionAngle = 45;
+		structureVisionRange = 10;
+		towerVisionRange = 15;
 	}
 	
 	protected void processSound(Event sound){ 

@@ -35,6 +35,12 @@ public class Guard extends Agent {
 	public Guard(Coordinate coords) {
 		super(coords);
 		stico = new Stico(this);
+		
+		minVisionRange = 0;
+		maxVisionRange = 10;
+		visionAngle = 45;
+		structureVisionRange = 10;
+		towerVisionRange = 15;
 	}
 	
 	protected void processSound(Event sound){ 
@@ -113,6 +119,8 @@ public class Guard extends Agent {
 	protected boolean toCatchState(){
 		for (Sprite s : lastSeen.getSpriteInVisionMap().values()){
 			if (s instanceof Thief){
+				lastSeenThief = (Thief) s;
+				lastSeenThiefDirection = s.getCoordinates().clone();
 				return true;
 			}
 		}
@@ -124,31 +132,27 @@ public class Guard extends Agent {
 		if (lastSeen.getSpriteInVisionMap().containsValue(lastSeenThief)){
 			return BlockingES(lastSeenThiefDirection);
 		}
-		
 		//if hear no sound gets out of catch mode
 		if (soundsDirection.isEmpty()){
-			currentState = GuardStates.EXPLORATION;
+			return null;
 		}
 		//else try to find where the sound comes from
-		else{
 			
-			System.out.println("catchingHear");
-			double closestThief = soundsDirection.get(0);
-			double closestThiefDirection = Math.abs(getCoordinates().getAngle(lastSeenThiefDirection) - soundsDirection.remove(0));
-			
-			for (double direction : soundsDirection){
-				if (Math.abs(getCoordinates().clone().getAngle(lastSeenThiefDirection) - direction) < closestThiefDirection){
-					closestThiefDirection = Math.abs(this.getCoordinates().getAngle(lastSeenThiefDirection)-direction);
-					closestThief = direction;
-				}
+		System.out.println("catchingHear");
+		double closestThief = soundsDirection.remove(0);
+		double closestThiefDirection = Math.abs(getCoordinates().getAngle(lastSeenThiefDirection) - closestThief);
+		
+		for (double direction : soundsDirection){
+			if (Math.abs(getCoordinates().clone().getAngle(lastSeenThiefDirection) - direction) < closestThiefDirection){
+				closestThiefDirection = Math.abs(this.getCoordinates().getAngle(lastSeenThiefDirection)-direction);
+				closestThief = direction;
 			}
-			System.out.println(closestThief);
-			lastSeenThiefDirection = new Coordinate((int)(Math.sin(closestThief)*2)+getCoordinates().x,(int)(Math.cos(closestThief)*2)+getCoordinates().y,0);
-			soundsDirection.clear();
-			
-			return BlockingES(lastSeenThiefDirection);
-			}
-		return null;	
+		}
+		System.out.println(closestThief);
+		lastSeenThiefDirection = new Coordinate((int)(Math.sin(closestThief)*2)+getCoordinates().x,(int)(Math.cos(closestThief)*2)+getCoordinates().y,0);
+		
+		
+		return BlockingES(lastSeenThiefDirection);	
 	}
 	
 	/**
@@ -159,10 +163,10 @@ public class Guard extends Agent {
 	 */
 	protected Action BlockingES(Coordinate intruder){
 		Collection<Coordinate> otherAgents = lastSeen.getSpriteInVisionMap().keySet();
-		otherAgents.remove(lastSeenThiefDirection);
+		otherAgents.remove(lastSeenThief.getCoordinates().clone());
 		Coordinate next = BES.getBlockingLocation(getCoordinates().clone(),otherAgents,intruder);
 		//Use A* or RTA* to get to the Blocking Coordinate.
-		return rTAStar(intruder);
+		return rTAStar(next);
 	}
 	public void enterTower(){
 		this.currentMaXVisionRange = this.towerMaxVisionRange;
