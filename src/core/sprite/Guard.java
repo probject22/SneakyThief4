@@ -130,7 +130,8 @@ public class Guard extends Agent {
 	protected Action catchState(){
 		//if the thief is still in view cone follow him.
 		if (lastSeen.getSpriteInVisionMap().containsValue(lastSeenThief)){
-			return BlockingES(lastSeenThiefDirection);
+			lastSeenThiefDirection = lastSeenThief.getCoordinates().clone();
+			return BlockingES(lastSeenThiefDirection);	
 		}
 		//if hear no sound gets out of catch mode
 		if (soundsDirection.isEmpty()){
@@ -138,7 +139,6 @@ public class Guard extends Agent {
 		}
 		//else try to find where the sound comes from
 			
-		System.out.println("catchingHear");
 		double closestThief = soundsDirection.remove(0);
 		double closestThiefDirection = Math.abs(getCoordinates().getAngle(lastSeenThiefDirection) - closestThief);
 		
@@ -148,7 +148,7 @@ public class Guard extends Agent {
 				closestThief = direction;
 			}
 		}
-		System.out.println(closestThief);
+		
 		lastSeenThiefDirection = new Coordinate((int)(Math.sin(closestThief)*2)+getCoordinates().x,(int)(Math.cos(closestThief)*2)+getCoordinates().y,0);
 		
 		

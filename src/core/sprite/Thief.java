@@ -24,6 +24,7 @@ public class Thief extends Agent {
 	protected ThiefPath<Coordinate> thiefPath;
 	protected ArrayList<Double> soundsDirection = new ArrayList<Double>();
 	protected boolean panic;
+	protected boolean isAlreadyPanicing;
 	protected ThiefStates currentState = ThiefStates.EXPLORATION;
 	/**
 	 * @param coords
@@ -105,14 +106,17 @@ public class Thief extends Agent {
 					followers.add(s.getCoordinates().clone());
 				}
 			}
+			if(isAlreadyPanicing){
 			for(double soundDirection : soundsDirection){
 				followers.add(new Coordinate((int)(Math.sin(soundDirection)*2+getCoordinates().x),
 										(int)(Math.cos(soundDirection)*2+getCoordinates().y),0));
-			}
+			}}
 			
-			if(followers.isEmpty())
+			if(followers.isEmpty()){
+				isAlreadyPanicing = false;
 				return null;
-			
+			}
+			isAlreadyPanicing = true;
 			Action action = reverseAStar(followers);
 			soundsDirection.clear();		
 			return action;	
