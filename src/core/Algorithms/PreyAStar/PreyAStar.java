@@ -3,12 +3,7 @@
  */
 package core.Algorithms.PreyAStar;
 
-import static java.lang.Math.sqrt;
-
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 import core.Map;
 import core.Algorithms.PathFinder;
@@ -18,8 +13,7 @@ import core.sprite.Agent;
 import core.sprite.Guard;
 import core.sprite.SpriteManager;
 import dataContainer.Coordinate;
-import dataContainer.GridState;
-import core.DebugConstants;
+
 /**
  * @author ing. R.J.H.M. Stevens
  *
@@ -105,6 +99,12 @@ public class PreyAStar implements PathFinder<Coordinate> {
 			
 	}
 	/*TODO IMPLEMENT THIS FUNCTION */
+	/**
+	 * This function returns the best node out of two nodes
+	 * @param node1 input-1
+	 * @param node2 input-2
+	 * @return the best node of the two
+	 */
 	protected EvaluationNode evaluationFunction(EvaluationNode node1, EvaluationNode node2){
 		return node1;
 	}
