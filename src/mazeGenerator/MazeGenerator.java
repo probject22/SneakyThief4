@@ -98,13 +98,13 @@ public class MazeGenerator {
 		for (Iterator<C> iterator = corners.iterator(); iterator.hasNext();) {
 			C c = iterator.next();
 			int count = 0;
-			System.out.println(c.neighbours());
+			//System.out.println(c.neighbours());
 			for(C n : c.neighbours()){
 				if(!passages.contains(n))
 					count++;
 			}
 			if(count >= 3){
-				System.out.println("yeah");
+				//System.out.println("yeah");
 				passages.add( c.x == 1 ? new C(c.x+1,c.y) : new C(c.x-1,c.y));
 			}
 		}

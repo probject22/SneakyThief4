@@ -31,7 +31,7 @@ public class MapSaver {
 			System.err.println("the length of the line is not correct");
 			//return;
 		}
-		System.out.println(line);
+		//System.out.println(line);
 		writer.println(line);
 		lineCounter++;
 	}
