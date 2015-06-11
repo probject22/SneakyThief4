@@ -44,6 +44,7 @@ public class Thief extends Agent {
 	public Action getAction(){
 		Action out = null;
 		
+		
 		switch(currentState){
 		case EXPLORATION:
 			if (toPanicState()){
@@ -91,26 +92,25 @@ public class Thief extends Agent {
 		return false;
 	}
 	protected Action panicState(){
-		List<Coordinate> followers = new ArrayList<Coordinate>(lastSeen.getSpriteInVisionMap().keySet());
-		for (Sprite s : lastSeen.getSpriteInVisionMap().values()) {
-			if (s instanceof Guard){
-				Action action = reverseAStar(followers);
-				if (action != null)
-					return action;
+		
+			List<Coordinate> followers = new ArrayList<Coordinate>();
+			for (Sprite s : lastSeen.getSpriteInVisionMap().values()) {
+				if (s instanceof Guard){
+					followers.add(s.getCoordinates().clone());
+				}
 			}
-		}
-		if(soundsDirection.isEmpty())
-			return null;
-		else{
-			followers = new ArrayList<Coordinate>(lastSeen.getSpriteInVisionMap().keySet());
 			for(double soundDirection : soundsDirection){
 				followers.add(new Coordinate((int)(Math.sin(soundDirection)*2+getCoordinates().x),
 										(int)(Math.cos(soundDirection)*2+getCoordinates().y),0));
 			}
+			
+			if(followers.isEmpty())
+				return null;
+			
 			Action action = reverseAStar(followers);
 			soundsDirection.clear();		
 			return action;	
-			}
+			
 	}
 	
 	protected boolean toTargetState(){
@@ -129,7 +129,7 @@ public class Thief extends Agent {
 		return true;
 	}
 	protected Action explorationState(){
-		target = new Coordinate(19,25,0);
+		target = new Coordinate(1,1,0);
 		return null;
 	}
 	

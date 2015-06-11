@@ -20,44 +20,45 @@ public class AStarExperiment extends AbstractExperiment {
 	public static void experiment(int repeats){
 		
 		for(int i= 0; i < repeats;i++){
+			System.out.println("run " + i);
 		double complexity = 0;
 		
 		Map map = Map.maze(100,100);
 		PathFinder<Coordinate> pathFinder;
-		Coordinate home = new Coordinate(0,0,0);
-		Coordinate target = new Coordinate(100,100,0);
+		Coordinate home = new Coordinate(1,1,0);
+		Coordinate target = new Coordinate(98,98,0);
 		
 		//test A*
 		pathFinder = new AStar(map);
-		Coordinate current = home;
+		Coordinate current = home.clone();
 		int aSteps  = 0;
 		long aStart = System.nanoTime();
-		while(current != target){
+		while(current.x != target.x || current.y != target.y){
 		current = pathFinder.getShortestPath(current, target);
 		aSteps ++;
 		}
 		long aEnd = System.nanoTime();
-		
+		/*
 		//test RTA*
 		pathFinder = new MapRTAStar(map);
-		current = home;
+		current = home.clone();
 		int rTASteps  = 0;
 		long rTAStart = System.nanoTime();
-		while(current != target){
+		while(current.x != target.x || current.y != target.y){
 		current = pathFinder.getShortestPath(current, target);
 		rTASteps ++;
 		}
 		long rTAEnd = System.nanoTime();
 		
-		
+		*/
 		
 		//save measurement
-		String[] measurements =  new String[names.size()];
+		String[] measurements =  new String[5];
 
 		measurements[0] = Double.toString(aEnd - aStart);
 		measurements[1] = Double.toString(aSteps);
-		measurements[2] = Double.toString(rTAEnd - rTAStart);
-		measurements[3] = Double.toString(rTASteps);
+		measurements[2] = Double.toString(0);//rTAEnd - rTAStart);
+		measurements[3] = Double.toString(0);//rTASteps);
 		measurements[4] = Double.toString(complexity);
 		
 		//System.out.println(measurements.toString());
@@ -66,12 +67,12 @@ public class AStarExperiment extends AbstractExperiment {
 		
 		}
 		
-		writeCsv("experiments/data/astar_experiment.csv");
+		writeCsv("experiments/a_star/data/astar_experiment.csv");
 	}
 	
 	public static void main(String[] args){
 	
-		experiment(1);
+		experiment(20);
 		
 	}
 	
