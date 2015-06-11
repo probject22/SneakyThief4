@@ -11,6 +11,7 @@ import core.Algorithms.Coverage.Stico.Stico;
 import core.actions.Action;
 import core.actions.Move;
 import core.actions.Turn;
+import core.actions.Wait;
 import core.events.Event;
 import core.events.Sound;
 import dataContainer.Coordinate;
@@ -26,6 +27,8 @@ public class Guard extends Agent {
 	protected Coordinate lastSeenThiefDirection;
 	protected Thief lastSeenThief;
 	protected ArrayList<Double> soundsDirection = new ArrayList<Double>();
+	
+	protected GuardStates currentState = GuardStates.EXPLORATION;
 	/**
 	 * @param coords
 	 */
@@ -42,57 +45,110 @@ public class Guard extends Agent {
 	}
 	
 	public Action getAction(){
+		Action out = null;
 		
-		if(catchMode){
-			
-			//if the thief is still in view cone follow him.
-			if (lastSeen.getSpriteInVisionMap().containsValue(lastSeenThief)){
-				return BlockingES(lastSeenThiefDirection);
+		switch(currentState){
+		case EXPLORATION:
+			if(toCatchState()){
+				currentState = GuardStates.CATCH_MODE;
 			}
-			
-			//if hear no sound gets out of catch mode
-			if (soundsDirection.isEmpty()){
-				catchMode = false;
+			else if(!toCoverageState()){
+				out = explorationState();
+				if (out != null)
+					return out;
+				currentState = GuardStates.COVARAGE;
 			}
-			//else try to find where the sound comes from
 			else{
-				
-				System.out.println("catchingHear");
-				double closestThief = soundsDirection.get(0);
-				double closestThiefDirection = Math.abs(getCoordinates().getAngle(lastSeenThiefDirection) - soundsDirection.remove(0));
-				
-				for (double direction : soundsDirection){
-					if (Math.abs(getCoordinates().clone().getAngle(lastSeenThiefDirection) - direction) < closestThiefDirection){
-						closestThiefDirection = Math.abs(this.getCoordinates().getAngle(lastSeenThiefDirection)-direction);
-						closestThief = direction;
-					}
-				}
-				System.out.println(closestThief);
-				lastSeenThiefDirection = new Coordinate((int)(Math.sin(closestThief)*2)+getCoordinates().x,(int)(Math.cos(closestThief)*2)+getCoordinates().y,0);
-				soundsDirection.clear();
-				
-				return BlockingES(lastSeenThiefDirection);
-				}	
+				currentState = GuardStates.COVARAGE;
+			}
+			///////////////////////////////////////////
+		case COVARAGE:
+			if(toCatchState()){
+				currentState = GuardStates.CATCH_MODE;
+			}
+			else{
+				out = coverageState();
+				if (out != null)
+					return out;
+			}
+		case CATCH_MODE:
+			out = catchState();
+			if (out != null)
+				return out;
+			if (toExplorationState()){
+				currentState = GuardStates.EXPLORATION;
+			}
+			else{
+				currentState = GuardStates.COVARAGE;
+			}
 		}
-		//if everything is normal basic exploration is done
-				Action action = basicExploration(); 
-	
-		// Check if there is a intruder in View !!
-		//If yes Use BES to get Action	
+		
 		soundsDirection.clear();	
+		//To avoid null errors
+		if (out == null){
+			out = new Action();
+			out.addActionElement(new Wait(0.01));
+		}
+		return out;
+
+	}
+	
+	protected boolean toExplorationState(){
+		Action action = basicExploration(); 
+		if (action != null)
+			return false;
+		return true;
+	}
+	protected Action explorationState(){
+		return basicExploration(); 
+	}
+	
+	protected boolean toCoverageState(){
+		return !toExplorationState();
+	}
+	protected Action coverageState(){
+		return stico.getMoveAction(lastSeen);
+	}
+	
+	protected boolean toCatchState(){
 		for (Sprite s : lastSeen.getSpriteInVisionMap().values()){
 			if (s instanceof Thief){
-				catchMode = true;
-				lastSeenThiefDirection = s.getCoordinates().clone();
-				//System.out.println(lastSeenThiefDirection);
-				lastSeenThief = (Thief) s;
-				return BlockingES(lastSeenThiefDirection);
+				return true;
 			}
 		}
-		//if problems: go to stico
-		if (action == null || action.getActionElements() == null || action.getActionElements().isEmpty())
-			action = stico.getMoveAction(lastSeen);
-		return action;
+		return false;
+	}
+	
+	protected Action catchState(){
+		//if the thief is still in view cone follow him.
+		if (lastSeen.getSpriteInVisionMap().containsValue(lastSeenThief)){
+			return BlockingES(lastSeenThiefDirection);
+		}
+		
+		//if hear no sound gets out of catch mode
+		if (soundsDirection.isEmpty()){
+			currentState = GuardStates.EXPLORATION;
+		}
+		//else try to find where the sound comes from
+		else{
+			
+			System.out.println("catchingHear");
+			double closestThief = soundsDirection.get(0);
+			double closestThiefDirection = Math.abs(getCoordinates().getAngle(lastSeenThiefDirection) - soundsDirection.remove(0));
+			
+			for (double direction : soundsDirection){
+				if (Math.abs(getCoordinates().clone().getAngle(lastSeenThiefDirection) - direction) < closestThiefDirection){
+					closestThiefDirection = Math.abs(this.getCoordinates().getAngle(lastSeenThiefDirection)-direction);
+					closestThief = direction;
+				}
+			}
+			System.out.println(closestThief);
+			lastSeenThiefDirection = new Coordinate((int)(Math.sin(closestThief)*2)+getCoordinates().x,(int)(Math.cos(closestThief)*2)+getCoordinates().y,0);
+			soundsDirection.clear();
+			
+			return BlockingES(lastSeenThiefDirection);
+			}
+		return null;	
 	}
 	
 	/**
@@ -141,5 +197,11 @@ public class Guard extends Agent {
 			}
 	}
 		return false;
+	}
+	
+	protected enum GuardStates{
+		COVARAGE,
+		EXPLORATION,
+		CATCH_MODE
 	}
 }
