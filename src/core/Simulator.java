@@ -56,27 +56,8 @@ public class Simulator {
 
 		spriteManager = SpriteManager.instance();
 
-		// spriteManager.addAgent(new Guard(new Coordinate(3,13,0)));
-		Sprite tempSprite = new Guard(new Coordinate(3, 3, 0));
-		((Agent) tempSprite).setBeliefMap(new BeliefMap(map));
-		spriteManager.addAgent((Agent) tempSprite);
-
-		/*
-		 * tempSprite = new Guard(new Coordinate(16,16,0));
-		 * ((Agent)tempSprite).setBeliefMap(new BeliefMap(map));
-		 * spriteManager.addAgent((Agent)tempSprite);
-		 * 
-		 * tempSprite = new Guard(new Coordinate(10,10,0));
-		 * ((Agent)tempSprite).setBeliefMap(new BeliefMap(map));
-		 * spriteManager.addAgent((Agent)tempSprite);
-		 */
-		tempSprite = new Guard(new Coordinate(10, 10, 0));
-		((Agent) tempSprite).setBeliefMap(new BeliefMap(map));
-		spriteManager.addAgent((Agent) tempSprite);
-		
-		tempSprite = new Thief(new Coordinate(20, 20, 0));
-		((Agent) tempSprite).setBeliefMap(new BeliefMap(map));
-		spriteManager.addAgent((Agent) tempSprite);
+		addGuard(new Coordinate(19, 19, 0));	
+		addGuard(new Coordinate(18, 20, 0));
 
 		eventManager = new EventManager(map);
 
@@ -88,6 +69,52 @@ public class Simulator {
 
 		gameLoop();
 	}
+	//Use this for StiCo Experiment
+	public Simulator(int guards, Map map){
+		if (debug)
+			System.err.println("The simulator has been started");
+
+		// map = new Map();
+		// map = new Map("test100.map");
+		// map = map.maze(map.getMapWidth(),map.getMapHeight());
+		this.map = map;
+
+		spriteManager = SpriteManager.instance();
+
+		for(int i =0;i<guards;i++){
+			addGuard(new Coordinate((int)Math.random()*map.getMapWidth(), (int)Math.random()*map.getMapHeight(), 0));
+		}
+
+		eventManager = new EventManager(map);
+
+		/* to get the agent list call spriteManager.getAgentList(); */
+
+		/* gui stuff (DONT NEED LOL)
+		mainFrame = new MainFrame();
+		mainFrame.setMap(map);*/
+
+		gameLoop();
+	}
+	public void addGuard(Coordinate coord, Map beliefMap){
+		Sprite sprite = new Guard(coord);
+		((Agent) sprite).setBeliefMap(beliefMap);
+		spriteManager.addAgent((Agent) sprite);
+	}
+	
+	public void addGuard(Coordinate coord){
+		addGuard(coord, new BeliefMap(map));
+	}
+	
+	public void addThief(Coordinate coord, Map beliefMap){
+		Sprite sprite = new Thief(coord);
+		((Agent) sprite).setBeliefMap(beliefMap);
+		spriteManager.addAgent((Agent) sprite);
+	}
+	
+	public void addThief(Coordinate coord){
+		addThief(coord, new BeliefMap(map));
+	}
+
 
 	private void gameLoop() {
 		mainFrame.updateGui();
