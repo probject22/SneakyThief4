@@ -84,10 +84,12 @@
 			\input{bes.tex}
 
 \chapter{Methods}
-	%This chapter should describe what experiments we perform and how.
+	\section{Simulator environment}
+		\subsection{Time perception}
+			The time in the simulator is perceived continuouly to allow for continuous velocity, even in a discretized world. Although the moves of the agents on the map are fully discretized, the simulator takes into account how long this unit move has taken to perform, and only allows the same agent to move again once all other agents have caught up with his 'time'. In other words, each agent has his own progress in time, and is only allowed to move when his time is lower (or equal) than all the other agents.
+		\subsection{Game Rules}
 
-\chapter{Implementation}
-	%This chapter should describe our implementation of the software
+
 
 \chapter{Results}
 	% This chapter should contain all experimental results that we obtain (lots of graphs!)
@@ -102,8 +104,6 @@
 % All references APA style
 
 \begin{appendices}
-\chapter{Software Engineering Patterns and Principles}	
-	\section{UML diagrams}
 \chapter{Other Data}
 	
 \end{appendices}
