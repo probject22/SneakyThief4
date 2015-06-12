@@ -11,10 +11,11 @@ import dataContainer.GridState;
 public class StiCoExperiment extends AbstractExperiment {
 	
 	public static void main(String[] args){
-		
+		StiCoExperiment StiCo = new StiCoExperiment();
+		StiCo.runExperiment(1000, 10, 200, 200, 0.4);
 	}
 
-	public StiCoExperiment(){
+	public StiCoExperiment(){ 
 		super();
 		names.add("ratiocoverage");
 		names.add("guard_number");
@@ -24,32 +25,39 @@ public class StiCoExperiment extends AbstractExperiment {
 	}
 	
 	public void runExperiment(int repeats, int guardnum, int mapwidth, int mapheight, double mapdensity){
-		for(int i = 0;i<repeats;i++){
-			System.out.println("run " + i);
-			Map map; // = generateMap(mapwidth, mapheight, mapdensity);
+		double ratio = 0;
+		for(int i = 1;i<guardnum;i++){
+			for(int k =0;k<repeats;k++){
+				//TODO: need this generator
+				Map map = null; // = generateMap(mapwidth, mapheight, mapdensity);
+				
+				SpriteManager manager = SpriteManager.instance();
+				for(int j = 0;j<i;j++){
+					boolean valid = false;
+					while(valid == false){
+			  	 		Coordinate coord = new Coordinate((int)Math.random()*mapwidth, (int)Math.random()*mapheight, 0);
+						if(map.isMoveable(coord)){
+			  			valid = true;
+						}	
+						Guard newGuard = new Guard(coord);
+						manager.addAgent(newGuard);
+					}
+					new Simulator(guardnum, map);
+					//ratio = ratioCovered(map, combinedbeliefmap);
+				}
+			}
+			//TODO: Combined belief map needs implementation
+			String[] measurements = new String[4];
+			measurements[0] = Double.toString(ratio);
+			measurements[1] = Integer.toString(guardnum);
+			measurements[2] = Integer.toString(mapwidth*mapheight);
+			measurements[3] = Double.toString(mapdensity);
 			
-			SpriteManager manager = SpriteManager.instance();
-			/*for(int j = 0;j<guardnum;j++){
-				Guard newGuard = 
-						new Guard(new Coordinate((int)Math.random()*mapwidth, (int)Math.random()*mapheight, 0));
-				manager.addAgent(newGuard);
-			}*/
-			new Simulator(guardnum, map);
-			
+			values.add(measurements);
 		}
-		
-		double ratio = ratioCovered(map, combinedbeliefmap);
-		String[] measurements;
-		measurements[0] = Double.toString(ratio);
-		measurements[1] = Integer.toString(guardnum);
-		measurements[2] = Integer.toString(mapwidth*mapheight);
-		measurements[3] = Double.toString(mapdensity);
-		
-		values.add(measurements);
-		
 		writeCsv("experiments/StiCo/data/stico_experiment.csv");
 	}
-	
+	//returns the ratio covered by the agents running StiCo
 	public double ratioCovered(Map map, BeliefMap beliefmap){
 		double ratio;
 		int covered = 0;

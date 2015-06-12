@@ -69,6 +69,7 @@ public class Simulator {
 
 		gameLoop();
 	}
+	
 	//Use this for StiCo Experiment
 	public Simulator(int guards, Map map){
 		if (debug)
