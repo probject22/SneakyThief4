@@ -20,7 +20,7 @@ public class MapBuilder {
 		for (double difficulty = startDifficulty; difficulty <= stopDifficulty; difficulty+=difficultyIncrease) {
 			for (int currentSize = startSize; currentSize <= stopSize; currentSize += increase) {
 				for (int i = 0; i < amount; i++) {
-					String name = "maze-" + "-" + difficulty + "-" + currentSize + "x" + currentSize + "-" + i + ".map";
+					String name = "maze-" + difficulty + "-" + currentSize + "x" + currentSize + "-" + i + ".map";
 
 					MapSaver saver = new MapSaver(path + name);
 					saver.setSize(currentSize, currentSize);
@@ -48,7 +48,7 @@ public class MapBuilder {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		new MapBuilder(1, 100, 500, 50, 0, 1, 0.1);
+		new MapBuilder(1000, 100, 500, 50, 0.1, 1, 0.1);
 
 	}
 
