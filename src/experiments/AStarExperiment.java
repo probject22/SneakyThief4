@@ -4,6 +4,7 @@ import core.Map;
 import core.Algorithms.PathFinder;
 import core.Algorithms.AStar.AStar;
 import core.Algorithms.RTAStar.MapRTAStar;
+import core.Algorithms.RTAStar.RealTimeAStar;
 import dataContainer.Coordinate;
 
 public class AStarExperiment extends AbstractExperiment {
@@ -21,9 +22,9 @@ public class AStarExperiment extends AbstractExperiment {
 		
 		for(int i= 0; i < repeats;i++){
 			System.out.println("run " + i);
-		double complexity = 0;
-		
-		Map map = Map.maze(100,100);
+		double complexity = Math.random();
+		String name = "maze-100x100-"+ i+ ".map";
+		Map map = new Map(name);
 		PathFinder<Coordinate> pathFinder;
 		Coordinate home = new Coordinate(1,1,0);
 		Coordinate target = new Coordinate(98,98,0);
@@ -38,9 +39,9 @@ public class AStarExperiment extends AbstractExperiment {
 		aSteps ++;
 		}
 		long aEnd = System.nanoTime();
-		/*
+		
 		//test RTA*
-		pathFinder = new MapRTAStar(map);
+		pathFinder = new RealTimeAStar(map);
 		current = home.clone();
 		int rTASteps  = 0;
 		long rTAStart = System.nanoTime();
@@ -50,15 +51,15 @@ public class AStarExperiment extends AbstractExperiment {
 		}
 		long rTAEnd = System.nanoTime();
 		
-		*/
+		
 		
 		//save measurement
 		String[] measurements =  new String[5];
 
 		measurements[0] = Double.toString(aEnd - aStart);
 		measurements[1] = Double.toString(aSteps);
-		measurements[2] = Double.toString(0);//rTAEnd - rTAStart);
-		measurements[3] = Double.toString(0);//rTASteps);
+		measurements[2] = Double.toString(rTAEnd - rTAStart);
+		measurements[3] = Double.toString(rTASteps);
 		measurements[4] = Double.toString(complexity);
 		
 		//System.out.println(measurements.toString());

@@ -163,7 +163,7 @@ public class Map {
 	 * @return
 	 */
 	public boolean isMoveable(int x, int y){
-		if ( x < 0 || x >= mapWidth || y < 0 || y >= mapHeight) return false;
+		if ( x < 0 || x >= map.length || y < 0 || y >= map[0].length) return false;
 		//else
 		return map[x][y].moveable();
 	}
