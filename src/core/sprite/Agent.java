@@ -249,4 +249,8 @@ public class Agent extends Sprite {
 	public void setPathFinder (PathFinder<Coordinate> pathFinder) {
 		this.pathFinder = pathFinder;
 	}
+	
+	public Map getBeliefMap(){
+		return beliefMap;
+	}
 }

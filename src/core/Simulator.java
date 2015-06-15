@@ -239,12 +239,13 @@ public class Simulator {
 			if (actionElement instanceof Move) {
 				if (!(agent instanceof Guard) || !((Guard) agent).isInTower()) {
 					Move move = (Move) actionElement;
+					Coordinate coordinate;
+					coordinate = agent.getCoordinates();
+					MoveDirection dir = MoveDirection
+							.getDirectionFromAngle(coordinate.angle);
+					coordinate.x += dir.getDx();
+					coordinate.y += dir.getDy();
 					if (isMovePossible(agent, move)) {
-						Coordinate coordinate = agent.getCoordinates();
-						MoveDirection dir = MoveDirection
-								.getDirectionFromAngle(coordinate.angle);
-						coordinate.x += dir.getDx();
-						coordinate.y += dir.getDy();
 						double time = actionElement.duration();
 						if (agent instanceof Thief)
 							time *= map.getCopyOfMap()[coordinate.x][coordinate.y]
@@ -257,6 +258,8 @@ public class Simulator {
 						// ACTIONELEMENT
 						eventManager.triggerEvent(actionElement, agent);
 					} else {
+						if (agent.getBeliefMap().getMap()[coordinate.x][coordinate.y] == GridState.unknown)
+							agent.getBeliefMap().getMap()[coordinate.x][coordinate.y] = GridState.unknownOBJECT;
 						// if a agent trys to go somewhere where it doesnt
 						// belong give him a time penalty
 						// this avoids that the simulator crashes

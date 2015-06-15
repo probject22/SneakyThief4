@@ -62,7 +62,6 @@ public class Map {
 			System.exit(-1);
 		}
 	}
-	
 	public Map(int width, int height){
 		this.map = new GridState[width][height];
 		for (int i = 0; i < map.length; i++) {
@@ -85,6 +84,9 @@ public class Map {
 		return map == null ? null: map.clone();
 	}
 	
+	public GridState[][] getMap(){
+		return map;
+	}
 	public ArrayList<Coordinate> getGoal(){
 		ArrayList<Coordinate> goals = null;
 		for(int i =0;i<this.getMapHeight();i++){
