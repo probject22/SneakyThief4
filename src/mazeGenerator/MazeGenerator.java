@@ -51,7 +51,7 @@ public class MazeGenerator {
 		}
 	}
 	
-	Random r = new Random(10);
+	Random r = new Random();
 	
 	public void prim(double difficulty){
 		
