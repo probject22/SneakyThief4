@@ -22,6 +22,7 @@ import core.actions.Turn;
 import core.events.Event;
 import core.events.Sound;
 import core.events.Vision;
+import dataContainer.BlackBoard;
 import dataContainer.Coordinate;
 
 /**
@@ -44,6 +45,7 @@ import dataContainer.Coordinate;
  */
 public class Agent extends Sprite {
 
+	protected BlackBoard blackboard;
 	public static final double MAX_SPEED = 1.4;
 	public static final double MAX_ANG_VEL = 1;
 	protected Map beliefMap;
@@ -115,6 +117,13 @@ public class Agent extends Sprite {
 			beliefMapGUi.updateGui();
 		}
 		lastSeen = vision;
+		if (blackboard != null){
+			for (Sprite s : lastSeen.getSpriteInVisionMap().values()){
+				if (s instanceof Thief){
+					blackboard.updateThief(s.getCoordinates().clone());
+				}	
+			}
+		}
 	}
 	
 	public Vision getLastSeen(){
