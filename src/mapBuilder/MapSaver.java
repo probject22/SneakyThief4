@@ -53,12 +53,10 @@ public class MapSaver {
 		try {
 			writer = new PrintWriter(filePath, "UTF-8");
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			writer = null;
 			return false;
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			writer = null;
 			return false;

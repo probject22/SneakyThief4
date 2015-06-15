@@ -41,7 +41,6 @@ public class MapBuilder {
 						saver.addLine(line);
 					}
 					saver.closeMap();
-					// TODO SAVE THE MAP IN A FILE
 				}
 
 			}
