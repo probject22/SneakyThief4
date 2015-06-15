@@ -1,13 +1,14 @@
 package core.Algorithms.RTAStar2;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import dataContainer.Coordinate;
 
-public abstract class RTAStar {
+public class RTAStar {
 	
 	
 	public List<Node> getShortestPath(Node from, Node to){
@@ -79,7 +80,9 @@ public abstract class RTAStar {
 		return reconstructPath(n);
 	}
 	
-	abstract double h(Node from, Node to);
+	double h(Node from, Node to){
+		return from.c.distance(to.c);
+	}
 	
 	public List<Node> reconstructPath(Node solution){
 		
@@ -103,12 +106,19 @@ public abstract class RTAStar {
 		
 	}
 	
-	protected class Node {
+	class Node {
 		// neighbours of the node with the respective moving cost
 		Map<Node, Double> neighbours;
 		
 		// the parent of the current node, used for path reconstruction
 		Node parent;
+		
+		public Node(){
+			neighbours = new HashMap<>();
+			parent = null;
+			f = 0;
+			c = null;
+		}
 		
 		// expected cost of moving through this node
 		double f;
