@@ -52,12 +52,14 @@ public class Simulator {
 		// map = new Map();
 		// map = new Map("test100.map");
 		// map = map.maze(map.getMapWidth(),map.getMapHeight());
-		 map = new Map("default.map");
+		 //map = new Map("default.map");
+		map = new Map("maze-100x100-0.map");
 
 		spriteManager = SpriteManager.instance();
 
-		addGuard(new Coordinate(19, 19, 0));	
-		addGuard(new Coordinate(18, 20, 0));
+		//addGuard(new Coordinate(19, 19, 0));	
+		//addGuard(new Coordinate(18, 20, 0));
+		addThief(new Coordinate(1,1,0));
 
 		eventManager = new EventManager(map);
 

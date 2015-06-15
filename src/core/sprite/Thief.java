@@ -139,7 +139,7 @@ public class Thief extends Agent {
 		return true;
 	}
 	protected Action explorationState(){
-		target = new Coordinate(1,1,0);
+		target = new Coordinate(97,97,0);
 		return null;
 	}
 	
