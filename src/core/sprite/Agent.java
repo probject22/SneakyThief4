@@ -118,6 +118,12 @@ public class Agent extends Sprite {
 		}
 		lastSeen = vision;
 		if (blackboard != null){
+			Coordinate thiefCoord = blackboard.getThiefCoord();
+			for (Coordinate c : vision.getStateInVisionMap().keySet()){
+				if (thiefCoord != null && thiefCoord.x == c.x && thiefCoord.y == c.y)
+					blackboard.updateThief(null);
+			}
+
 			for (Sprite s : lastSeen.getSpriteInVisionMap().values()){
 				if (s instanceof Thief){
 					blackboard.updateThief(s.getCoordinates().clone());

@@ -25,9 +25,13 @@ public class BlackBoard {
 		}
 	}
 	public void updateThief(Coordinate coord){
-		thiefCoord = coord.clone();
+		thiefCoord = null;
+		if (coord != null)
+			thiefCoord = coord.clone();
 	}
 	public Coordinate getThiefCoord(){
+		if (thiefCoord == null)
+			return null;
 		return thiefCoord.clone();
 	}
 	
