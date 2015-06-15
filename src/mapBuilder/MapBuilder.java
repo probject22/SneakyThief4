@@ -100,7 +100,7 @@ public class MapBuilder  {
 				}
 				saver.closeMap();
 			}
-			
+			System.err.println("a batch is finished "+ difficulty + "-" + size +"x" + size);
 		}
 		
 	}
