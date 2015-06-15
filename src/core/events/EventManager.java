@@ -199,6 +199,7 @@ public class EventManager {
 					}
 					
 					for (Coordinate neighbor : barrier.neighbourCoordinates()){
+						if (neighbor.x >=0 && neighbor.y >= 0 && neighbor.x <state.length && neighbor.y < state[0].length)
 						if(state[neighbor.x][neighbor.y] == GridState.Wall){
 							double nblockAngle = getBlockingAngle(baseCoords,neighbor);
 							Coordinate nNewBase = baseCoords.clone();
