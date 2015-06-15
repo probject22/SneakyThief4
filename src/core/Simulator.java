@@ -240,12 +240,17 @@ public class Simulator {
 				if (!(agent instanceof Guard) || !((Guard) agent).isInTower()) {
 					Move move = (Move) actionElement;
 					Coordinate coordinate;
-					coordinate = agent.getCoordinates();
+					coordinate = agent.getCoordinates().clone();
 					MoveDirection dir = MoveDirection
 							.getDirectionFromAngle(coordinate.angle);
 					coordinate.x += dir.getDx();
 					coordinate.y += dir.getDy();
 					if (isMovePossible(agent, move)) {
+						coordinate = agent.getCoordinates();
+						dir = MoveDirection
+								.getDirectionFromAngle(coordinate.angle);
+						coordinate.x += dir.getDx();
+						coordinate.y += dir.getDy();
 						double time = actionElement.duration();
 						if (agent instanceof Thief)
 							time *= map.getCopyOfMap()[coordinate.x][coordinate.y]
