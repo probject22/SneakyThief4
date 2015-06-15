@@ -19,6 +19,8 @@ import dataContainer.GridState;
  *
  */
 public class RealTimeAStar implements PathFinder<Coordinate> {
+	
+	// The map that AStar works on. This map should be the beliefmap of the agent.
 	Map map;
 	
 	/**
@@ -28,23 +30,40 @@ public class RealTimeAStar implements PathFinder<Coordinate> {
 		this.map = map;
 	}
 	
+	// The nodes that the RTA* works on. These nodes are generated as the algorithm progresses, and the algorithms
+	// checks whether the node already exists based on the coordinates of the node.
 	HashMap<Coordinate,Node> nodes = new HashMap<Coordinate,Node>();
 	
 	@Override
 	public Coordinate getShortestPath(Coordinate from, Coordinate to) {
 		
+		// if the goal is not reachable, return failure. There is no path.
 		if(!map.isMoveable(to)) return null;
 		
+		// define the starting node (the current location of the agent)
 		Node start = new Node();
 		start.c = from.clone();
+		
+		// the starting node has no parent.
 		start.parent = null;
+		
+		// The expected cost does not have a current cost component, so it is just the heuristic value
+		// The heuristic is the direct distance from the start to the goal. This heuristic never over-
+		// estimates the true cost, as required
 		start.f = start.c.distance(to);
 		
+		// initialize the iterator node with the start node
 		Node n = start;
+		
+		// (optional) define a maximum number of iterations. This is usefull for very long paths. This will
+		// give a preliminary result.
 		//int MAX_ITERATION = 1000000;
 		//int i = 0;
+		
+		// Loop until the goal is found
 		while(!n.c.equals(to)){
 			
+			// get the neighbouring nodes of the current node
 			List<Node> neighbours = neighbours(n);
 			
 			
@@ -52,20 +71,18 @@ public class RealTimeAStar implements PathFinder<Coordinate> {
 			if(neighbours.isEmpty())
 				return null;
 			
-			//if there is only one possible move, make that move
-			if(neighbours.size() == 1)
-				return neighbours.get(0).c;
-			
-			// don't visit a node twice
-			for(Node no : neighbours){
-				if(no.f == 0)
+			// For every neighbouring node, if the node does not yet have a f-value, initiate the value
+			// to the direct distance to the goal, plus the cost from moving from the current node to the
+			// neigbour.
+			for(Node no : neighbours)
+				if(no.f == 0) 
 					no.f = no.c.distance(to)+1;
-			}
 			
-			// select the second best neighbour
+			
+			// sort the list of neigbours based on their f-value
 			Collections.sort(neighbours);
 			
-			
+			// 
 			n.f = neighbours.get(1).f + 1;
 			
 			//move

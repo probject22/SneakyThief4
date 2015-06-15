@@ -53,7 +53,7 @@ public class Simulator {
 		// map = new Map("test100.map");
 		// map = map.maze(map.getMapWidth(),map.getMapHeight());
 		 //map = new Map("default.map");
-		map = new Map("maze-100x100-0.map");
+		map = new Map("maze-100x100-1.map");
 
 		spriteManager = SpriteManager.instance();
 
