@@ -197,8 +197,24 @@ public class EventManager {
 							isInView(gridCheck,blockAngle,maxVisionRange,newBase)){
 						remove.add(gridCheck);
 					}
+					
+					for (Coordinate neighbor : barrier.neighbourCoordinates()){
+						if(state[neighbor.x][neighbor.y] == GridState.Wall){
+							double nblockAngle = getBlockingAngle(baseCoords,neighbor);
+							Coordinate nNewBase = baseCoords.clone();
+							nNewBase.angle = baseCoords.getAngle(neighbor);
+							if (!isInView(gridCheck,nblockAngle,baseCoords.distance(neighbor)+1,nNewBase) &&
+								isInView(gridCheck,nblockAngle,maxVisionRange,nNewBase)){
+							remove.add(gridCheck);
+							}
+						}
+					
+					}
+		
+				
 				}
-			}
+			
+		}
 		}
 		vision.deleteGrid(remove);
 		
@@ -213,7 +229,6 @@ public class EventManager {
 		
 		agent.giveEvent(vision);
 	}
-	
 	// Split the map into sub section.
 	// Has to be initialized when map gets created
 	public void initializeSoundOnMap(){
