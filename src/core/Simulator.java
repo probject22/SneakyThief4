@@ -12,6 +12,7 @@ import core.sprite.Guard;
 import core.sprite.Sprite;
 import core.sprite.SpriteManager;
 import core.sprite.Thief;
+import dataContainer.BlackBoard;
 import dataContainer.Coordinate;
 import dataContainer.GridState;
 import dataContainer.MoveDirection;
@@ -98,10 +99,17 @@ public class Simulator {
 
 		gameLoop();
 	}
-	public void addGuard(Coordinate coord, Map beliefMap){
+	public void addGuard(Coordinate coord, Map beliefMap, BlackBoard blackboard){
 		Sprite sprite = new Guard(coord);
 		((Agent) sprite).setBeliefMap(beliefMap);
+		((Guard) sprite).setBlackBoard(blackboard);
 		spriteManager.addAgent((Agent) sprite);
+	}
+	public void addGuard(Coordinate coord, BlackBoard blackboard){
+		addGuard(coord, new BeliefMap(map), blackboard);
+	}
+	public void addGuard(Coordinate coord, Map beliefMap){
+		addGuard(coord, beliefMap, new BlackBoard());
 	}
 	
 	public void addGuard(Coordinate coord){

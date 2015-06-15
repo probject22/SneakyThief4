@@ -14,6 +14,7 @@ import core.actions.Turn;
 import core.actions.Wait;
 import core.events.Event;
 import core.events.Sound;
+import dataContainer.BlackBoard;
 import dataContainer.Coordinate;
 
 /**
@@ -22,6 +23,7 @@ import dataContainer.Coordinate;
  */
 public class Guard extends Agent {
 	
+	protected BlackBoard blackboard;
 	protected Stico stico;
 	protected boolean catchMode;
 	protected Coordinate lastSeenThiefDirection;
@@ -42,7 +44,10 @@ public class Guard extends Agent {
 		structureVisionRange = 10;
 		towerVisionRange = 15;
 	}
-	
+	public void setBlackBoard(BlackBoard board){
+		this.blackboard = board;
+		blackboard.addGuard(this.getCoordinates());
+	}
 	protected void processSound(Event sound){ 
 		processSound((Sound)sound);
 	}
