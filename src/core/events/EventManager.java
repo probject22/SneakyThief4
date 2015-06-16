@@ -120,17 +120,23 @@ public class EventManager {
 	private double getBlockingAngle(Coordinate base,Coordinate block){
 		
 		if((base.x > block.x && base.y > block.y) || (base.x < block.x && base.y < block.y))
-			return Math.abs(base.getAngle(new Coordinate(block.x+1,block.y-1,0)) - 
-					base.getAngle(new Coordinate(block.x-1,block.y+1,0)));
+			return Math.abs(base.getAngle(new Coordinate(block.x,block.y+1,0)) - 
+					base.getAngle(new Coordinate(block.x+1,block.y,0)));
 		if((base.x < block.x && base.y > block.y) || (base.x > block.x && base.y < block.y))
+			return Math.abs(base.getAngle(new Coordinate(block.x,block.y,0)) - 
+					base.getAngle(new Coordinate(block.x+1,block.y+1,0)));
+		if(base.x == block.x && base.y < block.y)
+				return Math.abs(base.getAngle(new Coordinate(block.x,block.y,0)) - 
+								base.getAngle(new Coordinate(block.x+1,block.y,0)));
+		if(base.x == block.x && base.y > block.y)
 			return Math.abs(base.getAngle(new Coordinate(block.x+1,block.y+1,0)) - 
-					base.getAngle(new Coordinate(block.x-1,block.y-1,0)));
-		if(base.x == block.x)
-				return Math.abs(base.getAngle(new Coordinate(block.x,block.y+1,0)) - 
-								base.getAngle(new Coordinate(block.x,block.y-1,0)));
-		else
-			return Math.abs(base.getAngle(new Coordinate(block.x+1,block.y,0)) - 
-							base.getAngle(new Coordinate(block.x-1,block.y,0)));
+							base.getAngle(new Coordinate(block.x,block.y+1,0)));
+		if(base.y == block.y && base.x > block.x)
+			return Math.abs(base.getAngle(new Coordinate(block.x+1,block.y+1,0)) - 
+							base.getAngle(new Coordinate(block.x+1,block.y,0)));
+		else 
+			return Math.abs(base.getAngle(new Coordinate(block.x,block.y,0)) - 
+							base.getAngle(new Coordinate(block.x,block.y+1,0)));
 		
 	}
 	
@@ -204,7 +210,7 @@ public class EventManager {
 							double nblockAngle = getBlockingAngle(baseCoords,neighbor);
 							Coordinate nNewBase = baseCoords.clone();
 							nNewBase.angle = baseCoords.getAngle(neighbor);
-							if (!isInView(gridCheck,nblockAngle,baseCoords.distance(neighbor) + 0.5,nNewBase) &&
+							if (!isInView(gridCheck,nblockAngle,baseCoords.distance(neighbor),nNewBase) &&
 								isInView(gridCheck,nblockAngle,maxVisionRange,nNewBase)){
 							remove.add(gridCheck);
 							}
