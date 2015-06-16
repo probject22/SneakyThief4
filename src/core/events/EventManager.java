@@ -204,7 +204,7 @@ public class EventManager {
 							double nblockAngle = getBlockingAngle(baseCoords,neighbor);
 							Coordinate nNewBase = baseCoords.clone();
 							nNewBase.angle = baseCoords.getAngle(neighbor);
-							if (!isInView(gridCheck,nblockAngle,baseCoords.distance(neighbor)+1,nNewBase) &&
+							if (!isInView(gridCheck,nblockAngle,baseCoords.distance(neighbor) + 0.5,nNewBase) &&
 								isInView(gridCheck,nblockAngle,maxVisionRange,nNewBase)){
 							remove.add(gridCheck);
 							}

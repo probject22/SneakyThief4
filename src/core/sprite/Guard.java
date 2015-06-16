@@ -100,7 +100,7 @@ public class Guard extends Agent {
 		//To avoid null errors
 		if (out == null){
 			out = new Action();
-			out.addActionElement(new Wait(0.01));
+			out.addActionElement(new Wait(0.1));
 		}
 		return out;
 
@@ -124,20 +124,24 @@ public class Guard extends Agent {
 	}
 	
 	protected boolean toCatchState(){
-		for (Sprite s : lastSeen.getSpriteInVisionMap().values()){
-			if (s instanceof Thief){
-				lastSeenThief = (Thief) s;
-				lastSeenThiefDirection = s.getCoordinates().clone();
-				return true;
-			}
+		if(blackboard.getThiefCoord() != null){
+			lastSeenThiefDirection = blackboard.getThiefCoord();
+			return true;
 		}
+//		for (Sprite s : lastSeen.getSpriteInVisionMap().values()){
+//			if (s instanceof Thief){
+//				lastSeenThief = (Thief) s;
+//				lastSeenThiefDirection = s.getCoordinates().clone();
+//				return true;
+//			}
+//		}
 		return false;
 	}
 	
 	protected Action catchState(){
 		//if the thief is still in view cone follow him.
-		if (lastSeen.getSpriteInVisionMap().containsValue(lastSeenThief)){
-			lastSeenThiefDirection = lastSeenThief.getCoordinates().clone();
+		if (blackboard.getThiefCoord() != null){
+			lastSeenThiefDirection = blackboard.getThiefCoord();
 			return BlockingES(lastSeenThiefDirection);	
 		}
 		//if hear no sound gets out of catch mode
@@ -169,11 +173,11 @@ public class Guard extends Agent {
 	 * @author Sina (21/05/2015)
 	 */
 	protected Action BlockingES(Coordinate intruder){
-		Collection<Coordinate> otherAgents = lastSeen.getSpriteInVisionMap().keySet();
-		otherAgents.remove(lastSeenThief.getCoordinates().clone());
-		Coordinate next = BES.getBlockingLocation(getCoordinates().clone(),otherAgents,intruder);
+//		Collection<Coordinate> otherAgents = lastSeen.getSpriteInVisionMap().keySet();
+//		otherAgents.remove(lastSeenThief.getCoordinates().clone());
+		Coordinate next = BES.getBlockingLocation(getCoordinates().clone(),blackboard.getGuardList(),intruder);
 		//Use A* or RTA* to get to the Blocking Coordinate.
-		return rTAStar(next);
+		return aStar(intruder.neighbourCoordinates().get(0));
 	}
 	public void enterTower(){
 		this.currentMaXVisionRange = this.towerMaxVisionRange;

@@ -16,6 +16,7 @@ import core.Algorithms.AStar.AStar;
 import core.Algorithms.BasicExploration.BasicRandomExploration;
 import core.Algorithms.RTAStar.MapRTAStar;
 import core.Algorithms.RTAStar.RealTimeAStar;
+import core.Algorithms.RTAStar2.MapAdapter;
 import core.actions.Action;
 import core.actions.Move;
 import core.actions.Turn;
@@ -71,7 +72,7 @@ public class Agent extends Sprite {
 		beliefMapGUi.close();
 		beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 		beliefMapGUi.updateGui();
-		pathFinder = new RealTimeAStar(beliefMap);
+		pathFinder = new AStar(beliefMap);
 		realTimePathFinder = new MapRTAStar(beliefMap);
 		exploration.setBeliefMap(map);
 	}
@@ -81,7 +82,7 @@ public class Agent extends Sprite {
         this.beliefMap =  new BeliefMap();
         beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 	    // Create an A* pathfinder
-	    pathFinder = new RealTimeAStar(beliefMap);
+	    pathFinder = new AStar(beliefMap);
 	    realTimePathFinder = new MapRTAStar(beliefMap);
 	    exploration = new BasicRandomExploration(this,beliefMap);
 	    
@@ -117,6 +118,7 @@ public class Agent extends Sprite {
 			beliefMapGUi.updateGui();
 		}
 		lastSeen = vision;
+		
 		if (blackboard != null){
 			Coordinate thiefCoord = blackboard.getThiefCoord();
 			for (Coordinate c : vision.getStateInVisionMap().keySet()){
@@ -154,6 +156,21 @@ public class Agent extends Sprite {
 	protected Action aStar(Coordinate goal){
 		Action action = new Action();
 		Coordinate next = pathFinder.getShortestPath(getCoordinates(), goal);
+		if (next == null)
+			return null;
+		double angle = getCoordinates().angle;
+		double goalAngle = getCoordinates().getAngle(next);
+		action.addActionElement(new Turn(angle, goalAngle, Agent.MAX_SPEED));
+		action.addActionElement(new Move(Agent.MAX_SPEED));
+		
+		return action;
+	}
+	
+	protected Action realTimeAStar(Coordinate goal){
+		Action action = new Action();
+		
+		MapAdapter mapadapter = new MapAdapter();
+		Coordinate next = mapadapter.getPath(beliefMap, getCoordinates(), goal).get(1);
 		if (next == null)
 			return null;
 		double angle = getCoordinates().angle;

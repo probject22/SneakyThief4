@@ -85,7 +85,7 @@ public class Thief extends Agent {
 		//To avoid null errors
 		if (out == null){
 			out = new Action();
-			out.addActionElement(new Wait(0.01));
+			out.addActionElement(new Wait(0.1));
 		}
 		return out;
 

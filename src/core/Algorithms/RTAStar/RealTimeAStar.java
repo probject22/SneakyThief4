@@ -76,21 +76,23 @@ public class RealTimeAStar implements PathFinder<Coordinate> {
 			// neigbour.
 			for(Node no : neighbours)
 				if(no.f == 0) 
-					no.f = no.c.distance(to)+1;
+					no.f = no.c.distance(to) + 1;
 			
 			
 			// sort the list of neigbours based on their f-value
 			Collections.sort(neighbours);
 			
 			// 
-			n.f = neighbours.get(1).f + 1;
+			if (neighbours.size() == 1)
+				n.f = 999;
+			else
+			n.f = neighbours.get(1).f;
 			
 			//move
 			Node p = n;
 				
 			n = neighbours.get(0);
-			System.out.println("p.f " + p.f + " " + p.c);
-			System.out.println("n.f " + n.f + " " + neighbours.get(1).c);
+
 			n.parent = p;
 			//if(i++ > MAX_ITERATION) break;
 		}
