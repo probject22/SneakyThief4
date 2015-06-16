@@ -96,7 +96,6 @@ public class Simulator {
 		/* gui stuff (DONT NEED LOL)
 		mainFrame = new MainFrame();
 		mainFrame.setMap(map);*/
-
 		gameLoop();
 	}
 	public void addGuard(Coordinate coord, Map beliefMap, BlackBoard blackboard){
@@ -159,6 +158,7 @@ public class Simulator {
 			/* finish the move by updateting the gui */
 			mainFrame.updateGui();
 			sleep(speed);
+			winLossValue = 0;
 		}
 		System.out.println("Stop");
 		System.exit(0);
