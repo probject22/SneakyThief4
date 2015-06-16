@@ -20,6 +20,7 @@ public enum GridState {
 	Tree			(	new Color(128,128,0),	false,			'B',		2.0,			2.0,			2.0			),
 	OuterWall		(	Color.DARK_GRAY,		false,			'+',		1.0,			1.0,			1.0			),
 	unknown			(	Color.RED,				true,			'9',		1.0,			1.0,			1.0			),
+	path			(	Color.CYAN,				true,			'9',		1.0,			1.0,			1.0			),
 	unknownOBJECT	(	Color.orange,			false,			'9',		1.0,			1.0,			1.0		);
 
 

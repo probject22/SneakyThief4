@@ -15,6 +15,8 @@ public class AStarExperiment extends AbstractExperiment {
 		names.add("a_path_length");
 		names.add("rta_running_time");
 		names.add("rta_path_length");
+		names.add("map_type");
+		names.add("map_area");
 		names.add("map_complexity");
 	}
 	
@@ -54,13 +56,15 @@ public class AStarExperiment extends AbstractExperiment {
 		
 		
 		//save measurement
-		String[] measurements =  new String[5];
+		String[] measurements =  new String[7];
 
 		measurements[0] = Double.toString(aEnd - aStart);
 		measurements[1] = Double.toString(aSteps);
 		measurements[2] = Double.toString(rTAEnd - rTAStart);
 		measurements[3] = Double.toString(rTASteps);
-		measurements[4] = Double.toString(complexity);
+		measurements[4] = name;
+		measurements[5] = Integer.toString(map.getMapWidth()*map.getMapHeight());
+		measurements[6] = Double.toString(complexity);
 		
 		//System.out.println(measurements.toString());
 		values.add(measurements);

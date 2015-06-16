@@ -118,25 +118,25 @@ public class EventManager {
 	 * @return angle vision around a block
 	 */
 	private double getBlockingAngle(Coordinate base,Coordinate block){
-		
+		//base is left down cornerpoint from block agent is in
 		if((base.x > block.x && base.y > block.y) || (base.x < block.x && base.y < block.y))
-			return Math.abs(base.getAngle(new Coordinate(block.x,block.y+1,0)) - 
-					base.getAngle(new Coordinate(block.x+1,block.y,0)));
+			return Math.abs(base.getAngleFromAgent(new Coordinate(block.x,block.y+1,0)) - 
+					base.getAngleFromAgent(new Coordinate(block.x+1,block.y,0)));
 		if((base.x < block.x && base.y > block.y) || (base.x > block.x && base.y < block.y))
-			return Math.abs(base.getAngle(new Coordinate(block.x,block.y,0)) - 
-					base.getAngle(new Coordinate(block.x+1,block.y+1,0)));
+			return Math.abs(base.getAngleFromAgent(new Coordinate(block.x,block.y,0)) - 
+					base.getAngleFromAgent(new Coordinate(block.x+1,block.y+1,0)));
 		if(base.x == block.x && base.y < block.y)
-				return Math.abs(base.getAngle(new Coordinate(block.x,block.y,0)) - 
-								base.getAngle(new Coordinate(block.x+1,block.y,0)));
+				return Math.abs(base.getAngleFromAgent(new Coordinate(block.x,block.y,0)) - 
+								base.getAngleFromAgent(new Coordinate(block.x+1,block.y,0)));
 		if(base.x == block.x && base.y > block.y)
-			return Math.abs(base.getAngle(new Coordinate(block.x+1,block.y+1,0)) - 
-							base.getAngle(new Coordinate(block.x,block.y+1,0)));
+			return Math.abs(base.getAngleFromAgent(new Coordinate(block.x+1,block.y+1,0)) - 
+							base.getAngleFromAgent(new Coordinate(block.x,block.y+1,0)));
 		if(base.y == block.y && base.x > block.x)
-			return Math.abs(base.getAngle(new Coordinate(block.x+1,block.y+1,0)) - 
-							base.getAngle(new Coordinate(block.x+1,block.y,0)));
+			return Math.abs(base.getAngleFromAgent(new Coordinate(block.x+1,block.y+1,0)) - 
+							base.getAngleFromAgent(new Coordinate(block.x+1,block.y,0)));
 		else 
-			return Math.abs(base.getAngle(new Coordinate(block.x,block.y,0)) - 
-							base.getAngle(new Coordinate(block.x,block.y+1,0)));
+			return Math.abs(base.getAngleFromAgent(new Coordinate(block.x,block.y,0)) - 
+							base.getAngleFromAgent(new Coordinate(block.x,block.y+1,0)));
 		
 	}
 	
@@ -156,6 +156,7 @@ public class EventManager {
 		
 		//Adding the states (towers,walls,trees) in the vision to the Grid hash map
 		GridState[][] state = map.getCopyOfMap();
+		vision.addGrid(new Coordinate(baseCoords.x,baseCoords.y,0), GridState.path);
 		for (int i=0; i<map.getMapWidth();i++){
 			for (int j=0; j<map.getMapHeight();j++){
 				
