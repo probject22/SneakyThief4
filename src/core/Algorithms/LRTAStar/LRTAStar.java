@@ -20,6 +20,7 @@ public class LRTAStar implements PathFinder<Coordinate> {
 	private Map map;
 	boolean debug = DebugConstants.lrtastarDebug;
 	private int[][] costMap;
+	
 	public LRTAStar(Map map) {
 		this.map = map;
 		generateCostMap();
@@ -29,10 +30,10 @@ public class LRTAStar implements PathFinder<Coordinate> {
 	public Coordinate getShortestPath(Coordinate from, Coordinate to) {
 		
 		if (this.goal == null || !(this.goal.x == to.x && this.goal.y == to.y)){
-			System.err.println("resetting costmap");
+			//System.err.println("resetting costmap");
 			if (goal != null)
 			System.err.println("goal"+ goal);
-			System.err.println(to);
+			//System.err.println(to);
 			this.goal = to.clone();
 			generateCostMap();
 		}
@@ -40,7 +41,8 @@ public class LRTAStar implements PathFinder<Coordinate> {
 		if (from.equals(to))
 			return to;
 		
-		if (costMap.length < from.x && costMap[0].length <from.y)
+		//System.err.println("cl "+costMap.length + " fx " + from.x + "cll "+costMap[0].length + " fy " + from.y);
+		if (costMap.length > from.x && costMap[0].length > from.y)
 		costMap[from.x][from.y] += 5;
 		
 		double bestEstemator = 0;
@@ -58,7 +60,7 @@ public class LRTAStar implements PathFinder<Coordinate> {
 			estemator += grid[tempCoord.x][tempCoord.y].getAstarCost();
 			
 			//the memory
-			if (costMap.length < tempCoord.x && costMap[0].length <tempCoord.y)
+			if (costMap.length > tempCoord.x && costMap[0].length > tempCoord.y)
 				estemator += (double)costMap[tempCoord.x][tempCoord.y];
 			
 			if (bestCoord == null || estemator < bestEstemator){
