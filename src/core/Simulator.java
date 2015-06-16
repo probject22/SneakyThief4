@@ -27,7 +27,7 @@ public class Simulator {
 	private boolean debug = true;
     private static boolean stop = false;
     private static boolean pause = true;
-    private double speed = 0.1;
+    private double speed = 0.05;
 
 	public void setSpeed(double newSpeed) {
 		speed = newSpeed;

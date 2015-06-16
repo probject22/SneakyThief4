@@ -51,6 +51,11 @@ public class Coordinate {
 	public double getAngle(Coordinate two){
 		return Math.atan2((two.y - this.y),(two.x - this.x));
 	}
+	
+	public double getAngleFromAgent(Coordinate two){
+		return Math.atan2((two.y - (this.y+0.5)),(two.x - (this.x+0.5)));
+	}
+	
 	public String toString(){
 		return "X = " +this.x +", y = "+this.y+", angle = "+this.angle+" rad/"+Math.toDegrees(angle)+" deg.";
 	}
