@@ -124,22 +124,29 @@ public class Guard extends Agent {
 	}
 	
 	protected boolean toCatchState(){
+		for (Sprite s : lastSeen.getSpriteInVisionMap().values()){
+			if (s instanceof Thief){
+				lastSeenThiefDirection = blackboard.getThiefCoord();
+				return true;
+			}
+		}
+		
 		if(blackboard.getThiefCoord() != null){
 			lastSeenThiefDirection = blackboard.getThiefCoord();
 			return true;
 		}
-//		for (Sprite s : lastSeen.getSpriteInVisionMap().values()){
-//			if (s instanceof Thief){
-//				lastSeenThief = (Thief) s;
-//				lastSeenThiefDirection = s.getCoordinates().clone();
-//				return true;
-//			}
-//		}
 		return false;
 	}
 	
 	protected Action catchState(){
-		//if the thief is still in view cone follow him.
+		//if the thief is still in view cone follow him directly.
+		for (Sprite s : lastSeen.getSpriteInVisionMap().values()){
+			if (s instanceof Thief){
+				lastSeenThiefDirection = s.getCoordinates().clone();
+				return rTAStar(lastSeenThiefDirection);
+			}
+		}
+		//if the thief is still in the blackboard use BES.
 		if (blackboard.getThiefCoord() != null){
 			lastSeenThiefDirection = blackboard.getThiefCoord();
 			return BlockingES(lastSeenThiefDirection);	
@@ -162,7 +169,6 @@ public class Guard extends Agent {
 		
 		lastSeenThiefDirection = new Coordinate((int)(Math.sin(closestThief)*2)+getCoordinates().x,(int)(Math.cos(closestThief)*2)+getCoordinates().y,0);
 		
-		
 		return BlockingES(lastSeenThiefDirection);	
 	}
 	
@@ -177,8 +183,9 @@ public class Guard extends Agent {
 //		otherAgents.remove(lastSeenThief.getCoordinates().clone());
 		Coordinate next = BES.getBlockingLocation(getCoordinates().clone(),blackboard.getGuardList(),intruder);
 		//Use A* or RTA* to get to the Blocking Coordinate.
-		return aStar(intruder.neighbourCoordinates().get(0));
+		//return aStar(intruder.neighbourCoordinates().get(0));
 		//return rTAStar(next);
+		return rTAStar(next);
 	}
 	public void enterTower(){
 		this.currentMaXVisionRange = this.towerMaxVisionRange;
