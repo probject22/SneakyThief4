@@ -5,12 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 
 import core.Map;
+import core.Algorithms.PathFinder;
 import core.Algorithms.RTAStar2.RTAStar.Node;
 import dataContainer.Coordinate;
 import dataContainer.GridState;
 
-public class MapAdapter {
+public class MapAdapter implements PathFinder<Coordinate> {
 
+	public MapAdapter(Map map){ this.map = map; }
+	
 	public List<Coordinate> getPath(Map map, Coordinate from, Coordinate to) {
 		RTAStar pathfinder = new RTAStar();
 		
@@ -68,6 +71,13 @@ public class MapAdapter {
 		
 		return start;
 
+	}
+	
+	Map map;
+
+	@Override
+	public Coordinate getShortestPath(Coordinate from, Coordinate to) {
+		return getPath(map, from, to).get(1);
 	}
 
 }

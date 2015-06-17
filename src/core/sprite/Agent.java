@@ -170,7 +170,7 @@ public class Agent extends Sprite {
 	protected Action realTimeAStar(Coordinate goal){
 		Action action = new Action();
 		
-		MapAdapter mapadapter = new MapAdapter();
+		MapAdapter mapadapter = new MapAdapter(beliefMap);
 		Coordinate next = mapadapter.getPath(beliefMap, getCoordinates(), goal).get(1);
 		if (next == null)
 			return null;
