@@ -4,7 +4,7 @@ A possible way of catching an intruder that is faster than the guards is to use 
 			% Insert explanatory graphics
 			%
 
-			\begin{algorithm}[H]
+			\begin{algorithm}
 			\KwData{The guard $p$; the current cell of the guard $s$; the current cell of the intruder $t$; the number of guards $n$}
 			\KwResult{Blocking location}
 			Let $(h_x,h_y)$ be the coordinate of cell $s$\;
@@ -23,7 +23,7 @@ A possible way of catching an intruder that is faster than the guards is to use 
 
 			To exactly calculate the blocking location in the last step of algorithm \ref{alg:blockloc} we execute algorithm~\ref{alg:calcblockloc}.
 
-			\begin{algorithm}[H]
+			\begin{algorithm}
 				\KwData{the guard $p$; the velocity of the guard $v_h$; the velocity of the intruder $v_p$; the escape direction $es$assigned to $p$}
 				Let $\epsilon$ be a small number (0.5)\;
 				Let $\varepsilon$ be a very small number(0.05)\; 

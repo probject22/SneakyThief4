@@ -1,93 +1,58 @@
-\documentclass[a4paper]{report}
-%\documentclass{ba-kecs}
+%\documentclass[a4paper]{article}
+\documentclass{apa6}
 \usepackage[toc,page]{appendix}
-\usepackage[british]{babel}
-\usepackage[affil-it]{authblk}
 \usepackage{apacite}
 \usepackage[ruled,linesnumbered,vlined]{algorithm2e}
 \usepackage{graphicx}
 
 \title{Sneaky Thief}
-\author{Stan Kerstjens\thanks{i6048794 : \texttt{s.kerstjens@student.maastrichtuniversity.nl}}}
-\author{ing. R.J.H.M. Stevens\thanks{i6079131 : \texttt{rj.stevens@student.maastrichtuniversity.nl}}} % Sorry if I didn't get all your credentials - Stan
-\author{Sina Maghami Nick\thanks{i6063694 : \texttt{s.maghaminick@student.maastrichtuniversity.nl}}} %Sorry I do not dare spelling your last name - Stan
-\author{Rob Clinch\thanks{i6044978 :
-\texttt{r.clinch@student.maastrichtuniversity.nl}}}
-\author{Sharon Hallmanns\thanks{i6077146 :
-\texttt{s.hallmanns@student.maastrichtuniversity.nl}}} % is this spelling correct? - Stan
-\affil{Department of Knowledge Engineering, Maastricht University}
-
+\author{Stan Kerstjens\\ing. R.J.H.M Stevens\\Sina Maghami\\Rob Clinch\\Sharon Hallmanns}
 \date{\today}
+\affiliation{Department of Knowledge Engineering, \\Maastricht University}
 \begin{document}
 \maketitle
-
-%Start roman numbering
-\pagenumbering{roman}
-\section*{Preface}
-\section*{Abstract}
-\listoffigures
-\section*{List of Abbreviations and Symbols}
-\tableofcontents\newpage
-
-
-
-\newpage
-\begin{center} 
-	This page is intentionally left blank 
-\end{center}
-
-%Start arabic numbering
-\pagenumbering{arabic}
-\newpage
-
-%Begin of report body
-\chapter{Introduction}
-
-% Problem Descriptions
-
-
+\section{Introduction}
+% Problem Description
+The posed problem is as follows. There is a world with two kind of people, guards and thieves. The guards have no greater goal than to catch the thieves, and the thieves have no larger purpose than to get to the valuables that they wish to acquire. The guards and thieves live on discrete tiles on a two dimensional game board among walls, doors, windows, and, of course, each other. This paper shall discuss various tasks both the guards and the guards in this world need to perform, and the appropriate algorithms to 
 
 % Paper overview
-	The problem posed can be divided into three main problems. The first problem is that guards put into an unknown environment should be able to create a 'mental map' of the environment. This is what we will call the exploration task. The second problem is that the guards should monitor the entire area as closely as possible to make it as difficult as possible for a possible intruder to pass through the area unseen. This will be called the coverage task. The third problem is that once an intruder has been detected, the guards should be able to actually catch the intruder. This will be called the pursuit task.
+	In the large, the problem  can be divided into three tasks. The first task is that guards put into an unknown environment should be able to create a 'mental map' of the environment. This is what we will call the exploration task. The second problem is that the guards should monitor the entire area as closely as possible to make it as difficult as possible for a possible intruder to pass through the area unseen. This will be called the coverage task. The third problem is that once an intruder has been detected, the guards should be able to actually catch the intruder. This will be called the pursuit task.
 
 	In every of these three main problems the guard should figure out two things, namely where it should go, and how it gets there. The 'where'-question is largely dependent on the specific task at hand, e.g. even if an intruder would only be one unit of distance away, but the task is exploration, then the guard does not necessarily have to move towards the intruder.
 
 	The 'how'-question, on the other hand, is in many cases independent of the exact task that we want to achieve, and therefore finding the shortest route to the destination does usually suffice, and is often even the best route. We will call the 'how'-question the pathfinding problem.
 
 	The final task of the guards is to combine the three main problems and decide when the guard should solve what problem. The intuitive solution would be to explore until the entire environment is known, and then start, and continue, covering the area. During this process pursuit is started as soon as an intruder is detected. This intuitive answer, however, runs into issues once it is not known to the guard how big the area actually is, so it will never know if the map if fully explored or not. Another possible issue arises when an intruder, for instance, disappears behind a wall. The pursuing guard does not detect the intruder anymore and stops pursuit. He should, however, have the intelligence to predict where the guard has gone.
-
-\chapter{Approaches}
 	
-	\section{Path finding}
+\section{Path finding}
 		As already mentioned in the introduction, the answer to the question on what path to take to a certain location is in many cases not important as long as we find the shortest path. This is why we can first discuss general methods of path finding without referring to what goal the moving of the agents serves. There are also cases where the shortest path is not the best path. This is heavily dependent on the task, and will therefore be discussed in the sections dealing with the specific tasks.
 
-		\subsection{A-star}
-			\input{astar.tex}
+    \subsection{A-star}
+		\input{astar.tex}
 		
-		\subsection{Reverse-A-star}
-		    Sometimes the best path is not simply defined by the shortest path towards a specific coordinate, but rather to avoid a certain coordinate. Our prey, for instance, wants to avoid the guards. To do this we can reverse the A-star algorithm, so instead of moving towards node with the highest
+	\subsection{Reverse-A-star}
+	Sometimes the best path is not simply defined by the shortest path towards a specific coordinate, but rather to avoid a certain coordinate. Our prey, for instance, wants to avoid the guards. To do this we can reverse the A-star algorithm, so instead of moving towards node with the highest
 
-		\subsection{RTTE-h}
-			\input{rtteh.tex}
+	\subsection{RTTE-h}
+		\input{rtteh.tex}
 
 	\section{Exploration}
 
 	\section{Coverage}
-		Any intruder will try to be undetected. In order to increase the chance of detecting an intruder we need to make sure that the environment is monitored as closely as possible. This is the problem of coverage. Given the environment we want our agents so move in such a way that no intruder can move through the environment undetected. The intuitive answer behind this problem is to try to disperse the guards over the environment as well as possible, which is exactly what the StiCo algorithm aims to do.
+	Any intruder will try to be undetected. In order to increase the chance of detecting an intruder we need to make sure that the environment is monitored as closely as possible. This is the problem of coverage. Given the environment we want our agents so move in such a way that no intruder can move through the environment undetected. The intuitive answer behind this problem is to try to disperse the guards over the environment as well as possible, which is exactly what the StiCo algorithm aims to do.
 	
 		\subsection{StiCo}
-				\input{stico.tex}
+			\input{stico.tex}
 
 	\section{Pursuit}
 		When considering the problem of pursuit, there is again a very simple intuitive answer, namely to go directly to the location of the intruder following the shortest path. This will often be the best solution if you are a lone guard pursuing an intruder. Yet even then, this strategy will only work if either the intruder is not actively avoiding the guard, or the guard is faster than the intruder. As we are not prepared to assume any of these conditions, we need to act slightly more intelligently.
 
-		\subsection{MTES}
+	    \subsection{MTES}
 			\input{mtes.tex}
 
 		\subsection{Blocking Escape Directions}
 			\input{bes.tex}
 
-\chapter{Methods}
 	\section{Simulator environment}
 		\subsection{Time perception}
 			The time in the simulator is perceived continuouly to allow for continuous velocity, even in a discretized world. Although the moves of the agents on the map are fully discretized, the simulator takes into account how long this unit move has taken to perform, and only allows the same agent to move again once all other agents have caught up with his 'time'. In other words, each agent has his own progress in time, and is only allowed to move when his time is lower (or equal) than all the other agents.
@@ -95,10 +60,10 @@
 
 
 
-\chapter{Results}
+\section{Results}
 	% This chapter should contain all experimental results that we obtain (lots of graphs!)
 	
-\chapter{Discussion\textbf{}}
+\section{Discussion}
 
 
 \chapter{Conclusions}
@@ -110,7 +75,7 @@
 % All references APA style
 
 \begin{appendices}
-\chapter{Other Data}
+\section{Other Data}
 	
 \end{appendices}
 

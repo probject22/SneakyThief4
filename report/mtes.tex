@@ -6,7 +6,7 @@ The Real-time Moving Target Evaluation Search (MTES) is an assisting algorithm t
 
 			This assisting algorithm requires the use of another path finding algorithm. The RTTE-h algorithm particularly suitable, since it does not only recommend a single moving direction, but multiple. If the first moving direction is blocked by a history cell, MTES can just select the second recommendation (see alg.~\ref{alg:mtes}).
 
-			\begin{algorithm}[H]
+			\begin{algorithm}
 				\KwData{Current cell $s$}
 				Let $d$ be the proposed direction as determined by RTTE-h\;
 				\eIf{$d$ exists}{
