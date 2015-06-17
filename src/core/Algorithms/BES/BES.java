@@ -18,6 +18,15 @@ public class BES {
             Coordinate agent,
             Collection<Coordinate> otherAgents,
             Coordinate intruder ){
+    	//Delete the agent himself from other agents
+    	Coordinate cloneAgent = null;
+    	for (Coordinate otherAgent : otherAgents) {
+    		if(otherAgent.x == agent.x && otherAgent.y == agent.y)
+    			cloneAgent = otherAgent;
+    	}
+    	if(cloneAgent != null){
+    	otherAgents.remove(cloneAgent);
+    	}
 
         // If this agent is closest to the intruder, the agent should go towards the intruder
         // this also catches the case where there is only one agent.
@@ -129,7 +138,7 @@ public class BES {
      */
     private static boolean isClosestToIntruder(Coordinate agent, Collection<Coordinate> otherAgents, Coordinate intruder){
         for (Coordinate otherAgent : otherAgents) {
-            if(otherAgent.distance(intruder) > agent.distance(intruder))
+            if(otherAgent.distance(intruder) < agent.distance(intruder))
                 return false;
         }
         return true;
