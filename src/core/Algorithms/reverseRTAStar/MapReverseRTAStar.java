@@ -14,28 +14,29 @@ import dataContainer.Coordinate;
 public class MapReverseRTAStar extends ReverseRTAStar<Coordinate, Coordinate> implements ThiefPath<Coordinate>{
 	
 	public double getCost(Node<Coordinate> from, Node<Coordinate> to) {
-        int counter = 0;
-        int x = min(from.element.x, to.element.x);
-        int y = min(from.element.y, to.element.y);
-
-        int toX = max(from.element.x, to.element.x);
-        int toY = max(from.element.y, to.element.y);
-
-        while(x < toX && y < toY){
-            counter++;
-            x++;
-            y++;
-        }
-
-        while(x < toX){
-            counter++;
-            x++;
-        }
-
-        while(y < toY){
-            counter++;
-            y++;
-        }
+        double counter = 0;
+        counter = this.map.getCopyOfMap()[to.element.x][to.element.y].getThiefCost();
+//        int x = min(from.element.x, to.element.x);
+//        int y = min(from.element.y, to.element.y);
+//
+//        int toX = max(from.element.x, to.element.x);
+//        int toY = max(from.element.y, to.element.y);
+//
+//        while(x < toX && y < toY){
+//            counter++;
+//            x++;
+//            y++;
+//        }
+//
+//        while(x < toX){
+//            counter++;
+//            x++;
+//        }
+//
+//        while(y < toY){
+//            counter++;
+//            y++;
+//        }
 
         return counter;
     }

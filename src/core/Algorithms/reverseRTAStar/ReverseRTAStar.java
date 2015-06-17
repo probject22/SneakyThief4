@@ -72,7 +72,7 @@ public abstract class ReverseRTAStar<E, T> {
 			
 			
 			// calculate functions
-			neighbour.g = getCost(from, neighbour);
+			neighbour.g = - getCost(from, neighbour);
 			neighbour.h = - getHeuristic(neighbour, to)*weight;
 			
 			for (T chaser : chasers){
