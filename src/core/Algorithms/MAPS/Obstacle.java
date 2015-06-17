@@ -13,8 +13,6 @@ public class Obstacle {
     // The point where the raycast hit the obstacle
     Vertex hitPoint;
 
-    //TODO implement all these calculations (see paper MAPS)
-
     private boolean behindOfLeft;
     private boolean behindOfRight;
 
@@ -50,10 +48,6 @@ public class Obstacle {
 
 
     public void calculateFeatures(Coordinate agent, Coordinate target, double rayDirection){
-
-
-        //TODO: Feature calculation (See maps paper)
-        //TODO: Sharon/Sina
 
         // left tour
         Vertex vertex = hitPoint;

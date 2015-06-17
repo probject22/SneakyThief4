@@ -92,7 +92,7 @@ public enum MoveDirection {
 	 * @return
 	 */
 	public static MoveDirection angleToMoveDirection(double direction) {
-//		if (direction < PI / 8 && direction > PI / 8)
+		//if (direction < PI / 8 && direction > PI / 8)
 		//TODO: implement this method
 		return null;
 	}

@@ -33,8 +33,7 @@ public class MapPanel extends JPanel{
 		GridState currentstate;
 
 		int xl = map.getCopyOfMap().length;
-		int yl = map.getCopyOfMap()[0].length;
-		// TODO: fix this 
+		int yl = map.getCopyOfMap()[0].length; 
 		for(int i = 0;i<map.getCopyOfMap().length;i++)
 			for(int j = 0; j<map.getCopyOfMap()[0].length;j++)
 			{
@@ -57,7 +56,6 @@ public class MapPanel extends JPanel{
 
 	}
 	public void setMap(Map map){
-		//TODO: Preproccess map
 		//TODO: save the map to a buffer
 		this.map = map;
 		update = true;

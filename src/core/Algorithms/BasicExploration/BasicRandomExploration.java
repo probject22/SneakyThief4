@@ -19,7 +19,7 @@ public class BasicRandomExploration extends BasicExploration {
 	 */
 	public BasicRandomExploration(Sprite sprite) {
 		super(sprite);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	/**
@@ -28,7 +28,6 @@ public class BasicRandomExploration extends BasicExploration {
 	 */
 	public BasicRandomExploration(Sprite sprite, Map beliefMap) {
 		super(sprite, beliefMap);
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**
