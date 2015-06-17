@@ -1,6 +1,8 @@
 package core.actions;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -13,7 +15,7 @@ import java.util.Set;
  */
 public class Action {
 	public Action(){
-		actionElements = new HashSet<>();
+		actionElements = new ArrayList<>();
 	}
 
 	/**
@@ -34,10 +36,10 @@ public class Action {
 		}
 		actionElements.add(action);
 	}
-	public Set<ActionElement> getActionElements(){
+	public List<ActionElement> getActionElements(){
 		return actionElements;
 	}
-    private Set<ActionElement> actionElements;
+    private List<ActionElement> actionElements;
 
 	/**
 	 *

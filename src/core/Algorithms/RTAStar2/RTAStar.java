@@ -28,6 +28,7 @@ public class RTAStar {
 		List<Node> visited = new ArrayList<Node>();
 		
 		// loop until the goal is found
+		
 		while ( ! n.equals(to) ){
 			
 			// go through all the neighbours
@@ -37,6 +38,7 @@ public class RTAStar {
 				if( ! visited.contains(neighbour) )
 					
 					// the f-value of each neighbour is the heuristic function plus the cost of moving there from the current node
+					if(neighbour.getKey().f == 0)
 					neighbour.getKey().f = h(neighbour.getKey(), to) + neighbour.getValue();
 
 			
@@ -50,13 +52,14 @@ public class RTAStar {
 				// check if the f value is smaller than the mininimum F
 				if( neighbour.f < minF ){
 					//update
+					//secondMinF = minF;
 					minF = neighbour.f;
 					minNeighbour = neighbour;
 				}
 				
 				// check if the f value is larger than the minimum, but lower than the second
 				// else because this is mutually exclusive with the previous if statement
-				else if (neighbour.f >= minF && neighbour.f < secondMinF)
+				else if (neighbour.f < secondMinF)
 					// update
 					secondMinF = neighbour.f;
 			}
@@ -72,6 +75,7 @@ public class RTAStar {
 			
 			// set the f-value of the parent to the second best plus the cost of moving to that node
 			n.parent.f = secondMinF + n.neighbours.get(n.parent);
+			System.err.println(n.c);
 			
 		}
 		// loop is exited as soon as the goal node is reached
@@ -107,6 +111,12 @@ public class RTAStar {
 	}
 	
 	class Node {
+		public Node (int x, int y){
+			neighbours = new HashMap<>();
+			parent = null;
+			f = 0;
+			c = new Coordinate(x,y,0);
+		}
 		// neighbours of the node with the respective moving cost
 		Map<Node, Double> neighbours;
 		

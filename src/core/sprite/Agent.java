@@ -73,7 +73,7 @@ public class Agent extends Sprite {
 		beliefMapGUi.close();
 		beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 		beliefMapGUi.updateGui();
-		pathFinder = new AStar(beliefMap);
+		pathFinder = new MapAdapter(beliefMap);
 		realTimePathFinder = new LRTAStar(beliefMap);
 		exploration.setBeliefMap(map);
 	}
@@ -83,7 +83,7 @@ public class Agent extends Sprite {
         this.beliefMap =  new BeliefMap();
         beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 	    // Create an A* pathfinder
-	    pathFinder = new AStar(beliefMap);
+	    pathFinder = new MapAdapter(beliefMap);
 	    realTimePathFinder = new LRTAStar(beliefMap);
 	    exploration = new BasicRandomExploration(this,beliefMap);
 	    
@@ -157,21 +157,6 @@ public class Agent extends Sprite {
 	protected Action aStar(Coordinate goal){
 		Action action = new Action();
 		Coordinate next = pathFinder.getShortestPath(getCoordinates(), goal);
-		if (next == null)
-			return null;
-		double angle = getCoordinates().angle;
-		double goalAngle = getCoordinates().getAngle(next);
-		action.addActionElement(new Turn(angle, goalAngle, Agent.MAX_SPEED));
-		action.addActionElement(new Move(Agent.MAX_SPEED));
-		
-		return action;
-	}
-	
-	protected Action realTimeAStar(Coordinate goal){
-		Action action = new Action();
-		
-		MapAdapter mapadapter = new MapAdapter(beliefMap);
-		Coordinate next = mapadapter.getPath(beliefMap, getCoordinates(), goal).get(1);
 		if (next == null)
 			return null;
 		double angle = getCoordinates().angle;

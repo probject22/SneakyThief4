@@ -27,7 +27,7 @@ public class Simulator {
 	private boolean debug = true;
     private static boolean stop = false;
     private static boolean pause = true;
-    private double speed = 0.05;
+    private double speed = 0.1;
 
 	public void setSpeed(double newSpeed) {
 		speed = newSpeed;
@@ -50,17 +50,19 @@ public class Simulator {
 		if (debug)
 			System.err.println("The simulator has been started");
 
-		// map = new Map();
+		 map = new Map();
 		// map = new Map("test100.map");
 		// map = map.maze(map.getMapWidth(),map.getMapHeight());
-		 //map = new Map("default.map");
-		map = new Map("default.map");
+		//map = new Map("default.map");
+		//map = new Map("empty.map");
 
 		spriteManager = SpriteManager.instance();
 
-		addGuard(new Coordinate(19, 19, 0));	
-		addGuard(new Coordinate(18, 20, 0));
-		addThief(new Coordinate(1,1,0));
+		//addGuard(new Coordinate(19, 19, 0));	
+		//addGuard(new Coordinate(18, 18, 0));
+		//addGuard(new Coordinate(17, 17, 0));
+		//addGuard(new Coordinate(16, 16, 0));
+		addThief(new Coordinate(1,1,0), map);
 
 		eventManager = new EventManager(map);
 
