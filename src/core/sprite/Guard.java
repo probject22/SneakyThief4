@@ -108,7 +108,7 @@ public class Guard extends Agent {
 	
 	protected boolean toExplorationState(){
 		Action action = basicExploration(); 
-		if (action != null)
+		if (action == null)
 			return false;
 		return true;
 	}
@@ -177,7 +177,8 @@ public class Guard extends Agent {
 //		otherAgents.remove(lastSeenThief.getCoordinates().clone());
 		Coordinate next = BES.getBlockingLocation(getCoordinates().clone(),blackboard.getGuardList(),intruder);
 		//Use A* or RTA* to get to the Blocking Coordinate.
-		return aStar(intruder.neighbourCoordinates().get(0));
+		//return aStar(intruder.neighbourCoordinates().get(0));
+		return rTAStar(next);
 	}
 	public void enterTower(){
 		this.currentMaXVisionRange = this.towerMaxVisionRange;
