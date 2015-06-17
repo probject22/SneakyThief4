@@ -98,7 +98,7 @@ public class PreyAStar implements PathFinder<Coordinate> {
 		
 			
 	}
-	/*TODO IMPLEMENT THIS FUNCTION */
+	
 	/**
 	 * This function returns the best node out of two nodes
 	 * @param node1 input-1

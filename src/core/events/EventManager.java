@@ -52,7 +52,6 @@ public class EventManager {
 	 * @param agent
 	 */
 	public void triggerEvent(ActionElement actionElement, Agent agent) {
-		// TODO Get the timestamps of the actions
 		if (actionElement == null || agent == null)
 			return;
 		double timeStamp = agent.getTimeKey();

@@ -123,7 +123,6 @@ public class TestaSTAR implements PathFinder<Coordinate> {
 	 * @param node
 	 */
 	private void setCost(Node node){
-		//TODO calculate the actual cost
 		node.g = node.parent.g + 1;
 	}
 	/**
@@ -175,7 +174,6 @@ public class TestaSTAR implements PathFinder<Coordinate> {
 		for (Node tempNode: options){
 			if (tempNode.x < grid.length && tempNode.x >= 0 && tempNode.y < grid[0].length && tempNode.y >= 0){
 				if (grid[tempNode.x][tempNode.y].moveable()){
-					//TODO check if there is no sprite on the tile
 					SpriteManager manager = SpriteManager.instance();
 					List<Agent> agents = manager.getAgentList();
 					for(Agent agent: agents){

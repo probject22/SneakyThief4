@@ -33,7 +33,6 @@ public class SpritePanel extends JPanel {
 	}
 
 	public void setMap(Map map) {
-		// TODO: Preproccess map
 		// TODO: save the map to a buffer
 		this.map = map;
 		this.spriteManager = SpriteManager.instance();

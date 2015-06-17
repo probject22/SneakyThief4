@@ -20,7 +20,6 @@ public class Vision extends Event {
 	 */
 	public Vision(double timeStamp) {
 		super(timeStamp);
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**

@@ -28,8 +28,7 @@ public class StiCoExperiment extends AbstractExperiment {
 		double ratio = 0;
 		for(int i = 1;i<guardnum;i++){
 			for(int k =0;k<repeats;k++){
-				//TODO: need this generator
-				Map map = null; // = generateMap(mapwidth, mapheight, mapdensity);
+				Map map = null; 
 				
 				SpriteManager manager = SpriteManager.instance();
 				for(int j = 0;j<i;j++){
@@ -46,7 +45,6 @@ public class StiCoExperiment extends AbstractExperiment {
 					//ratio = ratioCovered(map, combinedbeliefmap);
 				}
 			}
-			//TODO: Combined belief map needs implementation
 			String[] measurements = new String[4];
 			measurements[0] = Double.toString(ratio);
 			measurements[1] = Integer.toString(guardnum);
