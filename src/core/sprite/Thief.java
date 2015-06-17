@@ -1,5 +1,8 @@
 package core.sprite;
 
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +29,8 @@ public class Thief extends Agent {
 	protected boolean panic;
 	protected boolean isAlreadyPanicing;
 	protected ThiefStates currentState = ThiefStates.EXPLORATION;
+	//Assumption of how far the sounds are coming from
+			int soundAR = (int) maxVisionRange;
 	/**
 	 * @param coords
 	 */
@@ -40,6 +45,9 @@ public class Thief extends Agent {
 		visionAngle = 45;
 		structureVisionRange = 10;
 		towerVisionRange = 15;
+		
+		//Assumption of how far the sounds are coming from
+		soundAR = (int) maxVisionRange;
 	}
 	
 	protected void processSound(Event sound){ 
@@ -93,6 +101,7 @@ public class Thief extends Agent {
 	protected boolean toPanicState(){
 		for (Sprite s : lastSeen.getSpriteInVisionMap().values()) {
 			if (s instanceof Guard){
+				isAlreadyPanicing = false;
 				return true;
 			}
 		}
@@ -107,10 +116,15 @@ public class Thief extends Agent {
 				}
 			}
 			if(isAlreadyPanicing){
-			for(double soundDirection : soundsDirection){
-				followers.add(new Coordinate((int)(Math.sin(soundDirection)*2+getCoordinates().x),
-										(int)(Math.cos(soundDirection)*2+getCoordinates().y),0));
-			}}
+				for(double soundDirection : soundsDirection){
+					if((soundDirection + getCoordinates().clone().angle) < ((Math.PI - getVisionAngleRad())/2) &&
+							(soundDirection + getCoordinates().clone().angle) > (((Math.PI - getVisionAngleRad()) / 2) + getVisionAngleRad())){
+						followers.add(new Coordinate(
+								(int)(getCoordinates().x + (cos(soundDirection)*soundAR)),
+								(int)(getCoordinates().y + (sin(soundDirection)*soundAR)),0));
+					}
+				}
+			}
 			
 			if(followers.isEmpty()){
 				isAlreadyPanicing = false;

@@ -60,8 +60,8 @@ public class BES {
         //calculate reference points
         for (Double escapeDirection : escapeDirections) {
             Coordinate c = new Coordinate(
-                    intruder.x + (cos(escapeDirection) > 0 ? 1 : -1),
-                    intruder.y + (sin(escapeDirection) > 0 ? 1 : -1),0);
+                    (int)(intruder.x + (cos(escapeDirection)*2)),
+                    (int)(intruder.y + (sin(escapeDirection)*2)),0);
             references.put(c, escapeDirection);
         }
 
