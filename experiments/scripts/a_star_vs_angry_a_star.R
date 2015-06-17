@@ -11,7 +11,9 @@ l_path <- split(data$robStar_path_length, data$map_complexity)
 
 # Draw boxplot
 boxplot(a_path, ylim = c(100,200))
-boxplot(l_path, ylim = c(100,200))
+boxplot(l_path
+        , ylim = c(100,200)
+        )
 
 # Calculate the means of the path length per map complexity
 a_means <- aggregate(data$a_path_length, list(data$map_complexity), mean)
