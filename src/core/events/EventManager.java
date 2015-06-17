@@ -54,7 +54,7 @@ public class EventManager {
 			return;
 		double timeStamp = agent.getTimeKey();
 		if ( actionElement instanceof Turn){
-			//triger a vision event
+			generateVisionEvent(agent, timeStamp);
 		}
 
 		/* this handles the move actionElement (THIS NEEDS TO BE IMPLEMENTED) */
