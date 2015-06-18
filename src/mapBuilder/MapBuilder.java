@@ -59,7 +59,7 @@ public class MapBuilder  {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		new MapBuilder(20, 100, 500, 100, 0.0, 1, 0.1);
+		new MapBuilder(200, 100, 100, 100, 0.0, 1, 0.1);
 		//new MapBuilder(1000, 100, 100);
 	}
 	

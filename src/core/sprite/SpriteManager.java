@@ -34,6 +34,11 @@ public class SpriteManager {
 
 		return spriteManager;
 	}
+	public static SpriteManager newInstance(){
+		spriteManager = new SpriteManager();
+
+		return spriteManager;
+	}
 
 	/**
 	 * add an new agent to the list

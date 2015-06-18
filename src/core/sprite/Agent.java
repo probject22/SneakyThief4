@@ -71,8 +71,8 @@ public class Agent extends Sprite {
 	public void setBeliefMap(Map map){
 		this.beliefMap =  new BeliefMap();
 		beliefMapGUi.close();
-		beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
-		beliefMapGUi.updateGui();
+		//beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
+		//beliefMapGUi.updateGui();
 		pathFinder = new AStar(beliefMap);
 		realTimePathFinder = new LRTAStar(beliefMap);
 		exploration.setBeliefMap(map);
@@ -116,7 +116,7 @@ public class Agent extends Sprite {
 		if (debug) System.out.println("A vision event occured");
 		if (beliefMap != null && beliefMap instanceof BeliefMap){
 			((BeliefMap)beliefMap).processVision(vision);
-			beliefMapGUi.updateGui();
+		//	beliefMapGUi.updateGui();
 		}
 		lastSeen = vision;
 		

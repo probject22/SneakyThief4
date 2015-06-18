@@ -76,7 +76,7 @@ public class Simulator {
 	}
 	
 	//Use this for StiCo Experiment
-	public Simulator(int guards, Map map){
+	public Simulator(int guards, Map map, BeliefMap beliefmap){
 		if (debug)
 			System.err.println("The simulator has been started");
 
@@ -86,19 +86,37 @@ public class Simulator {
 		this.map = map;
 
 		spriteManager = SpriteManager.instance();
-
 		for(int i =0;i<guards;i++){
-			addGuard(new Coordinate((int)Math.random()*map.getMapWidth(), (int)Math.random()*map.getMapHeight(), 0));
+			boolean valid = false;
+			while(valid == false){
+				int x = (int)(Math.random()*map.getMapWidth());
+				int y = (int)(Math.random()*map.getMapHeight());
+				Coordinate coord = new Coordinate(x,y , 0);
+				if(map.isMoveable(coord)){
+					addGuard(coord, beliefmap);
+					valid = true;
+				}
+			}
 		}
 
 		eventManager = new EventManager(map);
-
 		/* to get the agent list call spriteManager.getAgentList(); */
 
 		/* gui stuff (DONT NEED LOL)
 		mainFrame = new MainFrame();
 		mainFrame.setMap(map);*/
-		gameLoop();
+		gameLoop(1*guards);
+	}
+	private void gameLoop(int maxturns) {
+		// 0 = running, 1 = thieves win, 2 = thieves loss
+		int turns = 0;
+		while (turns<maxturns) {
+			turns++;
+			firstAgentAction();
+			if(turns%100 == 0){
+				System.out.println(turns);
+			}
+		}
 	}
 	public void addGuard(Coordinate coord, Map beliefMap, BlackBoard blackboard){
 		Sprite sprite = new Guard(coord);
@@ -223,7 +241,8 @@ public class Simulator {
 
 		/* trigger the wait event to send an update of the vision to the agent */
 		eventManager.triggerEvent(new Wait(0), agent);
-
+		if (agent == null)
+			System.err.println("agent is null");
 		Action agentAction = agent.getAction();
 
 		for (ActionElement actionElement : agentAction.getActionElements()) {

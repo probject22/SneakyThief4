@@ -31,7 +31,7 @@ public class Guard extends Agent {
 	protected Thief lastSeenThief;
 	protected ArrayList<Double> soundsDirection = new ArrayList<Double>();
 	
-	protected GuardStates currentState = GuardStates.EXPLORATION;
+	protected GuardStates currentState = GuardStates.COVERAGE;
 	/**
 	 * @param coords
 	 */
@@ -69,13 +69,13 @@ public class Guard extends Agent {
 				out = explorationState();
 				if (out != null)
 					return out;
-				currentState = GuardStates.COVARAGE;
+				currentState = GuardStates.COVERAGE;
 			}
 			else{
-				currentState = GuardStates.COVARAGE;
+				currentState = GuardStates.COVERAGE;
 			}
 			///////////////////////////////////////////
-		case COVARAGE:
+		case COVERAGE:
 			if(toCatchState()){
 				currentState = GuardStates.CATCH_MODE;
 			}
@@ -92,7 +92,7 @@ public class Guard extends Agent {
 				currentState = GuardStates.EXPLORATION;
 			}
 			else{
-				currentState = GuardStates.COVARAGE;
+				currentState = GuardStates.COVERAGE;
 			}
 		}
 		
@@ -223,7 +223,7 @@ public class Guard extends Agent {
 	}
 	
 	protected enum GuardStates{
-		COVARAGE,
+		COVERAGE,
 		EXPLORATION,
 		CATCH_MODE
 	}
