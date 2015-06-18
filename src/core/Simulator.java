@@ -76,30 +76,30 @@ public class Simulator {
 	}
 	
 	//Use this for StiCo Experiment
-	public Simulator(int guards, Map map, BeliefMap beliefmap){
+	public Simulator(int guards, BeliefMap beliefmap){
 		if (debug)
 			System.err.println("The simulator has been started");
 
 		// map = new Map();
 		// map = new Map("test100.map");
 		// map = map.maze(map.getMapWidth(),map.getMapHeight());
-		this.map = map;
+		map = beliefmap;
 
 		spriteManager = SpriteManager.instance();
 		for(int i =0;i<guards;i++){
 			boolean valid = false;
 			while(valid == false){
-				int x = (int)(Math.random()*map.getMapWidth());
-				int y = (int)(Math.random()*map.getMapHeight());
+				int x = (int)(Math.random()*beliefmap.getMap().length);
+				int y = (int)(Math.random()*beliefmap.getMap()[0].length);
 				Coordinate coord = new Coordinate(x,y , 0);
-				if(map.isMoveable(coord)){
+				if(beliefmap.isMoveable(coord)){
 					addGuard(coord, beliefmap);
 					valid = true;
 				}
 			}
 		}
 
-		eventManager = new EventManager(map);
+		eventManager = new EventManager(beliefmap);
 		/* to get the agent list call spriteManager.getAgentList(); */
 
 		/* gui stuff (DONT NEED LOL)
