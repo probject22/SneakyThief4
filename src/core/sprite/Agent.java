@@ -69,7 +69,7 @@ public class Agent extends Sprite {
 
 
 	public void setBeliefMap(Map map){
-		this.beliefMap =  new BeliefMap();
+		this.beliefMap =  map;
 		beliefMapGUi.close();
 		//beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 		//beliefMapGUi.updateGui();
