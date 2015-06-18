@@ -69,11 +69,11 @@ public class Agent extends Sprite {
 
 
 	public void setBeliefMap(Map map){
-		this.beliefMap =  map;
+		this.beliefMap =  new BeliefMap();
 		beliefMapGUi.close();
 		beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 		beliefMapGUi.updateGui();
-		pathFinder = new MapAdapter(beliefMap);
+		pathFinder = new AStar(beliefMap);
 		realTimePathFinder = new LRTAStar(beliefMap);
 		exploration.setBeliefMap(map);
 	}
@@ -83,7 +83,7 @@ public class Agent extends Sprite {
         this.beliefMap =  new BeliefMap();
         beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 	    // Create an A* pathfinder
-	    pathFinder = new MapAdapter(beliefMap);
+	    pathFinder = new AStar(beliefMap);
 	    realTimePathFinder = new LRTAStar(beliefMap);
 	    exploration = new BasicRandomExploration(this,beliefMap);
 	    
