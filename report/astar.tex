@@ -2,10 +2,10 @@
 			The A-star algorithm is a general purpose algorithm that searches a graph and is capable of providing the optimal path from one node to another. A-star is a heuristic search, and like many heuristic search algorithms its effectiveness depends on the heuristic employed~\cite{4082128}.
 
 %Workings of A-star
-			A-star uses an evaluation function $f$ which depends on the cost function $g$ and the heuristic function $h$.
+			A-star uses an evaluation function $f(x)$ which depends on the cost function $g(x)$ and the heuristic function $h(x)$.
 			\begin{equation}
 				\label{eq:astarevaluation}
-			 	f = g + h
+			 	f(x) = g(x) + h(x)
 			\end{equation} 
 			At every iteration it will expand the node that has the lowest cost as predicted by the evaluation function (see alg.~\ref{alg:astar}).
 
