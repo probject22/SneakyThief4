@@ -26,6 +26,10 @@ public class Coordinate {
 		this.y = y;
 		this.angle = angle;
 	}
+	public Coordinate(int x, int y){
+		this.x = x;
+		this.y = y;
+	}
 	public void addToAngle(double angle){
 		this.angle += angle;
 		while (this.angle < 0)
