@@ -109,7 +109,8 @@ public class LRTAStar implements PathFinder<Coordinate> {
 	}
 	
 	private void generateCostMap(){
-		costMap = new int[map.getMapWidth()][map.getMapHeight()];
+		GridState[][] grid = map.getCopyOfMap();
+		costMap = new int[grid.length][grid[0].length];
 		for (int i = 0; i < costMap.length; i++)
 			for (int j = 0; j < costMap[0].length; j++)
 				costMap[i][j] = 0;

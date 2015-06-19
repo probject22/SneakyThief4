@@ -1,5 +1,8 @@
 package core;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import gui.MainFrame;
 import core.actions.Action;
 import core.actions.ActionElement;
@@ -28,6 +31,9 @@ public class Simulator {
     private static boolean stop = false;
     private static boolean pause = true;
     private double speed = 0.1;
+    
+    public int preyWinLoss = 0;
+    public double preyTime;
 
 	public void setSpeed(double newSpeed) {
 		speed = newSpeed;
@@ -62,7 +68,7 @@ public class Simulator {
 		//addGuard(new Coordinate(18, 18, 0));
 		//addGuard(new Coordinate(17, 17, 0));
 		//addGuard(new Coordinate(16, 16, 0));
-		addThief(new Coordinate(1,1,0), map);
+		//addThief(new Coordinate(1,1,0), map);
 
 		eventManager = new EventManager(map);
 
@@ -88,6 +94,7 @@ public class Simulator {
 		spriteManager = SpriteManager.instance();
 
 		for(int i =0;i<guards;i++){
+			
 			addGuard(new Coordinate((int)Math.random()*map.getMapWidth(), (int)Math.random()*map.getMapHeight(), 0));
 		}
 
@@ -100,6 +107,55 @@ public class Simulator {
 		mainFrame.setMap(map);*/
 		gameLoop();
 	}
+	
+	//Use this for prey Experiment
+		public Simulator(int guards,ArrayList<Coordinate> placable, Map map){
+			if (debug)
+				System.err.println("The simulator has been started");
+
+			// map = new Map();
+			// map = new Map("test100.map");
+			// map = map.maze(map.getMapWidth(),map.getMapHeight());
+			this.map = map;
+
+			spriteManager = SpriteManager.instance();
+			eventManager = new EventManager(map);
+			
+			GridState[][] grid = map.getCopyOfMap();
+			Random randomGenerator = new Random();
+			
+			//Adding the thief
+			addThief(new Coordinate(1,1,0));
+			
+			// deleting target and start coordinate from placables
+			placable.remove(placable.size()-1);
+			placable.remove(0);
+			
+			BlackBoard blackBoard = new BlackBoard();
+			
+			for(int i =0;i<guards;i++){
+				addGuard(placable.remove(randomGenerator.nextInt(placable.size())),blackBoard);
+			}
+
+			
+
+			/* to get the agent list call spriteManager.getAgentList(); */
+
+			/* gui stuff (DONT NEED LOL)
+			mainFrame = new MainFrame();
+			mainFrame.setMap(map);*/
+			preyWinLoss = gameLoop(true);
+			
+			preyTime = 0;
+			for(Agent s: spriteManager.getAgentList())
+				if (s instanceof Thief){
+					preyTime = s.getTimeKey();
+					break;
+				}
+		}	
+		
+		
+		
 	public void addGuard(Coordinate coord, Map beliefMap, BlackBoard blackboard){
 		Sprite sprite = new Guard(coord);
 		((Agent) sprite).setBeliefMap(beliefMap);
@@ -164,6 +220,42 @@ public class Simulator {
 		}
 		System.out.println("Stop");
 		System.exit(0);
+	}
+	
+	/**
+	 * gameloop for prey tests
+	 * @param something
+	 */
+	private int gameLoop(boolean something) {
+		// 0 = running, 1 = thieves win, 2 = thieves loss
+		int winLossValue = 0;
+		while (winLossValue == 0 ) {
+			firstAgentAction();
+			for (Agent f : spriteManager.getAgentList()) {
+				if (f instanceof Thief) {
+					if (((Thief) f).atGoal()) {
+						winLossValue = 1;
+					}
+				}
+				else if (f instanceof Guard)
+				{
+					if (((Guard)f).hasCaught())
+						winLossValue = 2;
+				}
+			}
+			if (winLossValue == 1) {
+				System.out.println("VERY SNEAKY THIEF!");
+				return winLossValue; 
+			}
+			if (winLossValue == 2) {
+				System.out.println("NOT A SNEAKY THIEF!");
+				return winLossValue; 
+			}
+			/* finish the move by updateting the gui */
+			winLossValue = 0;
+		}
+		System.out.println("Stop");
+		return winLossValue; 
 	}
 
 	/**

@@ -99,12 +99,12 @@ public class Thief extends Agent {
 
 	}
 	protected boolean toPanicState(){
-		for (Sprite s : lastSeen.getSpriteInVisionMap().values()) {
-			if (s instanceof Guard){
-				isAlreadyPanicing = false;
-				return true;
-			}
-		}
+//		for (Sprite s : lastSeen.getSpriteInVisionMap().values()) {
+//			if (s instanceof Guard){
+//				isAlreadyPanicing = false;
+//				return true;
+//			}
+//		}
 		return false;
 	}
 	protected Action panicState(){
@@ -153,7 +153,7 @@ public class Thief extends Agent {
 		return true;
 	}
 	protected Action explorationState(){
-		target = new Coordinate(25,25,0);
+		target = new Coordinate(98,98,0);
 		return null;
 	}
 	
