@@ -1,0 +1,47 @@
+This algorithm is basically a modified version of a greedy algorithm. The main difference is that it gets a penalty if it wants to go back to a spot where it has been before. This can be seen in eq.~\ref{eg:robstar}. The first part of the equation is the same as the equation that is used in A-Star (eq.~\ref{eq:astarevaluation}). The $p(x)$ part is the penalty for going back to a node that has been previously visited. The idea behind this is that it still can go back to a spot where it was before, but it avoids an agents "oscillating" between two spots. Shows the pseudocode of this algorithm
+
+\begin{equation}
+	\label{eq:robstar}
+ 	f(x) = g(x) + h(x) + p(x)
+\end{equation}
+
+
+\begin{algorithm}
+    \caption{Iteration of Rob-star}
+    \KwData{Current location $c$; Set of possible goal coordinate $G$; List of penalties $p(x)$ at coordinate $x$; List of expected costs $f(x)$ at coordinate }
+    \If{ $c \in G$}{
+        \Return found path\;
+    }
+    \If{$G$ has changed}{
+        reset $p$\;
+    }
+    Increment $p(c)$\;
+    \For{ $l \in \mathrm{neighbours}(c)$ }{
+        $f(l) \leftarrow \mathrm{heuristic}(G) + \mathrm{movecost}(l) + p(l)$
+    }
+    
+    move to $\min_f \mathrm{neighbours}(c)$
+\end{algorithm}
+
+% \begin{lstlisting}
+%     while(true){
+%         if(currentspot == goal){
+%             Stop;
+%         }
+        
+%         if (goal has changed){
+%             reset penalty-list;
+%         }
+        
+%         penalty-list.currentSpot += penaly;
+        
+%         Neighbours == getNeighbors(currentSpot)
+        
+%         for(neighbor : neighbours){
+%             neighbor.f = expectedDistence + moveCost + penalty-list.neighbor
+%         }
+        
+%         moveTo = neighbours.lowest.f;
+%     }
+    
+% \end{lstlisting}
