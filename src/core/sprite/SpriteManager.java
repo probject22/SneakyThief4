@@ -70,6 +70,10 @@ public class SpriteManager {
 		return new ArrayList<>(agents);
 	}
 	
+	public void resetAgentList(){
+		agents = new PriorityQueue<>(new AgentComparator());
+	}
+	
 	public ArrayList<Thief> getThieves(){
 		ArrayList<Thief> allThieves = new ArrayList<Thief>();
 		while(!agents.isEmpty()){
