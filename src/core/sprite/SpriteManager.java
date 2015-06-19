@@ -65,6 +65,10 @@ public class SpriteManager {
 		return new ArrayList<>(agents);
 	}
 	
+	public void resetAgentList(){
+		agents = new PriorityQueue<>(new AgentComparator());
+	}
+	
 
 	/**
 	 * A queue with agents. The priority queue ensured that the queue of agents is always sorted

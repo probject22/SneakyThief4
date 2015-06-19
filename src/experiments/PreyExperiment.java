@@ -34,7 +34,7 @@ public class PreyExperiment extends AbstractExperiment {
 
 	}
 
-	public static void dummyExperiment(int repeats) {
+	public void dummyExperiment(int repeats) {
 		
 		
 			//for (MapType map_type : MapType.values())
@@ -43,7 +43,8 @@ public class PreyExperiment extends AbstractExperiment {
 						for (int i = 0; i < repeats; i++){
 
 							//String name = "/" + map_type.name() + "/maze-100x100-"+ i+ ".map";
-							String name = "/maze/maze-"+ i+ ".map";
+							//String name = "/maze/maze-"+ i+ ".map";
+							String name = "maze-"+ i+ ".map";
 							Map map = new Map(name);
 							int map_area = 100 * 100;
 							int movableCoords = 0;
@@ -65,10 +66,8 @@ public class PreyExperiment extends AbstractExperiment {
 							double time = sim.preyTime;
 							
 							SpriteManager spriteManager = SpriteManager.instance();
-							spriteManager.getAgentList().clear();
+							spriteManager.resetAgentList();
 							System.out.println("agents " + spriteManager.getAgentList().size());
-							System.gc();
-							Runtime.getRuntime().gc();
 							
 							
 							//save measurement
