@@ -48,7 +48,8 @@ public class SpritePanel extends JPanel {
 			Coordinate coords = sprite.getCoordinates();
 			int xl = map.getCopyOfMap().length;
 			int cx = map.getMapWidth();
-			int scale= ((61*cx*cx)/48000)-((329*cx)/800)+(413/12)+1;
+			int scale = ((61 * cx * cx) / 48000) - ((329 * cx) / 800)
+					+ (413 / 12) + 1;
 			if (sprite == null)
 				break;
 			else if (map.getMapHeight() < 100) {
@@ -120,21 +121,19 @@ public class SpritePanel extends JPanel {
 				int yl = map.getCopyOfMap()[0].length;
 				int x = (coords.x) * scale + extra;
 				int y = (yl - coords.y) * scale + extra;
-				
 
 				g2d.drawImage(img, x, y, this);
-			}
-			else{
+			} else {
 				g2d.setColor(Color.RED);
-				g2d.drawRect(coords.x*scale+extra,(map.getCopyOfMap()[0].length-coords.y)*scale+extra, 1, 1);
+				g2d.drawRect(coords.x * scale + extra,
+						(map.getCopyOfMap()[0].length - coords.y) * scale
+								+ extra, 1, 1);
 			}
 
-			
 			int yl = map.getCopyOfMap()[0].length;
 			int x = (coords.x) * scale + extra;
 			int y = (yl - coords.y) * scale + extra;
-			
-			
+
 			g2d.setStroke(new BasicStroke(3));
 
 			if (sprite instanceof Thief)
@@ -153,17 +152,21 @@ public class SpritePanel extends JPanel {
 			if (angle2 < 0)
 				angle1 += 2 * Math.PI;
 			angle2 %= 2 * Math.PI;
-			int x1 = x + (int) ((distence * Math.cos(angle1)) + extra);
-			int y1 = y + yl - (int) ((distence * Math.sin(angle1)) + extra);
-			int x2 = x + (int) ((distence * Math.cos(coords.angle)) + extra);
-			int y2 = y + yl
-					- (int) ((distence * Math.sin(coords.angle)) + extra);
-			int x3 = x + (int) ((distence * Math.cos(angle2)) + extra);
-			int y3 = y + yl - (int) ((distence * Math.sin(angle2)) + extra);
-			g2d.drawLine(x + 10, y + 10, x1 - 15, y1 + 15);
-			g2d.drawLine(x + 10, y + 10, x2 - 15, y2 + 15);
-			g2d.drawLine(x + 10, y + 10, x3 - 15, y3 + 15);
-			// g2d.drawLine(x+10, y+10, 5000, 5000);
+
+			int x1 = x + (int) ((distence * Math.cos(angle1)));
+			int y1 = y - (int) ((distence * Math.sin(angle1)));
+			int x2 = x + (int) ((distence * Math.cos(coords.angle)));
+			int y2 = y - (int) ((distence * Math.sin(coords.angle)));
+			int x3 = x + (int) ((distence * Math.cos(angle2)));
+			int y3 = y - (int) ((distence * Math.sin(angle2)));
+			int halfScale = (int) scale / 2;
+			g2d.drawLine(x + halfScale, y + halfScale, x1 - halfScale, y1
+					+ halfScale);
+			g2d.drawLine(x + halfScale, y + halfScale, x2 - halfScale, y2
+					+ halfScale);
+			g2d.drawLine(x + halfScale, y + halfScale, x3 - halfScale, y3
+					+ halfScale);
+
 		}
 	}
 

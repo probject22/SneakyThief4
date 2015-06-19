@@ -50,11 +50,11 @@ public class Simulator {
 		if (debug)
 			System.err.println("The simulator has been started");
 
-		 map = new Map();
-		// map = new Map("test100.map");
+		// map = new Map();
+		 map = new Map("test200.map");
 		// map = map.maze(map.getMapWidth(),map.getMapHeight());
-		//map = new Map("default.map");
-		//map = new Map("empty.map");
+		// map = new Map("default.map");
+		// map = new Map("empty.map");
 
 		spriteManager = SpriteManager.instance();
 
