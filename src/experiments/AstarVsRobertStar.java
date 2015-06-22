@@ -33,7 +33,7 @@ public class AstarVsRobertStar extends AbstractExperiment {
 		for(int i= 0; i < repeats;i++){
 			System.out.println("run " + i);
 		
-		String name = "maze-"+ i+ ".map";
+		String name = "maze/difficulty-0.5-100/" + "maze-"+ i+ ".map";
 		Map map = new Map(name);
 		PathFinder<Coordinate> pathFinder;
 		Coordinate home = new Coordinate(1,1,0);
@@ -87,7 +87,7 @@ public class AstarVsRobertStar extends AbstractExperiment {
 	
 	public static void main(String[] args){
 	
-		experiment(100);
+		experiment(200);
 		
 	}
 	

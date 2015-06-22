@@ -116,4 +116,10 @@ public class LRTAStar implements PathFinder<Coordinate> {
 				costMap[i][j] = 0;
 	}
 
+	@Override
+	public int getPathLengt() {
+		// TODO Auto-generated method stub
+		return 1;
+	}
+
 }

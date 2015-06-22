@@ -121,4 +121,10 @@ public class MapRTAStar extends RTAStar<Coordinate, Coordinate> implements PathF
         return coordinates;
 
     }
+
+	@Override
+	public int getPathLengt() {
+		// TODO Auto-generated method stub
+		return 1;
+	}
 }

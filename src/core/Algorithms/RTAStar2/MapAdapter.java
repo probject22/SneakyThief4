@@ -187,4 +187,10 @@ public class MapAdapter implements PathFinder<Coordinate> {
 		return out;
 	}
 
+	@Override
+	public int getPathLengt() {
+		// TODO Auto-generated method stub
+		return 1;
+	}
+
 }

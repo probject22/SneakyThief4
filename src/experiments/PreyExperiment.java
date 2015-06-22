@@ -14,7 +14,7 @@ public class PreyExperiment extends AbstractExperiment {
 
 	public static void main(String[] args) {
 		PreyExperiment exp = new PreyExperiment();
-		exp.dummyExperiment(20);
+		exp.dummyExperiment(200);
 	}
 
 	public PreyExperiment() {
@@ -38,14 +38,16 @@ public class PreyExperiment extends AbstractExperiment {
 		
 		
 			//for (MapType map_type : MapType.values())
-			double guardDensity = 0.02;
-					//for(double guardDensity = 0.01; guardDensity < 0.02; guardDensity += 0.001)
+					//for(double guardDensity = 0.001; guardDensity < 0.02; guardDensity += 0.001)
+						double guardDensity = 0.005;
 						for (int i = 0; i < repeats; i++){
 
 							//String name = "/" + map_type.name() + "/maze-100x100-"+ i+ ".map";
 							//String name = "/maze/maze-"+ i+ ".map";
-							String name = "maze-"+ i+ ".map";
+							String name = "maze/difficulty-0.5-100/" + "maze-"+ i+ ".map";
 							Map map = new Map(name);
+							//Map map = new Map();
+							//map = map.maze(100,100,0.5);
 							int map_area = 100 * 100;
 							int movableCoords = 0;
 							GridState[][] grid = map.getCopyOfMap();
@@ -74,12 +76,12 @@ public class PreyExperiment extends AbstractExperiment {
 							String[] measurements =  new String[8];
 
 							measurements[0] = "none";
-							measurements[1] = "none(RobStar)";
+							measurements[1] = "BES";
 							measurements[2] = Double.toString(win==1 ? 1 : 0);
 							measurements[3] = Double.toString(time);
 							measurements[4] = Double.toString(nGuards);
 							measurements[5] = Double.toString(guardDensity);
-							measurements[6] = "maze";//map_type.name();
+							measurements[6] = "maze-0.5";//map_type.name();
 							measurements[7] = Double.toString(map_area);
 							
 							//System.out.println(measurements.toString());
@@ -87,7 +89,7 @@ public class PreyExperiment extends AbstractExperiment {
 							
 							}
 
-		writeCsv("experiments/prey/data/dummy.csv");
+		writeCsv("experiments/prey/data/non_BES.csv");
 
 	}
 

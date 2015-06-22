@@ -178,4 +178,10 @@ public class RealTimeAStar implements PathFinder<Coordinate> {
 		}
 		
 	}
+
+	@Override
+	public int getPathLengt() {
+		// TODO Auto-generated method stub
+		return 1;
+	}
 }

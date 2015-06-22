@@ -23,6 +23,7 @@ import core.DebugConstants;
  */
 public class AStar implements PathFinder<Coordinate> {
 	Map map;
+	int length = 0;
 	protected boolean debug = DebugConstants.astarDebug;
 	protected ArrayList<Node> openNodes = new ArrayList<Node>(); 
 	protected ArrayList<Node> closedNodes = new ArrayList<Node>(); 
@@ -61,6 +62,7 @@ public class AStar implements PathFinder<Coordinate> {
 	}
 	
 	protected ArrayList<Node> createTree(){
+		this.length = -1;
 		while (openNodes.size() != 0){
 			Node best =  Collections.min(openNodes, new NodeComparator());
 			openNodes.remove(best);
@@ -117,6 +119,7 @@ public class AStar implements PathFinder<Coordinate> {
 			out.add(endNode);
 			endNode = endNode.parent;
 		}
+		this.length = out.size();
 		return out;
 	}
 	/**
@@ -229,4 +232,9 @@ public class AStar implements PathFinder<Coordinate> {
             return 0;
         }
     }
+	@Override
+	public int getPathLengt() {
+		// TODO Auto-generated method stub
+		return this.length;
+	}
 }

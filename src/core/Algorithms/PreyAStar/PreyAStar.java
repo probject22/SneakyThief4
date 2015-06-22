@@ -124,5 +124,11 @@ public class PreyAStar implements PathFinder<Coordinate> {
 		public double preyCost = -1;
 		public double predatorCost = -1;
 	}
+
+	@Override
+	public int getPathLengt() {
+		// TODO Auto-generated method stub
+		return 1;
+	}
 	
 }

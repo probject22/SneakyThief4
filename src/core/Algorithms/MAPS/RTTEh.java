@@ -157,4 +157,10 @@ public class RTTEh implements PathFinder<Coordinate> {
         return null;
     }
 
+	@Override
+	public int getPathLengt() {
+		// TODO Auto-generated method stub
+		return 1;
+	}
+
 }

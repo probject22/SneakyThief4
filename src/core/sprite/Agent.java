@@ -59,7 +59,7 @@ public class Agent extends Sprite {
 	protected Coordinate target = new Coordinate(15,10	,0);
 	
 	
-	private PathFinder<Coordinate> pathFinder;
+	protected PathFinder<Coordinate> pathFinder;
 	private PathFinder<Coordinate> realTimePathFinder;
 	
 	protected ArrayList<Event> events = new ArrayList<Event>();

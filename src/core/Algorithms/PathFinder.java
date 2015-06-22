@@ -7,4 +7,5 @@ package core.Algorithms;
  */
 public interface PathFinder<E> {
 	E getShortestPath(E from, E to);
+	int getPathLengt();
 }
