@@ -14,7 +14,7 @@ public class PreyExperiment extends AbstractExperiment {
 
 	public static void main(String[] args) {
 		PreyExperiment exp = new PreyExperiment();
-		exp.dummyExperiment(200);
+		exp.dummyExperiment(5);
 	}
 
 	public PreyExperiment() {
