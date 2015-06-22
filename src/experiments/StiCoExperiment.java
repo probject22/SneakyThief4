@@ -12,7 +12,7 @@ public class StiCoExperiment extends AbstractExperiment {
 	
 	public static void main(String[] args){
 		StiCoExperiment StiCo = new StiCoExperiment();
-		StiCo.runExperiment(10, 1, 200, 200);
+		StiCo.runExperiment(200, 5);
 		System.exit(0);
 	}
 
@@ -26,14 +26,12 @@ public class StiCoExperiment extends AbstractExperiment {
 		
 	}
 	
-	public void runExperiment(int repeats, int guardnum, int mapwidth, int mapheight, double mapdensity){
+	public void runExperiment(int repeats, int guardnum){
 		double ratio = 0;
-		for(int i = 1;i<guardnum;i++){
-			for(int k =0;k<repeats;k++){
-				Map map = null; 
-				
-				SpriteManager manager = SpriteManager.instance();
-				for(int j = 0;j<i;j++){
+
+		SpriteManager manager = SpriteManager.instance();
+		
+		for(int k =0;k<repeats;k++){
 			//TODO: GET A MAP
 			Map map = new Map("maze-"+k+".map");//null; // = generateMap(mapwidth, mapheight, mapdensity); 
 
@@ -45,41 +43,42 @@ public class StiCoExperiment extends AbstractExperiment {
 				for(int s = 0; s < y; s++){
 					if (grid[r][s].moveable())
 						density++;
-						}	
-			}
-			double mapdensity = density/(grid.length*grid[0].length);
-						Guard newGuard = new Guard(coord);
-						manager.addAgent(newGuard);
-					}
-					new Simulator(guardnum, map);
-					
-					//ratio = ratioCovered(map, combinedbeliefmap);
 				}
 			}
-			String[] measurements = new String[4];
-			measurements[0] = Double.toString(ratio);
-			measurements[1] = Integer.toString(guardnum);
-					measurements[2] = "maze";//MAP TYPE
-			measurements[2] = Integer.toString(mapwidth*mapheight);
-			measurements[3] = Double.toString(mapdensity);
-			
-			values.add(measurements);
+			double mapdensity = density/(grid.length*grid[0].length);
+			BeliefMap beliefMap = new BeliefMap(map);
+			for(int i = guardnum;i<=guardnum;i++){
+					System.err.println("k "+ k + " g "+ i);
+					manager.getAgentList().clear();
+					new Simulator(guardnum, map, beliefMap);
 					
-		}
+					ratio = ratioCovered(beliefMap);
+					
+					String[] measurements = new String[5];
+					measurements[0] = Double.toString(ratio);
+					measurements[1] = Integer.toString(guardnum);
+					measurements[2] = "maze";//MAP TYPE
+					measurements[3] = Integer.toString(grid.length*grid[0].length);
+					measurements[4] = Double.toString(mapdensity);
+					
+					values.add(measurements);
+					
+			}
 		}
 		System.out.println("Writing results...");
-		writeCsv("experiments/StiCo/data/stico_experiment.csv");
+		writeCsv("experiments/StiCo/data/stico_experiment_5.csv");
+		
 	}
 	//returns the ratio covered by the agents running StiCo
-	public double ratioCovered(Map map, BeliefMap beliefmap){
+	public double ratioCovered(BeliefMap beliefmap){
 		double ratio;
-		int covered = 0;
-		int total = map.getMapWidth()*map.getMapHeight();
+		double covered = 0;
+		double total = beliefmap.getMap().length*beliefmap.getMap()[0].length;
 		GridState[][] mapcopy = beliefmap.getCopyOfMap();
-		for(int i =0;i<beliefmap.getMapWidth();i++){
-			for(int j = 0;j<beliefmap.getMapHeight();j++){
-				if(mapcopy[i][j]!=GridState.unknown){
-					covered += 1;
+		for(int i =0;i<beliefmap.getMap().length;i++){
+			for(int j = 0;j<beliefmap.getMap()[0].length;j++){
+				if(mapcopy[i][j]!= GridState.unknown&&mapcopy[i][j]!= GridState.unknownOBJECT){
+					covered ++;
 				}
 			}	
 		}
