@@ -14,7 +14,7 @@ public class PreyExperiment extends AbstractExperiment {
 
 	public static void main(String[] args) {
 		PreyExperiment exp = new PreyExperiment();
-		exp.dummyExperiment(5);
+		exp.dummyExperiment(100);
 	}
 
 	public PreyExperiment() {
@@ -39,7 +39,7 @@ public class PreyExperiment extends AbstractExperiment {
 		
 			//for (MapType map_type : MapType.values())
 					//for(double guardDensity = 0.001; guardDensity < 0.02; guardDensity += 0.001)
-						double guardDensity = 0.005;
+						double guardDensity = 0.003;
 						for (int i = 0; i < repeats; i++){
 
 							//String name = "/" + map_type.name() + "/maze-100x100-"+ i+ ".map";

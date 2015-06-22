@@ -30,7 +30,7 @@ public class Simulator {
 	private boolean debug = true;
     private static boolean stop = false;
     private static boolean pause = true;
-    private double speed = 0.1;
+    private double speed = 0.000001;
     
     public int preyWinLoss = 0;
     public double preyTime;
@@ -121,6 +121,7 @@ public class Simulator {
 			spriteManager = SpriteManager.instance();
 			eventManager = new EventManager(map);
 			
+			
 			GridState[][] grid = map.getCopyOfMap();
 			Random randomGenerator = new Random();
 			
@@ -135,15 +136,15 @@ public class Simulator {
 			
 			for(int i =0;i<guards;i++){
 				addGuard(placable.remove(randomGenerator.nextInt(placable.size())),blackBoard);
+				
 			}
 
 			
 
 			/* to get the agent list call spriteManager.getAgentList(); */
 
-			/* gui stuff (DONT NEED LOL)
-			mainFrame = new MainFrame();
-			mainFrame.setMap(map);*/
+			/* gui stuff */
+
 			preyWinLoss = gameLoop(true);
 			
 			preyTime = 0;
@@ -152,6 +153,7 @@ public class Simulator {
 					preyTime = s.getTimeKey();
 					break;
 				}
+			
 		}	
 		
 		

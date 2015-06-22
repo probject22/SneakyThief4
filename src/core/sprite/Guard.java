@@ -185,8 +185,9 @@ public class Guard extends Agent {
 		//Use A* or RTA* to get to the Blocking Coordinate.
 		//return aStar(intruder.neighbourCoordinates().get(0));
 		//List<Coordinate> movableNeighbours
-		if(aStar(next) != null)
-			return aStar(next);
+		Action action = aStar(next);
+		if(action != null)
+			return action;
 		for(Coordinate neighbours : next.neighbourCoordinates()){
 			pathFinder.getShortestPath(this.getCoordinates(), neighbours);
 			if (pathFinder.getPathLengt() != -1 && pathFinder.getPathLengt() > 8)

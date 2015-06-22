@@ -32,7 +32,7 @@ public class LRTAStar implements PathFinder<Coordinate> {
 		if (this.goal == null || !(this.goal.x == to.x && this.goal.y == to.y)){
 			//System.err.println("resetting costmap");
 			if (goal != null)
-			System.err.println("goal"+ goal);
+			if(debug)System.err.println("goal"+ goal);
 			//System.err.println(to);
 			this.goal = to.clone();
 			generateCostMap();
