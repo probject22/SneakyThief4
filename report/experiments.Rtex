@@ -1,3 +1,7 @@
+<<echo=FALSE,results:'hide', message=FALSE>>=
+library(Hmisc)
+@
+
 %Intro to experiments, ideas, reasons
 To evaluate our program's effectiveness a series of experiments are conducted to test the different algorithms performance based on their run-time/efficiency and most importantly, how they compare to their counterparts.
 
@@ -55,15 +59,83 @@ For path-finding the focus is on 2 values, run-time and path length. Obviously t
         )
 @
 
-<<echo=FALSE,robstar_astar_compare_run, fig.cap="">>=
+<<echo=FALSE,robstar_astar_compare_length, fig.cap="Comparison of path length of A-Rob versus A-star for various map complexities. Shown also the .99 confidence intervals per complexity. As a path length of 100 is the cartesian distance between the tiles, and thus the minimum possible path length on an empty map, this is chosen as the root of the y-axis.">>=
+
     data <- read.csv("../experiments/a_star/data/astar_total.csv")
-    l_time <- split(data$robStar_running_time, data$map_complexity)
-    boxplot(
-        l_time
-        #, ylim = c(0,6e8)
-        , ylab = "Running time (ns)"
-        , xlab = "Maze complexity"
-        )
+    
+    rob_means <- aggregate(
+        data$robStar_path_length, 
+        list(data$map_complexity), 
+        mean)
+    rob_sds <- aggregate(
+        data$robStar_path_length, 
+        list(data$map_complexity), 
+        sd)
+        
+    rob_error <- qt(0.99,df=100-2) * rob_sds/sqrt(100)
+    
+    a_means <- aggregate(
+        data$a_path_length, 
+        list(data$map_complexity), 
+        mean)
+    a_sds <- aggregate(
+        data$a_path_length, 
+        list(data$map_complexity), 
+        sd)
+
+    a_error <- qt(0.99,df=100-2) * a_sds / sqrt(100)
+    
+    
+    
+    errbar(
+        c(.1,.2,.3,.4,.5,.6,.7,.8,.9,1.0), 
+        rob_means[,2], 
+        rob_means[,2]-rob_error[,2], rob_means[,2]+rob_error[,2],
+        ylim=c(100,300),
+        col=2,
+        xlab="Maze complexity",
+        ylab="Path length")
+
+    errbar(
+        c(.1,.2,.3,.4,.5,.6,.7,.8,.9,1.0), 
+        a_means[,2], 
+        a_means[,2]-a_error[,2], a_means[,2]+a_error[,2],
+        ylim = c(100,300),
+        col=3, 
+        add=TRUE)
+        
+    legend(x=0.1,300,legend=c("A-Rob","A-star"),fill=c(2,3))
+    
+@
+
+<<echo=FALSE,robstar_astar_compare_run, fig.cap="Comparison of runtime of A-Rob versus A-star for various map complexities. Shown also the .99 confidence intervals per complexity.">>=
+    data <- read.csv("../experiments/a_star/data/astar_total.csv")
+    rob_means <- aggregate(data$robStar_running_time, list(data$map_complexity), mean)
+    rob_sds <- aggregate(data$robStar_running_time, list(data$map_complexity), sd)
+    rob_error <- qt(0.99,df=100-2)*rob_sds/sqrt(100)
+    
+    a_means <- aggregate(data$a_running_time, list(data$map_complexity), mean)
+    a_sds <- aggregate(data$a_running_time, list(data$map_complexity), sd)
+    a_error <- qt(0.99,df=100-2) * a_sds / sqrt(100)
+    
+    errbar(
+        c(.1,.2,.3,.4,.5,.6,.7,.8,.9,1.0), 
+        rob_means[,2], 
+        rob_means[,2]-rob_error[,2], rob_means[,2]+rob_error[,2],
+        ylim=c(0,10e8),
+        col=2,
+        xlab="Map complexity",
+        ylab="Running time (ns)")
+        
+    errbar(
+        c(.1,.2,.3,.4,.5,.6,.7,.8,.9,1.0), 
+        a_means[,2], 
+        a_means[,2]-a_error[,2], a_means[,2]+a_error[,2],
+        ylim = c(0,10e8),
+        col=3, 
+        add=TRUE)
+        
+    legend(x=0.1,1e9,legend=c("A-Rob","A-star"),fill=c(2,3))
 @
 
 

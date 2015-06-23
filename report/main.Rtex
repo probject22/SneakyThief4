@@ -15,26 +15,24 @@
 
 \section{Introduction}
 % Problem Description
-The posed problem is as follows. There is a world with two kinds of sprites guards and intruders. The guards have no greater goal than to catch the intruders and the intruders have no larger purpose than to get to the valuables that they wish to acquire. The guards and intruders live on discrete tiles on a two dimensional game board among walls, doors, windows, and each other. This paper shall discuss the various tasks both the guards and the intruders need to perform and the appropriate algorithms to reach their respective goals.
+The posed problem is as follows. There is a world with two kinds; guards and intruders. The guards have no greater goal than to catch the intruders and the intruders have no larger purpose than to get to the valuables that they wish to acquire. The guards and intruders live on discrete tiles on a two dimensional game board among walls, doors, windows, and each other. This paper shall discuss the various tasks both the guards and the intruders need to perform and the appropriate algorithms to reach their respective goals.
 
 % Paper overview
-	In the large, the problem  can be divided into three tasks. The first task is that guards that are put into an unknown environment should be able to create a 'mental map' of the environment. This is what we will call the exploration task. The second problem is that the guards should monitor the entire area as closely as possible to make it as difficult as possible for a intruder to pass through the area unseen. This will be called the coverage task. The third problem is that, once an intruder has been detected, the guards should be able to actually catch the intruder. This will be called the pursuit task.
 
-	In every of these three main problems the guard should figure out two things, namely where it should go and how it gets there. The 'where'-question is largely dependent on the specific task at hand, e.g. even if an intruder would only be one unit of distance away, but the task is exploration, then the guard does not necessarily have to move towards the intruder.
+	From the guards' perspective, the problem can be divided into three tasks. The initial task is that guards that are put into an unknown environment should be able to create a 'mental map' of the environment. This is called the exploration task. The second task is monitoring the entire area as closely as possible to make it as difficult as possible for a intruder to pass through the area unseen. This is called the coverage task. The third task is the pursuit action or in other words, cooperation with other guards to surround the intruder. The challenge arising from these three tasks is the decision to when to switch between them. For instance, an intuitive strategy would be to explore until the entire environment is known and then switch the task to covering the area. In this strategy the guards switches to the pursuit task at any moment that the intruder is detected. 
+	
+	From the intruder's perspective, one main task is encountered. The task of a intruder is to find it's path towards the target while dodging and avoiding the guards along the path.
+	
+	For every action, the guard or the intruder should figure out two things, namely where it should go and how it gets there. The 'where'-question is largely dependent on the specific task at hand. The 'how'-question, on the other hand, is in many cases independent of the exact task that needs to be achieved and therefore finding the shortest route to the destination does usually suffice and is often even the best route. The 'how'-question is referred to as the path finding problem.
 
-	The 'how'-question, on the other hand, is in many cases independent of the exact task that we want to achieve and therefore finding the shortest route to the destination does usually suffice and is often even the best route. We will call the 'how'-question the path finding problem.
-
-	The final task of the guards is to combine the three main problems and decide when the guard should solve what problem. The intuitive solution would be to explore until the entire environment is known and then start covering the area. During this process pursuit is started as soon as an intruder is detected. This intuitive answer, however, runs into issues once it is not known to the guard how big the area actually is, so it will never know if the map if fully explored or not. Another possible issue arises when an intruder, for example, disappears behind a wall. The pursuing guard does not detect the intruder anymore and stops pursuit. He should, however, have the intelligence to predict where the guard has gone.
-	
-	
-	
-	The rest of this paper is organised as follows. Section~\ref{sec:simulator} provides the knowledge of the simulated world and its rules. Sections~\ref{sec:pathfinding},~\ref{sec:coverage},~\ref{sec:pursuit}~and~\ref{sec:avoidance} will cover the implemented algorithms of path finding, coverage, pursuit and avoidance respectively.The experiments and results can be found in section~\ref{sec:experiments}. Section~\ref{sec:discussion} will pose discussion points that were found during this research. Finally, the conclusion will be given in section~\ref{sec:conclusion}
+	The rest of this paper is organised as follows. Section~\ref{sec:simulator} provides the knowledge of the simulated world and its rules. Sections~\ref{sec:pathfinding},~\ref{sec:coverage},~\ref{sec:pursuit}~and~\ref{sec:avoidance} will cover the implemented algorithms of path finding, coverage, pursuit and avoidance respectively.The experiments and results are presented in section~\ref{sec:experiments}. Section~\ref{sec:discussion} poses discussion points from the results of this research. Finally, the conclusion is given in section~\ref{sec:conclusion}
 	
 		\section{Simulator environment}
 		\label{sec:simulator}
 		\subsection{Time perception}
-			The time in the simulator is perceived continuously to allow for continuous velocity, even in a discretised world. Although the moves of the agents on the map are fully discretised, the simulator takes into account how long this unit's move has taken to perform and only allows the same agent to move again once all other agents have caught up with his 'time'. In other words, each agent has his own progress in time and is only allowed to move when his time is lower (or equal) than all the other agents' times.
+			The time in the simulator is perceived continuously to allow for continuous velocity, even in a discretized world. Although the moves of the agents on the map are fully discretized, the simulator takes into account how long this unit's move has taken to perform and only allows the same agent to move again once all other agents have caught up with his 'time'. In other words, each agent has his own progress in time and is only allowed to move when his time is lower (or equal) than all the other agents' times.
 		\subsection{Game Rules}
+		\input{gameRules.tex}
         \subsection{Map Generator}
         \input{mapgenerator.tex}
 
@@ -48,9 +46,9 @@ The posed problem is as follows. There is a world with two kinds of sprites guar
     \label{sec:astar}
 		\input{astar.tex}
     
-    \subsection{Rob-star}
-    \label{sec:Robstar}
-		\input{robStar.tex}
+    \subsection{ARob}
+    \label{sec:ARob}
+		\input{ARob.tex}
 		
 	
 	\subsection{RTTE-h}
@@ -84,6 +82,8 @@ The posed problem is as follows. There is a world with two kinds of sprites guar
 	\input{sneakescape.tex}
 	
 \section{Exploration}
+\label{sec:exploration}
+	\input{exploration.tex}
 
 \section{Experiments and results}
 \label{sec:experiments}
