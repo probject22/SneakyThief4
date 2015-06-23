@@ -3,7 +3,7 @@ package experiments;
 import core.Map;
 import core.Algorithms.PathFinder;
 import core.Algorithms.AStar.AStar;
-import core.Algorithms.LRTAStar.LRTAStar;
+import core.Algorithms.LRTAStar.RobPath;
 import core.Algorithms.RTAStar.RealTimeAStar;
 import dataContainer.Coordinate;
 
@@ -51,7 +51,7 @@ public class AstarVsRobertStar extends AbstractExperiment {
 		long aEnd = System.nanoTime();
 		System.out.println("atar " + i);
 		//test RobertA*
-		pathFinder = new LRTAStar(map);
+		pathFinder = new RobPath(map);
 		current = home.clone();
 		int rASteps  = 0;
 		long rAStart = System.nanoTime();

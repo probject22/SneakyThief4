@@ -90,8 +90,9 @@ public abstract class ReverseRTAStar<E, T> {
 			else if (result.f < neighbour.f)
 				result = neighbour;
 		}
-
-		return result.element;
+		if (result == null)
+			return null;
+ 		return result.element;
 	}
 
 	protected abstract List<Node<T>> getNeighbours(Node<T> current);

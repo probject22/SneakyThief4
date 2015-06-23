@@ -66,6 +66,7 @@ public class Guard extends Agent {
 				currentState = GuardStates.CATCH_MODE;
 			}
 			else if(!toCoverageState()){
+				System.err.println("exploration");
 				out = explorationState();
 				if (out != null)
 					return out;
@@ -80,11 +81,13 @@ public class Guard extends Agent {
 				currentState = GuardStates.CATCH_MODE;
 			}
 			else{
+				System.err.println("cov");
 				out = coverageState();
 				if (out != null)
 					return out;
 			}
 		case CATCH_MODE:
+			System.err.println("catch");
 			out = catchState();
 			if (out != null)
 				return out;
@@ -97,6 +100,7 @@ public class Guard extends Agent {
 		}
 		
 		soundsDirection.clear();	
+		System.err.println("wait01");
 		//To avoid null errors
 		if (out == null){
 			out = new Action();
@@ -185,13 +189,17 @@ public class Guard extends Agent {
 		//Use A* or RTA* to get to the Blocking Coordinate.
 		//return aStar(intruder.neighbourCoordinates().get(0));
 		//List<Coordinate> movableNeighbours
-		Action action = aStar(next);
+		Action action = null;
+		if (beliefMap.isMoveable(next))
+			action = aStar(next);
 		if(action != null)
 			return action;
 		for(Coordinate neighbours : next.neighbourCoordinates()){
-			pathFinder.getShortestPath(this.getCoordinates(), neighbours);
-			if (pathFinder.getPathLengt() != -1 && pathFinder.getPathLengt() > 8)
-				return aStar(neighbours);
+			if (beliefMap.isMoveable(neighbours)){
+				pathFinder.getShortestPath(this.getCoordinates(), neighbours);
+				if (pathFinder.getPathLengt() != -1 && pathFinder.getPathLengt() > 8)
+					return aStar(neighbours);
+			}
 		}
 		//return rTAStar(intruder);
 		return rTAStar(next);

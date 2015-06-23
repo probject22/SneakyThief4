@@ -125,7 +125,7 @@ public class RealTimeAStar implements PathFinder<Coordinate> {
 			for(Coordinate tempCoord :nodes.keySet()){
 				if (tempCoord.x == c.x && tempCoord.y == c.y){
 				options.add(nodes.get(tempCoord));
-				System.out.println("node exist");
+				//System.out.println("node exist");
 				found = true;
 				}
 			}

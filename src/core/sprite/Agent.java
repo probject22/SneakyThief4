@@ -14,7 +14,7 @@ import core.Algorithms.Exploration;
 import core.Algorithms.PathFinder;
 import core.Algorithms.AStar.AStar;
 import core.Algorithms.BasicExploration.BasicRandomExploration;
-import core.Algorithms.LRTAStar.LRTAStar;
+import core.Algorithms.LRTAStar.RobPath;
 import core.Algorithms.RTAStar.MapRTAStar;
 import core.Algorithms.RTAStar.RealTimeAStar;
 import core.Algorithms.RTAStar2.MapAdapter;
@@ -74,7 +74,7 @@ public class Agent extends Sprite {
 		//beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 		//beliefMapGUi.updateGui();
 		pathFinder = new AStar(beliefMap);
-		realTimePathFinder = new LRTAStar(beliefMap);
+		realTimePathFinder = new RobPath(beliefMap);
 		exploration.setBeliefMap(map);
 	}
 
@@ -84,7 +84,7 @@ public class Agent extends Sprite {
        // beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 	    // Create an A* pathfinder
 	    pathFinder = new AStar(beliefMap);
-	    realTimePathFinder = new LRTAStar(beliefMap);
+	    realTimePathFinder = new RobPath(beliefMap);
 	    exploration = new BasicRandomExploration(this,beliefMap);
 	    
 	    

@@ -144,7 +144,8 @@ public class Simulator {
 			/* to get the agent list call spriteManager.getAgentList(); */
 
 			/* gui stuff */
-
+			mainFrame = new MainFrame();
+			mainFrame.setMap(map);
 			preyWinLoss = gameLoop(true);
 			
 			preyTime = 0;
@@ -232,6 +233,7 @@ public class Simulator {
 		// 0 = running, 1 = thieves win, 2 = thieves loss
 		int winLossValue = 0;
 		while (winLossValue == 0 ) {
+			mainFrame.updateGui();
 			firstAgentAction();
 			for (Agent f : spriteManager.getAgentList()) {
 				if (f instanceof Thief) {
@@ -254,6 +256,7 @@ public class Simulator {
 				return winLossValue; 
 			}
 			/* finish the move by updateting the gui */
+			mainFrame.updateGui();
 			winLossValue = 0;
 		}
 		System.out.println("Stop");
@@ -317,7 +320,12 @@ public class Simulator {
 
 		/* trigger the wait event to send an update of the vision to the agent */
 		eventManager.triggerEvent(new Wait(0), agent);
-
+		if (agent instanceof Thief) {
+			System.err.println("thief turn");
+		}
+		if (agent instanceof Guard) {
+			System.err.println("guard turn");
+		}
 		Action agentAction = agent.getAction();
 
 		for (ActionElement actionElement : agentAction.getActionElements()) {

@@ -99,12 +99,12 @@ public class Thief extends Agent {
 
 	}
 	protected boolean toPanicState(){
-//		for (Sprite s : lastSeen.getSpriteInVisionMap().values()) {
-//			if (s instanceof Guard){
-//				isAlreadyPanicing = false;
-//				return true;
-//			}
-//		}
+		for (Sprite s : lastSeen.getSpriteInVisionMap().values()) {
+			if (s instanceof Guard){
+				isAlreadyPanicing = false;
+				return true;
+			}
+		}
 		return false;
 	}
 	protected Action panicState(){
@@ -160,6 +160,10 @@ public class Thief extends Agent {
 	protected Action reverseAStar(List<Coordinate> followers){
 		Action action = new Action();
 		Coordinate next = thiefPath.getBestEscape(getCoordinates().clone(),followers, target);
+		if (next ==null){
+			action.addActionElement(new Wait(0.1));
+			return action;
+		}
 		double angle = getCoordinates().clone().angle;
 		double goalAngle = getCoordinates().clone().getAngle(next);
 		action.addActionElement(new Turn(angle, goalAngle, Agent.MAX_SPEED));

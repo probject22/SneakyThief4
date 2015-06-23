@@ -14,14 +14,14 @@ import core.sprite.SpriteManager;
 import dataContainer.Coordinate;
 import dataContainer.GridState;
 
-public class LRTAStar implements PathFinder<Coordinate> {
+public class RobPath implements PathFinder<Coordinate> {
 
 	private Coordinate goal;
 	private Map map;
 	boolean debug = DebugConstants.lrtastarDebug;
 	private int[][] costMap;
 	
-	public LRTAStar(Map map) {
+	public RobPath(Map map) {
 		this.map = map;
 		generateCostMap();
 	}

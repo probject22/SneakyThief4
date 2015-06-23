@@ -9,7 +9,10 @@ import java.util.List;
 import core.Map;
 import core.Algorithms.PathFinder;
 import core.Algorithms.ThiefPath;
+import core.sprite.Agent;
+import core.sprite.SpriteManager;
 import dataContainer.Coordinate;
+import dataContainer.GridState;
 
 public class MapReverseRTAStar extends ReverseRTAStar<Coordinate, Coordinate> implements ThiefPath<Coordinate>{
 	
@@ -68,19 +71,45 @@ public class MapReverseRTAStar extends ReverseRTAStar<Coordinate, Coordinate> im
     public List<Node<Coordinate>> getNeighbours(Node<Coordinate> node) {
         //result list
         List<Node<Coordinate>> neighbours = new ArrayList<>();
-
-        // all neighbouring coordinates
-        List<Coordinate> neighbourCoordinates = neighbourCoordinates(node.element);
-
-        //loop through neighbouring coordinates
-        for (Coordinate coordinate : neighbourCoordinates) {
-            // if an agent can move there
-            if(map.isMoveable(coordinate))
-                //create a new node
-                neighbours.add(createNode(coordinate, node));
-        }
-
-        return neighbours;
+        
+    	ArrayList<Coordinate> options = new ArrayList<Coordinate>();
+		ArrayList<Coordinate> out = new ArrayList<Coordinate>();
+		
+		options.add(new Coordinate(node.element.x-1, node.element.x-1,	0));
+		options.add(new Coordinate(node.element.x  , node.element.x-1,	0));
+		options.add(new Coordinate(node.element.x+1, node.element.x-1,	0));
+		options.add(new Coordinate(node.element.x-1, node.element.x,	0));
+		options.add(new Coordinate(node.element.x+1, node.element.x,	0));
+		options.add(new Coordinate(node.element.x-1, node.element.x+1,	0));
+		options.add(new Coordinate(node.element.x  , node.element.x+1,	0));
+		options.add(new Coordinate(node.element.x+1, node.element.x+1,	0));
+		
+		GridState[][] grid = map.getCopyOfMap();
+		
+		for (Coordinate tempCoord: options){
+			if (tempCoord.x < grid.length && tempCoord.x >= 0 && tempCoord.y < grid[0].length && tempCoord.y >= 0){
+				if (grid[tempCoord.x][tempCoord.y].moveable()){
+					SpriteManager manager = SpriteManager.instance();
+					List<Agent> agents = manager.getAgentList();
+					for(Agent agent: agents){
+						Coordinate agentCoords = agent.getCoordinates();
+							if(agentCoords.x != tempCoord.x||agentCoords.y!=tempCoord.y){
+								Node<Coordinate> tempNode = new Node<Coordinate>();
+								tempNode.element = tempCoord;
+								neighbours.add(tempNode);	
+							}
+					}
+					if (agents.size() == 0){
+						Node<Coordinate> tempNode = new Node<Coordinate>();
+						tempNode.element = tempCoord;
+						neighbours.add(tempNode);	
+					}
+					
+				}
+			}
+		}
+	
+		return neighbours;
     }
 
     /**
