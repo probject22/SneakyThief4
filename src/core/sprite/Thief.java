@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import core.Algorithm;
+import core.Algorithm.Escape;
 import core.Algorithms.ThiefPath;
+import core.Algorithms.PreyAStar.PreyAStar;
 import core.Algorithms.reverseRTAStar.MapReverseRTAStar;
 import core.actions.Action;
 import core.actions.Move;
@@ -99,6 +102,8 @@ public class Thief extends Agent {
 
 	}
 	protected boolean toPanicState(){
+		if (!Algorithm.escape)
+			return false;
 		for (Sprite s : lastSeen.getSpriteInVisionMap().values()) {
 			if (s instanceof Guard){
 				isAlreadyPanicing = false;
@@ -108,7 +113,10 @@ public class Thief extends Agent {
 		return false;
 	}
 	protected Action panicState(){
-		
+		if (Algorithm.escapeAlg == Escape.prey){
+			PreyAStar prey = new PreyAStar(beliefMap);
+			return aStar(prey.getShortestPath(getCoordinates(), null));
+		}
 			List<Coordinate> followers = new ArrayList<Coordinate>();
 			for (Sprite s : lastSeen.getSpriteInVisionMap().values()) {
 				if (s instanceof Guard){

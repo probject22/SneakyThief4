@@ -6,6 +6,7 @@ package core.sprite;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import core.Algorithm;
 import core.Algorithms.BES.BES;
 import core.Algorithms.Coverage.Stico.Stico;
 import core.actions.Action;
@@ -107,6 +108,8 @@ public class Guard extends Agent {
 	}
 	
 	protected boolean toExplorationState(){
+		if(!Algorithm.guardExploration)
+			return false;
 		Action action = basicExploration(); 
 		if (action == null)
 			return false;
@@ -117,6 +120,8 @@ public class Guard extends Agent {
 	}
 	
 	protected boolean toCoverageState(){
+		if (!Algorithm.covarage)
+			return false;
 		return !toExplorationState();
 	}
 	protected Action coverageState(){
@@ -124,6 +129,8 @@ public class Guard extends Agent {
 	}
 	
 	protected boolean toCatchState(){
+		if(!Algorithm.catchalg)
+			return false;
 		for (Sprite s : lastSeen.getSpriteInVisionMap().values()){
 			if (s instanceof Thief){
 				lastSeenThiefDirection = blackboard.getThiefCoord();
