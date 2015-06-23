@@ -1,0 +1,78 @@
+%Intro to experiments, ideas, reasons
+To evaluate our program's effectiveness a series of experiments are conducted to test the different algorithms performance based on their run-time/efficiency and most importantly, how they compare to their counterparts.
+
+%List of experiments
+The different aspects of our program evaluated are, path finding, coverage, pursuit, avoidance and exploration.
+
+%PathFinding experiments
+For path-finding the focus is on 2 values, run-time and path length. Obviously the lower either of these values are, the better performance the algorithm has. 
+
+<<echo=FALSE,astar_path_length, fig.cap="Found path length per map complexity for the A-star pathfinding algorithm. Map complexity ranging from 0, to 1, where 0 denotes an empty map, and 1 denotes that there is only one possible path from one tile to any other. Sample size per map complexity is 100.">>=
+    data <- read.csv("../experiments/a_star/data/astar_total.csv")
+    a_path <- split(data$a_path_length, data$map_complexity)
+    
+    boxplot(
+        a_path
+        , ylim = c(100,200)
+        , ylab = "Path length"
+        , xlab = "Maze complexity"
+        )
+    
+@
+
+<<echo=FALSE,robstar_path_length, fig.cap="Found path length per map complexity for the A-Rob pathfinding algorithm. Map complexity ranging from 0, to 1, where 0 denotes an empty map, and 1 denotes that there is only one possible path from one tile to any other. Sample size per map complexity is 100.">>=
+    data <- read.csv("../experiments/a_star/data/astar_total.csv")
+    l_path <- split(data$robStar_path_length, data$map_complexity)
+    boxplot(
+        l_path
+        , ylim = c(100,200)
+        , ylab = "Path length"
+        , xlab = "Maze complexity"
+        )
+@
+
+<<echo=FALSE,astar_running_time, fig.cap="Found path length per map complexity for the A-star pathfinding algorithm. Map complexity ranging from 0, to 1, where 0 denotes an empty map, and 1 denotes that there is only one possible path from one tile to any other. Sample size per map complexity is 100.">>=
+    data <- read.csv("../experiments/a_star/data/astar_total.csv")
+    a_time <- split(data$a_running_time, data$map_complexity)
+    
+    boxplot(
+        a_time
+        #, ylim = c(0,6e8)
+        , ylab = "Running time (ns)"
+        , xlab = "Maze complexity"
+        )
+    
+@
+
+<<echo=FALSE,robstar_running_time, fig.cap="Found path length per map complexity for the A-Rob pathfinding algorithm. Map complexity ranging from 0, to 1, where 0 denotes an empty map, and 1 denotes that there is only one possible path from one tile to any other. Sample size per map complexity is 100.">>=
+    data <- read.csv("../experiments/a_star/data/astar_total.csv")
+    l_time <- split(data$robStar_running_time, data$map_complexity)
+    boxplot(
+        l_time
+        #, ylim = c(0,6e8)
+        , ylab = "Running time (ns)"
+        , xlab = "Maze complexity"
+        )
+@
+
+<<echo=FALSE,robstar_astar_compare_run, fig.cap="">>=
+    data <- read.csv("../experiments/a_star/data/astar_total.csv")
+    l_time <- split(data$robStar_running_time, data$map_complexity)
+    boxplot(
+        l_time
+        #, ylim = c(0,6e8)
+        , ylab = "Running time (ns)"
+        , xlab = "Maze complexity"
+        )
+@
+
+
+%Coverage 
+The most important part of a coverage algorithm is the ratio of covered area compared to the total area of the map. These experiments use StiCo to test the effects of the amount of guards against the map type, map size and map density. 
+
+%Pursuit
+The agent's ability to chase/pursue each are tested. The pursuit algorithm being tested be is blocking escape directions(BES) algorithm. It is matched against different avoidance strategies to determine its effectiveness.
+
+%Avoidance
+When an intruder sees a guard, it immediately wants to escape capture, this is tested ...
+	

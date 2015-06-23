@@ -2,5 +2,9 @@ There is a need for a simple exploration algorithm for the agents; this is becau
 For this, we came up with the algorithm that can be seen in listing x
 
 \begin{algorithm}
-    \KwData{Current map $M$, 
+    \KwData{Current map $M$}
+    Select random tile $c$ on $M$\;
+    \If{$c$ is not explored}{
+        \Return $c$
+    }
 \end{algorithm}
