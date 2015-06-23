@@ -1,0 +1,12 @@
+%Intro to prey a star
+This algorithm is an avoidance algorithm using the costs of both predator(guard) and prey(intruder) to travel to locations on the map. With this, the intruder is able to find the most desirable location to travel to.
+
+%Workings of prey a star
+    Prey A-Star uses 2 grids of integers each containing the a-star f values for the nearest predator to the target intruder. The difference of these values indicates the weight of the intruder wanting to travel to it.
+    
+    %Need Psuedocode
+    
+    This algorithm makes use of A-Star pathfinding to create the grids of values for each agent. This ensures optimal pathing to every grid space. When creating the path, it must also confirm that every step the agent takes abides by the rule that the min path from the guard is longer than the min path from the intruder to ensure that even optimal pathing strategies from the guard will not be able to catch the intruder. 
+    Unfortunately the algorithms suffers from not being able to anticipate the more advanced cooperation strategies with multiple guards working in unison. It is also expected to require a large computation time to calculate the paths due to the amount of individual A-Star computations. The algorithm must span the entire map to create the complete grid of values initially. 
+
+%Reference 

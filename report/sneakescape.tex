@@ -1,0 +1,17 @@
+Sometimes the best path is not simply defined by the shortest path towards a specific coordinate, but rather to avoid a certain coordinate. The intruder, for instance, wants to avoid the guards. To do this he can subtract the heuristic function toward all guards from the evaluation function $f$ (see eq.~\ref{eq:astarevaluation}). In order to vary the importance of getting to the goal rather than escaping from the guards a weight value is assigned to the heuristic value of getting to the goal.
+	%Workings of Sneakescape
+			Sneakescape uses an evaluation function $s(x)$ which depends on the A-star's evaluation function $f(x)$ and the summation heuristic functions toward the predators $h(G_i)$.
+			\begin{equation}
+				\label{eq:sneakyscape}
+			 	s(x,G) = c(x) + \alpha h(x) - \sum_{i=0}^n h(G_i)
+			\end{equation} 
+			Where $x$ is the coordinate of the target, $G$is the list of predators coordinates and $\alpha$ is the given weight to the tendency of moving towards the target. At every iteration the neighbour with the lowest $s(x,G)$ is chosen(see alg.~\ref{alg:sneakyscape}).
+	\begin{algorithm}
+	 \label{alg:sneakyscape}
+				\KwData{Prey coordinate $t$; Set of predator coordinates $G$; Goal Coordinate $x$; evaluation function $s(x,G)$}
+				\For{$n \in $ movable neighbours of $t$}{
+				    Calculate $s(x,G)$\;
+				}
+				Return $\min_{s(x,G)}$ \;
+				\caption{Sneakescape algorithm}
+			\end{algorithm}
