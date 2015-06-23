@@ -19,10 +19,11 @@ For path-finding the focus is on 2 values, run-time and path length. Obviously t
         a_path
         , ylim = c(100,200)
         , ylab = "Path length"
-        , xlab = "Maze complexity"
-        )
+        , xlab = "Maze complexity")
     
 @
+
+The relationship between path length for the A-Star and the complexity is a steadily increasing gradient. This is explainable by the fact that the algorithm needs to navigate around walls, increasing the minimum path length available for the agent. The range of the experiment for complexity 1.0 is quite large due to the fact that the one available direct path is not decided by the algorithm, but by the maze generator. This does not allow any optimization for the algorithm.
 
 <<echo=FALSE,robstar_path_length, fig.cap="Found path length per map complexity for the A-Rob pathfinding algorithm. Map complexity ranging from 0, to 1, where 0 denotes an empty map, and 1 denotes that there is only one possible path from one tile to any other. Sample size per map complexity is 100.">>=
     data <- read.csv("../experiments/a_star/data/astar_total.csv")
@@ -31,11 +32,10 @@ For path-finding the focus is on 2 values, run-time and path length. Obviously t
         l_path
         , ylim = c(100,200)
         , ylab = "Path length"
-        , xlab = "Maze complexity"
-        )
+        , xlab = "Maze complexity")
 @
 
-<<echo=FALSE,astar_running_time, fig.cap="Found path length per map complexity for the A-star pathfinding algorithm. Map complexity ranging from 0, to 1, where 0 denotes an empty map, and 1 denotes that there is only one possible path from one tile to any other. Sample size per map complexity is 100.">>=
+<<echo=FALSE,astar_running_time, fig.cap="Found running time per map complexity for the A-star pathfinding algorithm. Map complexity ranging from 0, to 1, where 0 denotes an empty map, and 1 denotes that there is only one possible path from one tile to any other. Sample size per map complexity is 100.">>=
     data <- read.csv("../experiments/a_star/data/astar_total.csv")
     a_time <- split(data$a_running_time, data$map_complexity)
     
@@ -43,20 +43,19 @@ For path-finding the focus is on 2 values, run-time and path length. Obviously t
         a_time
         #, ylim = c(0,6e8)
         , ylab = "Running time (ns)"
-        , xlab = "Maze complexity"
-        )
+        , xlab = "Maze complexity")
     
 @
 
-<<echo=FALSE,robstar_running_time, fig.cap="Found path length per map complexity for the A-Rob pathfinding algorithm. Map complexity ranging from 0, to 1, where 0 denotes an empty map, and 1 denotes that there is only one possible path from one tile to any other. Sample size per map complexity is 100.">>=
+<<echo=FALSE,robstar_running_time, fig.cap="Found running time per map complexity for the A-Rob pathfinding algorithm. Map complexity ranging from 0, to 1, where 0 denotes an empty map, and 1 denotes that there is only one possible path from one tile to any other. Sample size per map complexity is 100.">>=
     data <- read.csv("../experiments/a_star/data/astar_total.csv")
     l_time <- split(data$robStar_running_time, data$map_complexity)
     boxplot(
         l_time
         #, ylim = c(0,6e8)
         , ylab = "Running time (ns)"
-        , xlab = "Maze complexity"
-        )
+        , xlab = "Maze complexity")
+        
 @
 
 <<echo=FALSE,robstar_astar_compare_length, fig.cap="Comparison of path length of A-Rob versus A-star for various map complexities. Shown also the .99 confidence intervals per complexity. As a path length of 100 is the cartesian distance between the tiles, and thus the minimum possible path length on an empty map, this is chosen as the root of the y-axis.">>=
@@ -95,7 +94,7 @@ For path-finding the focus is on 2 values, run-time and path length. Obviously t
         col=2,
         xlab="Maze complexity",
         ylab="Path length")
-
+        
     errbar(
         c(.1,.2,.3,.4,.5,.6,.7,.8,.9,1.0), 
         a_means[,2], 
@@ -136,15 +135,31 @@ For path-finding the focus is on 2 values, run-time and path length. Obviously t
         add=TRUE)
         
     legend(x=0.1,1e9,legend=c("A-Rob","A-star"),fill=c(2,3))
+    
 @
 
+<<echo=FALSE,fig.cap="Exploration of StiCo algorithm with different amounts of guard on an empty map (with outer walls). Sample size per boxplot is 200.">>=
+
+    data <- read.csv("../experiments/StiCo/data/stico_experiment_5adapted.csv")
+    
+    boxplot(
+        split(data$ratiocoverage,list(data$guard_number)),
+        xlab="Number of guards",
+        ylab="Ratio of map covered")
+        
+@
 
 %Coverage 
 The most important part of a coverage algorithm is the ratio of covered area compared to the total area of the map. These experiments use StiCo to test the effects of the amount of guards against the map type, map size and map density. 
 
+
+
 %Pursuit
 The agent's ability to chase/pursue each are tested. The pursuit algorithm being tested be is blocking escape directions(BES) algorithm. It is matched against different avoidance strategies to determine its effectiveness.
 
+    <<>>=
+        
+    @
+
 %Avoidance
 When an intruder sees a guard, it immediately wants to escape capture, this is tested ...
-	

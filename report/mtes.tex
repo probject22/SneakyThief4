@@ -4,7 +4,7 @@ The Real-time Moving Target Evaluation Search (MTES) is an assisting algorithm t
 
 			An example where this history could help is when two guards are pursuing an intruder around an obstacle. If the shortest path to the intruder is always chosen, the intruder and guards will continue to walk circles around the obstacle. If the guard, however, holds a record of where he's already been, he will try alternative paths as soon as one cycle has been made.
 
-			This assisting algorithm requires the use of another path finding algorithm. The RTTE-h algorithm particularly suitable, since it does not only recommend a single moving direction, but multiple. If the first moving direction is blocked by a history cell, MTES can just select the second recommendation (see alg.~\ref{alg:mtes}).
+			This assisting algorithm requires the use of another path finding algorithm. The RTTE-h algorithm particularly suitable, since it does not only recommend a single moving direction, but multiple. If the first moving direction is blocked by a history cell, MTES can just select the second recommendation (see alg.~\ref{alg:mtes})\cite{undeger2010multi, undeger2007single}.
 
 			\begin{algorithm}
 				\KwData{Current cell $s$}

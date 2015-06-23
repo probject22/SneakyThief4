@@ -1,10 +1,25 @@
-There is a need for a simple exploration algorithm for the agents; this is because most algorithms work better on an explored maps. (e.g.; the path that A* finds on an explored map is the optimal one, but when the map is not fully explored it is possible that it finds the longest path to the goal.)
-For this, we came up with the algorithm that can be seen in listing x
+Most algorithms work best on a map that has been explored (e.g.; the path that A* finds on an explored map is the optimal one, but when the map is not fully explored it is possible that it finds the longest path to the goal). Therefore, two exploration algorithms were implemented. The first one takes the map and then chooses a random unexplored tile to explore next. This can be found below as algorithm~\ref{randomExplor}.
 
 \begin{algorithm}
+\label{randomExplor}
+  \caption{Single iteration of random exploration algorithm}
     \KwData{Current map $M$}
     Select random tile $c$ on $M$\;
     \If{$c$ is not explored}{
         \Return $c$
     }
 \end{algorithm}
+
+Of course, this could lead to the agent running from one side of the world to the other repeatedly, which clearly is not the fastest way. To solve this, it was decided to add another exploration algorithm, namely one that goes to the closest uncovered tile. This can be found in algorithm ~\ref{closestExplor}.
+
+\begin{algorithm}
+\label{closestExplor}
+  \caption{Single iteration of closest exploration algorithm}
+    \KwData{Current map $M$}
+    Select closest tile $c$ on $M$\;
+    \If{$c$ is not explored}{
+        \Return $c$
+    }
+\end{algorithm}
+
+To get the best results, one might want to use both algorithms. First the random one to get a basic idea of what the world looks like, then discover all unexplored areas in a smart way by checking the closest tiles.
