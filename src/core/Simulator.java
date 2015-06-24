@@ -76,36 +76,31 @@ public class Simulator {
 	}
 	
 	//Use this for StiCo Experiment
-	public Simulator(int guards, BeliefMap beliefmap){
+	public Simulator(int guards,Map map, BeliefMap beliefmap){
 		if (debug)
 			System.err.println("The simulator has been started");
 
 		// map = new Map();
 		// map = new Map("test100.map");
 		// map = map.maze(map.getMapWidth(),map.getMapHeight());
-		map = beliefmap;
-
+		this.map = map;
 		spriteManager = SpriteManager.instance();
+		eventManager = new EventManager(map);
 		for(int i =0;i<guards;i++){
 			boolean valid = false;
 			while(valid == false){
-				int x = (int)(Math.random()*beliefmap.getMap().length);
-				int y = (int)(Math.random()*beliefmap.getMap()[0].length);
+				int x = (int)(Math.random()*map.getMap().length-1);
+				int y = (int)(Math.random()*map.getMap()[0].length-1);
 				Coordinate coord = new Coordinate(x,y , 0);
-				if(beliefmap.isMoveable(coord)){
+				if(map.isMoveable(coord)){
 					addGuard(coord, beliefmap);
 					valid = true;
 				}
 			}
 		}
-
-		eventManager = new EventManager(beliefmap);
 		/* to get the agent list call spriteManager.getAgentList(); */
 
-		/* gui stuff (DONT NEED LOL)
-		mainFrame = new MainFrame();
-		mainFrame.setMap(map);*/
-		gameLoop(1*guards);
+		gameLoop(50*guards);
 	}
 	private void gameLoop(int maxturns) {
 		// 0 = running, 1 = thieves win, 2 = thieves loss
@@ -113,7 +108,7 @@ public class Simulator {
 		while (turns<maxturns) {
 			turns++;
 			firstAgentAction();
-			if(turns%100 == 0){
+			if(turns%50 == 0){
 				System.out.println(turns);
 			}
 		}

@@ -36,6 +36,7 @@ public class Guard extends Agent {
 	/**
 	 * @param coords
 	 */
+	
 	public Guard(Coordinate coords) {
 		super(coords);
 		stico = new Stico(this);

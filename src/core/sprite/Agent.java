@@ -70,7 +70,7 @@ public class Agent extends Sprite {
 
 	public void setBeliefMap(Map map){
 		this.beliefMap =  map;
-		beliefMapGUi.close();
+		//beliefMapGUi.close();
 		//beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 		//beliefMapGUi.updateGui();
 		pathFinder = new AStar(beliefMap);
@@ -81,7 +81,7 @@ public class Agent extends Sprite {
     public Agent(Coordinate coords) {
         super(coords);
         this.beliefMap =  new BeliefMap();
-        beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
+        //beliefMapGUi = new  BeliefMapGui((Map)beliefMap, "test");
 	    // Create an A* pathfinder
 	    pathFinder = new AStar(beliefMap);
 	    realTimePathFinder = new LRTAStar(beliefMap);

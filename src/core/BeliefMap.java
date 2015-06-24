@@ -21,7 +21,7 @@ public class BeliefMap extends Map {
 	
 	public BeliefMap(){
 		Map map = Map.mapClass;
-		this.map = new GridState[map.getMapWidth()][map.getMapHeight()];
+		this.map = new GridState[map.getCopyOfMap().length][map.getCopyOfMap()[0].length];
 		for (int i = 0; i<this.map.length; i++){
 			for (int j = 0; j<this.map[0].length; j++){
 				this.map[i][j] = GridState.unknown;
