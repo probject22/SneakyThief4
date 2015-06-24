@@ -51,7 +51,7 @@ public class Simulator {
 			System.err.println("The simulator has been started");
 
 		// map = new Map();
-		 map = new Map("test200.map");
+		 map = new Map("default.map");
 		// map = map.maze(map.getMapWidth(),map.getMapHeight());
 		// map = new Map("default.map");
 		// map = new Map("empty.map");
@@ -59,10 +59,10 @@ public class Simulator {
 		spriteManager = SpriteManager.instance();
 
 		//addGuard(new Coordinate(19, 19, 0));	
-		//addGuard(new Coordinate(18, 18, 0));
-		//addGuard(new Coordinate(17, 17, 0));
-		//addGuard(new Coordinate(16, 16, 0));
-		addThief(new Coordinate(1,1,0), map);
+		addGuard(new Coordinate(18, 18, 0));
+		addGuard(new Coordinate(17, 17, 0));
+		addGuard(new Coordinate(29, 22, 0));
+		addThief(new Coordinate(1,1,0));
 
 		eventManager = new EventManager(map);
 
