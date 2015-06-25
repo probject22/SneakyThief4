@@ -1,4 +1,4 @@
-This algorithm is basically a modified version of a greedy algorithm. The main difference is that it gets a penalty if it wants to go back to a spot where it has been before. This can be seen in eq.~\ref{eq:ARob}. The first part of the equation is the same as the equation that is used in A-Star (eq.~\ref{eq:astarevaluation}). The $p(x)$ part is the penalty for going back to a node that has been previously visited. The idea behind this is that it still can go back to a spot where it was before, but it avoids an agents "oscillating" between two spots. Algorithm~\ref{ARobAlgorithm} shows the pseudocode of this algorithm
+This algorithm is a modified version of A* algorithm. The main difference is that it gets a penalty by revisiting a cell.  his can be seen in eq.~\ref{eq:ARob}. This evaluation function is bassed on A*'s evaluation function (eq.~\ref{eq:astarevaluation}). The $p(x)$ is the penalty for revisiting a cell. The idea behind this is that it still can go back to a spot where it was before, but it avoids an agents oscillating between two spots. Alg.~2 shows the pseudocode of this algorithm.
 
 \begin{equation}
 	\label{eq:ARob}
@@ -6,8 +6,8 @@ This algorithm is basically a modified version of a greedy algorithm. The main d
 \end{equation}
 
 
-\begin{algorithm}
-\label{ARobAlgorithm}
+\begin{algorithm}[h!]
+    \label{al:ARob}
     \caption{Single iteration of ARob}
     \KwData{Current location $c$; Set of possible goal coordinate $G$; List of penalties $p(x)$ at coordinate $x$; List of expected costs $f(x)$ at coordinate }
     \If{ $c \in G$}{

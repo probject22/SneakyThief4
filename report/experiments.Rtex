@@ -2,30 +2,31 @@
 library(Hmisc)
 @
 
-%Intro to experiments, ideas, reasons
-To evaluate our program's effectiveness a series of experiments are conducted to test the different algorithms performance based on their run-time/efficiency and most importantly, how they compare to their counterparts.
 
-%List of experiments
-The different aspects of our program evaluated are, path finding, coverage, pursuit, avoidance and exploration.
+To evaluate the simulator's potency, a series of experiments are conducted to test the performance of different algorithms. The experiments measure different abilities such as efficiency and effectiveness of algorithms. Besides, ranking experiments are also conducted in order to compare different algorithms which solve the same problem. For instance, the ARob algorithm is compared with A*.The main aspects of evaluation are path finding, coverage, pursuit, avoidance, and exploration.
 
-%PathFinding experiments
-For path-finding the focus is on 2 values, run-time and path length. Obviously the lower either of these values are, the better performance the algorithm has. 
 
-<<echo=FALSE,astar_path_length, fig.cap="Found path length per map complexity for the A-star pathfinding algorithm. Map complexity ranging from 0, to 1, where 0 denotes an empty map, and 1 denotes that there is only one possible path from one tile to any other. Sample size per map complexity is 100.">>=
+\subsection{PathFinding experiments}
+    For the path finding algorithms, the computer processing time and the path length of getting from an initial coordinate to a given goal are measured. This experiments are performed using batches of fixed sized maps containing randomly placed walls within a range of map complexities. At each run, an agent is placed at the bottom right corner of the map with a given goal, which is at the top-left corner of the map. When comparing several path-finding algorithms, at each repeat the same map is used by the algorithms in order to reduce the variance of the results.
+    A* and ARob algorithms were compared using the explained experiment setup. The figures~\ref{fig:astar_path_length} to \ref{fig:robstar_astar_compare_length}.
+    
+
+<<echo=FALSE,astar_path_length, fig.cap="Path length per map complexity for the A* path-finding algorithm. Map complexity ranging from 0, to 1, where 0 denotes an empty map, and 1 denotes that there is only one possible path from one tile to any other. Sample size per map complexity is 100.">>=
+
     data <- read.csv("../experiments/a_star/data/astar_total.csv")
     a_path <- split(data$a_path_length, data$map_complexity)
     
     boxplot(
-        a_path
-        , ylim = c(100,200)
-        , ylab = "Path length"
-        , xlab = "Maze complexity")
+        a_path, 
+        ylim = c(100,200), 
+        ylab = "Path length", 
+        xlab = "Maze complexity")
     
 @
 
-The relationship between path length for the A-Star and the complexity is a steadily increasing gradient. This is explainable by the fact that the algorithm needs to navigate around walls, increasing the minimum path length available for the agent. The range of the experiment for complexity 1.0 is quite large due to the fact that the one available direct path is not decided by the algorithm, but by the maze generator. This does not allow any optimization for the algorithm.
+The relationship between path length for the A* and the complexity is a steadily increasing gradient. This is explainable by the fact that the algorithm needs to navigate around walls, increasing the minimum path length available for the agent. The range of the experiment for complexity 1.0 is quite large due to the fact that the one available direct path is not decided by the algorithm, but by the maze generator. This does not allow any optimisation for the algorithm.
 
-<<echo=FALSE,robstar_path_length, fig.cap="Found path length per map complexity for the A-Rob pathfinding algorithm. Map complexity ranging from 0, to 1, where 0 denotes an empty map, and 1 denotes that there is only one possible path from one tile to any other. Sample size per map complexity is 100.">>=
+<<echo=FALSE,robstar_path_length, fig.cap="Found path length per map complexity for the A-Rob path-finding algorithm. Map complexity ranging from 0, to 1, where 0 denotes an empty map, and 1 denotes that there is only one possible path from one tile to any other. Sample size per map complexity is 100.">>=
     data <- read.csv("../experiments/a_star/data/astar_total.csv")
     l_path <- split(data$robStar_path_length, data$map_complexity)
     boxplot(
@@ -35,30 +36,23 @@ The relationship between path length for the A-Star and the complexity is a stea
         , xlab = "Maze complexity")
 @
 
-<<echo=FALSE,astar_running_time, fig.cap="Found running time per map complexity for the A-star pathfinding algorithm. Map complexity ranging from 0, to 1, where 0 denotes an empty map, and 1 denotes that there is only one possible path from one tile to any other. Sample size per map complexity is 100.">>=
-    data <- read.csv("../experiments/a_star/data/astar_total.csv")
-    a_time <- split(data$a_running_time, data$map_complexity)
-    
-    boxplot(
-        a_time
-        #, ylim = c(0,6e8)
-        , ylab = "Running time (ns)"
-        , xlab = "Maze complexity")
-    
-@
+The A-Rob path length is affected heavily by higher complexities of map due to a wrong turn causing potentially huge deviations from the optimal path. Due to its greedy nature it can visit a lot of possible routes that have long paths to dead ends. This problem is caused by the algorithm visiting every possible cell once it takes a wrong turn on its route. Figure~10 shows the rapid increase in path length as more blocked routes appear.
+
+Running time of the A* algorithm increases as time increases due to the algorithm having to do the calculations for every step of incorrect paths. On the dense maps, due to the algorithms inabilty to optimise routes, it is very close to likely that all other routes are explored in some part. Figure~13 shows the very high growth of runtime when the complexity of the map is large.
 
 <<echo=FALSE,robstar_running_time, fig.cap="Found running time per map complexity for the A-Rob pathfinding algorithm. Map complexity ranging from 0, to 1, where 0 denotes an empty map, and 1 denotes that there is only one possible path from one tile to any other. Sample size per map complexity is 100.">>=
     data <- read.csv("../experiments/a_star/data/astar_total.csv")
     l_time <- split(data$robStar_running_time, data$map_complexity)
     boxplot(
         l_time
-        #, ylim = c(0,6e8)
+        , ylim = c(0,1e6)
         , ylab = "Running time (ns)"
         , xlab = "Maze complexity")
-        
 @
 
-<<echo=FALSE,robstar_astar_compare_length, fig.cap="Comparison of path length of A-Rob versus A-star for various map complexities. Shown also the .99 confidence intervals per complexity. As a path length of 100 is the cartesian distance between the tiles, and thus the minimum possible path length on an empty map, this is chosen as the root of the y-axis.">>=
+The A-Rob algorithm uses very little computing time as it is very similar to greedy in that it saves very elementary data for each node. Figure~13 shows the relatively low runtime in comparison to the A* algorithm.
+
+<<echo=FALSE,robstar_astar_compare_length, fig.cap="Comparison of path length of A-Rob versus A* for various map complexities. Shown also the .99 confidence intervals per complexity. As a path length of 100 is the Cartesian distance between the tiles, and thus the minimum possible path length on an empty map, this is chosen as the root of the y-axis.">>=
 
     data <- read.csv("../experiments/a_star/data/astar_total.csv")
     
@@ -82,14 +76,13 @@ The relationship between path length for the A-Star and the complexity is a stea
         list(data$map_complexity), 
         sd)
 
-    a_error <- qt(0.99,df=100-2) * a_sds / sqrt(100)
-    
-    
+    a_error <- qt(0.99,df=100-2) * a_sds / sqrt(100)   
     
     errbar(
         c(.1,.2,.3,.4,.5,.6,.7,.8,.9,1.0), 
         rob_means[,2], 
-        rob_means[,2]-rob_error[,2], rob_means[,2]+rob_error[,2],
+        rob_means[,2]-rob_error[,2],
+        rob_means[,2]+rob_error[,2],
         ylim=c(100,300),
         col=2,
         xlab="Maze complexity",
@@ -98,16 +91,22 @@ The relationship between path length for the A-Star and the complexity is a stea
     errbar(
         c(.1,.2,.3,.4,.5,.6,.7,.8,.9,1.0), 
         a_means[,2], 
-        a_means[,2]-a_error[,2], a_means[,2]+a_error[,2],
+        a_means[,2] - a_error[,2], 
+        a_means[,2] + a_error[,2],
         ylim = c(100,300),
         col=3, 
         add=TRUE)
         
-    legend(x=0.1,300,legend=c("A-Rob","A-star"),fill=c(2,3))
+    legend(
+        x=0.1,y=300,
+        legend=c(
+            "A-Rob",
+            "A*"),
+        fill=c(2,3))
     
 @
 
-<<echo=FALSE,robstar_astar_compare_run, fig.cap="Comparison of runtime of A-Rob versus A-star for various map complexities. Shown also the .99 confidence intervals per complexity.">>=
+<<echo=FALSE,robstar_astar_compare_run, fig.cap="Comparison of runtime of A-Rob versus A* for various map complexities. Shown also the .99 confidence intervals per complexity.">>=
     data <- read.csv("../experiments/a_star/data/astar_total.csv")
     rob_means <- aggregate(data$robStar_running_time, list(data$map_complexity), mean)
     rob_sds <- aggregate(data$robStar_running_time, list(data$map_complexity), sd)
@@ -134,32 +133,443 @@ The relationship between path length for the A-Star and the complexity is a stea
         col=3, 
         add=TRUE)
         
-    legend(x=0.1,1e9,legend=c("A-Rob","A-star"),fill=c(2,3))
+    legend(x=0.1,1e9,legend=c("A-Rob","A*"),fill=c(2,3))
     
 @
 
-<<echo=FALSE,fig.cap="Exploration of StiCo algorithm with different amounts of guard on an empty map (with outer walls). Sample size per boxplot is 200.">>=
+
+
+\subsection{Patrolling experiments}
+The most important part of a patrolling algorithm is the ratio of covered area compared to the total area of the map. These experiments use StiCo to test the effects of variation in the amount of guards against random maps with fixed map size and fixed complexities. 
+
+<<echo=FALSE,fig.cap="Random vs Nearest exploration on maps with a density of 0.716. Differences are significant from 350 moves onwards.">>=
+    rand     <- read.csv("../experiments/exploration/data/Exploration.csv")
+    non_rand <- read.csv("../experiments/exploration/data/nonRandomExploration.csv")
+    
+    rand     <- subset(rand, rand$moves >= 100)
+    non_rand <- subset(non_rand, non_rand$moves >= 100)
+    
+    rand_means  <- aggregate(rand$ratioexplored, list(rand$moves), mean)
+    rand_sds    <- aggregate(rand$ratioexplored, list(rand$moves), sd)
+    rand_errors <- qt(0.99,df=20-2)*rand_sds/sqrt(20)
+    
+    non_rand_means  <- aggregate(non_rand$ratioexplored, list(non_rand$moves), mean)
+    non_rand_sds    <- aggregate(non_rand$ratioexplored, list(non_rand$moves), sd)
+    non_rand_errors <-  qt(0.99,df=20-2)*rand_sds/sqrt(20)
+    
+    errbar(
+      unique(rand$moves),
+      rand_means[,2],
+      rand_means[,2]-rand_errors[,2],
+      rand_means[,2]+rand_errors[,2],
+      col=2,
+      xlab="Amount of moves made",
+      ylab="Ratio of map explored",
+      ylim=c(0,1))
+    
+    errbar(
+      unique(non_rand$moves),
+      non_rand_means[,2],
+      non_rand_means[,2]-non_rand_errors[,2],
+      non_rand_means[,2]+non_rand_errors[,2],
+      col=3,
+      add=TRUE)
+    
+    legend(
+      x=100,y=1,
+      legend=c(
+        "Random",
+        "Nearest"),
+      title="Method",
+      fill=c(2,3))
+      
+@
+
+
+<<echo=FALSE,fig.cap="Exploration of StiCo algorithm with different amounts of guard on an empty map (with outer walls). Sample size per box-plot is 200. Simulation was performed for 50 moves.">>=
 
     data <- read.csv("../experiments/StiCo/data/stico_experiment_5adapted.csv")
     
     boxplot(
         split(data$ratiocoverage,list(data$guard_number)),
         xlab="Number of guards",
-        ylab="Ratio of map covered")
+        ylab="Ratio of map covered",
+        ylim=c(0,1))
         
 @
 
-%Coverage 
-The most important part of a coverage algorithm is the ratio of covered area compared to the total area of the map. These experiments use StiCo to test the effects of the amount of guards against the map type, map size and map density. 
 
+% <<echo=FALSE,fig.cap="Exploration of StiCo algorithm with different amounts of guard on an empty map (with outer walls). Sample size per boxplot is 5. Simulation was stopped after 50 moves, not until an equilibrium was reached.">>=
 
-
-%Pursuit
-The agent's ability to chase/pursue each are tested. The pursuit algorithm being tested be is blocking escape directions(BES) algorithm. It is matched against different avoidance strategies to determine its effectiveness.
-
-    <<>>=
+%     data <- read.csv("../experiments/StiCo/data/stico_experiment_0.35.csv")
+    
+%     boxplot(
+%         split(data$ratiocoverage,list(data$guard_number)),
+%         xlab="Number of guards",
+%         ylab="Ratio of map covered",
+%         ylim=c(0,1))
         
-    @
+% @
 
-%Avoidance
-When an intruder sees a guard, it immediately wants to escape capture, this is tested ...
+% <<echo=FALSE,stico_five,fig.cap="Exploration of StiCo algorithm with different amounts of guard on a map with complexity 0.5 (with outer walls). Sample size per boxplot is 5. Simulation was stopped after 50 moves, not until an equilibrium was reached.">>=
+%     data <- read.csv("../experiments/StiCo/data/stico_experiment_0.5.csv")
+    
+%     boxplot(
+%         split(data$ratiocoverage,list(data$guard_number)),
+%         xlab="Number of guards",
+%         ylab="Ratio of map explored",
+%         ylim=c(0,1))
+
+% @
+
+% <<echo=FALSE,stico_six,fig.cap="Exploration of StiCo algorithm with different amounts of guard on a map with complexity 0.6 (with outer walls). Sample size per boxplot is 5. Simulation was stopped after 50 moves, not until an equilibrium was reached.">>=
+%     data <- read.csv("../experiments/StiCo/data/stico_experiment_0.6.csv")
+    
+%     boxplot(
+%         split(data$ratiocoverage,list(data$guard_number)),
+%         xlab="Number of guards",
+%         ylab="Ratio of map explored",
+%         ylim=c(0,1))
+
+% @
+
+<<echo=FALSE,stico_comparison,fig.cap="Comparison of exploration of StiCo for different map complexities. Confidence intervals are .99. Ratio of exploration is taken after 50 moves">>=
+    data0  <- read.csv("../experiments/StiCo/data/stico_experiment_5adapted.csv")
+    data1  <- read.csv("../experiments/StiCo/data/stico_experiment_0.1.csv")
+    data2  <- read.csv("../experiments/StiCo/data/stico_experiment_0.2.csv")
+    data3  <- read.csv("../experiments/StiCo/data/stico_experiment_0.3.csv")
+    data35 <- read.csv("../experiments/StiCo/data/stico_experiment_0.35.csv")
+    data4  <- read.csv("../experiments/StiCo/data/stico_experiment_0.4.csv")
+    data5  <- read.csv("../experiments/StiCo/data/stico_experiment_0.5.csv")
+    data6  <- read.csv("../experiments/StiCo/data/stico_experiment_0.6.csv")
+    data7  <- read.csv("../experiments/StiCo/data/stico_experiment_0.7.csv")
+    data8  <- read.csv("../experiments/StiCo/data/stico_experiment_0.8.csv")
+    data9  <- read.csv("../experiments/StiCo/data/stico_experiment_0.9.csv")
+    data10  <- read.csv("../experiments/StiCo/data/stico_experiment_1.0.csv")
+    
+    means0   <- aggregate(data0$ratiocoverage, list(data0$guard_number),mean)
+    sds0     <- aggregate(data0$ratiocoverage, list(data0$guard_number),sd)
+    errors0  <- qt(0.99,df=10-2) * sds0 / sqrt(10)
+    
+    means1   <- aggregate(data1$ratiocoverage, list(data1$guard_number),mean)
+    sds1     <- aggregate(data1$ratiocoverage, list(data1$guard_number),sd)
+    errors1  <- qt(0.99,df=10-2) * sds1 / sqrt(10)
+    
+    means2   <- aggregate(data2$ratiocoverage, list(data2$guard_number),mean)
+    sds2     <- aggregate(data2$ratiocoverage, list(data2$guard_number),sd)
+    errors2  <- qt(0.99,df=10-2) * sds2 / sqrt(10)
+    
+    means3   <- aggregate(data3$ratiocoverage, list(data3$guard_number),mean)
+    sds3     <- aggregate(data3$ratiocoverage, list(data3$guard_number),sd)
+    errors3  <- qt(0.99,df=10-2) * sds3 / sqrt(10)
+    
+    means35  <- aggregate(data35$ratiocoverage, list(data35$guard_number),mean)
+    sds35    <- aggregate(data35$ratiocoverage, list(data35$guard_number),sd)
+    errors35 <- qt(0.99,df=10-2) * sds35 / sqrt(10)
+    
+    means4   <- aggregate(data4$ratiocoverage, list(data4$guard_number),mean)
+    sds4     <- aggregate(data4$ratiocoverage, list(data4$guard_number),sd)
+    errors4  <- qt(0.99,df=10-2) * sds4 / sqrt(10)
+    
+    means5   <- aggregate(data5$ratiocoverage, list(data5$guard_number),mean)
+    sds5     <- aggregate(data5$ratiocoverage, list(data5$guard_number),sd)
+    errors5  <- qt(0.99,df=10-2) * sds5 / sqrt(10)
+    
+    means6   <- aggregate(data6$ratiocoverage, list(data6$guard_number),mean)
+    sds6     <- aggregate(data6$ratiocoverage, list(data6$guard_number),sd)
+    errors6  <- qt(0.99,df=10-2) * sds6 / sqrt(10)
+    
+    means7   <- aggregate(data7$ratiocoverage, list(data7$guard_number),mean)
+    sds7     <- aggregate(data7$ratiocoverage, list(data7$guard_number),sd)
+    errors7  <- qt(0.99,df=10-2) * sds7 / sqrt(10)
+    
+    means8   <- aggregate(data8$ratiocoverage, list(data8$guard_number),mean)
+    sds8     <- aggregate(data8$ratiocoverage, list(data8$guard_number),sd)
+    errors8  <- qt(0.99,df=10-2) * sds8 / sqrt(10)
+    
+    means9   <- aggregate(data9$ratiocoverage, list(data9$guard_number),mean)
+    sds9     <- aggregate(data9$ratiocoverage, list(data9$guard_number),sd)
+    errors9  <- qt(0.99,df=10-2) * sds9 / sqrt(10)
+    
+    means10   <- aggregate(data10$ratiocoverage, list(data10$guard_number),mean)
+    sds10     <- aggregate(data10$ratiocoverage, list(data10$guard_number),sd)
+    errors10  <- qt(0.99,df=10-2) * sds10 / sqrt(10)
+    
+    ## empty map
+    errbar(
+        unique(data0$guard_number), 
+        means0[,2], 
+        means0[,2]-errors0[,2], 
+        means0[,2]+errors0[,2],
+        ylim=c(0,1),
+        col=1,
+        xlab="Number of guards",
+        ylab="Ratio of exploration")
+        
+    lines(
+        unique(data0$guard_number), 
+        means0[,2],
+        col=1)
+        
+    ## complexity .1
+    errbar(
+        unique(data1$guard_number), 
+        means1[,2], 
+        means1[,2]-errors1[,2], 
+        means1[,2]+errors1[,2],
+        ylim=c(0,1),
+        col=2,
+        add=TRUE)
+    
+    lines(
+        unique(data1$guard_number), 
+        means1[,2],
+        col=3)
+     
+     ## complexity .2   
+    errbar(
+        unique(data2$guard_number), 
+        means2[,2], 
+        means2[,2]-errors2[,2], 
+        means2[,2]+errors2[,2],
+        ylim=c(0,1),
+        col=4,
+        add=TRUE)
+    
+    lines(
+        unique(data2$guard_number), 
+        means2[,2],
+        col=4)
+        
+    ## complexity .3
+    errbar(
+        unique(data3$guard_number), 
+        means3[,2], 
+        means3[,2]-errors3[,2], 
+        means3[,2]+errors3[,2],
+        ylim=c(0,1),
+        col=5,
+        add=TRUE)
+    
+   
+    lines(
+        unique(data3$guard_number), 
+        means3[,2],
+        col=5)
+      
+     ## complexity .35  
+    errbar(
+        unique(data35$guard_number), 
+        means35[,2], 
+        means35[,2]-errors35[,2], 
+        means35[,2]+errors35[,2],
+        ylim=c(0,1),
+        col=6,
+        add=TRUE)
+    
+    lines(
+        unique(data35$guard_number), 
+        means35[,2],
+        col=6)
+    
+     ## complexity .4  
+    errbar(
+        unique(data4$guard_number), 
+        means4[,2], 
+        means4[,2]-errors4[,2], 
+        means4[,2]+errors4[,2],
+        ylim=c(0,1),
+        col=7,
+        add=TRUE)
+    
+    lines(
+        unique(data4$guard_number), 
+        means4[,2],
+        col=7)
+        
+     ## complexity .5
+    errbar(
+        unique(data5$guard_number), 
+        means5[,2], 
+        means5[,2]-errors5[,2], 
+        means5[,2]+errors5[,2],
+        ylim=c(0,1),
+        col=8,
+        add=TRUE)
+        
+    lines(
+        unique(data5$guard_number), 
+        means5[,2],
+        col=8)
+     
+     ## complexity .6   
+    errbar(
+        unique(data6$guard_number), 
+        means6[,2], 
+        means6[,2]-errors6[,2], 
+        means6[,2]+errors6[,2],
+        ylim=c(0,1),
+        col=9,
+        add=TRUE)
+        
+    lines(
+        unique(data6$guard_number), 
+        means6[,2],
+        col=9)
+    
+     ## complexity .7  
+    errbar(
+        unique(data7$guard_number), 
+        means7[,2], 
+        means7[,2]-errors7[,2], 
+        means7[,2]+errors7[,2],
+        ylim=c(0,1),
+        col=10,
+        add=TRUE)
+    
+    lines(
+        unique(data7$guard_number), 
+        means7[,2],
+        col=10)
+        
+     ## complexity .8
+    errbar(
+        unique(data8$guard_number), 
+        means8[,2], 
+        means8[,2]-errors8[,2], 
+        means8[,2]+errors8[,2],
+        ylim=c(0,1),
+        col=11,
+        add=TRUE)
+    
+    lines(
+        unique(data8$guard_number), 
+        means8[,2],
+        col=11)
+        
+     ## complexity .9
+    errbar(
+        unique(data9$guard_number), 
+        means9[,2], 
+        means9[,2]-errors9[,2], 
+        means9[,2]+errors9[,2],
+        ylim=c(0,1),
+        col=12,
+        add=TRUE)
+    
+    lines(
+        unique(data9$guard_number), 
+        means9[,2],
+        col=12)
+        
+     ## complexity 1.
+    errbar(
+        unique(data10$guard_number), 
+        means10[,2], 
+        means10[,2]-errors10[,2], 
+        means10[,2]+errors10[,2],
+        ylim=c(0,1),
+        col=13,
+        add=TRUE)
+    
+    lines(
+        unique(data10$guard_number), 
+        means10[,2],
+        col=13)
+        
+    legend(
+        x=1, y=1,
+        legend=c(
+            0,
+            0.1,
+            0.2,
+            0.3,
+            0.35,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            1.0),
+        fill=1:13,
+        title="Maze complexity")
+
+@
+
+%Explaining guard number to coverage/exploration ratio
+The StiCo algorithm was run on varying numbers of guards to check for the ratio of the map explored after 50 turns with different map complexities. The results show a larger area of the map explored on less dense maps. This could be caused by the map being more accessible than the more dense and blocked off map. As the agents will not be able to see many of the tiles that are hidden behind other obstacles. More agents gives a larger ratio coverage, which is logical as there is more vision of the map. Figure~\ref{fig:stico_comparison} shows how the results for different complexities and guard numbers affect the coverage ratio. The shown error bars denote the 99\% confidence intervals on the data points. From the figure it is possible to derive that the effectiveness of StiCo is indeed heavily dependent on the complexity of the map. Beyond this being merely because of visual obstruction, this relation might also be due to the limited set of possible actions that are performed when executing StiCo. This limited set possibly drastically limits the possible areas that could be explored. Furthermore, this figure demonstrated that more intelligent algorithms are needed to perform exploration on maps with higher complexity.
+
+%Explaining Random/NonRandom
+Random exploration yields higher exploration rates, although it cannot be said to be more 'intelligent' than stico, as can be seen from figure 14. Another possible algorithm for exploration is the algorithm that picks the nearest unexplored tile and moves there. From figure 14 it can be seen that on long runs (longer than 350 moves) the nearest tile is a significantly better choice than a random tile. Both these variations of exploration converge to complete coverage, in contrast to the StiCo algorithm.
+
+\subsection{Pursuit experiments}
+The agents' ability to catch the intruder are tested by the pursuit experiments. The only pursuit algorithm which is tested is BES (see section \ref{sec:BES}). In order to measure the effectiveness of BES algorithm. The experiment was performed in two different setups. One setup uses a pursuit algorithm, where the second setup does not use any pursuit actions, meaning that the guards do not try to catch the intruders. Both setups are performed using random maps with fixed size and fixed complexity. In these experiments the intruders are given the Sneaky Escape algorithm (see section \ref{sec:SneakyEs}). The value fixations are done in order to reduce the variance of the results. The catching rate and the in game time of the pursuit algorithm was recorded from these experiments.
+\label{sec:pursExp}
+
+<<echo=FALSE,catching_persuit,fig.cap="The success boxplot represents the time until the guards catch the intruder, and the failure boxplot represents the time until the intruder reaches its target. Only one of the measures was counted at each simulation. All simulations were run on a random maze with complexity $.35$. The $N$ denote the total amount of failures/successes for the intruder from a total of 100 simulations. The intruders use the Sneaky Escape algorithm, and the Guards do not use the BES algorithm.">>=
+        data <- read.csv("../experiments/prey/data/sn_non.csv")
+        
+        b <- boxplot(
+            split(data$run_time,list(data$Thief_succes)),
+            xlab="Guard success",
+            xaxt='n',
+            ylab="Time (s)",
+            ylim=c(0,300),
+            main="Intruder: Sneaky Escape | Guards: No BES")
+        
+        axis(
+            1,
+            at=c(1,2),
+            labels=c(
+                paste("Success ( N =",b$n[1],")") ,
+                paste("Failure ( N =",b$n[2],")") ))
+       
+    @
+    
+    <<echo=FALSE,catching_pursuit_no,fig.cap="The success boxplot represents the time until the guards catch the intruder, and the failure boxplot represents the time until the intruder reaches its target. Only one of the measures was counted at each simulation. All simulations were run on a random maze with complexity $.35$. The $N$ denote the total amount of failures/successes for the intruder from a total of 100 simulations. The intruders use the Sneaky Escape algorithm, and the Guards do use the BES algorithm.">>=         
+        data <- read.csv("../experiments/prey/data/sn_bes.csv")
+        
+        b <- boxplot(
+            split(data$run_time,list(data$Thief_success)),
+            xlab="Guard success",
+            xaxt='n',
+            ylab="Time (s)",
+            ylim=c(0,300),
+            main="Intruder: Sneaky Escape | Guards: BES")
+        
+        axis(
+            1,
+            at=c(1,2),
+            labels=c(
+                paste("Success ( N =",b$n[1],")") ,
+                paste("Failure ( N =",b$n[2],")") ))
+    @
+    
+   
+
+\subsection{Avoidance experiments}
+When an intruder senses a guard, it immediately switches to an avoidance state. An identical experiment setup as the section \ref{sec:pursExp} was created for the avoidance experiments. However, in the avoidance experiments the intruders are given the Sneaky-Scape algorithm (see section \ref{sec:SneakyEs}) for the first setup, and no avoidance algorithm for the second setup. For all the cases, guards are given the BES algorithm (see section \ref{sec:BES}). The reason for this setup is to measure the effectiveness of the Sneaky-Scape algorithm comparing to a setup where intruders do not switch into the avoidance state.
+
+    
+ <<echo=FALSE,avoidance_no,fig.cap="The success boxplot represents the time until the guards catch the intruder, and the failure boxplot represents the time until the intruder reaches its target. Only one of the measures was counted at each simulation. All simulations were run on a random maze with complexity $.35$. The $N$ denote the total amount of failures/successes for the intruder from a total of 100 simulations. The intruders do not use any avoidance algorithm, and the Guards do use the BES algorithm.">>=
+        data <- read.csv("../experiments/prey/data/non_bes.csv")
+        
+        b <- boxplot(
+            split(data$run_time,list(data$Thief_success)),
+            xlab="Thief success",
+            xaxt='n',
+            ylab="Time (s)",
+            ylim=c(0,300),
+            main="Intruder: no avoidance | Guards: BES")
+        
+        axis(
+            1,
+            at=c(1,2),
+            labels=c(
+                paste("Failure ( N =",b$n[1],")") ,
+                paste("Success ( N =",b$n[2],")") ))
+       
+    @
+    
+    

@@ -1,10 +1,11 @@
-A possible way of catching an intruder that is faster than the guards is to use the fact that there multiple guards pursuing a single intruder. In this case the guards should surround the intruder as much as possible, as to block all the possible direction in which he could escape. Then the guards can draw in and catch the intruder. The most naive way of doing this is to disperse the available guards equally amongst the circumference of an intruder. The guard closest to the intruder will always move directly towards the intruder following the shortest path. The other guards will establish the amount of pursuing guards ($n$) and each block one of the angles resulting from dividing the total angle in which the agent can move in equal parts ($2\pi / n$)\cite{undeger2010multi, undeger2007single, undeger2009real}.
+A possible way of catching an intruder that is faster than the guards is to use the fact that there multiple guards pursuing a single intruder. In this case the guards should surround the intruder as much as possible, as to block all the possible direction in which he could escape. Then the guards can draw in and catch the intruder. The most naive way of doing this is to disperse the available guards equally amongst the circumference of an intruder. The guard closest to the intruder will always move directly towards the intruder following the shortest path. The other guards will establish the amount of pursuing guards ($n$) and each block one of the angles resulting from dividing the total angle in which the agent can move in equal parts ($2\pi / n$)\cite{undeger2009real, undeger2010multi, undeger2007single}.
+\label{sec:BES}
 
 			%
 			% Insert explanatory graphics
 			%
 
-		\begin{algorithm}
+		\begin{algorithm}[h!]
 			\KwData{The guard $p$; the current cell of the guard $s$; the current cell of the intruder $t$; the number of guards $n$}
 			\KwResult{Blocking location}
 			Let $(h_x,h_y)$ be the coordinate of cell $s$\;
@@ -21,7 +22,7 @@ A possible way of catching an intruder that is faster than the guards is to use 
 			\caption{Determining the Blocking Location}
 		\end{algorithm}
 
-			To exactly calculate the blocking location in the last step of algorithm \ref{alg:blockloc} we execute algorithm~\ref{alg:calcblockloc}.
+			To exactly calculate the blocking location in the last step of algorithm \ref{alg:blockloc} algorithm~\ref{alg:calcblockloc} is executed.
 
 			\begin{algorithm}
 				\KwData{the guard $p$; the velocity of the guard $v_h$; the velocity of the intruder $v_p$; the escape direction $es$assigned to $p$}

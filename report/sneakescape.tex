@@ -1,13 +1,14 @@
 For an intruder the best path is not simply defined by the shortest path towards the target, but rather to avoid the guards an smarter path needs to be evaluated. SneakyThief algorithm is invented during the production of this research.
 	%Workings of Sneakescape
-			Sneakescape uses an evaluation function $s(x)$ which depends on the A-star's evaluation function $f(x)$ (see eq.~\ref{eq:astarevaluation}) and the summation heuristic functions toward the predators $h(G_i)$.In order to vary the importance of getting to the goal rather than escaping from the guards a weight value is assigned to the heuristic value of getting to the goal
+			Sneakescape uses an evaluation function $s(x)$ which depends on the A*'s evaluation function $f(x)$ (see eq.~\ref{eq:astarevaluation}) and the summation heuristic functions toward the predators $h(G_i)$.In order to vary the importance of getting to the goal rather than escaping from the guards a weight value is assigned to the heuristic value of getting to the goal
+			\label{sec:SneakyEs}
 			\begin{equation}
 				\label{eq:sneakyscape}
 			 	s(x,G) = c(x) + \alpha h(x) - \sum_{i=0}^n h(G_i)
 			\end{equation} 
-			Where $x$ is the coordinate of the target, $G$is the list of predators coordinates and $\alpha$ is the given weight to the tendency of moving towards the target. At every iteration the neighbour with the lowest $s(x,G)$ is chosen(see alg.~\ref{alg:sneakyscape}).
+			Where $x$ is the coordinate of the target, $G$is the list of predators coordinates and $\alpha$ is the given weight for the tendency of moving towards the target. At every iteration the neighbour with the lowest $s(x,G)$ is chosen(see alg. 12).
 	\begin{algorithm}
-	 \label{alg:sneakyscape}
+	 \label{alg:sneakescape}
 				\KwData{Prey coordinate $t$; Set of predator coordinates $G$; Goal Coordinate $x$; evaluation function $s(x,G)$}
 				\For{$n \in $ movable neighbours of $t$}{
 				    Calculate $s(x,G)$\;

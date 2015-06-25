@@ -1,15 +1,16 @@
-As mentioned earlier (see section \ref{sec:intro}) one of the challenges for the agents is to decide when to perform certain actions such as avoidance for the intruder and coverage,pursuits and exploration for the guards. In order to achieve the decision-making process, three different states are created for both guards and the intruder. The three states for the guards are Exploration, Coverage and Catching, and the three states for the intruders are Exploration, Panic and Direct-to-Target. The following diagrams explain the process of state machines of guards and a intruder. 
-\begin{figure}
+As mentioned earlier (see section \ref{sec:intro}) one of the challenges for the agents is to decide when to perform certain actions such as avoidance for the intruder and coverage,pursuit and exploration for the guards. In order to achieve the decision-making process, three different states are created for both guards and the intruder. The three states for the guards are Exploration, Patrolling and Catching, and the three states for the intruders are Exploration, Direct-to-Target and Avoidance. Figure~\ref{fig:guardState} and Figure~\ref{fig:thiefState} show the state machines of guards and the intruder.
+    Both guards and intruder start off in exploration state where guards try to learn the entire map and intruder tries to find the location of the target. Once the exploration is done for a guard, it switches to patrolling state where it tries to corporate with other guards in order to cover most of the map under their vision. The guards switch to the catching state once an intruder is identified while being in either Exploration or Patrolling states. On the other hand, once an an intruder realises the position of the target, it tries to find the shortest path towards the target, this is referred as the Direct-to-Target state in Figure~\ref{fig:thiefState}. However, since the intruder needs to avoid the guards, the avoidance state is added to the state machine. Starting either in exploration or Direct-to-Target state, the avoidance state triggers once the intruder notices guard(s) around.
+\begin{figure}[H]
 \centering
 \input{guardStates.tex}
-\caption{State machine of the guard. Where $Exp$,$Cov$ and $Cat$ stand for Exploration,Coverage and Catching states respectively.}
-\label{fig:my_label}
+\caption{State machine of the guard. Where $Exp$, $Pat$ and $Cat$ stand for Exploration,Patrolling and Catching states respectively.}
+\label{fig:guardState}
 \end{figure}
 
-\begin{State machine of the guard. Where $Exp$,$DT$ and $Pan$ stand for Exploration, Direct-to-Target and Panic states respectively}
+\begin{figure}[H]
 \centering
 \input{thiefStates.tex}
-\caption{Caption}
-\label{fig:my_label}
+\caption{State machine of the intruder. Where $Exp$, $DT$ and $Avoid$ stand for Exploration, Direct-to-Target and Avoidance states respectively}
+\label{fig:thiefState}
 \end{figure}
 

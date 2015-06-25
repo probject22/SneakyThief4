@@ -4,7 +4,7 @@
 			%
 			% Explain how RTTEh works
 			%
-			\begin{algorithm}
+			\begin{algorithm}[h!]
 				\KwData{The agent's current cell $s$}
 				\KwResult{Utilities of neighbours of $s$}
 				Mark all moving directions of $s$ as open\;
@@ -22,10 +22,10 @@
 				\caption{RTTE-h algorithm~\protect\cite{undeger2010multi}}
 			\end{algorithm}
 
-			The merging phase of the algorithm determines the utilities as is described in algorithm~\ref{alg:rrtehmerge}.
+			The merging phase of the algorithm determines the utilities as is described in alg.~2.
 
 
-			\begin{algorithm}
+			\begin{algorithm}[h!]
 				\KwData{current coordinate of the guard $s$; current coordinate of the target $t$; results from the rays $r$.}
 				\If{All neighbours of $s$ are closed}{
 					\Return failure\;
@@ -49,8 +49,8 @@
 				\Return utilities\;
 			\end{algorithm}
 
-			The RTTEh algorithm \ref{alg:rtteh} provides answers to two shortcomings of the A-star algorithm for path search. First, it is a continuous space algorithm, so it is not dependant on any kind of discretisation for real world applications. Second, it is capable of identifying whether a certain coordinate in space is unreachable without having to explore a large amount of possible routes.
+			The RTTEh alg.~6 provides answers to two shortcomings of the A* algorithm for path search. First, it is a continuous space algorithm, so it is not dependant on any kind of discretisation for real world applications. Second, it is capable of identifying whether a certain coordinate in space is unreachable without having to explore a large amount of possible routes.
 
 			Another property that will be useful later on is that this algorithm returns an ordering of all moving directions, instead of just the best one.
 
-			Although the algorithm operates in continuous space, the moving directions are still discretised. In real world applications this is usually not the case, and this will therefore lead to a suboptimal result.\cite{undeger2010multi, undeger2007single,undeger2009real}.
+			Although the algorithm operates in continuous space, the moving directions are still discretised. In real world applications this is usually not the case, and this will therefore lead to a suboptimal result.\cite{undeger2009real, undeger2010multi, undeger2007single}.

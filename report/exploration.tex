@@ -1,8 +1,8 @@
-Most algorithms work best on a map that has been explored (e.g.; the path that A* finds on an explored map is the optimal one, but when the map is not fully explored it is possible that it finds the longest path to the goal). Therefore, two exploration algorithms were implemented. The first one takes the map and then chooses a random unexplored tile to explore next. This can be found below as algorithm~\ref{randomExplor}.
+Most algorithms work best on a map that has been explored (e.g.; the path that A* finds on an explored map is the optimal one, but when the map is not fully explored it is possible that it finds the longest path to the goal). Therefore, two exploration algorithms were implemented. The first one takes the map and then chooses a random unexplored tile to explore next. This can be found below as algorithm~\ref{alg:randomExplore}.
 
 \begin{algorithm}
-\label{randomExplor}
-  \caption{Single iteration of random exploration algorithm}
+    \label{alg:randomExplore}
+    \caption{Single iteration of random exploration algorithm}
     \KwData{Current map $M$}
     Select random tile $c$ on $M$\;
     \If{$c$ is not explored}{
@@ -10,11 +10,11 @@ Most algorithms work best on a map that has been explored (e.g.; the path that A
     }
 \end{algorithm}
 
-Of course, this could lead to the agent running from one side of the world to the other repeatedly, which clearly is not the fastest way. To solve this, it was decided to add another exploration algorithm, namely one that goes to the closest uncovered tile. This can be found in algorithm ~\ref{closestExplor}.
+Of course, this could lead to the agent running from one side of the world to the other repeatedly, which clearly is not the fastest way. To solve this, it was decided to add another exploration algorithm, namely one that goes to the closest uncovered tile. This can be found in algorithm~\ref{eq:closestExplore}.
 
 \begin{algorithm}
-\label{closestExplor}
-  \caption{Single iteration of closest exploration algorithm}
+    \label{eq:closestExplore}
+    \caption{Single iteration of closest exploration algorithm}
     \KwData{Current map $M$}
     Select closest tile $c$ on $M$\;
     \If{$c$ is not explored}{
