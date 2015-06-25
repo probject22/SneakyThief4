@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--AgileJ Ltd. (http://www.agilej.com)--><ajsv>
+    <diagram creationDate="2015-Jun-25 12:44" licenseGrade="single" licenseeName="Robert_Stevens" licenseeOrganization="personal" populationMethod="manual" version="1.8.2.v20150605-1440">
+        <class className="core.sprite.Guard" project="SneakyThief5" xLocation="2602" yLocation="2049"/>
+        <class className="core.sprite.Thief" project="SneakyThief5" xLocation="3522" yLocation="2196"/>
+        <class className="dataContainer.MoveDirection" project="SneakyThief5" xLocation="4105" yLocation="118"/>
+        <class className="core.events.EventManager" project="SneakyThief5" xLocation="745" yLocation="1326"/>
+        <class className="core.sprite.SpriteManager" project="SneakyThief5" xLocation="210" yLocation="2200"/>
+        <class className="dataContainer.Coordinate" project="SneakyThief5" xLocation="2710" yLocation="1310"/>
+        <class className="core.actions.ActionElement" project="SneakyThief5" xLocation="842" yLocation="413"/>
+        <class className="core.Simulator" project="SneakyThief5" xLocation="1761" yLocation="1242"/>
+        <class className="dataContainer.GridState" project="SneakyThief5" xLocation="2619" yLocation="100"/>
+        <class className="gui.MainFrame" project="SneakyThief5" xLocation="4283" yLocation="1059"/>
+        <class className="dataContainer.BlackBoard" project="SneakyThief5" xLocation="4266" yLocation="1750"/>
+        <class className="core.sprite.Agent" project="SneakyThief5" xLocation="1903" yLocation="2318"/>
+        <class className="core.BeliefMap" project="SneakyThief5" xLocation="3462" yLocation="735"/>
+        <class className="core.actions.Action" project="SneakyThief5" xLocation="1841" yLocation="529"/>
+        <class className="core.sprite.Sprite" project="SneakyThief5" xLocation="1123" yLocation="2321"/>
+        <class className="core.actions.Move" project="SneakyThief5" xLocation="163" yLocation="541"/>
+        <class className="core.actions.Turn" project="SneakyThief5" xLocation="169" yLocation="157"/>
+        <class className="core.actions.Wait" project="SneakyThief5" xLocation="125" yLocation="874"/>
+    </diagram>
+</ajsv>
